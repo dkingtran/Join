@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Board</title>
+    <link rel="stylesheet" href="./styles/board.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/side_menu.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./scripts/board.js"></script>
+  </head>
+  <body onload="updateHTML()">
+    <header>
+      <!--Header content-->
+      <div class="header-content">
+        <div class="header-inner">
+          <h1 class="header-title">Kanban Project Management Tool</h1>
+          <div class="header-profile">
+            <div class="help-container" id="helpContainer">
+              <span class="help-icon" onclick="toggleHelpDropdown()">?</span>
+              <div id="helpDropdown" class="help-dropdown">
+                <a href="" class="dropdown-item">Impressum</a>
+                <a href="" class="dropdown-item">Datenschutz</a>
+              </div>
+            </div>
+            <div class="profile-container" id="profileContainer">
+              <img
+                src="./assets/profile.jpg"
+                alt="Profile"
+                class="profile-img"
+                onclick="toggleProfileDropdown()"
+              />
+              <div id="profileDropdown" class="profile-dropdown">
+                <a href="" class="dropdown-item mobile-only d_none">Impressum</a>
+                <a href="" class="dropdown-item mobile-only d_none">Datenschutz</a>
+                <a href="login.html" class="dropdown-item">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End of Header content-->
+    </header>
+    <!--Side-menu-->
+    <div class="side-menu background-side-menu">
+      <div class="logo-section">
+        <img src="./assets/logo.png" alt="Logo" class="logo-side-menu-img" />
+      </div>
+
+      <div class="menu-section">
+        <a href="summary.html" class="menu-item">
+          <span class="menu-icon">📊</span>
+          <span>Summary</span>
+        </a>
+        <a href="./board.html" class="menu-item active">
+          <span class="menu-icon">📋</span>
+          <span>Board</span>
+        </a>
+        <a href="add_task.html" class="menu-item">
+          <span class="menu-icon">➕</span>
+          <span>Add Task</span>
+        </a>
+        <a href="add_contact.html" class="menu-item">
+          <span class="menu-icon">👥</span>
+          <span>Contacts</span>
+        </a>
+      </div>
+
+      <div class="notice-side-menu">
+        <a href="" class="menu-item">
+          <span class="menu-icon">ℹ️</span>
+          <span>Impressum</span>
+        </a>
+        <a href="" class="menu-item">
+          <span class="menu-icon">🔒</span>
+          <span>Datenschutz</span>
+        </a>
+      </div>
+    </div>
+    <!--End of Side-menu-->
+
+    <main class="main-content">
+      <button id="addTaskButton" onclick="showAddTask()">+</button>
+      <button id="logoutButton" onclick="logout()">Logout</button>
+
+      <div
+        class="drag-area"
+        id="open"
+        ondrop="moveTo('open')"
+        ondragleave="removeHighlight('open')"
+        ondragover="allowDrop(event); highlight('open')"
+      ></div>
+      <div
+        class="drag-area"
+        id="closed"
+        ondrop="moveTo('closed')"
+        ondragleave="removeHighlight('closed')"
+        ondragover="allowDrop(event); highlight('closed')"
+      ></div>
+    </main>
+  </body>
+</html>
+</html>
