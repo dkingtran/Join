@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
-    <script src="script.js"></script>
-    <script src="./scripts/add_task.js"></script>
-    <script src="./scripts/template.js"></script>
-  </head>
-  <body>
- <img src="bild.svg" alt="Logo" class="logo-animated" id="logo" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="icon" href="../assets/img/Capa 1.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles/login.css">
+  <link rel="stylesheet" href="styles/standard.css">
+
+  <!--   <script src="script.js"></script>
+  <script src="./scripts/add_task.js"></script>-->
+  <script src="scripts/login.js"></script> 
+</head>
+
+<body>
+  <img src="../assets/img/Capa 1.svg" alt="Logo" class="logo-animated" id="logo" />
 
 
   <div class="intro" id="intro">
@@ -22,32 +28,27 @@
       <button class="signup-btn">Sign up</button>
     </div>
 
-    
+
     <div class="container">
-
-
-
       <div class="login-box">
         <h2>Log in</h2>
-        <div class="underline"><img src="underline.svg" alt=""></div>
+        <div class="underline"><img src="./assets/img/icons/login/underline.svg" alt=""></div>
         <form class="form-box">
           <div class="input-box">
-          <div class="input-group">
-            <div class="input-wrapper">
-              <input type="email" placeholder="Email" required>
-              <img class="icon" src="mail.svg" alt="">
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="email" placeholder="Email" required>
+                <img class="icon" src="./assets/img/icons/login/mail.svg" alt="">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="password" placeholder="Password" required>
+                <img class="icon" src="./assets/img/icons/login/lock.svg" alt="">
+              </div>
             </div>
           </div>
-
-          <div class="input-group">
-            <div class="input-wrapper">
-              <input type="password" placeholder="Password" required>
-              <img class="icon" src="lock.svg" alt="">
-            </div>
-          </div>
-          </div>
-
-         
 
           <div class="buttons">
             <button type="submit" class="login-btn">Log in</button>
@@ -56,14 +57,15 @@
         </form>
       </div>
 
-   
+
     </div>
-       <div class="footer">
-        <a href="./privacyPolicy">Privacy Policy</a>
-        <a href="legalNotice">Legal notice</a>
-      </div>
+    <div class="footer">
+      <a href="./privacyPolicy.html">Privacy Policy</a>
+      <a href="./legalNotice.html">Legal notice</a>
+    </div>
 
   </div>
 
-  </body>
+</body>
+
 </html>
