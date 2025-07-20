@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Help</title>
+    <link rel="icon" href="../assets/img/logo/logo-dark.png" />
+    <link rel="stylesheet" href="./styles/side_menu.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/ln-pp.css" />
+
+    <script src="./scripts/side-menu.js"></script>
+  </head>
+  <body>
+    <header>
+      <!--Header content-->
+      <div class="header-content">
+        <div class="header-inner">
+          <div class="logo-mobile d_none">
+            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+          </div>
+          <h1 class="header-title">Kanban Project Management Tool</h1>
+          <div class="header-right">
+            <div class="help-container" id="helpContainer">
+              <a href="../help.html" class="help-icon">
+                <img
+                  src="../assets/img/icons/header-side-menu/help.png"
+                  alt="Help Icon"
+                />
+              </a>
+            </div>
+            <div class="profile-container" id="profileContainer">
+              <button
+                class="profile-btn"
+                onclick="toggleProfileDropdown()"
+                aria-label="Profile menu"
+              >
+                SM
+              </button>
+              <div id="profileDropdown" class="profile-dropdown">
+                <a href="./help.html" class="dropdown-item mobile-only d_none"
+                  >Help</a
+                >
+                <a href="./legal-notice.html" class="dropdown-item"
+                  >Legal Notice</a
+                >
+                <a href="./privacy-policy.html" class="dropdown-item"
+                  >Privacy Policy</a
+                >
+                <a href="login.html" class="dropdown-item">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End of Header content-->
+    </header>
+    <!--Side-menu-->
+    <aside class="side-menu background-side-menu">
+      <div class="logo-section">
+        <img
+          src="../assets/img/logo/logo-light.png"
+          alt="Logo"
+          class="logo-side-menu-img"
+        />
+      </div>
+
+      <div class="menu-section">
+        <a href="../summary.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/summary.svg"
+              alt=""
+            />
+          </span>
+          <span>Summary</span>
+        </a>
+        <a href="../board.html" class="menu-item">
+          <span class="menu-icon">
+            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
+          <span>Board</span>
+        </a>
+        <a href="../add_task.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/add-task.svg"
+              alt=""
+            />
+          </span>
+          <span>Add Task</span>
+        </a>
+        <a href="../add_contact.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/contacts.svg"
+              alt=""
+            />
+          </span>
+          <span>Contacts</span>
+        </a>
+      </div>
+
+      <div class="notice-side-menu">
+        <a href="./legal-notice.html" class="menu-item menu-bottom">
+          <span>Legal notice</span>
+        </a>
+        <a href="./privacy-policy.html" class="menu-item menu-bottom">
+          <span>Privacy Policy</span>
+        </a>
+      </div>
+    </aside>
+
+    <main>
+      <div class="main-content">
+        <div class="help-header">
+          <h1>Help</h1>
+          <button class="back-button" onclick="window.history.back()">
+            <img src="./assets/img/icons/content/help/back.png" alt="Back" />
+          </button>
+        </div>
+        <p>
+          Welcome to the help page for Join, your guide to using our kanban
+          project management tool. Here, we'll provide an overview of what Join
+          is, how it can benefit you, and how to use it.
+        </p>
+        <br />
+        <h2>What is Join?</h2>
+        <p>
+          Join is a kanban-based project management tool designed and built by a
+          group of dedicated students as part of their web development bootcamp
+          at the Developer Akademie. <br /><br />
+          Kanban, a Japanese term meaning "billboard", is a highly effective
+          method to visualize work, limit work-in-progress, and maximize
+          efficiency (or flow). Join leverages the principles of kanban to help
+          users manage their tasks and projects in an intuitive, visual
+          interface. <br /><br />
+          It is important to note that Join is designed as an educational
+          exercise and is not intended for extensive business usage. While we
+          strive to ensure the best possible user experience, we cannot
+          guarantee consistent availability, reliability, accuracy, or other
+          aspects of quality regarding Join.
+        </p>
+        <br /><br />
+        <h2>How to use it</h2>
+        <p>Here is a step-by-step guide on how to use Join:</p>
+        <br />
+        <div class="numbered-section">
+          <div class="number">1.</div>
+          <div class="content">
+            <h3>Exploring the Board</h3>
+            <p>
+              When you log in to Join, you'll find a default board. This board
+              represents your project and contains four default lists: "To Do",
+              "In Progress", “Await feedback” and "Done".
+            </p>
+          </div>
+        </div>
+
+        <div class="numbered-section">
+          <div class="number">2.</div>
+          <div class="content">
+            <h3>Creating Contacts</h3>
+            <p>
+              In Join, you can add contacts to collaborate on your projects. Go
+              to the "Contacts" section, click on "New contact", and fill in the
+              required information. Once added, these contacts can be assigned
+              tasks and they can interact with the tasks on the board.
+            </p>
+          </div>
+        </div>
+
+        <div class="numbered-section">
+          <div class="number">3.</div>
+          <div class="content">
+            <h3>Adding Cards</h3>
+            <p>
+              Now that you've added your contacts, you can start adding cards.
+              Cards represent individual tasks. Click the "+" button under the
+              appropriate list to create a new card. Fill in the task details in
+              the card, like task name, description, due date, assignees, etc.
+            </p>
+          </div>
+        </div>
+
+        <div class="numbered-section">
+          <div class="number">4.</div>
+          <div class="content">
+            <h3>Moving Cards</h3>
+            <p>
+              As the task moves from one stage to another, you can reflect that
+              on the board by dragging and dropping the card from one list to
+              another.
+            </p>
+          </div>
+        </div>
+
+        <div class="numbered-section">
+          <div class="number">5.</div>
+          <div class="content">
+            <h3>Deleting Cards</h3>
+            <p>
+              Once a task is completed, you can either move it to the "Done"
+              list or delete it. Deleting a card will permanently remove it from
+              the board. <br />
+              Please exercise caution when deleting cards, as this action is
+              irreversible. <br />
+              Remember that using Join effectively requires consistent updates
+              from you and your team to ensure the board reflects the current
+              state of your project. <br />
+              Have more questions about Join? Feel free to contact us at [Your
+              Contact Email]. We're here to help you!
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
