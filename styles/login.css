@@ -12,6 +12,10 @@ body {
 .wrapper {
   opacity: 1;
   transition: opacity 1.5s ease-in-out;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* Inhalt + Footer am unteren Rand */
+  min-height: 100vh;
 }
 
 
@@ -221,7 +225,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-top: 40px;
+  margin: 40px;
 }
 
 .footer a {
