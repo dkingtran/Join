@@ -19,9 +19,3 @@
     
 }
 
-@media (max-width: 320px) {
-    .profile-dropdown {
-        width: 140px;
-        min-width: 100px;
-    }
-}
