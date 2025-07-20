@@ -15,3 +15,13 @@ body {
     background-color: #F5F7F7;
     text-decoration: none;
 }
+
+.d-none {
+    display: none;
+}
+
+.display-standard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

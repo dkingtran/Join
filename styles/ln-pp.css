@@ -1,3 +1,12 @@
+/* User state classes */
+.logged-in .login-only {
+    display: none !important;
+}
+
+.login-only .logged-in-only {
+    display: none !important;
+}
+
 /* Header styles */
 .header-content {
     height: 80px;
@@ -32,6 +41,10 @@
 .header-logo {
     height: 40px;
     width: auto;
+}
+
+.logo-mobile {
+    display: none;
 }
 
 .header-right {
@@ -205,7 +218,7 @@
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     padding: 16px 56px;
     color: #CDCDCD;
     text-decoration: none;
@@ -235,26 +248,17 @@
 }
 
 
+.menu-item:hover {
+    background-color: #2A3D59;
+}
+
 .menu-bottom:hover {
     color: #29ABE2;
     background-color: transparent !important;
 }
 
-.menu-item:hover {
-    background-color: #2A3D59;
-}
-
 .menu-item.active {
     background-color: #091931 !important;
-    color: white;
-}
-
-.menu-item:hover {
-    background-color: #2A3D59;
-}
-
-.menu-item.active {
-    background-color: #091931;
     color: white;
 }
 
@@ -272,9 +276,6 @@
     text-align: center;
 }
 
-.d_none {
-    display: none;
-}
 
 .notice-side-menu {
     margin-top: auto;
@@ -397,6 +398,10 @@ h3 {
         padding-right: 32px;
     }
 
+    .logo-mobile {
+        display: block;
+    }
+
     .logo-mobile img {
         height: 40px;
         width: auto;
@@ -453,9 +458,9 @@ h3 {
         border-radius: 16px;
     }
 
-    .menu-item:hover {
-        background-color: #091931;
-        color: white;
+    .menu-item:hover,
+    .login-only .notice-side-menu .menu-item:hover {
+        background-color: #2A3D59;
         border-radius: 16px;
     }
 
@@ -467,38 +472,60 @@ h3 {
         display: none;
     }
 
-    .profile-dropdown {
-        top: 68px;
-        right: 0;
-        background-color: #2A3647;
-        border-radius: 20px 0 20px 20px;
-        padding: 8px;
-        min-width: 150px;
-        width: auto;
-        text-align: start;
-        z-index: 300;
-        height: 204px;
+    /* Show notice menu for login-only pages in mobile */
+    .login-only .notice-side-menu {
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        transform: translateX(100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, visibility 0.125s ease-in-out;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 16px;
+        padding: 0 16px;
+        height: 76px;
+        align-items: center;
+        font-size: 14px;
+        margin-top: 0;
     }
 
-    .profile-dropdown.show {
-        transform: translateX(0);
-        opacity: 1;
-        visibility: visible;
+    .login-only .menu-section {
+        justify-content: flex-start;
     }
+
+    .login-only .notice-side-menu .menu-item {
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px 12px;
+        margin: 0 4px;
+        text-align: center;
+        min-width: 104px;
+        width: 104px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        font-size: 14px;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-radius: 16px;
+    }
+
+    .profile-dropdown {
+        height: 204px;
+        min-width: 150px;
+    }
+
+
+
+@media (max-width: 490px) {
+    .profile-dropdown {
+        top: 60px;
+        right: -8px;
+    }
+}
 
     .help-container {
         display: none;
-    }
-
-    .d_none {
-        display: block;
     }
 
     .main-content {
@@ -549,7 +576,7 @@ h3 {
         width: 40px;
         height: 40px;
         box-shadow: 0 0 0 2px #2A3647;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .profile-btn.single-initial {
@@ -587,7 +614,7 @@ h3 {
         flex: 1;
         max-width: 80px;
         height: 100%;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -600,11 +627,6 @@ h3 {
         align-items: center;
     }
 
-    .menu-item:hover {
-        background-color: #091931;
-        color: white;
-    }
-
     .menu-item.active:hover {
         background-color: #091931;
     }
@@ -612,31 +634,6 @@ h3 {
 
     .profile-container {
         right: 8px;
-    }
-
-    .profile-dropdown {
-        top: 60px;
-        right: -8px;
-        background-color: #2A3647;
-        border-radius: 20px 0 20px 20px;
-        padding: 8px;
-        min-width: 150px;
-        width: auto;
-        text-align: start;
-        z-index: 300;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        transform: translateX(100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, visibility 0.125s ease-in-out;
-    }
-
-    .profile-dropdown.show {
-        transform: translateX(0);
-        opacity: 1;
-        visibility: visible;
     }
     
     h1 {
@@ -676,8 +673,45 @@ h3 {
 }
 
 @media (max-width: 370px) {
+    .menu-section {
+        padding: 0 8px;
+        gap: 8px;
+    }
+
+    .menu-item {
+        padding: 16px 4px;
+        min-width: 40px;
+        max-width: 70px;
+        font-size: 14px;
+        line-height: 1.1;
+    }
+
+    .login-only .notice-side-menu {
+        gap: 4px;
+        padding: 0 8px;
+    }
+
+    .login-only .menu-section {
+        padding: 0 8px;
+    }
+
+    .login-only .notice-side-menu .menu-item {
+        padding: 16px 2px;
+        width: 104px;
+        max-width: 104px;
+        font-size: 14px;
+        line-height: 1.1;
+    }
+
+    .login-only .menu-item {
+        padding: 16px 4px;
+        width: 80px;
+        font-size: 14px;
+    }
 
     h1 {
         font-size: 40px;
     }
 }
+
+

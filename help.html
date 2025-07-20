@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="logged-in">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,11 +17,11 @@
       <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
-          <div class="logo-mobile d_none">
+          <div class="logo-mobile logged-in-only">
             <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
           </div>
           <h1 class="header-title">Kanban Project Management Tool</h1>
-          <div class="header-right">
+          <div class="header-right logged-in-only">
             <div class="help-container" id="helpContainer">
               <a href="../help.html" class="help-icon">
                 <img
@@ -39,9 +39,7 @@
                 SM
               </button>
               <div id="profileDropdown" class="profile-dropdown">
-                <a href="./help.html" class="dropdown-item mobile-only d_none"
-                  >Help</a
-                >
+                <a href="./help.html" class="dropdown-item logged-in-only">Help</a>
                 <a href="./legal-notice.html" class="dropdown-item"
                   >Legal Notice</a
                 >
@@ -66,7 +64,7 @@
         />
       </div>
 
-      <div class="menu-section">
+      <div class="menu-section logged-in-only">
         <a href="../summary.html" class="menu-item">
           <span class="menu-icon">
             <img
@@ -102,7 +100,7 @@
         </a>
       </div>
 
-      <div class="notice-side-menu">
+      <div class="notice-side-menu logged-in-only">
         <a href="./legal-notice.html" class="menu-item menu-bottom">
           <span>Legal notice</span>
         </a>
@@ -216,5 +214,7 @@
         </div>
       </div>
     </main>
+  </body>
+</html>
   </body>
 </html>
