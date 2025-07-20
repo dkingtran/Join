@@ -45,7 +45,7 @@ document.getElementById("login-form").addEventListener("submit", e => {
 
 
 
-/* 
+
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -62,5 +62,5 @@ if (message) {
   msgBox.innerHTML = message;
 } else {
     msgBox.style.display = 'none';  // error here Leo
-} */
+} 
 
