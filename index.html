@@ -1,12 +1,83 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
-    <script src="script.js"></script>
-    <script src="./scripts/add_task.js"></script>
-    <script src="./scripts/template.js"></script>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="icon" href="../assets/img/Capa1.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles/login.css">
+  <link rel="stylesheet" href="styles/standard.css">
+
+  <!--   <script src="script.js"></script>
+  <script src="./scripts/add_task.js"></script>-->
+
+</head>
+
+<body>
+  <img src="../assets/img/Capa1.svg" alt="Logo" class="logo-animated" id="logo" />
+
+
+  <div class="intro" id="intro">
+    <div class="white-overlay" id="whiteOverlay"></div>
+  </div>
+
+  <div class="wrapper hidden" id="mainContent">
+    <div class="top-right">
+      <span class="not-a-user">Not a Join user?</span>
+      <a class="signup-btn" href="register.html">Sign up</a>
+
+    </div>
+
+
+    <div class="container">
+      <div class="login-box">
+        <h2>Log in</h2>
+        <div class="underline"><img src="./assets/img/icons/login/underline.svg" alt=""></div>
+        <form class="form-box" id="login-form">
+          <div class="input-box">
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="email" placeholder="Email">
+                <img class="icon" src="./assets/img/icons/login/mail.svg" alt="">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="password" placeholder="Password">
+                <img id="lock-password" onclick="showPassword()" class="icon" src="./assets/img/icons/login/lock.svg" alt="Password Closed Icon">
+                <img id="visibility-off" onclick="closePassword()" class="icon" src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
+              </div>
+      
+
+            </div>
+                    <div id="error-msg" class="error-message">Check your email and password. Please try again</div>
+          </div>
+
+          <div class="buttons">
+            <button id="login-in" onclick="loginBtn" type="submit" class="login-btn">Log in</button>
+            <button id="guest-login" type="button" class="guest-btn">Guest Log in</button>
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+
+    <div class="top-right-down">
+      <span class="not-a-user">Not a Join user?</span>
+      <button class="signup-btn">Sign up</button>
+    </div>
+    <div class="footer">
+      <a id="privacy-policy" href="./privacyPolicy.html">Privacy Policy</a>
+      <a id="legal-notice" href="./legalNotice.html">Legal notice</a>
+    </div>
+
+  </div>
+
+
+  <script src="scripts/login.js"></script>
+</body>
+
 </html>
