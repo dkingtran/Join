@@ -1,5 +1,4 @@
 body {
-
   background-color: #F6F7F8;
   height: 100vh;
 }
@@ -85,6 +84,7 @@ body {
   cursor: pointer;
   border: none;
   transition: background-color 100ms ease-in-out;
+  text-decoration: none;
 }
 
 .login-box {
