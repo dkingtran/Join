@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register Join</title>$
-<link rel="stylesheet" href="styles/login.css">
-  <link rel="stylesheet" href="styles/register.css">
-  <link rel="stylesheet" href="styles/standard.css">
+  <title>Register Join</title>
+  <link rel="stylesheet" href="./styles/standard.css">
+  <link rel="stylesheet" href="./styles/login.css">
+  <link rel="stylesheet" href="./styles/register.css">
+  
 </head>
 
 <body>
   <img src="../assets/img/Capa1.svg" alt="Logo" class="logo-animated" id="logo" />
-
 
   <div class="intro" id="intro">
     <div class="white-overlay" id="whiteOverlay"></div>
@@ -47,19 +47,23 @@
             <div class="input-wrapper">
               <input type="password" placeholder="Password">
               <img class="icon" src="./assets/img/icons/login/lock.svg" alt="">
+                <img id="visibility-off-password" onclick="closePassword()" class="icon" src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
 
             </div>
             <div class="input-group">
               <div class="input-wrapper">
                 <input type="password" placeholder="Confirm Password">
                 <img class="icon" src="./assets/img/icons/login/lock.svg" alt="">
+                  <img id="visibility-off-confirm-password" onclick="closePassword()" class="icon" src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
               </div>
 
               <div class="checkbox-box">
-                <label for="checkbox-sign-up"></label>
-                <input id="checkbox-sign-up" type="checkbox">
-                <p>I accept the <span>Privacy police</span></p>
+                <label for="checkbox-sign-up">
+                  <input class="checkbox" id="checkbox-sign-up" type="checkbox">
+                </label>
+                 <p>I accept the <a onmouseover="privacyPolice()" class="privacy-police" href="privacy.html">Privacy policy</a></p>
               </div>
+
 
             </div>
             <div id="error-msg" class="error-message">You passwords don't match. Please try again</div>
@@ -88,7 +92,7 @@
   </div>
 
 
-  <script src="scripts/login.js"></script>
+  <script src="./scripts/login.js"></script>
 
   <script src="./scripts/register.js"></script>
 </body>

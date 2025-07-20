@@ -25,7 +25,8 @@
   <div class="wrapper hidden" id="mainContent">
     <div class="top-right">
       <span class="not-a-user">Not a Join user?</span>
-      <button class="signup-btn">Sign up</button>
+      <a class="signup-btn" href="register.html">Sign up</a>
+
     </div>
 
 
@@ -45,7 +46,8 @@
             <div class="input-group">
               <div class="input-wrapper">
                 <input type="password" placeholder="Password">
-                <img class="icon" src="./assets/img/icons/login/lock.svg" alt="">
+                <img id="lock-password" onclick="showPassword()" class="icon" src="./assets/img/icons/login/lock.svg" alt="Password Closed Icon">
+                <img id="visibility-off" onclick="closePassword()" class="icon" src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
               </div>
       
 
