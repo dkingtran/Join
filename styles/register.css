@@ -98,7 +98,7 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Media Quaries */
+/* Media Query */
 
 @media(max-width: 650px) {
     .login-box-register {
