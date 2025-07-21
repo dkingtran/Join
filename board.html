@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join - Board</title>
+    <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/board.css" />
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
@@ -15,25 +16,33 @@
       <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
+          <div class="logo-mobile d_none">
+            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+          </div>
           <h1 class="header-title">Kanban Project Management Tool</h1>
-          <div class="header-profile">
+          <div class="header-right">
             <div class="help-container" id="helpContainer">
-              <span class="help-icon" onclick="toggleHelpDropdown()">?</span>
-              <div id="helpDropdown" class="help-dropdown">
-                <a href="" class="dropdown-item">Impressum</a>
-                <a href="" class="dropdown-item">Datenschutz</a>
-              </div>
+              <a href="../help.html" class="help-icon">
+                <img
+                  src="../assets/img/icons/header-side-menu/help.png"
+                  alt="Help Icon"
+                />
+              </a>
             </div>
             <div class="profile-container" id="profileContainer">
-              <img
-                src="./assets/profile.jpg"
-                alt="Profile"
-                class="profile-img"
+              <button
+                class="profile-btn"
                 onclick="toggleProfileDropdown()"
-              />
+                aria-label="Profile menu"
+              >
+                WM
+              </button>
               <div id="profileDropdown" class="profile-dropdown">
-                <a href="" class="dropdown-item mobile-only d_none">Impressum</a>
-                <a href="" class="dropdown-item mobile-only d_none">Datenschutz</a>
+                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                  >Help</a
+                >
+                <a href="" class="dropdown-item">Legal Notice</a>
+                <a href="" class="dropdown-item">Privacy Policy</a>
                 <a href="login.html" class="dropdown-item">Log out</a>
               </div>
             </div>
@@ -43,42 +52,61 @@
       <!--End of Header content-->
     </header>
     <!--Side-menu-->
-    <div class="side-menu background-side-menu">
+    <aside class="side-menu background-side-menu">
       <div class="logo-section">
-        <img src="./assets/logo.png" alt="Logo" class="logo-side-menu-img" />
+        <img
+          src="../assets/img/logo/logo-light.png"
+          alt="Logo"
+          class="logo-side-menu-img"
+        />
       </div>
 
       <div class="menu-section">
-        <a href="summary.html" class="menu-item">
-          <span class="menu-icon">📊</span>
+        <a href="../summary.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/summary.svg"
+              alt=""
+            />
+          </span>
           <span>Summary</span>
         </a>
-        <a href="./board.html" class="menu-item active">
-          <span class="menu-icon">📋</span>
+        <a href="../board.html" class="menu-item active">
+          <span class="menu-icon">
+            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
           <span>Board</span>
         </a>
-        <a href="add_task.html" class="menu-item">
-          <span class="menu-icon">➕</span>
+        <a href="../add_task.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/add-task.svg"
+              alt=""
+            />
+          </span>
           <span>Add Task</span>
         </a>
-        <a href="add_contact.html" class="menu-item">
-          <span class="menu-icon">👥</span>
+        <a href="../add_contact.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/contacts.svg"
+              alt=""
+            />
+          </span>
           <span>Contacts</span>
         </a>
       </div>
 
       <div class="notice-side-menu">
-        <a href="" class="menu-item">
-          <span class="menu-icon">ℹ️</span>
-          <span>Impressum</span>
+        <a href="./legal-notice.html" class="menu-item menu-bottom">
+          <span>Legal notice</span>
         </a>
-        <a href="" class="menu-item">
-          <span class="menu-icon">🔒</span>
-          <span>Datenschutz</span>
+        <a href="" class="menu-item menu-bottom">
+          <span>Privacy Policy</span>
         </a>
       </div>
-    </div>
-    <!--End of Side-menu-->
+    </aside>
+    <!--End of Side-menu--> 
 
     <main class="main-content">
       <button id="addTaskButton" onclick="showAddTask()">+</button>

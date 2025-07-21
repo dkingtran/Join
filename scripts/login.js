@@ -1,3 +1,4 @@
+
 const loginForm = document.getElementById('login-form');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
@@ -82,7 +83,7 @@ const urlParams = new URLSearchParams(window.location.search); // animation from
 const message = urlParams.get('message');
 
 if (message) {
-  msgBox.innerHTML = message;
+    msgBox.innerHTML = message;
 } else {
   msgBox.style.display = 'none';
 }
