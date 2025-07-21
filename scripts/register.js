@@ -69,12 +69,7 @@ function validateRegisterInputs(name, email, password, confirmPassword, errorMsg
         input.parentElement.classList.add("error");
       }
     });
-    if (!checkbox.checked) {
-  errorMsgSignUp.textContent = "Please accept the privacy policy.";
-  errorMsgSignUp.classList.add("show");
-  checkbox.parentElement.classList.add("error");
-  valid = false;
-}
+
     errorMsgSignUp.textContent = "Please fill all fields correctly. Passwords must match.";
    errorMsgSignUp.classList.add("show");
     valid = false;

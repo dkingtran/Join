@@ -1,7 +1,6 @@
 body {
   background-color: #F6F7F8;
   height: 100vh;
-
   background-color: black;
 }
 
@@ -110,7 +109,7 @@ body {
 
 .input-box {
   width: 100%;
-  max-width: 422px;
+  max-width: 535px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
