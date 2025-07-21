@@ -1,6 +1,6 @@
 /* Header styles */
 .header-content {
-    height: 80px;
+    height: 96px;
     background-color: #ffffff;
     position: fixed;
     top: 0;
@@ -100,7 +100,7 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 68px;
+    top: 76px;
     right: 0;
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
@@ -108,7 +108,7 @@
     min-width: 120px;
     width: auto;
     text-align: start;
-    z-index: 300;
+    z-index: 99999;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -468,7 +468,7 @@ h3 {
     }
 
     .profile-dropdown {
-        top: 68px;
+        top: 76px;
         right: 0;
         background-color: #2A3647;
         border-radius: 20px 0 20px 20px;
@@ -476,7 +476,7 @@ h3 {
         min-width: 150px;
         width: auto;
         text-align: start;
-        z-index: 300;
+        z-index: 99999;
         height: 204px;
         display: flex;
         flex-direction: column;
@@ -536,6 +536,11 @@ h3 {
 
 /* Small mobile styles */
 @media (max-width: 490px) {
+    
+    .header-content {
+        height: 80px;
+    }
+    
     .header-inner {
         padding-left: 16px;
         padding-right: 16px;
@@ -623,7 +628,7 @@ h3 {
         min-width: 150px;
         width: auto;
         text-align: start;
-        z-index: 300;
+        z-index: 99999;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
