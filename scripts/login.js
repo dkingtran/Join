@@ -65,7 +65,6 @@ document.getElementById("login-form").addEventListener("submit", function (event
 });
 
 
-
 // function displayLoginError() {
 //     let errorMessage = document.getElementById('error-message');
 //     errorMessage.innerText = "Invalid. Please check your E-Mail or Password";
@@ -74,7 +73,6 @@ document.getElementById("login-form").addEventListener("submit", function (event
 //         loginForm.classList.remove('failure');
 //     }, 2000);
 // }
-
 
 const urlParams = new URLSearchParams(window.location.search);
 const message = urlParams.get('message');
