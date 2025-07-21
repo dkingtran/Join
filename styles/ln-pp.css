@@ -510,59 +510,32 @@ h3 {
         border-radius: 16px;
     }
 
+    .help-container {
+        display: none;
+    }
+
     .profile-dropdown {
         height: 204px;
         min-width: 150px;
     }
 
-
-
-@media (max-width: 490px) {
-    .profile-dropdown {
-        top: 60px;
-        right: -8px;
-    }
-}
-
-    .help-container {
-        display: none;
-    }
-
     .main-content {
-        margin: 16px;
-        margin-top: 40px;
-    }
-
-    .help-header {
-        margin-bottom: 24px;
-    }
-
-}
-
-@media (max-width: 750px) {
-
-    .main-content {
+        margin-left: 0;
+        margin-right: 0;
         padding: 48px;
-        padding-top: 80px;
+        padding-top: 40px;
     }
-
 }
+
 
 @media (max-width: 540px) {
 
-    .main-content {
-        padding: 48px;
-    }
     
     h1 {
         margin-top: 24px;
         font-size: 52px;
     }
 
-}   
-
-/* Small mobile styles */
-@media (max-width: 490px) {
     .header-inner {
         padding-left: 16px;
         padding-right: 16px;
@@ -586,7 +559,9 @@ h3 {
     .main-content {
         margin-left: 16px;
         margin-right: 16px;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
+        padding-top: 48px;
+        padding: 0;
     }
 
 
@@ -626,7 +601,7 @@ h3 {
         justify-content: center;
         align-items: center;
     }
-
+    
     .menu-item.active:hover {
         background-color: #091931;
     }
@@ -635,19 +610,26 @@ h3 {
     .profile-container {
         right: 8px;
     }
-    
+
+    .profile-dropdown {
+        top: 60px;
+        right: -8px;
+        height: 204px;
+        min-width: 150px;
+    }
+
     h1 {
         font-size: 47px;
         font-weight: 700;
         margin-bottom: 30px;
     }
-    
+
     h2 {
         font-size: 27px;
         font-weight: 700;
         margin-bottom: 16px;
     }
-    
+
     h3 {
         font-size: 20px;
         font-weight: 700;
@@ -662,6 +644,19 @@ h3 {
         height: 32px;
         width: 32px;
     }
+
+}   
+
+@media (max-width: 490px) {
+
+    .main-content {
+        margin: 16px;
+        margin-top: 40px;
+    }
+
+    .help-header {
+        margin-bottom: 24px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -670,9 +665,7 @@ h3 {
         padding: 0px;
         padding-top: 48px;
     }
-}
 
-@media (max-width: 370px) {
     .menu-section {
         padding: 0 8px;
         gap: 8px;
@@ -712,6 +705,7 @@ h3 {
     h1 {
         font-size: 40px;
     }
+
 }
 
 
