@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Contact</title>
+    <link rel="icon" href="./assets/img/logo/logo-dark.png">
     <link rel="stylesheet" href="./styles/add-contact.css" />
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/side_menu.css">
@@ -109,14 +110,14 @@
     
     <!-- Contact Sidebar -->
     <div class="contact-sidebar">
-        <button class="add-contact-btn" onclick="showForm()">
-            <span>Add new contact</span>
-            <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-        </button>
-        <button class="add-contact-btn-mobile" onclick="showForm()">
-            <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-        </button>
         <div class="contact-sidebar-inner">
+            <button class="add-contact-btn" onclick="showForm()">
+                <span>Add new contact</span>
+                <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+            </button>
+            <button class="add-contact-btn-mobile" onclick="showForm()">
+                <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+            </button>
             <div class="contact-list" id="contactList">
                 <!-- Contacts will be rendered here -->
             </div>
@@ -124,7 +125,7 @@
     </div>
     
     <!-- Form Container (hidden by default) -->
-    <div class="form-container" id="formContainer" style="display: none;">
+    <div class="form-container" id="formContainer">
       <form onsubmit="addToContacts(); return false;">
         <h2>Add Contact</h2>
         <input required type="text" placeholder="Name" id="contactName" />

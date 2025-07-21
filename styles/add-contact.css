@@ -13,7 +13,7 @@
     background: white;
     box-shadow: 4px 0px 6px 0px #00000014;
     overflow-y: auto;
-    padding: 20px;
+    padding: 32px 24px;
     box-sizing: border-box;
     z-index: 101;
 }
@@ -22,31 +22,38 @@
     font-size: 20px;
     font-weight: 400;
     color: #000000;
-    margin: 16px 0 4px 0;
+    margin: 16px 4px;
     letter-spacing: 2px;
+    text-align: left;
+    margin-left: 64px;
 }
 
 .contact-divider {
     height: 1px;
+    width: 352px;
     background: #e0e0e0;
     border: none;
     overflow: hidden;
     padding: 0;
+    margin: 8px auto;
 }
 
 /* Add Contact Button */
 .add-contact-btn {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
+    margin: auto;
+    gap: 12px;
+    width: 352px;
+    height: 56px;
     padding: 16px 20px;
     background: #2A3647;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 21px;
+    font-weight: 700;
     cursor: pointer;
     margin-bottom: 20px;
     transition: background-color 0.3s ease;
@@ -57,8 +64,8 @@
 }
 
 .add-contact-btn img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     filter: brightness(0) invert(1);
 }
 
@@ -71,6 +78,7 @@
     height: 78px;
     background: #fff;
     border-radius: 10px;
+    margin: auto;
     /* Kein Border */
     cursor: pointer;
     transition: all 0.125s ease;
@@ -100,16 +108,17 @@
 }
 
 .contact-avatar {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     background: #2A3647;
     color: white;
     border-radius: 50%;
+    border: 2px solid white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 12px;
     margin-right: 16px;
     flex-shrink: 0;
 }
