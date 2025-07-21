@@ -81,16 +81,7 @@ function validateLoginInputs(email, password, errorMsg) {
 
 
 
-// function displayLoginError() {
-//     let errorMessage = document.getElementById('error-message');
-//     errorMessage.innerText = "Invalid. Please check your E-Mail or Password";
-//     loginForm.classList.add('failure');
-//     setTimeout(() => {
-//         loginForm.classList.remove('failure');
-//     }, 2000);
-// }
-
-/* const urlParams = new URLSearchParams(window.location.search);
+ const urlParams = new URLSearchParams(window.location.search); // animation from 
 const message = urlParams.get('message');
 
 if (message) {
@@ -99,4 +90,4 @@ if (message) {
   msgBox.style.display = 'none';
 }
 
- */
+ 
