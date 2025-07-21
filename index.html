@@ -26,26 +26,25 @@
     <div class="top-right">
       <span class="not-a-user">Not a Join user?</span>
       <a class="signup-btn" href="register.html">Sign up</a>
-
     </div>
 
 
-    <div class="container">
-      <div class="login-box">
+    <div class="container display-standard">
+      <div class="login-box display-standard">
         <h2>Log in</h2>
         <div class="underline"><img src="./assets/img/icons/login/underline.svg" alt=""></div>
-        <form class="form-box" id="login-form">
+        <form class="form-box display-standard" id="login-form">
           <div class="input-box">
             <div class="input-group">
               <div class="input-wrapper">
-                <input type="email" placeholder="Email">
+                <input id="email" type="email" placeholder="Email">
                 <img class="icon" src="./assets/img/icons/login/mail.svg" alt="">
               </div>
             </div>
 
             <div class="input-group">
               <div class="input-wrapper">
-                <input type="password" placeholder="Password">
+                <input id="password" type="password" placeholder="Password">
                 <img id="lock-password" onclick="showPassword()" class="icon" src="./assets/img/icons/login/lock.svg" alt="Password Closed Icon">
                 <img id="visibility-off" onclick="closePassword()" class="icon" src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
               </div>
@@ -55,9 +54,9 @@
                     <div id="error-msg" class="error-message">Check your email and password. Please try again</div>
           </div>
 
-          <div class="buttons">
-            <button id="login-in" onclick="loginBtn" type="submit" class="login-btn">Log in</button>
-            <button id="guest-login" type="button" class="guest-btn">Guest Log in</button>
+          <div class="buttons display-standard">
+            <button id="login-in" onclick="loginBtn" type="submit" class="login-btn display-standard">Log in</button>
+            <button id="guest-login" type="button" class="guest-btn display-standard">Guest Log in</button>
           </div>
         </form>
       </div>
@@ -70,7 +69,7 @@
      <a href="register.html" class="signup-btn">Sign up</a>
 
     </div>
-    <div class="footer">
+    <div class="footer display-standard">
       <a id="privacy-policy" href="./privacyPolicy.html">Privacy Policy</a>
       <a id="legal-notice" href="./legalNotice.html">Legal notice</a>
     </div>
