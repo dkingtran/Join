@@ -16,11 +16,11 @@ body {
     text-decoration: none;
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
-.display-standard{
+.display-standard {
     display: flex;
     justify-content: center;
     align-items: center;

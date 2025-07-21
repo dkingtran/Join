@@ -1,7 +1,7 @@
-.wrapper{
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-up {
@@ -127,7 +127,7 @@
     }
 
     .signup-btn-register {
-    max-width: 160px;
-}
+        max-width: 160px;
+    }
 
 }
