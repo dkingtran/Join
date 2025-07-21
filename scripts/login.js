@@ -2,18 +2,21 @@
 const loginForm = document.getElementById('login-form');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
+const errorMsg = document.getElementById("error-msg");
+
+
 
 async function login() {
-    loginForm.preventDefault();
-    let users = await loadData("/users/");
-    let user = users.find(user => user.email === email.value && user.password === password.value);
-    if (user) {
-        window.location.href = "../index.html";
-    } else {
-        displayLoginError();
-    }
-    email.value = '';
-    password.value = '';
+  loginForm.preventDefault();
+  let users = await loadData("/users/");
+  let user = users.find(user => user.email === email.value && user.password === password.value);
+  if (user) {
+    window.location.href = "../index.html";
+  } else {
+    displayLoginError();
+  }
+  email.value = '';
+  password.value = '';
 }
 
 
@@ -40,36 +43,49 @@ window.addEventListener('load', () => {
   }, 1600);
 });
 
+
+loginForm.addEventListener("submit", displayLoginError);
 /**
- * Login form validation on submit
- * - Prevents the default form submission
- * - Checks if either email or password is missing
- * - Displays an error message if one of the fields is empty
- * - Highlights the problematic fields with an "error" class
- * - Clears previous error states before validation
+ * Handles login form submission
+ * - Prevents default behavior
+ * - Resets previous error styles
+ * - Validates input fields and shows error if needed
  */
-document.getElementById("login-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const form = e.target;
-  const email = form.querySelector('input[type="email"]');
-  const pass = form.querySelector('input[type="password"]');
-  const err = document.getElementById("error-msg");
-  [email, pass].forEach(input => input.parentElement.classList.remove("error"));
-  err.classList.remove("show");
-  if ((email.value && !pass.value) || (!email.value && pass.value)) {
-    [email, pass].forEach(input => input.parentElement.classList.add("error"));
-    err.classList.add("show");
+function displayLoginError(event) {
+  event.preventDefault();
+  email.parentElement.classList.remove("error");
+  password.parentElement.classList.remove("error");
+  errorMsg.classList.remove("show");
+
+  validateLoginInputs(email, password, errorMsg);
+}
+
+
+/**
+ * Validates the email and password input fields and applies visual error feedback if needed.
+ * @param {HTMLInputElement} email - The email input field.
+ * @param {HTMLInputElement} password - The password input field.
+ * @param {HTMLElement} errorMsg - The error message element to be displayed.
+ * @description
+ * Checks whether one or both fields are empty (after trimming whitespace).
+ * If invalid, adds the "error" class to the parent wrapper of each field
+ * and reveals the error message element.
+ */
+function validateLoginInputs(email, password, errorMsg) {
+  if (!email.value.trim() || !password.value.trim()) {
+    email.parentElement.classList.add("error");
+    password.parentElement.classList.add("error");
+    errorMsg.classList.add("show");
   }
-});
+}
 
-
-const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search); // animation from down comformation login is good
 const message = urlParams.get('message');
 
 if (message) {
     msgBox.innerHTML = message;
 } else {
-    msgBox.style.display = 'none';
+  msgBox.style.display = 'none';
 }
 
 

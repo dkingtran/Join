@@ -1,7 +1,12 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sign-up {
     font-size: 61px;
     width: 100%;
-
 }
 
 .sign-up-box {
@@ -30,8 +35,6 @@
 .left-flash img {
     width: 32px;
 }
-
-
 
 .login-box-register {
     display: flex;
@@ -73,7 +76,6 @@
 
 .sign-up-bottom {
     width: 100%;
-
 }
 
 .signup-btn-register {
@@ -89,29 +91,34 @@
     cursor: pointer;
     border: none;
     transition: background-color 100ms ease-in-out;
-
 }
-
-
-
 
 .signup-btn-register:hover {
     background-color: #00BEE8;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Media Quaries */
+/* Media Query */
 
 @media(max-width: 650px) {
     .login-box-register {
         max-width: 411px;
+        height: 650px;
+    }
+}
+
+@media(max-width: 600px) {
+    .login-box-register {
+        max-width: 445px;
+        height: 600px;
     }
 }
 
 @media(max-width: 450px) {
     .login-box-register {
-        max-width: 301px;
-        height: 570px;
+        max-width: 310px;
+        height: 480px;
+        padding: 80px 10px;
     }
 
     .sign-up {
@@ -120,6 +127,7 @@
     }
 
     .signup-btn-register {
-    max-width: 160px;
-}
+        max-width: 160px;
+    }
+
 }
