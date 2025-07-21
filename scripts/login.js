@@ -1,8 +1,9 @@
-
 const loginForm = document.getElementById('login-form');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const errorMsg = document.getElementById("error-msg");
+
+
 
 async function login() {
   loginForm.preventDefault();
@@ -41,28 +42,43 @@ window.addEventListener('load', () => {
   }, 1600);
 });
 
+
+loginForm.addEventListener("submit", displayLoginError);
 /**
- * Validates the login form on submit.
- * @param {SubmitEvent} event – The event triggered when the form is submitted.
- * Steps:
- * 1. Prevents the form from submitting and reloading the page.
- * 2. Removes any previous error styling from the input fields.
- * 3. Checks if the email or password fields are empty.
- * 4. If either field is empty:
- *    - Adds an "error" class to both input wrappers (e.g., red border),
- *    - Shows the error message below the form.
+ * Handles login form submission
+ * - Prevents default behavior
+ * - Resets previous error styles
+ * - Validates input fields and shows error if needed
  */
-document.getElementById("login-form").addEventListener("submit", function (event) {
+function displayLoginError(event) {
   event.preventDefault();
   email.parentElement.classList.remove("error");
   password.parentElement.classList.remove("error");
   errorMsg.classList.remove("show");
-  if (!email.value || !password.value) {
+
+  validateLoginInputs(email, password, errorMsg);
+}
+
+
+/**
+ * Validates the email and password input fields and applies visual error feedback if needed.
+ * @param {HTMLInputElement} email - The email input field.
+ * @param {HTMLInputElement} password - The password input field.
+ * @param {HTMLElement} errorMsg - The error message element to be displayed.
+ * @description
+ * Checks whether one or both fields are empty (after trimming whitespace).
+ * If invalid, adds the "error" class to the parent wrapper of each field
+ * and reveals the error message element.
+ */
+function validateLoginInputs(email, password, errorMsg) {
+  if (!email.value.trim() || !password.value.trim()) {
     email.parentElement.classList.add("error");
     password.parentElement.classList.add("error");
     errorMsg.classList.add("show");
   }
-});
+}
+
+
 
 
 // function displayLoginError() {
@@ -74,7 +90,7 @@ document.getElementById("login-form").addEventListener("submit", function (event
 //     }, 2000);
 // }
 
-const urlParams = new URLSearchParams(window.location.search);
+/* const urlParams = new URLSearchParams(window.location.search);
 const message = urlParams.get('message');
 
 if (message) {
@@ -83,4 +99,4 @@ if (message) {
   msgBox.style.display = 'none';
 }
 
-
+ */
