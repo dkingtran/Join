@@ -1,158 +1,78 @@
-<!DOCTYPE html>
-<html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Register Join</title>
-		<link rel="stylesheet" href="./styles/standard.css" />
-		<link rel="stylesheet" href="./styles/login.css" />
-		<!-- gemeinsame Basis -->
-		<link rel="stylesheet" href="./styles/register.css" />
-		<!-- überschreibt login.css -->
-	</head>
+const nameSignUp = document.getElementById("name-sign-up");
+const emailSignUp = document.getElementById("email-sign-up");
+const passwordSignUp = document.getElementById("password-sign-up");
+const confirmPassword = document.getElementById("confirm-password");
+const  errorMsgSignUp = document.getElementById("error-msg");
+const checkbox = document.getElementById("checkbox-sign-up");
 
-	<body>
-		<img
-			src="../assets/img/Capa1.svg"
-			alt="Logo"
-			class="logo-animated"
-			id="logo"
-		/>
+// In validateRegisterInputs() hinzufügen:
+if (!checkbox.checked) {
+  errorMsgSignUp.textContent = "Please accept the privacy policy.";
+  errorMsgSignUp.classList.add("show");
+  checkbox.parentElement.classList.add("error");
+  valid = false;
+}
 
-		<div class="intro" id="intro">
-			<div class="white-overlay" id="whiteOverlay"></div>
-		</div>
 
-		<div class="wrapper hidden" id="mainContent">
-			<div class="container">
-				<div class="login-box-register">
-					<div class="sign-up-box">
-						<a href="index.html" class="left-flash" id="flash-left">
-							<img
-								src="../assets/img/icons/register/flasblueleft.svg"
-								alt="Flash left"
-							/>
-						</a>
+let users = [
+    {'email': 'test@example.com', 'password': 'password123'}
+]
 
-						<h2 class="sign-up">Sign up</h2>
-					</div>
+ function addUser() {
+  users.push({ email: emailSignUp.value, password: passwordSignUp.value }); // Change by ME
+  window.location.href = 'login.html?message=Registration successful';
+}
+ 
 
-					<div class="underline">
-						<img src="./assets/img/icons/login/underline.svg" alt="" />
-					</div>
-					<form
-						onsubmit="addUser(); return false;"
-						class="form-box"
-						id="login-form"
-					>
-						<div class="input-box">
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input id="name" type="text" placeholder="Name"/>
-									<img
-										class="icon"
-										src="./assets/img/icons/register/person.svg"
-										alt=""
-									/>
-								</div>
-							</div>
+document.getElementById("login-form").addEventListener("submit", handleRegister);
+/**
+ * Handles the register form submission
+ * - Prevents default
+ * - Resets old errors
+ * - Validates all fields
+ * - Calls addUser() if all inputs are valid
+ */
+function handleRegister(event) {
+  event.preventDefault();
+  resetRegisterStyles([nameSignUp, emailSignUp, passwordSignUp, confirmPassword], errorMsg);
+  if (!validateRegisterInputs(nameSignUp, emailSignUp, passwordSignUp, confirmPassword, errorMsg)) return;
+  addUser();
+}
 
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input id="email" type="text" placeholder="Email"/>
-									<img
-										class="icon"
-										src="./assets/img/icons/login/mail.svg"
-										alt=""
-									/>
-								</div>
-							</div>
+/**
+ * Removes previous error styles from the input fields and hides the error message.
+ * 
+ * @param {HTMLElement[]} inputs - Array of input elements (name, email, password, confirmPassword)
+ * @param {HTMLElement} errorMsg - The element displaying the global error message
+ */
+function resetRegisterStyles(inputs, errorMsgSignUp) {
+  inputs.forEach(input => input.parentElement.classList.remove("error"));
+  errorMsgSignUp.classList.remove("show");
+}
+/**
+ * Validates that all fields are filled and that the password and confirmation match.
+ * If validation fails, it applies the "error" class and shows the error message.
+ * 
+ * @param {HTMLElement} name - The name input field
+ * @param {HTMLElement} email - The email input field
+ * @param {HTMLElement} password - The password input field
+ * @param {HTMLElement} confirmPassword - The confirmation password input field
+ * @param {HTMLElement} errorMsg - The element displaying the global error message
+ * @returns {boolean} - Returns true if all inputs are valid, otherwise false
+ */
 
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input
-										id="password"
-										type="password"
-										placeholder="Password"
-									/>
-									<img
-										class="icon"
-										src="./assets/img/icons/login/lock.svg"
-										alt=""
-									/>
-									<img
-										id="visibility-off-password"
-										onclick="closePassword()"
-										class="icon"
-										src="./assets/img/icons/register/visibility_off.svg"
-										alt="Visibility off Icon"
-									/>
-								</div>
-							</div>
+function validateRegisterInputs(name, email, password, confirmPassword, errorMsgSignUp) {
+  let valid = true;
+  if (!name.value || !email.value || !password.value || !confirmPassword.value || password.value !== confirmPassword.value) {
+    [name, email, password, confirmPassword].forEach(input => {
+      if (!input.value || (input === confirmPassword && password.value !== confirmPassword.value)) {
+        input.parentElement.classList.add("error");
+      }
+    });
 
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input
-										id="password-confirmation"
-										type="password"
-										placeholder="Confirm Password"
-									/>
-									<img
-										class="icon"
-										src="./assets/img/icons/login/lock.svg"
-										alt=""
-									/>
-									<img
-										id="visibility-off-confirm-password"
-										onclick="closePassword()"
-										class="icon"
-										src="./assets/img/icons/register/visibility_off.svg"
-										alt="Visibility off Icon"
-									/>
-								</div>
-							</div>
-
-							<div class="checkbox-box">
-								<label for="privacy-policy-checkbox"></label>
-									<input
-										class="checkbox"
-										id="privacy-policy-checkbox"
-										type="checkbox"
-									/>
-								<p>
-									I accept the
-									<a
-										class="privacy-police"
-										href="privacy_police.html"
-										>Privacy policy</a
-									>
-								</p>
-							</div>
-
-							<small id="error-msg" class="error-message">
-								Please check your information and try again.
-							</small>
-						</div>
-
-						<div class="buttons">
-							<div class="sign-up-bottom">
-								<button id="signup-btn" class="signup-btn-register" type="submit" disabled="true">
-									Sign up
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<div class="footer">
-				<a id="privacy-policy" href="./privacyPolicy.html">Privacy Policy</a>
-				<a id="legal-notice" href="./legalNotice.html">Legal notice</a>
-			</div>
-		</div>
-
-		<!-- <script src="./scripts/login.js"></script> -->
-
-		<script src="./scripts/register.js"></script>
-	</body>
-</html>
+    errorMsgSignUp.textContent = "Please fill all fields correctly. Passwords must match.";
+   errorMsgSignUp.classList.add("show");
+    valid = false;
+  }
+  return valid;
+}
