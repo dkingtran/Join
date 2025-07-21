@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Register Join</title>
+      <link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml">
 		<link rel="stylesheet" href="./styles/standard.css" />
 		<link rel="stylesheet" href="./styles/login.css" />
 		<!-- gemeinsame Basis -->
@@ -13,7 +14,7 @@
 
 	<body>
 		<img
-			src="../assets/img/Capa1.svg"
+			src="assets/img/Capa1.svg"
 			alt="Logo"
 			class="logo-animated"
 			id="logo"
@@ -29,7 +30,7 @@
 					<div class="sign-up-box">
 						<a href="index.html" class="left-flash" id="flash-left">
 							<img
-								src="../assets/img/icons/register/flasblueleft.svg"
+								src="assets/img/icons/register/flashleft.svg"
 								alt="Flash left"
 							/>
 						</a>
@@ -76,16 +77,22 @@
 										placeholder="Password"
 									/>
 									<img
+                    id="lock-off-password"
 										class="icon"
 										src="./assets/img/icons/login/lock.svg"
-										alt=""
+										alt="Lock Password"
 									/>
 									<img
 										id="visibility-off-password"
-										onclick="closePassword()"
 										class="icon"
 										src="./assets/img/icons/register/visibility_off.svg"
 										alt="Visibility off Icon"
+									/>
+                  <img
+										id="visibility-on-password"
+										class="icon"
+										src="./assets/img/icons/register/visibility.svg"
+										alt="Visibility on Icon"
 									/>
 								</div>
 							</div>
@@ -97,17 +104,22 @@
 										type="password"
 										placeholder="Confirm Password"
 									/>
-									<img
+                  	<img
 										class="icon"
 										src="./assets/img/icons/login/lock.svg"
 										alt=""
 									/>
-									<img
+                  <img
 										id="visibility-off-confirm-password"
-										onclick="closePassword()"
 										class="icon"
 										src="./assets/img/icons/register/visibility_off.svg"
 										alt="Visibility off Icon"
+									/>
+                  	<img
+                    id="lock-off-confirm-password"
+										class="icon"
+										src="./assets/img/icons/register/visibility.svg"
+										alt="Lock Password"
 									/>
 								</div>
 							</div>

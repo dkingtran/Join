@@ -78,10 +78,7 @@ function validateLoginInputs(email, password, errorMsg) {
   }
 }
 
-
-
-
- const urlParams = new URLSearchParams(window.location.search); // animation from 
+ const urlParams = new URLSearchParams(window.location.search); // animation from down comformation login is good
 const message = urlParams.get('message');
 
 if (message) {
