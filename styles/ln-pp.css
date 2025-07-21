@@ -254,7 +254,14 @@
 
 .menu-bottom:hover {
     color: #29ABE2;
+    font-weight: bold;
     background-color: transparent !important;
+}
+
+.menu-bottom {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu-item.active {
