@@ -3,60 +3,110 @@ const emailRef = document.getElementById('email');
 const nameRef = document.getElementById('name');
 const passwordRef = document.getElementById('password');
 const passwordConfirmationRef = document.getElementById('password-confirmation');
-const emailRegex = /^[a-z]+\s[a-z]+$/gi;
+const errorMessageRef = document.getElementById('error-msg');
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/gi;
 
 
 async function addUser() {
-    if (checkName() && checkEmail() && checkPassword()) {
+    if (checkName() & checkEmail() & checkPassword()) {
         let users = await loadData("/users/");
         let newUser = {
             "name": nameRef.value,
             "email": emailRef.value,
             "password": passwordRef.value,
-        }
+        };
         users.push(newUser);
         await putData("/users/", users);
         window.location.href = 'login.html?message=Registration successful';
-    } else return false;
+    } else {
+        showErrorMessage();
+        return false;
+    }
 }
+
+
+function showErrorMessage() {
+    errorMessageRef.classList.add('show');
+    setTimeout(() => {
+        errorMessageRef.classList.remove('show');
+    }, 3000)
+}
+
+
 
 
 function checkName() {
     if (!(nameRef.value == '')) {
         return true;
     } else {
-        nameRef.classList.add('failure');
+        nameRef.parentElement.classList.add('error');
         return false;
     }
 }
+
+
+nameRef.addEventListener("input", () => {
+    nameRef.parentElement.classList.remove('error');
+});
 
 
 function checkEmail() {
     if (emailRegex.test(emailRef.value)) {
         return true;
     } else {
-        emailRef.classList.add('failure');
+        emailRef.parentElement.classList.add('error');
         return false;
     }
 }
+
+
+emailRef.addEventListener("input", () => {
+    emailRef.parentElement.classList.remove('error');
+});
 
 
 function checkPassword() {
     if (!(passwordRef.value == '') && passwordRef.value == passwordConfirmationRef.value) {
         return true;
     } else {
-        passwordRef.classList.add('failure');
-        passwordConfirmationRef.classList.add('failure');
+        passwordRef.parentElement.classList.add('error');
+        passwordConfirmationRef.parentElement.classList.add('error');
     }
 }
 
 
-document.getElementById('privacy-policy-check').addEventListener("onclick", (event) => {
+passwordRef.addEventListener("input", () => {
+    passwordRef.parentElement.classList.remove('error');
+});
+
+passwordConfirmationRef.addEventListener("input", () => {
+    passwordConfirmationRef.parentElement.classList.remove('error');
+});
+
+
+document.getElementById('privacy-policy-checkbox').addEventListener("click", (event) => {
     let isChecked = event.target.checked;
-    let signUpBtn = document.getElementById('sign-up-btn');
+    let signUpBtn = document.getElementById('signup-btn');
     if (isChecked) {
         signUpBtn.disabled = false;
     } else {
         signUpBtn.disabled = true;
     }
+});
+
+
+window.addEventListener('load', () => {
+    const logo = document.getElementById('logo');
+    const overlay = document.getElementById('whiteOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const intro = document.getElementById('intro');
+    mainContent.classList.remove('hidden');
+    requestAnimationFrame(() => {
+        logo.classList.add('shrink');
+        overlay.style.opacity = '0';
+        mainContent.style.opacity = '1';
+    });
+    setTimeout(() => {
+        intro.remove();
+    }, 1600);
 });
