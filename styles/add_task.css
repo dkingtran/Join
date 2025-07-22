@@ -65,11 +65,13 @@
 }
 
 .section-task-under{
-    margin-top: 50px;
+    margin-top: 48px;
     display: flex;
     justify-content:space-between;
     border:2px solid black;
 }
+
+
 /* Assigned CSS */
 .custom-dropdown {
   width: 320px;
@@ -177,8 +179,8 @@
   cursor: not-allowed;
 }
 
-.icon {
-  font-size: 16px;
+.icon-task {
+  font-size: 24px;
   color: #333;
   cursor: pointer;
   padding-left: 10px;
