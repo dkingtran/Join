@@ -65,13 +65,13 @@ function renderContacts() {
         grouped[letter].push(contact);
     });
 
-    let first = true;
+    let contactIndex = 0;
     Object.keys(grouped).sort().forEach((letter) => {
         contactList.innerHTML += `<div class="contact-group-letter">${letter}</div>`;
         contactList.innerHTML += '<hr class="contact-divider">';
         grouped[letter].forEach((contact) => {
             contactList.innerHTML += `
-                <div class="contact-item">
+                <div class="contact-item" data-index="${contactIndex}">
                     <div class="contact-avatar">${contact.name.split(' ').map(n => n[0]).join('')}</div>
                     <div class="contact-item-content">
                         <div class="contact-name">${contact.name}</div>
@@ -79,7 +79,26 @@ function renderContacts() {
                     </div>
                 </div>
             `;
+            contactIndex++;
         });
+    });
+
+    // Auswahl-Logik
+    let contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            contactItems.forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+            e.stopPropagation();
+        });
+    });
+
+    // Entferne Auswahl beim Klick außerhalb der Kontaktliste
+    document.addEventListener('click', function(e) {
+        const contactList = document.getElementById('contactList');
+        if (!contactList.contains(e.target)) {
+            contactItems.forEach(i => i.classList.remove('selected'));
+        }
     });
 }
 
