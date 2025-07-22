@@ -4,11 +4,16 @@ const nameRef = document.getElementById('name');
 const passwordRef = document.getElementById('password');
 const passwordConfirmationRef = document.getElementById('password-confirmation');
 const errorMessageRef = document.getElementById('error-msg');
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/gi;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+
+let emailCheck = false;
+let nameCheck = false;
+let passwordCheck = false;
+let passwordConfirmationCheck = false;
 
 
 async function addUser() {
-  if (checkName() & checkEmail() & checkPassword()) {
+  if (checkRegisterForm()) {
     let users = await loadData("/users/");
     let newUser = {
       "name": nameRef.value,
@@ -25,62 +30,89 @@ async function addUser() {
 }
 
 
-function showErrorMessage() {
-  errorMessageRef.classList.add('show');
-  setTimeout(() => {
-    errorMessageRef.classList.remove('show');
-  }, 3000)
+function checkRegisterForm() {
+  checkName();
+  checkEmail();
+  checkPassword();
+  checkPasswordConfirmation();
+  if (emailCheck && nameCheck && passwordCheck && passwordConfirmationCheck) {
+    return true;
+  } else return false;
 }
 
 
+function showErrorMessage() {
+  errorMessageRef.classList.add('show');
+}
+
+document.getElementById('login-form').addEventListener("input", () => {
+  if (emailCheck && nameCheck && passwordCheck && passwordConfirmationCheck) {
+    errorMessageRef.classList.remove('show');
+  }
+});
 
 
 function checkName() {
   if (!(nameRef.value == '')) {
-    return true;
+    nameCheck = true;
   } else {
     nameRef.parentElement.classList.add('error');
-    return false;
+    nameCheck = false;
   }
 }
 
 
 nameRef.addEventListener("input", () => {
   nameRef.parentElement.classList.remove('error');
+  nameCheck = true;
 });
 
 
 function checkEmail() {
   if (emailRegex.test(emailRef.value)) {
-    return true;
+    emailCheck = true;
   } else {
     emailRef.parentElement.classList.add('error');
-    return false;
+    emailCheck = false;
   }
 }
 
 
 emailRef.addEventListener("input", () => {
   emailRef.parentElement.classList.remove('error');
+  emailCheck = true;
 });
 
 
 function checkPassword() {
-  if (!(passwordRef.value == '') && passwordRef.value == passwordConfirmationRef.value) {
-    return true;
+  if (!(passwordRef.value == '')) {
+    passwordCheck = true;
   } else {
     passwordRef.parentElement.classList.add('error');
-    passwordConfirmationRef.parentElement.classList.add('error');
+    passwordCheck = false;
   }
 }
 
 
 passwordRef.addEventListener("input", () => {
   passwordRef.parentElement.classList.remove('error');
+  passwordCheck = true;
 });
+
+
+function checkPasswordConfirmation() {
+  if (!(passwordConfirmationRef.value == '') && passwordRef.value == passwordConfirmationRef.value) {
+    passwordConfirmationCheck = true;
+  } else {
+    passwordConfirmationRef.parentElement.classList.add('error');
+    passwordConfirmationCheck = false;
+  }
+}
+
 
 passwordConfirmationRef.addEventListener("input", () => {
   passwordConfirmationRef.parentElement.classList.remove('error');
+  passwordConfirmationCheck = true;
 });
 
 
