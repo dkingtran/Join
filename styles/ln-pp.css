@@ -1,6 +1,6 @@
 /* Header styles */
 .header-content {
-    height: 80px;
+    height: 96px;
     background-color: #ffffff;
     position: fixed;
     top: 0;
@@ -100,7 +100,7 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 68px;
+    top: 76px;
     right: 0;
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
@@ -108,7 +108,7 @@
     min-width: 120px;
     width: auto;
     text-align: start;
-    z-index: 300;
+    z-index: 99999;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -237,7 +237,29 @@
 
 .menu-bottom:hover {
     color: #29ABE2;
+    font-weight: bold;
     background-color: transparent !important;
+}
+
+.notice-side-menu .menu-bottom:hover,
+.notice-side-menu .menu-item:hover {
+    background-color: transparent !important;
+    color: #29ABE2;
+    font-weight: bold;
+}
+
+.notice-side-menu .menu-bottom.active:hover,
+.notice-side-menu .menu-item.active:hover {
+    background-color: #091931 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+
+.menu-bottom {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu-item:hover {
@@ -250,7 +272,7 @@
 }
 
 .menu-item:hover {
-    background-color: #2A3D59;
+    background-color: #2A3D59 !important;
 }
 
 .menu-item.active {
@@ -392,6 +414,18 @@ h3 {
 
 
 @media (max-width: 1000px) {
+    .menu-bottom {
+        width: 104px !important;
+    }
+    .menu-item {
+        width: 80px;
+    }
+
+    .menu-item:hover {
+        background-color: #2A3D59 !important;
+        border-radius: 16px;
+    }
+    
     .header-inner {
         padding-left: 32px;
         padding-right: 32px;
@@ -409,7 +443,7 @@ h3 {
         bottom: 0;
         top: auto;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
         background-color: #293445;
         padding: 0;
@@ -455,7 +489,6 @@ h3 {
 
     .menu-item:hover {
         background-color: #091931;
-        color: white;
         border-radius: 16px;
     }
 
@@ -463,12 +496,23 @@ h3 {
         background-color: #091931;
     }
 
+    .login-only .notice-side-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 16px;
+        padding: 0 16px;
+        height: 76px;
+        align-items: center;
+        font-size: 14px;
+        margin-top: 0;
+    }
     .notice-side-menu {
         display: none;
     }
 
     .profile-dropdown {
-        top: 68px;
+        top: 76px;
         right: 0;
         background-color: #2A3647;
         border-radius: 20px 0 20px 20px;
@@ -476,7 +520,7 @@ h3 {
         min-width: 150px;
         width: auto;
         text-align: start;
-        z-index: 300;
+        z-index: 99999;
         height: 204px;
         display: flex;
         flex-direction: column;
@@ -536,6 +580,11 @@ h3 {
 
 /* Small mobile styles */
 @media (max-width: 490px) {
+    
+    .header-content {
+        height: 80px;
+    }
+    
     .header-inner {
         padding-left: 16px;
         padding-right: 16px;
@@ -574,7 +623,7 @@ h3 {
         justify-content: space-between;
         flex-grow: 0;
         font-size: 16px;
-        padding: 0 16px;
+        padding: 0 8px;
         width: 100%;
         max-width: 400px;
     }
@@ -583,11 +632,8 @@ h3 {
         padding: 16px 8px;
         margin: 0;
         min-width: 48px;
-        width: auto;
-        flex: 1;
-        max-width: 80px;
-        height: 100%;
-        font-size: 12px;
+        width: 80px !important;
+        font-size: 14px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -598,6 +644,9 @@ h3 {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .menu-bottom {
+        width: 104px !important;
     }
 
     .menu-item:hover {
@@ -623,7 +672,7 @@ h3 {
         min-width: 150px;
         width: auto;
         text-align: start;
-        z-index: 300;
+        z-index: 99999;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -673,11 +722,20 @@ h3 {
         padding: 0px;
         padding-top: 48px;
     }
+
+    .notice-side-menu {
+        gap: 8px;
+    }
 }
 
 @media (max-width: 370px) {
 
     h1 {
         font-size: 40px;
+    }
+
+    .notice-side-menu {
+        gap: 2px;
+        padding-left: 0px !important;
     }
 }
