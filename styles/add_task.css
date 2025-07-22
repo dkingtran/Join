@@ -1,0 +1,196 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+
+.title-section {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 206px;
+    margin-left: 328px;
+    max-width: 625px;
+    height: 73px;
+    gap: 30px;
+}
+
+.title-section h1 {
+    font-size: 61px;
+    color: #000000;
+    font-weight: bold;
+    /*font-family: inter;*/
+}
+
+.add-task-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 328px;
+    width: 850px;
+    height: 562px;
+    top: 562px;
+    left: 328px;
+    background-color: rgba(172, 255, 47, 0.382);
+}
+
+.add-task-container {
+    display: flex;
+    gap: 30px;
+}
+
+.pipe {
+    width: 2px;
+    height: 424px;
+    border: 1px solid #D1D1D1;
+}
+
+.section-task-left{
+    border:2px solid black;
+}
+.section-task-right{
+    border:2px solid black;
+}
+
+.section-task-under{
+    margin-top: 50px;
+    display: flex;
+    justify-content:space-between;
+    border:2px solid black;
+}
+/* Assigned CSS */
+.custom-dropdown {
+  width: 320px;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.dropdown-input {
+  border: 1px solid #ccc;
+  padding: 10px 36px 10px 10px; /* Platz für Pfeil rechts */
+  border-radius: 6px;
+  position: relative;
+}
+
+.dropdown-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+  font-size: 14px;
+}
+
+
+.dropdown-list {
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background-color: #f0f0f0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.contact-name {
+  flex-grow: 1;
+}
+
+.contact-item input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+
+/* Add Subtask CSS */
+.subtask-container {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+.subtask-input-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 6px 10px;
+  width: 300px;
+  position: relative;
+}
+
+.subtask-input-box input {
+  border: none;
+  background: transparent;
+  flex-grow: 1;
+  font-size: 14px;
+  color: #888;
+}
+
+.subtask-input-box input:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.icon {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  padding-left: 10px;
+}
+/* 2. Input field */
+.plus {
+  font-weight: bold;
+}
+
+.cancel, .confirm {
+  font-size: 16px;
+  margin-left: 6px;
+  color: #444;
+}
+
