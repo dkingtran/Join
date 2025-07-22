@@ -1,8 +1,3 @@
-/* Mobile Add Contact Button default hidden */
-.add-contact-btn-mobile {
-    display: none;
-}
-
 /* Contact Sidebar */
 .contact-sidebar {
     position: fixed;
@@ -144,6 +139,149 @@
     margin: 2px 0;
     font-size: 14px;
     color: #666;
+}
+
+.contacts-section {
+    position: absolute;
+    top: 206px;
+    left: 743px;
+    z-index: 20;
+}
+
+.contacts-header {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.contacts-header h1 {
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.logo-divider {
+    width: 0px;
+    height: 59px;
+    border: 3px solid #29ABE2;
+}
+
+.contacts-header h2 {
+    font-size: 27px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+/* Contact Details Template Styles */
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    align-items: flex-start;
+}
+
+.contact-details-top {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+    width: 100%;
+}
+
+.contact-avatar-clicked {
+    width: 120px;
+    height: 120px;
+    background: #2A3647;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    font-weight: 500;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.contact-name-clicked {
+    font-size: 32px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.contact-details-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-btn {
+    background: #29ABE2;
+    color: #fff;
+}
+
+.edit-btn:hover {
+    background: #007CEE;
+}
+
+.delete-btn {
+    background: #f44336;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background: #d32f2f;
+}
+
+.contact-details-info {
+    width: 100%;
+}
+
+.contact-details-info-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #2A3647;
+}
+
+.contact-details-info-section {
+    padding-top: 21px;
+}
+
+.contact-details-info-section-title {
+    font-weight: bold;
+    color: #2A3647;
+    margin-bottom: 15px;
+}
+
+.contact-details-info-email {
+    color: #007CEE;
+    font-size: 16px;
+    word-break: break-all;
+}
+
+.contact-details-info-phone {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Mobile Add Contact Button default hidden */
+.add-contact-btn-mobile {
+    display: none;
 }
 
 /* Form Container */

@@ -41,7 +41,7 @@ let contacts = [
     }
 ];
 
-
+let contactIndex = 0;
 
 function init() {
     renderContacts();
@@ -65,7 +65,7 @@ function renderContacts() {
         grouped[letter].push(contact);
     });
 
-    let contactIndex = 0;
+
     Object.keys(grouped).sort().forEach((letter) => {
         contactList.innerHTML += `<div class="contact-group-letter">${letter}</div>`;
         contactList.innerHTML += '<hr class="contact-divider">';
@@ -89,6 +89,8 @@ function renderContacts() {
         item.addEventListener('click', function(e) {
             contactItems.forEach(i => i.classList.remove('selected'));
             this.classList.add('selected');
+            const idx = parseInt(this.dataset.index);
+            showContactDetails(contacts[idx], idx);
             e.stopPropagation();
         });
     });
@@ -102,11 +104,45 @@ function renderContacts() {
     });
 }
 
+
+function showContactDetails(contact, idx) {
+    document.getElementById('contactListClicked').innerHTML = `
+        <div class="contact-details">
+            <div class="contact-details-top">
+                <div class="contact-avatar-clicked">${contact.name.split(' ').map(n => n[0]).join('')}</div>
+                <div>
+                    <div class="contact-name-clicked">${contact.name}</div>
+                    <div class="contact-details-actions">
+                        <button class="edit-btn" onclick="editContact(idx)"><img src="assets/img/icons/add-contact/edit.svg">Edit</button>
+                        <button class="delete-btn" onclick="deleteContact(idx)"><img src="assets/img/icons/add-contact/delete.svg">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-details-info">
+                <div class="contact-details-info-title">Contact Information</div>
+                <div class="contact-details-info-section">
+                    <div class="contact-details-info-section-title">Email</div>
+                    <div class="contact-details-info-email">${contact.email}</div>
+                </div>
+                <div class="contact-details-info-section">
+                    <div class="contact-details-info-section-title">Phone</div>
+                    <div class="contact-details-info-phone">${contact.phone}</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
 /**
  * Shows the form container
  */
 function showForm() {
     document.getElementById('formContainer').style.display = 'block';
+    // Add outside click listener
+    setTimeout(() => {
+        document.addEventListener('click', closeFormOnOutsideClick);
+    }, 0);
 }
 
 /**
@@ -114,6 +150,15 @@ function showForm() {
  */
 function hideForm() {
     document.getElementById('formContainer').style.display = 'none';
+    document.removeEventListener('click', closeFormOnOutsideClick);
+}
+
+// Closes the form if clicking outside the form container
+function closeFormOnOutsideClick(e) {
+    const formContainer = document.getElementById('formContainer');
+    if (formContainer.style.display === 'block' && !formContainer.contains(e.target)) {
+        hideForm();
+    }
 }
 
 
