@@ -115,10 +115,11 @@ form{
 /* section under */
 
 .section-task-under {
-  margin-top: 48px;
-  display: flex;
-  justify-content: space-between;
-  border: 2px solid black;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid black; */
+    align-items: flex-end;
 }
 
 
@@ -224,12 +225,33 @@ form{
   font-weight: bold;
 }
 
-.cancel,
-.confirm {
-  font-size: 16px;
-  margin-left: 6px;
-  color: #444;
+.btn-clear-task-container{
+  gap:10px;
+  width: 100%;
+  max-width: 300px;
+
 }
+
+.btn-addtask-clear{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 110px;
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid #f6f7f8;
+  padding: 16px;
+}
+.btn-addtask-create{
+  width: 100%;
+  max-width: 183px;
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid #f6f7f8;
+  padding: 16px;
+}
+
 
 .star {
   color: red;
