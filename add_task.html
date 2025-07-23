@@ -74,7 +74,7 @@
                             <div class="date-task">
                                 <p>Du date <span class="star">*</span></p>
                                 <label for=""></label>
-                                <input class="font-bundle" id="" name="" type="date" placeholder="">
+                                <input class="font-bundle date-input-task input-bundle" id="" name="" type="date" placeholder="">
                             </div>
 
                         </div>
@@ -94,9 +94,8 @@
                             <div class="assigned-to">
                                 <div class="custom-dropdown">
                                     <label>Assigned to</label>
-                                    <div class="dropdown-input">
-                                        <input class="font-bundle" type="text" placeholder="Select contacts to assign" id="searchInput"
-                                            onfocus="toggleDropdown()" onkeyup="filterContacts()" />
+                                    <div class="dropdown-input ">
+                                        <input class="font-bundle input-bundle" type="text" placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
                                     <div class="dropdown-list" id="contactList"></div>
@@ -113,15 +112,17 @@
                             </div>
 
                             <div class="subtask-container">
-                                <label for="subtask-input">Subtasks</label>
-                                <div class="subtask-input-box">
-                                    <input type="text" id="subtask-input" placeholder="Add new subtask" disabled />
+                                <p class="font-bundle">Subtasks</p>
+                                <label for="subtask-input"></label>
+                                <div class="subtask-input-box input-bundle">
+                                    <input class="input-bundle font-bundle" type="text" id="subtask-input" placeholder="Add new subtask" disabled />
                                     <span class="icon plus"><img src="assets/img/icons/add_task/add.svg" alt=""></span>
                                 </div>
                             </div>
                             <div class="subtask-container">
-                                <label for="subtask-input">Subtasks</label>
-                                <div class="subtask-input-box">
+                                <p class="font-bundle">Subtasks</p>
+                                <label for="subtask-input"></label>
+                                <div class="subtask-input-box input-bundle">
                                     <input type="text" id="subtask-input-second" value="Contact Form" />
                                     <span class="icon cancel"><img class="icon-task" src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon"></span>
                                     <span class="icon confirm"><img class="icon-task" src="assets/img/icons/add_task/check.svg" alt="Confirm Icon"></span>

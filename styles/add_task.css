@@ -5,10 +5,20 @@
   font-style: normal;
 }
 
+/* css snippet */
 .font-bundle{
  font-size: 20px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
+}
+.input-bundle{
+  width: 100%;
+  max-width: 440px;
+  height: 48px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin:10px 0;
+  padding:12px 21px;
 }
 
 
@@ -79,7 +89,7 @@ form{
 
 .section-task-left {
   width: 100%;
-  max-width: 400px;
+  max-width: 50%;
   border: 2px solid black;
 }
 
@@ -93,8 +103,18 @@ form{
   padding:12px 21px;
 }
 
+.textarea-task{
+  width: 100%;
+  max-width: 440px;
+  height: 120px;
+  border-radius: 10px;
+  padding:12px 21px;
+}
 
 .section-task-right {
+  width: 100%;
+
+  max-width: 50%;
   border: 2px solid black;
 }
 
@@ -104,14 +124,6 @@ form{
   font-family: 'Inter', sans-serif;
   font-weight: bold;
   border: 1x solid black;
-}
-
-.textarea-task{
-  width: 100%;
-  max-width: 440px;
-  height: 120px;
-  border-radius: 10px;
-  padding:12px 21px;
 }
 
 
@@ -133,18 +145,11 @@ form{
 
 .dropdown-input {
   border: 1px solid #ccc;
-  padding: 10px 36px 10px 10px;
-  /* Platz für Pfeil rechts */
-  border-radius: 6px;
+  border: none;
   position: relative;
 }
 
-.dropdown-input input {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-}
+
 
 .arrow {
   position: absolute;
@@ -203,25 +208,19 @@ form{
 
 
 /* Add Subtask CSS */
-.subtask-container {
-  font-family: sans-serif;
-  margin: 20px;
-}
+
 
 .subtask-input-box {
   display: flex;
-  align-items: center;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  padding: 6px 10px;
-  width: 300px;
-  position: relative;
+ align-items: center;
+  background-color: white;
+  width: 440px;
+ 
 }
 
 .subtask-input-box input {
   border: none;
-  background: transparent;
+
   flex-grow: 1;
   font-size: 14px;
   color: #888;
