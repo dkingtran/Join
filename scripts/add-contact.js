@@ -54,8 +54,10 @@ function init() {
  * Renders all contacts in the contact list
  */
 function renderContacts() {
+
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
+    contactIndex = 0;
 
     // Sortiere Kontakte alphabetisch nach Name
     let sorted = [...contacts].sort((a, b) => a.name.localeCompare(b.name));
@@ -156,25 +158,27 @@ function showContactDetails(contact, idx) {
  * Shows the form container
  */
 function showForm() {
-    document.getElementById('formContainer').style.display = 'block';
-    // Add outside click listener
-    setTimeout(() => {
-        document.addEventListener('click', closeFormOnOutsideClick);
-    }, 0);
+  const form = document.getElementById('formContainer');
+  form.classList.add('show');
+
+  // Add outside click listener
+  setTimeout(() => {
+    document.addEventListener('click', closeFormOnOutsideClick);
+  }, 0);
 }
 
-/**
- * Hides the form container
- */
 function hideForm() {
-    document.getElementById('formContainer').style.display = 'none';
-    document.removeEventListener('click', closeFormOnOutsideClick);
+  const form = document.getElementById('formContainer');
+  form.classList.remove('show');
+
+  document.removeEventListener('click', closeFormOnOutsideClick);
 }
+
 
 // Closes the form if clicking outside the form container
 function closeFormOnOutsideClick(e) {
     const formContainer = document.getElementById('formContainer');
-    if (formContainer.style.display === 'block' && !formContainer.contains(e.target)) {
+    if (formContainer.classList.contains('show') && !formContainer.contains(e.target)) {
         hideForm();
     }
 }
@@ -207,6 +211,21 @@ function addToContacts() {
     
     renderContacts();
     hideForm();
+}
+
+function updateFormAvatar() {
+    const name = document.getElementById("contactName").value.trim();
+    const avatar = document.getElementById("formAvatar");
+    if (!name) {
+      avatar.textContent = "AA";
+      return;
+    }
+    const initials = name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+    avatar.textContent = initials;
 }
 
 

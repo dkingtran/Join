@@ -4,16 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Contact</title>
-    <link rel="icon" href="./assets/img/logo/logo-dark.png">
+    <link rel="icon" href="./assets/img/logo/logo-dark.png" />
     <link rel="stylesheet" href="./styles/add-contact.css" />
-    <link rel="stylesheet" href="./styles/standard.css">
-    <link rel="stylesheet" href="./styles/side_menu.css">
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/side_menu.css" />
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/add-contact.js"></script>
-    
   </head>
   <body onload="init()">
-        <header>
+    <header>
       <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
@@ -107,28 +106,28 @@
         </a>
       </div>
     </aside>
-    
+
     <!-- Contact Sidebar -->
     <div class="contact-sidebar">
-        <div class="contact-sidebar-inner">
-            <button class="add-contact-btn" onclick="showForm()">
-                <span>Add new contact</span>
-                <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-            </button>
-            <button class="add-contact-btn-mobile" onclick="showForm()">
-                <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-            </button>
-            <div class="contact-list" id="contactList">
-                <!-- Contacts will be rendered here -->
-            </div>
+      <div class="contact-sidebar-inner">
+        <button class="add-contact-btn" onclick="showForm()">
+          <span>Add new contact</span>
+          <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+        </button>
+        <button class="add-contact-btn-mobile" onclick="showForm()">
+          <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+        </button>
+        <div class="contact-list" id="contactList">
+          <!-- Contacts will be rendered here -->
         </div>
+      </div>
     </div>
 
     <!--Contacts Section -->
     <div class="contacts-section">
       <div class="contacts-header">
         <h1>Contacts</h1>
-        <hr class="logo-divider">
+        <hr class="logo-divider" />
         <h2>Better with a team</h2>
       </div>
       <div class="contact-list-clicked" id="contactListClicked">
@@ -138,25 +137,48 @@
 
     <!-- Form Container (hidden by default) -->
     <div class="form-container" id="formContainer">
-      <form onsubmit="addToContacts(); return false;">
-        <h2>Add Contact</h2>
-        <input required type="text" placeholder="Name" id="contactName" />
-        <input required type="email" placeholder="Email" id="contactEmail" />
-        <input
-          required
-          minlength="10"
-          type="tel"
-          placeholder="Phonenumber"
-          id="contactPhone"
-        />
-        <div class="button-group">
-          <button type="button" class="cancel-btn" onclick="cancelForm()">
-            Cancel <img src="./assets/img/icons/add-contact/close.svg" alt="">
-          </button>
-          <button type="submit" class="create-btn">Create Contact <img src="./assets/img/icons/add-contact/check.svg" alt=""></button>
+      <button class="close-btn" onclick="hideForm()">
+        <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+      </button>
+      <div class="form-header">
+        <div class="form-title">
+          <img src="./assets/img/logo/logo-light.png" alt="form logo" />
+          <h1>Add contact</h1>
+          <p>Tasks are better with a team!</p>
+          <hr class="form-divider" />
         </div>
-      </form>
+      </div>
+      <div class="contact-avatar-clicked" id="formAvatar">AA</div>
+      <div class="form-content">
+        <form onsubmit="addToContacts(); return false;">
+          <input
+            required
+            type="text"
+            placeholder="Name"
+            id="contactName"
+            oninput="updateFormAvatar()"
+          />
+          <input required type="email" placeholder="Email" id="contactEmail" />
+          <input
+            required
+            minlength="10"
+            type="tel"
+            placeholder="Phonenumber"
+            id="contactPhone"
+          />
+          <div class="button-group">
+            <button type="button" class="cancel-btn" onclick="cancelForm()">
+              Cancel
+              <img src="./assets/img/icons/add-contact/close.svg" alt="" />
+            </button>
+            <button type="submit" class="create-btn">
+              Create Contact
+              <img src="./assets/img/icons/add-contact/check.svg" alt="" />
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+    <script></script>
   </body>
-</html>
 </html>

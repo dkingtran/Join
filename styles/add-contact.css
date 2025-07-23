@@ -171,7 +171,8 @@
 .logo-divider {
     width: 0px;
     height: 59px;
-    border: 3px solid #29ABE2;
+    border: 2px solid #29ABE2;
+    border-radius: 4px;
 }
 
 .contacts-header h2 {
@@ -316,17 +317,25 @@
 }
 
 /* Form Container */
+
 .form-container {
+    display: none; /* Initially hidden */
+}
+
+.form-container.show {
     position: fixed;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
     top: 50%;
     left: 50%;
+    gap: 72px;
     transform: translate(-50%, -50%);
-    max-width: 500px;
-    width: 90%;
-    padding: 30px;
+    max-width: 1160px;
+    height: 592px;
+    width: 100%;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    border-radius: 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
@@ -341,6 +350,109 @@
 .form-group {
     margin-bottom: 15px;
 }
+
+/* Form Header (links im Overlay) */
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #2A3647;
+    color: white;
+    height: 594px;
+    width: 467px;
+    padding: 66px 46px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    box-sizing: border-box;
+}
+
+/* Avatar im Overlay-Formular */
+.form-container .contact-avatar-clicked {
+    min-width: 120px;
+    min-height: 120px;
+    background: #D1D1D1;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    font-weight: 500;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.form-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 32px;
+    min-width: 320px;
+    max-width: 420px;
+    box-sizing: border-box;
+}
+
+
+.form-title {
+    gap: 12px;
+}
+
+.form-title img {
+    position: absolute;
+    width: 55.59px;
+    height: 66.48px;
+    top: 148px;
+    left: 46px;
+}
+
+.form-title h1 {
+    font-size: 61px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 120%;
+}
+
+.form-title p {
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 120%;
+    margin-top: 12px;
+}
+
+.form-divider {
+    width: 90px;
+    height: 3px;
+    border-radius: 3px;
+    border: 2px solid #29ABE2;
+    margin-top: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #2A3647;
+    transition: all 0.1s ease-in-out;
+}
+
+.close-btn:hover {
+    transform: scale(1.01);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.close-btn img {
+    width: 13.15px;
+    height: 13.15px;
+}
+
 
 label {
     display: block;
@@ -373,17 +485,20 @@ input:focus {
 .cancel-btn {
     width: 126px;
     height: 56px;
+    font-size: 20px;
+    font-weight: 400;
     border-radius: 10px;
     border-width: 1px;
     padding: 16px;
-    gap: 4px;
+    gap: 8px;
     opacity: 1;
     cursor: pointer;
     border: 1px solid #2A3647;
     transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s ease-in-out;
-    display: inline-flex;
-    align-items: center;
+    display: flex;
     justify-content: center;
+    align-items: center;
+
 }
 
 .cancel-btn img {
@@ -400,7 +515,6 @@ input:focus {
     border-radius: 10px;
     border-width: 2px;
     padding: 16px;
-    gap: 4px;
     opacity: 1;
     color: #29ABE2;
     border: 2px solid #29ABE2;
@@ -426,17 +540,20 @@ input:focus {
 }
 
 .create-btn {
-    width: 126px;
-    height: 56px;
+    width: 214px;
+    height: 57px;
+    font-size: 21px;
+    font-weight: 700;
+    font-style: bold;
     border-radius: 10px;
     border-width: 1px;
     padding: 16px;
-    gap: 4px;
+    gap: 8px;
     opacity: 1;
     cursor: pointer;
     border: 1px solid #2A3647;
     transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s ease-in-out;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     background: #2A3647;
@@ -445,19 +562,16 @@ input:focus {
 }
 
 .create-btn img {
-    width: 10.5px;
-    height: 10.5px;
+    width: 15.5px;
+    height: 11.22px;
     filter: brightness(0) invert(1);
     transition: filter 0.1s ease-in-out;
 }
 
 .create-btn:hover {
-    width: 126px;
-    height: 56px;
     border-radius: 10px;
     border-width: 2px;
     padding: 16px;
-    gap: 4px;
     opacity: 1;
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
@@ -481,6 +595,10 @@ input:focus {
 
 .create-btn:active img {
     filter: brightness(0) invert(1);
+}
+
+.contact-sidebar {
+    scrollbar-color: #A8A8A8 #fff;
 }
 
 @media (max-width: 1000px) {
