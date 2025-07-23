@@ -41,7 +41,9 @@ let contacts = [
     }
 ];
 
+
 let contactIndex = 0;
+let lastShownContactIdx = null;
 
 function init() {
     renderContacts();
@@ -87,10 +89,19 @@ function renderContacts() {
     let contactItems = document.querySelectorAll('.contact-item');
     contactItems.forEach(item => {
         item.addEventListener('click', function(e) {
-            contactItems.forEach(i => i.classList.remove('selected'));
-            this.classList.add('selected');
             const idx = parseInt(this.dataset.index);
-            showContactDetails(contacts[idx], idx);
+            // Toggle logic: if same contact, hide details
+            if (lastShownContactIdx === idx) {
+                document.getElementById('contactListClicked').style.display = 'none';
+                contactItems.forEach(i => i.classList.remove('selected'));
+                lastShownContactIdx = null;
+            } else {
+                contactItems.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                showContactDetails(contacts[idx], idx);
+                document.getElementById('contactListClicked').style.display = '';
+                lastShownContactIdx = idx;
+            }
             e.stopPropagation();
         });
     });
@@ -106,15 +117,16 @@ function renderContacts() {
 
 
 function showContactDetails(contact, idx) {
-    document.getElementById('contactListClicked').innerHTML = `
+    const container = document.getElementById('contactListClicked');
+    container.innerHTML = `
         <div class="contact-details">
             <div class="contact-details-top">
                 <div class="contact-avatar-clicked">${contact.name.split(' ').map(n => n[0]).join('')}</div>
-                <div>
+                <div class="contact-name-edit-delete">
                     <div class="contact-name-clicked">${contact.name}</div>
                     <div class="contact-details-actions">
-                        <button class="edit-btn" onclick="editContact(idx)"><img src="assets/img/icons/add-contact/edit.svg">Edit</button>
-                        <button class="delete-btn" onclick="deleteContact(idx)"><img src="assets/img/icons/add-contact/delete.svg">Delete</button>
+                        <button class="edit-btn" onclick="editContact(${idx})"><img src="assets/img/icons/add-contact/edit.svg">Edit</button>
+                        <button class="delete-btn" onclick="deleteContact(${idx})"><img src="assets/img/icons/add-contact/delete.svg">Delete</button>
                     </div>
                 </div>
             </div>
@@ -131,6 +143,12 @@ function showContactDetails(contact, idx) {
             </div>
         </div>
     `;
+    // Animation: slide in from right
+    container.classList.remove('active');
+    container.classList.add('contact-list-clicked');
+    setTimeout(() => {
+        container.classList.add('active');
+    }, 10);
 }
 
 

@@ -51,11 +51,17 @@
     font-weight: 700;
     cursor: pointer;
     margin-bottom: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.1s ease-in-out;
 }
 
 .add-contact-btn:hover {
-    background: #1e2a3a;
+    background: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.add-contact-btn:active {
+    background: #091931;
+    box-shadow: 0px 0px 0px 0px;
 }
 
 .add-contact-btn img {
@@ -217,33 +223,58 @@
     gap: 12px;
 }
 
-.edit-btn,
 .delete-btn {
-    padding: 8px 20px;
-    border-radius: 8px;
+    width: 62px;
+    height: 24px;
     border: none;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     cursor: pointer;
-    transition: background 0.2s;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
 }
 
 .edit-btn {
-    background: #29ABE2;
-    color: #fff;
+    width: 62px;
+    height: 24px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
 }
 
-.edit-btn:hover {
-    background: #007CEE;
-}
-
-.delete-btn {
-    background: #f44336;
-    color: #fff;
-}
-
+.edit-btn:hover,
 .delete-btn:hover {
-    background: #d32f2f;
+    color: #29ABE2;
+    font-weight: 700;
+}
+
+.edit-btn:hover img,
+.delete-btn:hover img {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
+}
+
+/* Ensure button images are always inline and sized */
+.delete-btn img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.edit-btn img {
+    width: 18.28px;
+    height: 18.25px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .contact-details-info {
@@ -339,33 +370,117 @@ input:focus {
     margin-top: 24px;
 }
 
-button {
-    flex: 1;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
+.cancel-btn {
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 16px;
+    gap: 4px;
+    opacity: 1;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    border: 1px solid #2A3647;
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cancel-btn {
-    background-color: #f44336;
-    color: white;
+.cancel-btn img {
+    width: 10.5px;
+    height: 10.5px;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(13%) saturate(1092%) hue-rotate(178deg) brightness(97%) contrast(92%);
+    /* entspricht #2A3647 */
+    transition: filter 0.1s ease-in-out;
 }
 
 .cancel-btn:hover {
-    background-color: #d32f2f;
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border-width: 2px;
+    padding: 16px;
+    gap: 4px;
+    opacity: 1;
+    color: #29ABE2;
+    border: 2px solid #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.cancel-btn:hover img {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
+    /* entspricht #29ABE2 */
+}
+
+.cancel-btn:active {
+    color: #091931;
+    box-shadow: 0px 0px 0px 0px;
+    border: 1px solid #091931;
+    background: #f3f5f7;
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background 0.1s ease-in-out;
+}
+
+.cancel-btn:active img {
+    filter: brightness(0) saturate(100%) invert(7%) sepia(16%) saturate(1817%) hue-rotate(183deg) brightness(97%) contrast(92%);
+    /* entspricht #091931 */
 }
 
 .create-btn {
-    background-color: #4caf50;
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 16px;
+    gap: 4px;
+    opacity: 1;
+    cursor: pointer;
+    border: 1px solid #2A3647;
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #2A3647;
     color: white;
+    white-space: nowrap; /* Prevent line break */
+}
+
+.create-btn img {
+    width: 10.5px;
+    height: 10.5px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.1s ease-in-out;
 }
 
 .create-btn:hover {
-    background-color: #388e3c;
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border-width: 2px;
+    padding: 16px;
+    gap: 4px;
+    opacity: 1;
+    color: white;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid #29ABE2;
+    background: #29ABE2;
+    white-space: nowrap; /* Prevent line break on hover */
+}
+
+.create-btn:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.create-btn:active {
+    color: white;
+    box-shadow: 0px 0px 0px 0px;
+    border: 1px solid #091931;
+    background: #091931;
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background 0.1s ease-in-out;
+    white-space: nowrap; /* Prevent line break on active */
+}
+
+.create-btn:active img {
+    filter: brightness(0) invert(1);
 }
 
 @media (max-width: 1000px) {
