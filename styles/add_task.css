@@ -1,5 +1,3 @@
-
-
 .wrapper {
   display: flex;
   justify-content: center;
@@ -45,18 +43,20 @@
   left: 328px;
 
 }
-form{
+
+form {
   width: 100%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
 }
+
 .add-task-container {
   width: 100%;
   max-width: 1200px;
   display: flex;
   gap: 50px;
- 
+
 }
 
 .pipe {
@@ -64,6 +64,7 @@ form{
   height: 424px;
   border: 1px solid #D1D1D1;
 }
+
 /* Section left */
 .section-task-left {
   width: 100%;
@@ -77,16 +78,16 @@ form{
   height: 48px;
   border: 1px solid black;
   border-radius: 10px;
-  margin:10px 0;
-  padding:12px 21px;
+  margin: 10px 0;
+  padding: 12px 21px;
 }
 
-.textarea-task{
+.textarea-task {
   width: 100%;
   max-width: 440px;
   height: 120px;
   border-radius: 10px;
-  padding:12px 21px;
+  padding: 12px 21px;
   margin-top: 10px;
 }
 
@@ -94,26 +95,33 @@ form{
 .section-task-right {
   width: 100%;
   max-width: 50%;
- 
+
 }
-.btn-prio{
+
+.btn-prio {
   display: flex;
   justify-content: flex-start;
   gap: 16px;
-  margin:10px 0;
+  margin: 10px 0;
   background: white;
 }
 
+.btn-prio-bundle:hover{
 
-.btn-prio-bundle{
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.4);
+}
+
+
+.btn-prio-bundle {
   width: 100%;
   max-width: 136px;
   height: 56px;
   border-radius: 10px;
-  padding:16px 10px;
+  padding: 16px 10px;
   background-color: white;
 }
-.medium-btn{
+
+.medium-btn {
   gap: 6px;
   background: #FFA800;
   font-size: 21px;
@@ -121,7 +129,8 @@ form{
   font-weight: bold;
   border: 1x solid black;
 }
-.icon-subtask-container{
+
+.icon-subtask-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,11 +139,11 @@ form{
 /* section under */
 
 .section-task-under {
-    margin-top: 48px;
-    display: flex;
-    justify-content: space-between;
-    /* border: 2px solid black; */
-    align-items: flex-end;
+  margin-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+  align-items: flex-end;
 }
 
 
@@ -183,7 +192,7 @@ form{
   background-color: #f0f0f0;
 }
 
-.avatar {
+/* .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -194,7 +203,7 @@ form{
   align-items: center;
   margin-right: 10px;
   font-size: 14px;
-}
+} */
 
 .contact-name {
   flex-grow: 1;
@@ -210,25 +219,26 @@ form{
 
 .subtask-input-box {
   display: flex;
- align-items: center;
- justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
   width: 440px;
-    color: #D1D1D1;
- 
+  color: #D1D1D1;
+
 }
 
 .subtask-input-box input {
-   border: none;
-   color: #D1D1D1;
-} 
+  border: none;
+  color: #D1D1D1;
+}
 
 .subtask-input-box input:disabled {
   color: #D1D1D1;
   cursor: not-allowed;
 }
-.add-subtask-input{
-  padding:0;
+
+.add-subtask-input {
+  padding: 0;
 }
 
 .icon-task {
@@ -243,14 +253,14 @@ form{
   font-weight: bold;
 }
 
-.btn-clear-task-container{
-  gap:10px;
+.btn-clear-task-container {
+  gap: 10px;
   width: 100%;
   max-width: 519px;
 
 }
 
-.btn-addtask-clear{
+.btn-addtask-clear {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,11 +268,22 @@ form{
   max-width: 110px;
   height: 56px;
   border-radius: 10px;
- border: 1px solid #2A3647;
+  border: 1px solid #2A3647;
   padding: 16px;
+  color: #2A3647;
+  background: white;
+  gap: 8px;
+  transition: all 100ms ease-in-out;
 }
 
-.btn-addtask-create{
+.btn-addtask-clear:hover {
+  border-color: #29ABE2;
+  color: #29ABE2;
+  transform: scale(1.01);
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-addtask-create {
   color: white;
   width: 100%;
   max-width: 183px;
@@ -270,8 +291,15 @@ form{
   border-radius: 10px;
   background: #2A3647;
   padding: 16px;
+  transition: all 0.2s ease-in-out;
 }
 
+.btn-addtask-create:hover {
+  background: #29ABE2;
+  transform: scale(1.01);
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
+
+}
 
 .star {
   color: red;
