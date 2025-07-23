@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin-top: 206px;
+  margin-top: 164px;
   margin-left: 328px;
   max-width: 625px;
   height: 73px;
@@ -38,12 +38,12 @@
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-  margin-left: 328px;
+  margin-left: 237px;
   width: 1400px;
   height: 562px;
   top: 562px;
   left: 328px;
-  background-color: rgba(172, 255, 47, 0.382);
+
 }
 form{
   width: 100%;
@@ -56,7 +56,7 @@ form{
   max-width: 1200px;
   display: flex;
   gap: 50px;
-  background-color: grey;
+ 
 }
 
 .pipe {
@@ -68,7 +68,7 @@ form{
 .section-task-left {
   width: 100%;
   max-width: 50%;
-  border: 2px solid black;
+
 }
 
 .input-title-task {
@@ -87,22 +87,23 @@ form{
   height: 120px;
   border-radius: 10px;
   padding:12px 21px;
+  margin-top: 10px;
 }
 
 /* Section right */
 .section-task-right {
   width: 100%;
   max-width: 50%;
-  border: 2px solid black;
+ 
+}
+.btn-prio{
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  margin:10px 0;
+  background: white;
 }
 
-.medium-btn{
-  background: #FFA800;
-  font-size: 21px;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  border: 1x solid black;
-}
 
 .btn-prio-bundle{
   width: 100%;
@@ -110,6 +111,20 @@ form{
   height: 56px;
   border-radius: 10px;
   padding:16px 10px;
+  background-color: white;
+}
+.medium-btn{
+  gap: 6px;
+  background: #FFA800;
+  font-size: 21px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  border: 1x solid black;
+}
+.icon-subtask-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* section under */
@@ -196,6 +211,7 @@ form{
 .subtask-input-box {
   display: flex;
  align-items: center;
+ justify-content: space-between;
   background-color: white;
   width: 440px;
     color: #D1D1D1;
@@ -203,14 +219,16 @@ form{
 }
 
 .subtask-input-box input {
-  border: none;
-  flex-grow: 1;
+   border: none;
    color: #D1D1D1;
-}
+} 
 
 .subtask-input-box input:disabled {
   color: #D1D1D1;
   cursor: not-allowed;
+}
+.add-subtask-input{
+  padding:0;
 }
 
 .icon-task {
@@ -228,7 +246,7 @@ form{
 .btn-clear-task-container{
   gap:10px;
   width: 100%;
-  max-width: 300px;
+  max-width: 519px;
 
 }
 
@@ -240,15 +258,17 @@ form{
   max-width: 110px;
   height: 56px;
   border-radius: 10px;
-  border: 1px solid #f6f7f8;
+ border: 1px solid #2A3647;
   padding: 16px;
 }
+
 .btn-addtask-create{
+  color: white;
   width: 100%;
   max-width: 183px;
   height: 56px;
   border-radius: 10px;
-  border: 1px solid #f6f7f8;
+  background: #2A3647;
   padding: 16px;
 }
 

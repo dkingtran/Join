@@ -60,7 +60,7 @@
                         <div class="section-task-left">
 
                             <div class="title-task">
-                                <p class="title-task font-bundle">Title<sup class="star">*</sup></p>
+                                <p class="title-task font-bundle">Title<span class="star">*</span></p>
                                 <label for=""></label>
                                 <input class="input-title-task font-bundle" id="" name="" type="text"
                                     placeholder="Enter a title">
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="date-task">
-                                <p>Du date <span class="star">*</span></p>
+                                <p class="font-bundle">Du date <span class="star">*</span></p>
                                 <label for=""></label>
                                 <input class="font-bundle date-input-task input-bundle" id="" name="" type="date"
                                     placeholder="">
@@ -87,11 +87,11 @@
                         <div class="section-task-right">
                             <div class="priority">
                                 <p class="font-bundle">Priority</p>
-                                <div class="btn-prio ">
+                                <div class="btn-prio">
                                     <button class="font-bundle btn-prio-bundle">Urgent <img
                                             src="./assets/img/icons/add_task/urgent_icon.svg"
                                             alt="Urgent Icon"></button>
-                                    <button class="medium-btn btn-prio-bundle">Medium <img
+                                    <button class="medium-btn btn-prio-bundle display-standard">Medium <img
                                             src="./assets/img/icons/add_task/medium_vector.svg" alt="medium"></button>
                                     <button class="font-bundle btn-prio-bundle">Low <img
                                             src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon"></button>
@@ -100,7 +100,7 @@
 
                             <div class="assigned-to">
                                 <div class="custom-dropdown">
-                                    <label>Assigned to</label>
+                                    <label class="font-bundle">Assigned to</label>
                                     <div class="dropdown-input">
                                         <input class="font-bundle input-bundle" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
@@ -111,7 +111,7 @@
                             </div>
 
                             <div class="category-task">
-                                <p>Category<sup class="star">*</sup></p>
+                                <p class="font-bundle">Category<span class="star">*</span></p>
                                 <select class="font-bundle input-bundle" name="user" id="select-contacts">
                                     <option value="" disabled selected>Select task category</option>
                                     <option value="porsche">Technical Task</option>
@@ -123,21 +123,23 @@
                                 <p class="font-bundle">Subtasks</p>
                                 <label for="subtask-input"></label>
                                 <div class="subtask-input-box input-bundle">
-                                    <input class="input-bundle font-bundle" type="text" id="subtask-input"
-                                        placeholder="Add new subtask" disabled />
+                                    <input class="add-subtask-input input-bundle font-bundle" type="text" id="subtask-input" value="Add new subtask" disabled>
                                     <span class="icon plus"><img src="assets/img/icons/add_task/add.svg" alt=""></span>
                                 </div>
                             </div>
+
                             <div class="subtask-container">
                                 <p class="font-bundle">Subtasks</p>
                                 <label for="subtask-input"></label>
                                 <div class="subtask-input-box input-bundle">
                                     <input class="font-bundle" type="text" id="subtask-input-second"
                                         value="Contact Form" />
+                                        <div class="icon-subtask-container">
                                     <span class="icon cancel"><img class="icon-task"
                                             src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon"></span>
                                     <span class="icon confirm"><img class="icon-task"
                                             src="assets/img/icons/add_task/check.svg" alt="Confirm Icon"></span>
+                                            </div>
                                 </div>
                             </div>
                         </div>
