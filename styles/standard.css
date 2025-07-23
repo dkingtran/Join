@@ -25,3 +25,19 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* css snippet addtask.html */
+.font-bundle{
+ font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+.input-bundle{
+  width: 100%;
+  max-width: 440px;
+  height: 48px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin:10px 0;
+  padding:12px 21px;
+}
