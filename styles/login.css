@@ -159,6 +159,10 @@ input:focus {
   margin-left: 10px;
 }
 
+.password-icon:hover {
+  cursor: pointer;
+}
+
 .form-box {
   width: 100%;
   display: flex;

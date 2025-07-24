@@ -68,23 +68,23 @@
 							</div>
 
 							<div class="input-group">
-								<div class="input-wrapper">
+								<div id="password-wrapper" class="input-wrapper">
 									<input id="password" type="password" placeholder="Password" />
 									<img
-										id="lock-off-password"
-										class="icon"
+										id="lock-password"
+										class="icon password-icon"
 										src="./assets/img/icons/login/lock.svg"
 										alt="Lock Password"
 									/>
 									<img
 										id="visibility-off-password"
-										class="icon"
+										class="icon password-icon d-none"
 										src="./assets/img/icons/register/visibility_off.svg"
 										alt="Visibility off Icon"
 									/>
 									<img
 										id="visibility-on-password"
-										class="icon"
+										class="icon password-icon d-none"
 										src="./assets/img/icons/register/visibility.svg"
 										alt="Visibility on Icon"
 									/>
@@ -92,7 +92,7 @@
 							</div>
 
 							<div class="input-group">
-								<div class="input-wrapper">
+								<div id="password-confirmation-wrapper" class="input-wrapper">
 									<input
 										id="password-confirmation"
 										type="password"
@@ -100,20 +100,20 @@
 									/>
 
 									<img
-										id="lock-off-confirm-password"
-										class="icon"
+										id="lock-confirm-password"
+										class="icon password-icon"
 										src="./assets/img/icons/login/lock.svg"
 										alt=""
 									/>
 									<img
 										id="visibility-off-confirm-password"
-										class="icon"
+										class="icon password-icon d-none"
 										src="./assets/img/icons/register/visibility_off.svg"
 										alt="Visibility off Icon"
 									/>
 									<img
 										id="visibility-on-confirm-password"
-										class="icon"
+										class="icon password-icon d-none"
 										src="./assets/img/icons/register/visibility.svg"
 										alt="Lock Password"
 									/>
@@ -162,6 +162,7 @@
 			</div>
 		</div>
 
+		<script src="./scripts/login-register.js"></script>
 		<script src="./scripts/register.js"></script>
 	</body>
 </html>
