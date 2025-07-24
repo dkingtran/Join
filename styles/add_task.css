@@ -106,7 +106,7 @@ form {
   background: white;
 }
 
-.btn-prio-bundle:hover{
+.btn-prio-bundle:hover {
 
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.4);
 }
@@ -264,6 +264,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   width: 100%;
   max-width: 110px;
   height: 56px;
@@ -272,8 +273,8 @@ form {
   padding: 16px;
   color: #2A3647;
   background: white;
-  gap: 8px;
   transition: all 100ms ease-in-out;
+  cursor: pointer;
 }
 
 .btn-addtask-clear:hover {
@@ -300,6 +301,19 @@ form {
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
 
 }
+
+.icon-close path {
+  stroke: #2A3647;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s ease-in-out;
+}
+
+.btn-addtask-clear:hover .icon-close path {
+  stroke: #29ABE2;
+}
+
 
 .star {
   color: red;
