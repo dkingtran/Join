@@ -1,11 +1,9 @@
-
 const emailRef = document.getElementById('email');
 const nameRef = document.getElementById('name');
 const passwordRef = document.getElementById('password');
 const passwordConfirmationRef = document.getElementById('password-confirmation');
 const errorMessageRef = document.getElementById('error-msg');
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/gi;
-
 
 async function addUser() {
   if (checkName() & checkEmail() & checkPassword()) {
@@ -24,16 +22,12 @@ async function addUser() {
   }
 }
 
-
 function showErrorMessage() {
   errorMessageRef.classList.add('show');
   setTimeout(() => {
     errorMessageRef.classList.remove('show');
   }, 3000)
 }
-
-
-
 
 function checkName() {
   if (!(nameRef.value == '')) {
@@ -44,11 +38,9 @@ function checkName() {
   }
 }
 
-
 nameRef.addEventListener("input", () => {
   nameRef.parentElement.classList.remove('error');
 });
-
 
 function checkEmail() {
   if (emailRegex.test(emailRef.value)) {
@@ -59,11 +51,9 @@ function checkEmail() {
   }
 }
 
-
 emailRef.addEventListener("input", () => {
   emailRef.parentElement.classList.remove('error');
 });
-
 
 function checkPassword() {
   if (!(passwordRef.value == '') && passwordRef.value == passwordConfirmationRef.value) {
@@ -74,7 +64,6 @@ function checkPassword() {
   }
 }
 
-
 passwordRef.addEventListener("input", () => {
   passwordRef.parentElement.classList.remove('error');
 });
@@ -82,7 +71,6 @@ passwordRef.addEventListener("input", () => {
 passwordConfirmationRef.addEventListener("input", () => {
   passwordConfirmationRef.parentElement.classList.remove('error');
 });
-
 
 document.getElementById('privacy-policy-checkbox').addEventListener("click", (event) => {
   let isChecked = event.target.checked;
@@ -93,7 +81,6 @@ document.getElementById('privacy-policy-checkbox').addEventListener("click", (ev
     signUpBtn.disabled = true;
   }
 });
-
 
 /**
  * Handles smooth intro animation on page load:
