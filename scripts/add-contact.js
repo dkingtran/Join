@@ -41,6 +41,19 @@ let contacts = [
     }
 ];
 
+    // Mapping Name -> Farbklasse
+const colorMap = {
+    'Anton Mayer': 'contact-avatar-color1',
+    'Anja Schulz': 'contact-avatar-color2',
+    'Benedikt Ziegler': 'contact-avatar-color3',
+    'David Eisenberg': 'contact-avatar-color4',
+    'Eva Fischer': 'contact-avatar-color5',
+    'Emmanuel Mauer': 'contact-avatar-color6',
+    'Marcel Bauer': 'contact-avatar-color7',
+    'Tatjana Wolf': 'contact-avatar-color8',
+    'Sofia Müller': 'contact-avatar-color9',
+    '': 'contact-avatar-color10' // Default color for any other names
+};
 
 let contactIndex = 0;
 let lastShownContactIdx = null;
@@ -58,9 +71,12 @@ function renderContacts() {
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
     contactIndex = 0;
-
-    // Sortiere Kontakte alphabetisch nach Name
-    let sorted = [...contacts].sort((a, b) => a.name.localeCompare(b.name));
+    // Sortiere Kontakte nach Initialen (z.B. AM vor AS), deutsches Alphabet, case-insensitive
+    let sorted = [...contacts].sort((a, b) => {
+        const initialsA = a.name.split(' ').map(n => n[0].toUpperCase()).join('');
+        const initialsB = b.name.split(' ').map(n => n[0].toUpperCase()).join('');
+        return initialsA.localeCompare(initialsB, 'de', { sensitivity: 'base' });
+    });
     // Gruppiere nach Anfangsbuchstaben
     let grouped = {};
     sorted.forEach(contact => {
@@ -74,9 +90,10 @@ function renderContacts() {
         contactList.innerHTML += `<div class="contact-group-letter">${letter}</div>`;
         contactList.innerHTML += '<hr class="contact-divider">';
         grouped[letter].forEach((contact) => {
+            const colorClass = colorMap[contact.name] || 'contact-avatar-color1';
             contactList.innerHTML += `
                 <div class="contact-item" data-index="${contactIndex}">
-                    <div class="contact-avatar">${contact.name.split(' ').map(n => n[0]).join('')}</div>
+                    <div class="contact-avatar ${colorClass}">${contact.name.split(' ').map(n => n[0]).join('')}</div>
                     <div class="contact-item-content">
                         <div class="contact-name">${contact.name}</div>
                         <div class="contact-email">${contact.email}</div>
@@ -120,10 +137,12 @@ function renderContacts() {
 
 function showContactDetails(contact, idx) {
     const container = document.getElementById('contactListClicked');
+    const colorClass = colorMap[contact.name] || 'contact-avatar-color10';
+    const initials = contact.name.split(' ').map(n => n[0]).join('');
     container.innerHTML = `
         <div class="contact-details">
             <div class="contact-details-top">
-                <div class="contact-avatar-clicked">${contact.name.split(' ').map(n => n[0]).join('')}</div>
+                <div class="contact-avatar-clicked ${colorClass}">${initials}</div>
                 <div class="contact-name-edit-delete">
                     <div class="contact-name-clicked">${contact.name}</div>
                     <div class="contact-details-actions">
@@ -160,7 +179,9 @@ function showContactDetails(contact, idx) {
 function showForm() {
   const form = document.getElementById('formContainer');
   form.classList.add('show');
-
+  // Show overlay
+  const overlay = document.getElementById('modalOverlay');
+  if (overlay) overlay.classList.add('show');
   // Add outside click listener
   setTimeout(() => {
     document.addEventListener('click', closeFormOnOutsideClick);
@@ -170,7 +191,9 @@ function showForm() {
 function hideForm() {
   const form = document.getElementById('formContainer');
   form.classList.remove('show');
-
+  // Hide overlay
+  const overlay = document.getElementById('modalOverlay');
+  if (overlay) overlay.classList.remove('show');
   document.removeEventListener('click', closeFormOnOutsideClick);
 }
 
@@ -216,15 +239,26 @@ function addToContacts() {
 function updateFormAvatar() {
     const name = document.getElementById("contactName").value.trim();
     const avatar = document.getElementById("formAvatar");
-    if (!name) {
-      avatar.textContent = "AA";
-      return;
+    // Alle möglichen Farbklassen entfernen
+    for (let i = 1; i <= 10; i++) {
+        avatar.classList.remove('contact-avatar-color' + i);
     }
+    if (!name) {
+        // Standardfarbe und Standardbild setzen
+        // Erst Farbe setzen, dann Icon
+        avatar.classList.remove('contact-avatar-color10');
+        avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
+        return;
+    }
+    // Farbklasse bestimmen
+    let colorClass = colorMap[name] || 'contact-avatar-color10';
+    avatar.classList.add(colorClass);
     const initials = name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase();
+        .split(" ")
+        .filter(Boolean)
+        .map(n => n[0].toUpperCase())
+        .slice(0, 2)
+        .join("");
     avatar.textContent = initials;
 }
 
@@ -237,4 +271,60 @@ function cancelForm() {
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
     hideForm();
+}
+
+
+/**
+ * Opens the edit contact modal, fills in the contact data, and shows the correct avatar.
+ * @param {number} idx - Index of the contact to edit
+ */
+function showEditForm(idx) {
+    const contact = contacts[idx];
+    document.getElementById('editContactName').value = contact.name;
+    document.getElementById('editContactEmail').value = contact.email;
+    document.getElementById('editContactPhone').value = contact.phone;
+    updateEditFormAvatar();
+    const editForm = document.getElementById('editFormContainer');
+    editForm.classList.add('show');
+    // Show overlay
+    const overlay = document.getElementById('editModalOverlay');
+    if (overlay) overlay.classList.add('show');
+    // Optional: hide add form if open
+    hideForm();
+    // Store index for saveEditContact
+    window.editContactIdx = idx;
+}
+
+function hideEditForm() {
+    document.getElementById('editFormContainer').classList.remove('show');
+    // Hide overlay
+    const overlay = document.getElementById('editModalOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function updateEditFormAvatar() {
+    const name = document.getElementById('editContactName').value.trim();
+    const avatar = document.getElementById('editFormAvatar');
+    for (let i = 1; i <= 10; i++) {
+        avatar.classList.remove('contact-avatar-color' + i);
+    }
+    if (!name) {
+        avatar.classList.add('contact-avatar-color10');
+        avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
+        return;
+    }
+    let colorClass = colorMap[name] || 'contact-avatar-color10';
+    avatar.classList.add(colorClass);
+    const initials = name
+        .split(' ')
+        .filter(Boolean)
+        .map(n => n[0].toUpperCase())
+        .slice(0, 2)
+        .join('');
+    avatar.textContent = initials;
+}
+
+// Add this function to handle the edit button click
+function editContact(idx) {
+    showEditForm(idx);
 }

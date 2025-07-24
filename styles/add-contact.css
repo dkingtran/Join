@@ -1,3 +1,29 @@
+/* Overlay for modal background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 999;
+    display: none;
+}
+.modal-overlay.show {
+    display: block;
+}
+/* Kontakt-Avatar Farben (10 verschiedene) */
+.contact-avatar-color1 { background: #FF7A00 !important; }
+.contact-avatar-color2 { background: #9327FF !important; }
+.contact-avatar-color3 { background: #6E52FF !important; }
+.contact-avatar-color4 { background: #FC71FF !important; }
+.contact-avatar-color5 { background: #FFBB2B !important; }
+.contact-avatar-color6 { background: #1FD7C1 !important; }
+.contact-avatar-color7 { background: #462F8A !important; }
+.contact-avatar-color8 { background: #FF4646 !important; }
+.contact-avatar-color9 { background: #00BEE8 !important; }
+.contact-avatar-color10 { background: #48b848 !important; }
+
 /* Contact Sidebar */
 .contact-sidebar {
     position: fixed;
@@ -433,8 +459,13 @@
 
 .close-btn {
     position: absolute;
-    top: 32px;
-    right: 32px;
+    top: 48px;
+    right: 48px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -443,9 +474,6 @@
 }
 
 .close-btn:hover {
-    transform: scale(1.01);
-    width: 32px;
-    height: 32px;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.1);
 }
@@ -491,13 +519,12 @@ input:focus {
     margin-bottom: 0;
 }
 
-.input-wrapper .icon {
+.icon {
     position: absolute;
     right: 16px;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     pointer-events: none;
-    filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
 }
 
 .button-group {

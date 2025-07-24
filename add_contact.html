@@ -135,6 +135,8 @@
       </div>
     </div>
 
+    <!-- Modal Overlay for Add Contact -->
+    <div class="modal-overlay" id="modalOverlay"></div>
     <!-- Form Container (hidden by default) -->
     <div class="form-container" id="formContainer">
       <button class="close-btn" onclick="hideForm()">
@@ -148,7 +150,9 @@
           <hr class="form-divider" />
         </div>
       </div>
-      <div class="contact-avatar-clicked" id="formAvatar">AA</div>
+      <div class="contact-avatar-clicked" id="formAvatar">
+        <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
+      </div>
       <div class="form-content">
         <form class="form-wrapper" onsubmit="addToContacts(); return false;">
           <div class="input-wrapper">
@@ -199,6 +203,81 @@
             </button>
             <button type="submit" class="create-btn">
               Create Contact
+              <img src="./assets/img/icons/add-contact/check.svg" alt="" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Overlay for Edit Contact -->
+    <div class="modal-overlay" id="editModalOverlay"></div>
+    <!-- Edit Contact Modal (hidden by default) -->
+    <div class="form-container" id="editFormContainer" style="display: none">
+      <button class="close-btn" onclick="hideEditForm()">
+        <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+      </button>
+      <div class="form-header">
+        <div class="form-title">
+          <img src="./assets/img/logo/logo-light.png" alt="form logo" />
+          <h1>Edit contact</h1>
+          <p>Tasks are better with a team!</p>
+          <hr class="form-divider" />
+        </div>
+      </div>
+      <div class="contact-avatar-clicked" id="editFormAvatar">
+        <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
+      </div>
+      <div class="form-content">
+        <form class="form-wrapper" onsubmit="saveEditContact(); return false;">
+          <div class="input-wrapper">
+            <input
+              required
+              type="text"
+              placeholder="Name"
+              id="editContactName"
+              oninput="updateEditFormAvatar()"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/person.svg"
+              alt="Name Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              id="editContactEmail"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/mail.svg"
+              alt="Mail Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              minlength="10"
+              type="tel"
+              placeholder="Phone"
+              id="editContactPhone"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/call.svg"
+              alt="Phone Icon"
+            />
+          </div>
+          <div class="button-group">
+            <button type="button" class="cancel-btn" onclick="hideEditForm()">
+              Cancel
+              <img src="./assets/img/icons/add-contact/close.svg" alt="" />
+            </button>
+            <button type="submit" class="create-btn">
+              Save Changes
               <img src="./assets/img/icons/add-contact/check.svg" alt="" />
             </button>
           </div>
