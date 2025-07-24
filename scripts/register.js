@@ -1,8 +1,6 @@
 
-const emailRef = document.getElementById('email');
 const nameRef = document.getElementById('name');
 const passwordConfirmationRef = document.getElementById('password-confirmation');
-const errorMessageRef = document.getElementById('error-msg');
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
 
 const passwordConLockIcon = document.getElementById('lock-confirm-password');
@@ -22,8 +20,7 @@ let passwordConfirmationCheck = false;
  * creates new user and adds it to the downloaded user array
  * uploads new user array
  * redirects to login
- * if false shows error message and returns false
- * @returns 
+ * if false shows error message
  */
 async function addUser() {
   if (checkRegisterForm()) {
@@ -35,11 +32,18 @@ async function addUser() {
     };
     users.push(newUser);
     await putData("/users/", users);
-    window.location.href = 'index.html?message=Registration successful';
+    // showSuccess();
+    redirectToLogin();
   } else {
     showErrorMessage();
-    return false;
   }
+}
+
+/**
+ * sets timeout for redirection to login
+ */
+function redirectToLogin() {
+  setTimeout(() => window.location.href = 'index.html', 2000);
 }
 
 
@@ -188,30 +192,6 @@ document.getElementById('privacy-policy-checkbox').addEventListener("click", (ev
   } else {
     signUpBtn.disabled = true;
   }
-});
-
-
-/**
- * Handles smooth intro animation on page load:
- * - Shrinks the logo into the top corner
- * - Fades out the white overlay simultaneously
- * - Gradually reveals the main content
- * - Removes the intro element after the transition
- */
-window.addEventListener('load', () => {
-  const logo = document.getElementById('logo');
-  const overlay = document.getElementById('whiteOverlay');
-  const mainContent = document.getElementById('mainContent');
-  const intro = document.getElementById('intro');
-  mainContent.classList.remove('hidden');
-  requestAnimationFrame(() => {
-    logo.classList.add('shrink');
-    overlay.style.opacity = '0';
-    mainContent.style.opacity = '1';
-  });
-  setTimeout(() => {
-    intro.remove();
-  }, 1600);
 });
 
 

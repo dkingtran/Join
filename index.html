@@ -16,6 +16,7 @@
 		<link
 			rel="stylesheet"
 			href="styles/standard.css" />
+		<script src="./scripts/firebase.js"></script>
 	</head>
 
 	<body>
@@ -56,6 +57,7 @@
 							alt="" />
 					</div>
 					<form
+						onsubmit="login(); return false;"
 						class="form-box display-standard"
 						id="login-form">
 						<div class="input-box">
@@ -63,7 +65,7 @@
 								<div class="input-wrapper">
 									<input
 										id="email"
-										type="email"
+										type="text"
 										placeholder="Email" />
 									<img
 										class="icon"
@@ -75,7 +77,9 @@
 
 						<div class="input-box">
 							<div class="input-group">
-								<div id="password-wrapper" class="input-wrapper">
+								<div
+									id="password-wrapper"
+									class="input-wrapper">
 									<input
 										id="password"
 										type="password"
@@ -102,13 +106,12 @@
 						<small
 							id="error-msg"
 							class="error-message"
-							>Please check your information and try again.</small
+							>Check your email and password. Please try again.</small
 						>
 
 						<div class="buttons display-standard">
 							<button
 								id="login-in"
-								onclick="loginBtn"
 								type="submit"
 								class="login-btn display-standard">
 								Log in
