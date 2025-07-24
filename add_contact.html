@@ -150,22 +150,48 @@
       </div>
       <div class="contact-avatar-clicked" id="formAvatar">AA</div>
       <div class="form-content">
-        <form onsubmit="addToContacts(); return false;">
-          <input
-            required
-            type="text"
-            placeholder="Name"
-            id="contactName"
-            oninput="updateFormAvatar()"
-          />
-          <input required type="email" placeholder="Email" id="contactEmail" />
-          <input
-            required
-            minlength="10"
-            type="tel"
-            placeholder="Phonenumber"
-            id="contactPhone"
-          />
+        <form class="form-wrapper" onsubmit="addToContacts(); return false;">
+          <div class="input-wrapper">
+            <input
+              required
+              type="text"
+              placeholder="Name"
+              id="contactName"
+              oninput="updateFormAvatar()"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/person.svg"
+              alt="Name Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              id="contactEmail"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/mail.svg"
+              alt="Mail Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              minlength="10"
+              type="tel"
+              placeholder="Phone"
+              id="contactPhone"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/call.svg"
+              alt="Phone Icon"
+            />
+          </div>
           <div class="button-group">
             <button type="button" class="cancel-btn" onclick="cancelForm()">
               Cancel
@@ -179,6 +205,5 @@
         </form>
       </div>
     </div>
-    <script></script>
   </body>
 </html>

@@ -331,9 +331,10 @@
     left: 50%;
     gap: 72px;
     transform: translate(-50%, -50%);
-    max-width: 1160px;
-    height: 592px;
-    width: 100%;
+    width: 80vw;
+    height: 50vh;
+    max-width: 1300px;
+    max-height: 900px;
     background: white;
     border-radius: 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -358,7 +359,7 @@
     justify-content: start;
     background-color: #2A3647;
     color: white;
-    height: 594px;
+    height: 50vh;
     width: 467px;
     padding: 66px 46px;
     border-top-left-radius: 30px;
@@ -387,10 +388,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin: 32px;
-    min-width: 320px;
-    max-width: 420px;
+    margin-right: 48px;
     box-sizing: border-box;
 }
 
@@ -427,6 +425,10 @@
     border-radius: 3px;
     border: 2px solid #29ABE2;
     margin-top: 12px;
+}
+
+.form-wrapper {
+    padding-right: 16px;
 }
 
 .close-btn {
@@ -476,9 +478,31 @@ input:focus {
     box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
 }
 
+/* Input Wrapper mit Icon rechts im Inputfeld */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.input-wrapper .icon {
+    position: absolute;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
+}
+
 .button-group {
     display: flex;
-    gap: 12px;
+    gap: 25px;
     margin-top: 24px;
 }
 
