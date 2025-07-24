@@ -88,12 +88,15 @@
                             <div class="priority">
                                 <p class="font-bundle">Priority</p>
                                 <div class="btn-prio">
-                                    <button class="font-bundle btn-prio-bundle">Urgent <img
+                                    <button id="urgent" class="font-bundle btn-prio-bundle">Urgent <img
                                             src="./assets/img/icons/add_task/urgent_icon.svg"
                                             alt="Urgent Icon"></button>
-                                    <button class="medium-btn btn-prio-bundle display-standard">Medium <img
-                                            src="./assets/img/icons/add_task/medium_vector.svg" alt="medium"></button>
-                                    <button class="font-bundle btn-prio-bundle">Low <img
+                                    <button id="medium" class="medium-btn btn-prio-bundle display-standard">
+    Medium 
+    <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg" alt="medium">
+</button>
+
+                                    <button id="low" class="font-bundle btn-prio-bundle">Low <img
                                             src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon"></button>
                                 </div>
                             </div>
@@ -214,6 +217,8 @@
             </a>
         </div>
     </aside>
+
+    <script src="./scripts/add_task.js"></script>
 </body>
 
 </html>
