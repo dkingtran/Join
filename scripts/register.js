@@ -32,7 +32,7 @@ async function addUser() {
     };
     users.push(newUser);
     await putData("/users/", users);
-    // showSuccess();
+    showSuccess();
     redirectToLogin();
   } else {
     showErrorMessage();
@@ -40,10 +40,30 @@ async function addUser() {
 }
 
 /**
+ * Displays the success message,
+ * hides it after 1 second,
+ */
+function showSuccess() {
+  const confirmLoginDiv = document.getElementById('confirm-login');
+  if (confirmLoginDiv) {
+    confirmLoginDiv.classList.remove('hide');
+    confirmLoginDiv.classList.add('show');
+    setTimeout(() => {
+      confirmLoginDiv.classList.remove('show');
+      confirmLoginDiv.classList.add('hide');
+      redirectToLogin();
+    }, 1000);
+  }
+}
+
+/**
  * sets timeout for redirection to login
+ * and redirects to the login page after 2.5 seconds.
  */
 function redirectToLogin() {
-  setTimeout(() => window.location.href = 'index.html', 2000);
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 2500); 
 }
 
 
