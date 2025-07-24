@@ -98,6 +98,40 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
+
+.confirm-login-template {
+    width: 100%;
+    max-width: 312px;
+    height: 74px;
+    border-radius: 20px;
+    padding: 0 25px;
+    background-color: #2a3647;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    position: fixed;
+    bottom: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
+    z-index: 1000;
+}
+
+ .confirm-login-template.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 1;
+}
+
+
+.confirm-login-template.hide {
+    bottom: -100px;
+    opacity: 0;
+} 
+
 /* Media Query */
 
 @media(max-width: 650px) {
