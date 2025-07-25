@@ -108,7 +108,7 @@
     color: white;
     font-size: 20px;
     position: fixed;
-    bottom: -100px; /* Start: unsichtbar außerhalb des Screens */
+    bottom: -100px; 
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
@@ -121,18 +121,14 @@
     pointer-events: none;
 }
 
-/* Fahrt nach oben + sichtbar */
 .confirm-login-template.show {
     bottom: 420px;
     opacity: 1;
 }
 
-/* Nur verschwinden – bottom bleibt gleich */
 .confirm-login-template.fadeout {
     opacity: 0;
-    /* wichtig: KEIN bottom hier! */
 }
-
 
 .register-succ-overlay {
     position: fixed;
@@ -154,8 +150,6 @@
     opacity: 0;
     pointer-events: none;
 }
-
-
 
 /* Media Query */
 @media(max-width: 650px) {
