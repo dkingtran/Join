@@ -72,3 +72,26 @@ btnLow.addEventListener("click", function (event) {
     event.preventDefault();
     activateButton(btnLow, "active-red");
 });
+
+
+// Assigned
+
+function toggleDropdown() {
+  const list = document.getElementById("contactList");
+  const arrow = document.querySelector(".arrow");
+  list.style.display = list.style.display === "block" ? "none" : "block";
+  arrow.classList.toggle("rotate");
+}
+
+const checkboxes = document.querySelectorAll(".contact-checkbox");
+const input = document.getElementById("searchInput");
+
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener("change", () => {
+    const selected = Array.from(checkboxes)
+      .filter(c => c.checked)
+      .map(c => c.dataset.name);
+    input.value = selected.join(", ");
+  });
+});
+

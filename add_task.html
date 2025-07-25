@@ -92,26 +92,55 @@
                                             src="./assets/img/icons/add_task/urgent_icon.svg"
                                             alt="Urgent Icon"></button>
                                     <button id="medium" class="medium-btn btn-prio-bundle display-standard">
-    Medium 
-    <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg" alt="medium">
-</button>
+                                        Medium
+                                        <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
+                                            alt="medium">
+                                    </button>
 
                                     <button id="low" class="font-bundle btn-prio-bundle">Low <img
                                             src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon"></button>
                                 </div>
                             </div>
 
+                            <!-- Assigned -->
                             <div class="assigned-to">
                                 <div class="custom-dropdown">
                                     <label class="font-bundle">Assigned to</label>
-                                    <div class="dropdown-input">
-                                        <input class="font-bundle input-bundle" type="text"
+                                    <div class="dropdown-input" onclick="toggleDropdown()">
+                                        <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
-                                    <div class="dropdown-list" id="contactList"></div>
+                                    <div class="dropdown-list" id="contactList">
+                                        <!-- LAter render from Firebase here -->
+                                        <label class="contact-item">
+                                            <span class="avatar" style="background-color: #6A1B9A;">AK</span>
+                                            <span class="contact-name">Andreas Kissner</span>
+                                            <input type="checkbox" class="contact-checkbox" data-name="Andreas Kissner"
+                                                data-initials="AK">
+                                        </label>
+                                        <label class="contact-item">
+                                            <span class="avatar" style="background-color: #8BC34A;">AB</span>
+                                            <span class="contact-name">Anton Bauerma</span>
+                                            <input type="checkbox" class="contact-checkbox" data-name="Anton Bauerma"
+                                                data-initials="AB">
+                                        </label>
+                                        <label class="contact-item">
+                                            <span class="avatar" style="background-color: #2196F3;">CS</span>
+                                            <span class="contact-name">Clara Schmidt</span>
+                                            <input type="checkbox" class="contact-checkbox" data-name="Clara Schmidt"
+                                                data-initials="CS">
+                                        </label>
+                                        <label class="contact-item">
+                                            <span class="avatar" style="background-color: #FF9800;">EM</span>
+                                            <span class="contact-name">Elena Meier</span>
+                                            <input type="checkbox" class="contact-checkbox" data-name="Elena Meier"
+                                                data-initials="EM">
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div class="category-task">
                                 <p class="font-bundle">Category<span class="star">*</span></p>
