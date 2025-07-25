@@ -5,10 +5,11 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Register Join</title>
-	<link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml">
+	<link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml" />
 	<link rel="stylesheet" href="./styles/standard.css" />
 	<link rel="stylesheet" href="./styles/login.css" />
 	<link rel="stylesheet" href="./styles/register.css" />
+	<script src="./scripts/firebase.js"></script>
 </head>
 
 <body>
@@ -49,26 +50,26 @@
 						</div>
 
 						<div class="input-group">
-							<div class="input-wrapper">
+							<div id="password-wrapper" class="input-wrapper">
 								<input id="password" type="password" placeholder="Password" />
-								<img id="lock-off-password" class="icon" src="./assets/img/icons/login/lock.svg"
-									alt="Lock Password" />
-								<img id="visibility-off-password" class="icon"
+								<img id="lock-password" class="icon password-icon"
+									src="./assets/img/icons/login/lock.svg" alt="Lock Password" />
+								<img id="visibility-off-password" class="icon password-icon d-none"
 									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
-								<img id="visibility-on-password" class="icon"
+								<img id="visibility-on-password" class="icon password-icon d-none"
 									src="./assets/img/icons/register/visibility.svg" alt="Visibility on Icon" />
 							</div>
 						</div>
 
 						<div class="input-group">
-							<div class="input-wrapper">
+							<div id="password-confirmation-wrapper" class="input-wrapper">
 								<input id="password-confirmation" type="password" placeholder="Confirm Password" />
 
-								<img id="lock-off-confirm-password" class="icon" src="./assets/img/icons/login/lock.svg"
-									alt="" />
-								<img id="visibility-off-confirm-password" class="icon"
+								<img id="lock-confirm-password" class="icon password-icon"
+									src="./assets/img/icons/login/lock.svg" alt="" />
+								<img id="visibility-off-confirm-password" class="icon password-icon d-none"
 									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
-								<img id="visibility-on-confirm-password" class="icon"
+								<img id="visibility-on-confirm-password" class="icon password-icon d-none"
 									src="./assets/img/icons/register/visibility.svg" alt="Lock Password" />
 							</div>
 						</div>
@@ -78,7 +79,7 @@
 							<input class="checkbox" id="privacy-policy-checkbox" type="checkbox" />
 							<p>
 								I accept the
-								<a class="privacy-police" href="pp-login.html">Privacy policy</a>
+								<a class="privacy-police" href="privacy_police.html">Privacy policy</a>
 							</p>
 						</div>
 
@@ -104,11 +105,16 @@
 		</div>
 	</div>
 
-	<div id="confirm-login-signup" class="confirm-login-template display-standard">
+	
+	<div id="register-succ-overlay" class="register-succ-overlay hide"></div>
+	<div id="confirm-login" class="confirm-login-template hide display-standard">
 		<p>You Signed Up successfully</p>
 	</div>
 
 
+
+
+	<script src="./scripts/login-register.js"></script>
 	<script src="./scripts/register.js"></script>
 </body>
 

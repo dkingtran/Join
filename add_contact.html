@@ -1,32 +1,137 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Contact</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/side_menu.css" />
+    <link rel="stylesheet" href="./styles/add-contact.css" />
+
+    <script src="./scripts/side-menu.js"></script>
     <script src="script.js"></script>
   </head>
   <body onload="init()">
-    <div class="form-container">
-      <form onsubmit="addToContacts(); return false;">
-        <input required type="text" placeholder="Name" id="contactName" />
-        <input required type="email" placeholder="Email" id="contactEmail" />
-        <input
-          required
-          minlength="10"
-          type="tel"
-          placeholder="Phonenumber"
-          id="contactPhone"
-        />
-        <div class="button-group">
-          <button type="button" class="cancel-btn" onclick="cancelForm()">
-            Cancel
-          </button>
-          <button type="submit" class="create-btn">Create Contact</button>
+    <header>
+      <!--Header content-->
+      <div class="header-content">
+        <div class="header-inner">
+          <div class="logo-mobile d_none">
+            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+          </div>
+          <h1 class="header-title">Kanban Project Management Tool</h1>
+          <div class="header-right">
+            <div class="help-container" id="helpContainer">
+              <a href="../help.html" class="help-icon">
+                <img
+                  src="../assets/img/icons/header-side-menu/help.png"
+                  alt="Help Icon"
+                />
+              </a>
+            </div>
+            <div class="profile-container" id="profileContainer">
+              <button
+                class="profile-btn"
+                onclick="toggleProfileDropdown()"
+                aria-label="Profile menu"
+              >
+                SM
+              </button>
+              <div id="profileDropdown" class="profile-dropdown">
+                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                  >Help</a
+                >
+                <a href="./legal-notice.html" class="dropdown-item"
+                  >Legal Notice</a
+                >
+                <a href="./privacy-policy.html" class="dropdown-item"
+                  >Privacy Policy</a
+                >
+                <a href="./login.html" class="dropdown-item">Log out</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <!--End of Header content-->
+    </header>
+    <!--Side-menu-->
+    <aside class="side-menu background-side-menu">
+      <div class="logo-section">
+        <img
+          src="../assets/img/logo/logo-light.png"
+          alt="Logo"
+          class="logo-side-menu-img"
+        />
+      </div>
+
+      <div class="menu-section">
+        <a href="../summary.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/summary.svg"
+              alt=""
+            />
+          </span>
+          <span>Summary</span>
+        </a>
+        <a href="../board.html" class="menu-item">
+          <span class="menu-icon">
+            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
+          <span>Board</span>
+        </a>
+        <a href="../add_task.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/add-task.svg"
+              alt=""
+            />
+          </span>
+          <span>Add Task</span>
+        </a>
+        <a href="../add_contact.html" class="menu-item active">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/contacts.svg"
+              alt=""
+            />
+          </span>
+          <span>Contacts</span>
+        </a>
+      </div>
+
+      <div class="notice-side-menu">
+        <a href="../legal-notice.html" class="menu-item menu-bottom">
+          <span>Legal notice</span>
+        </a>
+        <a href="../privacy-policy.html" class="menu-item menu-bottom">
+          <span>Privacy Policy</span>
+        </a>
+      </div>
+    </aside>
+    <!--End of Side-menu-->
+    <main class="main-content">
+      <div class="form-container">
+        <form onsubmit="addToContacts(); return false;">
+          <input required type="text" placeholder="Name" id="contactName" />
+          <input required type="email" placeholder="Email" id="contactEmail" />
+          <input
+            required
+            minlength="10"
+            type="tel"
+            placeholder="Phonenumber"
+            id="contactPhone"
+          />
+          <div class="button-group">
+            <button type="button" class="cancel-btn" onclick="cancelForm()">
+              Cancel
+            </button>
+            <button type="submit" class="create-btn">Create Contact</button>
+          </div>
+        </form>
+      </div>
+    </main>
   </body>
 </html>
-
