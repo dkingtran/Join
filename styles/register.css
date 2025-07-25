@@ -98,7 +98,6 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-
 .confirm-login-template {
     width: 100%;
     max-width: 312px;
@@ -109,24 +108,54 @@
     color: white;
     font-size: 20px;
     position: fixed;
-    bottom: 420px;
+    bottom: -100px; /* Start: unsichtbar außerhalb des Screens */
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
-    z-index: 1000;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
 }
 
- .confirm-login-template.show {
-    bottom: 50%;
-    transform: translate(-50%, 50%);
+/* Fahrt nach oben + sichtbar */
+.confirm-login-template.show {
+    bottom: 420px;
     opacity: 1;
 }
 
-.confirm-login-template.hide {
-    bottom: -100px;
+/* Nur verschwinden – bottom bleibt gleich */
+.confirm-login-template.fadeout {
     opacity: 0;
-} 
+    /* wichtig: KEIN bottom hier! */
+}
+
+
+.register-succ-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.register-succ-overlay.show {
+    opacity: 1;
+}
+
+.register-succ-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
 
 /* Media Query */
 @media(max-width: 650px) {
