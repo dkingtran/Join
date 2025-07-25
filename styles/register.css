@@ -99,7 +99,7 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.confirm-login-template {
+.confirm-register-template {
     width: 100%;
     max-width: 312px;
     height: 74px;
@@ -122,13 +122,9 @@
     pointer-events: none;
 }
 
-.confirm-login-template.show {
+.confirm-register-template.show {
     bottom: 420px;
     opacity: 1;
-}
-
-.confirm-login-template.fadeout {
-    opacity: 0;
 }
 
 .register-succ-overlay {
