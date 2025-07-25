@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
     <script src="./scripts/side-menu.js"></script>
+    <script src="./scripts/template.js"></script>
     <script src="./scripts/add-contact.js"></script>
   </head>
   <body onload="init()">
@@ -213,7 +214,7 @@
     <!-- Modal Overlay for Edit Contact -->
     <div class="modal-overlay" id="editModalOverlay"></div>
     <!-- Edit Contact Modal (hidden by default) -->
-    <div class="form-container" id="editFormContainer" style="display: none">
+    <div class="form-container" id="editFormContainer">
       <button class="close-btn" onclick="hideEditForm()">
         <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
       </button>
