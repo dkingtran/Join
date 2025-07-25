@@ -46,40 +46,23 @@ async function addUser() {
  * and then redirects the user to the login page.
  */
 function showSuccess() {
-  const confirmLoginDiv = document.getElementById('confirm-login');
+  const confirmLoginDiv = document.getElementById('confirm-register');
 
   confirmLoginDiv.classList.remove('hide', 'fadeout');
   confirmLoginDiv.classList.add('show');
 
-  toggleOverlay(true);
-
-  setTimeout(() => {
-    confirmLoginDiv.classList.add('fadeout'); 
-    toggleOverlay(false);
-    redirectToLogin();
-  }, 1000);
+  toggleOverlay();
 }
 
-/**
- * Redirects the user to the login page.
- */
-function redirectToLogin() {
-  window.location.href = 'index.html';
-}
 
 /**
  * Shows or hides the overlay based on the given boolean value.
  * @param {boolean} visible - true to show the overlay, false to hide it
  */
-function toggleOverlay(visible) {
+function toggleOverlay() {
   const overlay = document.getElementById('register-succ-overlay');
-  if (visible) {
-    overlay.classList.remove('hide');
-    overlay.classList.add('show');
-  } else {
-    overlay.classList.remove('show');
-    overlay.classList.add('hide');
-  }
+  overlay.classList.remove('hide');
+  overlay.classList.add('show');
 }
 
 
@@ -240,7 +223,6 @@ document.getElementById('privacy-policy-checkbox').addEventListener("click", (ev
     signUpBtn.disabled = true;
   }
 });
-
 
 /**
  * eventlistener on focus password-confirmation-input 
