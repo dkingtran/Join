@@ -1,208 +1,122 @@
 <!DOCTYPE html>
 <html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<title>Register Join</title>
-		<link
-			rel="icon"
-			href="assets/img/Capa1.svg"
-			type="image/svg+xml" />
-		<link
-			rel="stylesheet"
-			href="./styles/standard.css" />
-		<link
-			rel="stylesheet"
-			href="./styles/login.css" />
-		<link
-			rel="stylesheet"
-			href="./styles/register.css" />
-		<script src="./scripts/firebase.js"></script>
-	</head>
 
-	<body>
-		<img
-			src="assets/img/Capa1.svg"
-			alt="Logo"
-			class="logo-animated"
-			id="logo" />
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Register Join</title>
+	<link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml" />
+	<link rel="stylesheet" href="./styles/standard.css" />
+	<link rel="stylesheet" href="./styles/login.css" />
+	<link rel="stylesheet" href="./styles/register.css" />
+	<script src="./scripts/firebase.js"></script>
+</head>
 
-		<div
-			class="intro"
-			id="intro">
-			<div
-				class="white-overlay"
-				id="whiteOverlay"></div>
-		</div>
+<body>
+	<img src="assets/img/Capa1.svg" alt="Logo" class="logo-animated" id="logo" />
 
-		<div
-			class="wrapper hidden"
-			id="mainContent">
-			<div class="container">
-				<div class="login-box-register">
-					<div class="sign-up-box">
-						<a
-							href="index.html"
-							class="left-flash"
-							id="flash-left">
-							<img
-								src="assets/img/icons/register/flashleft.svg"
-								alt="Flash left" />
-						</a>
+	<div class="intro" id="intro">
+		<div class="white-overlay" id="whiteOverlay"></div>
+	</div>
 
-						<h2 class="sign-up">Sign up</h2>
-					</div>
+	<div class="wrapper hidden" id="mainContent">
+		<div class="container">
+			<div class="login-box-register">
+				<div class="sign-up-box">
+					<a href="index.html" class="left-flash" id="flash-left">
+						<img src="assets/img/icons/register/flashleft.svg" alt="Flash left" />
+					</a>
 
-					<div class="underline">
-						<img
-							src="./assets/img/icons/login/underline.svg"
-							alt="" />
-					</div>
-					<form
-						onsubmit="addUser(); return false;"
-						class="form-box"
-						id="login-form">
-						<div class="input-box">
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input
-										id="name"
-										type="text"
-										placeholder="Name" />
-									<img
-										class="icon"
-										src="./assets/img/icons/register/person.svg"
-										alt="" />
-								</div>
-							</div>
-
-							<div class="input-group">
-								<div class="input-wrapper">
-									<input
-										id="email"
-										type="text"
-										placeholder="Email" />
-									<img
-										class="icon"
-										src="./assets/img/icons/login/mail.svg"
-										alt="" />
-								</div>
-							</div>
-
-							<div class="input-group">
-								<div
-									id="password-wrapper"
-									class="input-wrapper">
-									<input
-										id="password"
-										type="password"
-										placeholder="Password" />
-									<img
-										id="lock-password"
-										class="icon password-icon"
-										src="./assets/img/icons/login/lock.svg"
-										alt="Lock Password" />
-									<img
-										id="visibility-off-password"
-										class="icon password-icon d-none"
-										src="./assets/img/icons/register/visibility_off.svg"
-										alt="Visibility off Icon" />
-									<img
-										id="visibility-on-password"
-										class="icon password-icon d-none"
-										src="./assets/img/icons/register/visibility.svg"
-										alt="Visibility on Icon" />
-								</div>
-							</div>
-
-							<div class="input-group">
-								<div
-									id="password-confirmation-wrapper"
-									class="input-wrapper">
-									<input
-										id="password-confirmation"
-										type="password"
-										placeholder="Confirm Password" />
-
-									<img
-										id="lock-confirm-password"
-										class="icon password-icon"
-										src="./assets/img/icons/login/lock.svg"
-										alt="" />
-									<img
-										id="visibility-off-confirm-password"
-										class="icon password-icon d-none"
-										src="./assets/img/icons/register/visibility_off.svg"
-										alt="Visibility off Icon" />
-									<img
-										id="visibility-on-confirm-password"
-										class="icon password-icon d-none"
-										src="./assets/img/icons/register/visibility.svg"
-										alt="Lock Password" />
-								</div>
-							</div>
-
-							<div class="checkbox-box">
-								<label for="privacy-policy-checkbox"></label>
-								<input
-									class="checkbox"
-									id="privacy-policy-checkbox"
-									type="checkbox" />
-								<p>
-									I accept the
-									<a
-										class="privacy-police"
-										href="privacy_police.html"
-										>Privacy policy</a
-									>
-								</p>
-							</div>
-
-							<small
-								id="error-msg"
-								class="error-message">
-								Please check your information and try again.
-							</small>
-						</div>
-
-						<div class="buttons">
-							<div class="sign-up-bottom">
-								<button
-									id="signup-btn"
-									class="signup-btn-register"
-									type="submit"
-									disabled="true">
-									Sign up
-								</button>
-							</div>
-						</div>
-					</form>
+					<h2 class="sign-up">Sign up</h2>
 				</div>
-			</div>
 
-			<div class="footer">
-				<a
-					id="privacy-policy"
-					href="./pp-login.html"
-					>Privacy Policy</a
-				>
-				<a
-					id="legal-notice"
-					href="./ln-login.html"
-					>Legal notice</a
-				>
+				<div class="underline">
+					<img src="./assets/img/icons/login/underline.svg" alt="" />
+				</div>
+				<form onsubmit="addUser(); return false;" class="form-box" id="login-form">
+					<div class="input-box">
+						<div class="input-group">
+							<div class="input-wrapper">
+								<input id="name" type="text" placeholder="Name" />
+								<img class="icon" src="./assets/img/icons/register/person.svg" alt="" />
+							</div>
+						</div>
+
+						<div class="input-group">
+							<div class="input-wrapper">
+								<input id="email" type="text" placeholder="Email" />
+								<img class="icon" src="./assets/img/icons/login/mail.svg" alt="" />
+							</div>
+						</div>
+
+						<div class="input-group">
+							<div id="password-wrapper" class="input-wrapper">
+								<input id="password" type="password" placeholder="Password" />
+								<img id="lock-password" class="icon password-icon"
+									src="./assets/img/icons/login/lock.svg" alt="Lock Password" />
+								<img id="visibility-off-password" class="icon password-icon d-none"
+									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
+								<img id="visibility-on-password" class="icon password-icon d-none"
+									src="./assets/img/icons/register/visibility.svg" alt="Visibility on Icon" />
+							</div>
+						</div>
+
+						<div class="input-group">
+							<div id="password-confirmation-wrapper" class="input-wrapper">
+								<input id="password-confirmation" type="password" placeholder="Confirm Password" />
+
+								<img id="lock-confirm-password" class="icon password-icon"
+									src="./assets/img/icons/login/lock.svg" alt="" />
+								<img id="visibility-off-confirm-password" class="icon password-icon d-none"
+									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
+								<img id="visibility-on-confirm-password" class="icon password-icon d-none"
+									src="./assets/img/icons/register/visibility.svg" alt="Lock Password" />
+							</div>
+						</div>
+
+						<div class="checkbox-box">
+							<label for="privacy-policy-checkbox"></label>
+							<input class="checkbox" id="privacy-policy-checkbox" type="checkbox" />
+							<p>
+								I accept the
+								<a class="privacy-police" href="privacy_police.html">Privacy policy</a>
+							</p>
+						</div>
+
+						<small id="error-msg" class="error-message">
+							Please check your information and try again.
+						</small>
+					</div>
+
+					<div class="buttons">
+						<div class="sign-up-bottom">
+							<button id="signup-btn" class="signup-btn-register" type="submit" disabled="true">
+								Sign up
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 
-		<div
-			id="confirm-login-signup"
-			class="confirm-login-template">
-			<p>You Signed Up successfully</p>
+		<div class="footer">
+			<a id="privacy-policy" href="./pp-login.html">Privacy Policy</a>
+			<a id="legal-notice" href="./ln-login.html">Legal notice</a>
 		</div>
+	</div>
 
-		<script src="./scripts/login-register.js"></script>
-		<script src="./scripts/register.js"></script>
-	</body>
+
+	
+	<div id="register-succ-overlay" class="register-succ-overlay hide"></div>
+	<div id="confirm-login" class="confirm-login-template hide display-standard">
+		<p>You Signed Up successfully</p>
+	</div>
+
+
+
+
+	<script src="./scripts/login-register.js"></script>
+	<script src="./scripts/register.js"></script>
+</body>
+
 </html>

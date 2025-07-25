@@ -32,18 +32,65 @@ async function addUser() {
     };
     users.push(newUser);
     await putData("/users/", users);
-    // showSuccess();
+    showSuccess();
     redirectToLogin();
   } else {
     showErrorMessage();
   }
 }
 
+
 /**
- * sets timeout for redirection to login
+ * Displays the success message and the overlay,
+ * fades both out after 1 second,
+ * and then redirects the user to the login page.
+ */
+function showSuccess() {
+  const confirmLoginDiv = document.getElementById('confirm-login');
+
+  confirmLoginDiv.classList.remove('hide', 'fadeout');
+  confirmLoginDiv.classList.add('show');
+
+  toggleOverlay(true);
+
+  setTimeout(() => {
+    confirmLoginDiv.classList.add('fadeout'); 
+    toggleOverlay(false);
+    redirectToLogin();
+  }, 1000);
+}
+
+/**
+ * Redirects the user to the login page.
  */
 function redirectToLogin() {
-  setTimeout(() => window.location.href = 'index.html', 2000);
+  window.location.href = 'index.html';
+}
+
+/**
+ * Shows or hides the overlay based on the given boolean value.
+ * @param {boolean} visible - true to show the overlay, false to hide it
+ */
+function toggleOverlay(visible) {
+  const overlay = document.getElementById('register-succ-overlay');
+  if (visible) {
+    overlay.classList.remove('hide');
+    overlay.classList.add('show');
+  } else {
+    overlay.classList.remove('show');
+    overlay.classList.add('hide');
+  }
+}
+
+
+/**
+ * sets timeout for redirection to login
+ * and redirects to the login page after 2.5 seconds.
+ */
+function redirectToLogin() {
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1500); 
 }
 
 
