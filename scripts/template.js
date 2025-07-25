@@ -1,3 +1,15 @@
+// Returns the contact list item HTML template
+function getContactListItemTemplate(contact, colorClass, initials, contactIndex) {
+    return `
+        <div class="contact-item" data-index="${contactIndex}">
+            <div class="contact-avatar ${colorClass}">${initials}</div>
+            <div class="contact-item-content">
+                <div class="contact-name">${contact.name}</div>
+                <div class="contact-email">${contact.email}</div>
+            </div>
+        </div>
+    `;
+}
 // Returns the contact details HTML template
 function getContactDetailsTemplate(contact, colorClass, initials, idx) {
     return `
