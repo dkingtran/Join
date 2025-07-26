@@ -32,18 +32,48 @@ async function addUser() {
     };
     users.push(newUser);
     await putData("/users/", users);
-    // showSuccess();
+    showSuccess();
     redirectToLogin();
   } else {
     showErrorMessage();
   }
 }
 
+
+/**
+ * Displays the success message and the overlay,
+ * fades both out after 1 second,
+ * and then redirects the user to the login page.
+ */
+function showSuccess() {
+  const confirmLoginDiv = document.getElementById('confirm-register');
+
+  confirmLoginDiv.classList.remove('hide', 'fadeout');
+  confirmLoginDiv.classList.add('show');
+
+  toggleOverlay();
+}
+
+
+/**
+ * Shows or hides the overlay based on the given boolean value.
+ * @param {boolean} visible - true to show the overlay, false to hide it
+ */
+function toggleOverlay() {
+  const overlay = document.getElementById('register-succ-overlay');
+  overlay.classList.remove('hide');
+  overlay.classList.add('show');
+}
+
+
 /**
  * sets timeout for redirection to login
+ * and redirects to the login page after 2.5 seconds.
  */
 function redirectToLogin() {
-  setTimeout(() => window.location.href = 'index.html', 2000);
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1500); 
 }
 
 
@@ -193,7 +223,6 @@ document.getElementById('privacy-policy-checkbox').addEventListener("click", (ev
     signUpBtn.disabled = true;
   }
 });
-
 
 /**
  * eventlistener on focus password-confirmation-input 
