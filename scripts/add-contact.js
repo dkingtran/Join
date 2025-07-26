@@ -66,17 +66,35 @@ function init() {
     hideForm();
 }
 /**
- * Renders all contacts in the contact list, sorted and grouped by initial letter.
+ * Renders all contacts in the contact list.
+ * Sorts and groups contacts, then renders each group.
  */
 function renderContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
-    const sorted = [...contacts].sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
+    const sorted = getSortedContacts();
     const grouped = groupContactsByLetter(sorted);
+    let globalIndex = 0;
     Object.keys(grouped).sort().forEach(letter => {
-        contactList.innerHTML += getGroupTemplate(letter, grouped[letter]);
+        contactList.innerHTML += getGroupTemplate(letter, grouped[letter], sorted, globalIndex);
+        globalIndex += grouped[letter].length;
     });
     addContactItemListeners();
+}
+
+/**
+ * Returns a sorted copy of the contacts array.
+ * Sorts by initials, then by name.
+ * @returns {Array} Sorted contacts array.
+ */
+function getSortedContacts() {
+    return [...contacts].sort((a, b) => {
+        const initialsA = getInitials(a.name);
+        const initialsB = getInitials(b.name);
+        if (initialsA < initialsB) return -1;
+        if (initialsA > initialsB) return 1;
+        return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    });
 }
 
 /**
@@ -96,11 +114,17 @@ function groupContactsByLetter(list) {
  * Returns the HTML template for a contact group section.
  * @param {string} letter - The initial letter for the group.
  * @param {Array} contactsArr - Array of contacts in the group.
+ * @param {Array} sortedArr - The full sorted contacts array.
+ * @param {number} startIdx - The starting global index for this group.
  * @returns {string} HTML string for the group section.
  */
-function getGroupTemplate(letter, contactsArr) {
+function getGroupTemplate(letter, contactsArr, sortedArr, startIdx) {
     return `<div class="contact-group-letter">${letter}</div><hr class="contact-divider">` +
-        contactsArr.map((c, i) => getContactListItemTemplate(c, colorMap[c.name] || 'contact-avatar-color1', getInitials(c.name), i)).join('');
+        contactsArr.map((c, i) => {
+            // Find the global index of this contact in the sorted array
+            const globalIdx = sortedArr.findIndex(contact => contact === c);
+            return getContactListItemTemplate(c, colorMap[c.name] || 'contact-avatar-color1', getInitials(c.name), globalIdx);
+        }).join('');
 }
 
 /**
@@ -292,6 +316,15 @@ function showEditForm(idx) {
     window.editContactIdx = idx;
 }
 
+// Add this function to handle the edit button click
+/**
+ * Handles the edit button click for a contact item.
+ * @param {number} idx - Index of the contact to edit.
+ */
+function editContact(idx) {
+    showEditForm(idx);
+}
+
 /**
  * Fills the edit form fields and updates the avatar.
  * @param {Object} contact - The contact object.
@@ -344,13 +377,4 @@ function updateEditFormAvatar() {
         .map(n => n[0].toUpperCase())
         .slice(0, 2)
         .join('');
-}
-
-// Add this function to handle the edit button click
-/**
- * Handles the edit button click for a contact item.
- * @param {number} idx - Index of the contact to edit.
- */
-function editContact(idx) {
-    showEditForm(idx);
 }
