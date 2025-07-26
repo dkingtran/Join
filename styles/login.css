@@ -345,8 +345,8 @@ input:focus {
 
 @media(max-width:500px) {
   .logo-animated.shrink {
-    top: 85px;
-    left: 65px;
+    top: 50px;
+    left: 40px;
   }
 
   .logo-animated {
