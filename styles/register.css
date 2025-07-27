@@ -1,7 +1,12 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sign-up {
     font-size: 61px;
     width: 100%;
-
 }
 
 .sign-up-box {
@@ -31,8 +36,6 @@
     width: 32px;
 }
 
-
-
 .login-box-register {
     display: flex;
     justify-content: center;
@@ -41,7 +44,7 @@
     background-color: white;
     width: 100%;
     max-width: 598px;
-    height: 733px;
+    height: 726px;
     margin: 180px auto 0 auto;
     padding: 80px 40px;
     border-radius: 30px;
@@ -73,14 +76,14 @@
 
 .sign-up-bottom {
     width: 100%;
-
 }
 
 .signup-btn-register {
     width: 100%;
     height: 55px;
     max-width: 126px;
-    font-family: var(--Inter800);
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
     background-color: #2A3647;
     font-size: 16px;
     border-radius: 8px;
@@ -89,29 +92,82 @@
     cursor: pointer;
     border: none;
     transition: background-color 100ms ease-in-out;
-
 }
-
-
-
 
 .signup-btn-register:hover {
     background-color: #00BEE8;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Media Quaries */
+.confirm-register-template {
+    width: 100%;
+    max-width: 312px;
+    height: 74px;
+    border-radius: 20px;
+    padding: 0 25px;
+    background-color: #2a3647;
+    color: white;
+    font-size: 20px;
+    position: fixed;
+    bottom: -100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+}
 
+.confirm-register-template.show {
+    bottom: 420px;
+    opacity: 1;
+}
+
+.register-succ-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.register-succ-overlay.show {
+    opacity: 1;
+}
+
+.register-succ-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Media Query */
 @media(max-width: 650px) {
     .login-box-register {
         max-width: 411px;
+        height: 650px;
+    }
+}
+
+@media(max-width: 600px) {
+    .login-box-register {
+        max-width: 445px;
+        height: 600px;
     }
 }
 
 @media(max-width: 450px) {
     .login-box-register {
-        max-width: 301px;
-        height: 570px;
+        max-width: 310px;
+        height: 480px;
+        padding: 80px 10px;
     }
 
     .sign-up {
@@ -120,6 +176,7 @@
     }
 
     .signup-btn-register {
-    max-width: 160px;
-}
+        max-width: 160px;
+    }
+
 }
