@@ -27,6 +27,10 @@ body {
    border-radius: 10px;
 }
 
+.p-16{
+  padding: 16px;
+}
+
 .d-none {
     display: none;
 }
