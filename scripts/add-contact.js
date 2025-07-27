@@ -129,15 +129,83 @@ function getGroupTemplate(letter, contactsArr, sortedArr, startIdx) {
 
 /**
  * Adds click event listeners to all contact items for selection and details display.
+ * Handles mobile view switching.
  */
 function addContactItemListeners() {
     document.querySelectorAll('.contact-item').forEach(item => {
         item.onclick = function (e) {
             const idx = parseInt(this.dataset.index);
-            toggleContactDetails(idx, this);
+            if (window.innerWidth <= 780) {
+                showMobileContactDetails(idx);
+            } else {
+                toggleContactDetails(idx, this);
+            }
             e.stopPropagation();
         };
     });
+}
+
+/**
+ * Shows the contact details in mobile view, hides sidebar, shows back and edit button.
+ * @param {number} idx - Index of the contact in the sorted array.
+ */
+function showMobileContactDetails(idx) {
+    // Hide sidebar, show contacts-section as overlay
+    document.querySelector('.contact-sidebar').classList.add('hide-mobile-sidebar');
+    const section = document.querySelector('.contacts-section');
+    section.classList.add('show-mobile-section');
+    // Ensure contact details container is visible
+    const details = document.getElementById('contactListClicked');
+    details.style.display = 'block';
+    // Add back button if not present
+    let backBtn = document.getElementById('mobileBackBtn');
+    if (!backBtn) {
+        backBtn = document.createElement('button');
+        backBtn.className = 'mobile-back-btn';
+        backBtn.id = 'mobileBackBtn';
+        backBtn.innerHTML = '<img src="./assets/img/icons/content/help/back.png" alt="Back">';
+        backBtn.onclick = hideMobileContactDetails;
+        section.appendChild(backBtn);
+    }
+    backBtn.style.display = 'flex';
+    // Add edit button if not present
+    let editBtn = document.getElementById('mobileEditBtn');
+    if (!editBtn) {
+        editBtn = document.createElement('button');
+        editBtn.className = 'mobile-edit-btn';
+        editBtn.id = 'mobileEditBtn';
+        editBtn.innerHTML = '<img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit">';
+        editBtn.onclick = function() { editContact(idx); };
+        document.body.appendChild(editBtn);
+    } else {
+        editBtn.style.display = 'flex';
+        editBtn.onclick = function() { editContact(idx); };
+    }
+    // Hide add-contact-btn-mobile
+    document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
+    // Show details
+    showContactDetails(getSortedContacts()[idx], idx);
+}
+
+/**
+ * Hides the mobile contact details view and shows the sidebar again.
+ */
+function hideMobileContactDetails() {
+    document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
+    const section = document.querySelector('.contacts-section');
+    section.classList.remove('show-mobile-section');
+    section.style.display = '';
+    // Hide contact details container
+    const details = document.getElementById('contactListClicked');
+    details.style.display = '';
+    // Hide back button
+    const backBtn = document.getElementById('mobileBackBtn');
+    if (backBtn) backBtn.style.display = 'none';
+    // Hide edit button
+    const editBtn = document.getElementById('mobileEditBtn');
+    if (editBtn) editBtn.style.display = 'none';
+    // Show add-contact-btn-mobile
+    document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
 }
 
 /**

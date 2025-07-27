@@ -1,3 +1,62 @@
+/* Mobile-only: Hilfsklassen für Umschalten */
+.hide-mobile-sidebar {
+    display: none !important;
+}
+.show-mobile-section {
+    display: block !important;
+    position: fixed !important;
+    top: 80px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background: #fff;
+    z-index: 2000;
+    overflow-y: auto;
+}
+.mobile-back-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.mobile-back-btn img {
+    width: 32px;
+    height: 32px;
+}
+.mobile-edit-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 104px;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    max-width: 56px;
+    max-height: 56px;
+    border-radius: 50%;
+    background: #2A3647;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    display: flex;
+}
+.mobile-edit-btn img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+}
 /* Overlay for modal background */
 .modal-overlay {
     position: fixed;
@@ -777,17 +836,68 @@ input:focus {
 }
 
 @media (max-width: 780px) {
+    .contacts-section {
+        display: none !important;
+    }
+    .contacts-section.show-mobile-section {
+        display: block !important;
+        background: #F4F7F7 !important;
+        position: fixed !important;
+        top: 80px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 80px);
+        z-index: 100;
+        overflow-y: auto;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 200;
+        background: #2A3647 !important;
+        color: #fff;
+    }
+    .side-menu {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        z-index: 201;
+        background: #2A3647 !important;
+        color: #fff;
+    }
+    .side-menu .menu-section, .side-menu .notice-side-menu {
+        background: transparent !important;
+    }
+    .side-menu .menu-item {
+        color: #fff !important;
+    }
+    .side-menu .menu-item.active {
+        background: #091931 !important;
+        color: #fff !important;
+    }
+    .form-container {
+        display: none !important;
+    }
     .contact-sidebar {
         position: fixed;
         width: 100%;
         padding: 16px;
         box-sizing: border-box;
     }
-
     .contact-group-letter {
         margin-left: calc(50% - 144px); 
     }
-    
+    /* Add-Contact-Button mobile: bleibt wie gehabt, wird aber bei Detailsansicht versteckt */
+    .add-contact-btn-mobile.hide-mobile-edit {
+        display: none !important;
+    }
+    /* Always show back button in overlay */
+    .show-mobile-section .mobile-back-btn {
+        display: flex !important;
+    }
 }
 
 @media (max-width: 490px) {
