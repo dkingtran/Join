@@ -32,16 +32,3 @@ function displayLoginError() {
   passwordRef.parentElement.classList.add("error");
   errorMessageRef.classList.add("show");
 }
-
-
-/** 
-const urlParams = new URLSearchParams(window.location.search); // animation from down comformation login is good
-const message = urlParams.get('message');
-
-if (message) {
-  msgBox.innerHTML = message;
-} else {
-  msgBox.style.display = 'none';
-}
-*/
-
