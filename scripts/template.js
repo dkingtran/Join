@@ -1,3 +1,12 @@
+// Returns the contact group header HTML template
+function getGroupTemplate(letter) {
+    return `
+        <div class="contact-group-letter">${letter}</div>
+        <hr class="contact-divider">
+    `;
+}
+
+
 // Returns the contact list item HTML template
 function getContactListItemTemplate(contact, colorClass, initials, contactIndex) {
     return `

@@ -1,41 +1,49 @@
 let contacts = [
     {
-        "name": "Anton Mayer",
+        "firstName": "Anton",
+        "lastName": "Mayer",
         "email": "antom@gmail.com",
         "phone": "+49 1111 111 11 1"
     },
     {
-        "name": "Anja Schulz",
+        "firstName": "Anja",
+        "lastName": "Schulz",
         "email": "schulz@hotmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "Benedikt Ziegler",
+        "firstName": "Benedikt",
+        "lastName": "Ziegler",
         "email": "benedikt@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "David Eisenberg",
+        "firstName": "David",
+        "lastName": "Eisenberg",
         "email": "davidberg@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "Eva Fischer",
+        "firstName": "Eva",
+        "lastName": "Fischer",
         "email": "eva@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "Emmanuel Mauer",
+        "firstName": "Emmanuel",
+        "lastName": "Mauer",
         "email": "emmanuelma@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "Marcel Bauer",
+        "firstName": "Marcel",
+        "lastName": "Bauer",
         "email": "bauer@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     },
     {
-        "name": "Tatjana Wolf",
+        "firstName": "Tatjana",
+        "lastName": "Wolf",
         "email": "wolf@gmail.com",
         "phone": "+49 XXXX XXX XX X"
     }
@@ -55,7 +63,6 @@ const colorMap = {
     '': 'contact-avatar-color10' // Default color for any other names
 };
 
-let contactIndex = 0;
 let lastShownContactIdx = null;
 
 /**
@@ -72,15 +79,35 @@ function init() {
 function renderContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
-    const sorted = getSortedContacts();
-    const grouped = groupContactsByLetter(sorted);
-    let globalIndex = 0;
+    // Map contacts to have a 'name' property for compatibility
+    const contactsWithName = contacts.map(c => ({
+        ...c,
+        name: `${c.firstName} ${c.lastName}`.trim()
+    }));
+    // Sort contacts by initials (Vorname Nachname)
+    const sorted = [...contactsWithName].sort((a, b) => {
+        const initialsA = getInitials(a.name);
+        const initialsB = getInitials(b.name);
+        if (initialsA < initialsB) return -1;
+        if (initialsA > initialsB) return 1;
+        return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+    });
+    // Group contacts by first letter of initials
+    const grouped = sorted.reduce((acc, contact) => {
+        const initials = getInitials(contact.name);
+        const letter = initials[0] ? initials[0].toUpperCase() : '';
+        if (!letter) return acc;
+        (acc[letter] = acc[letter] || []).push(contact);
+        return acc;
+    }, {});
     Object.keys(grouped).sort().forEach(letter => {
-        contactList.innerHTML += getGroupTemplate(letter, grouped[letter], sorted, globalIndex);
-        globalIndex += grouped[letter].length;
+        contactList.innerHTML += getGroupTemplate(letter);
+        contactList.innerHTML += getGroupContactsHtml(grouped[letter], sorted);
     });
     addContactItemListeners();
 }
+
+// getGroupTemplate ist jetzt in template.js
 
 /**
  * Returns a sorted copy of the contacts array.
@@ -88,12 +115,17 @@ function renderContacts() {
  * @returns {Array} Sorted contacts array.
  */
 function getSortedContacts() {
-    return [...contacts].sort((a, b) => {
+    // Map contacts to have a 'name' property if not present
+    const contactsWithName = contacts.map(c => ({
+        ...c,
+        name: c.name || `${c.firstName || ''} ${c.lastName || ''}`.trim()
+    }));
+    return [...contactsWithName].sort((a, b) => {
         const initialsA = getInitials(a.name);
         const initialsB = getInitials(b.name);
         if (initialsA < initialsB) return -1;
         if (initialsA > initialsB) return 1;
-        return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+        return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
     });
 }
 
@@ -104,28 +136,15 @@ function getSortedContacts() {
  */
 function groupContactsByLetter(list) {
     return list.reduce((acc, contact) => {
-        const letter = contact.name[0].toUpperCase();
+        // Use lastName if available, otherwise firstName, fallback to empty string
+        const letter = (contact.lastName ? contact.lastName[0] : (contact.firstName ? contact.firstName[0] : '')).toUpperCase();
+        if (!letter) return acc;
         (acc[letter] = acc[letter] || []).push(contact);
         return acc;
     }, {});
 }
 
-/**
- * Returns the HTML template for a contact group section.
- * @param {string} letter - The initial letter for the group.
- * @param {Array} contactsArr - Array of contacts in the group.
- * @param {Array} sortedArr - The full sorted contacts array.
- * @param {number} startIdx - The starting global index for this group.
- * @returns {string} HTML string for the group section.
- */
-function getGroupTemplate(letter, contactsArr, sortedArr, startIdx) {
-    return `<div class="contact-group-letter">${letter}</div><hr class="contact-divider">` +
-        contactsArr.map((c, i) => {
-            // Find the global index of this contact in the sorted array
-            const globalIdx = sortedArr.findIndex(contact => contact === c);
-            return getContactListItemTemplate(c, colorMap[c.name] || 'contact-avatar-color1', getInitials(c.name), globalIdx);
-        }).join('');
-}
+// ...existing code...
 
 /**
  * Adds click event listeners to all contact items for selection and details display.
@@ -187,26 +206,6 @@ function showMobileContactDetails(idx) {
     showContactDetails(getSortedContacts()[idx], idx);
 }
 
-/**
- * Hides the mobile contact details view and shows the sidebar again.
- */
-function hideMobileContactDetails() {
-    document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
-    const section = document.querySelector('.contacts-section');
-    section.classList.remove('show-mobile-section');
-    section.style.display = '';
-    // Hide contact details container
-    const details = document.getElementById('contactListClicked');
-    details.style.display = '';
-    // Hide back button
-    const backBtn = document.getElementById('mobileBackBtn');
-    if (backBtn) backBtn.style.display = 'none';
-    // Hide edit button
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (editBtn) editBtn.style.display = 'none';
-    // Show add-contact-btn-mobile
-    document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
-}
 
 /**
  * Toggles the contact details view for a selected contact item.
@@ -215,6 +214,7 @@ function hideMobileContactDetails() {
  */
 function toggleContactDetails(idx, item) {
     const details = document.getElementById('contactListClicked');
+    const sorted = getSortedContacts();
     if (lastShownContactIdx === idx) {
         details.style.display = 'none';
         item.classList.remove('selected');
@@ -222,7 +222,7 @@ function toggleContactDetails(idx, item) {
     } else {
         document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('selected'));
         item.classList.add('selected');
-        showContactDetails(contacts[idx], idx);
+        showContactDetails(sorted[idx], idx);
         details.style.display = '';
         lastShownContactIdx = idx;
     }
@@ -230,21 +230,41 @@ function toggleContactDetails(idx, item) {
 
 
 /**
- * Displays the details of a contact in the details container.
+ * Prepares the contact details HTML and updates the details container.
  * @param {Object} contact - The contact object to display.
  * @param {number} idx - Index of the contact in the contacts array.
  */
 function showContactDetails(contact, idx) {
     const container = document.getElementById('contactListClicked');
-    const colorClass = colorMap[contact.name] || 'contact-avatar-color10';
-    const initials = contact.name.split(' ').map(n => n[0]).join('');
-    container.innerHTML = getContactDetailsTemplate(contact, colorClass, initials, idx);
+    const { html, colorClass } = getContactDetailsHtml(contact, idx);
+    container.innerHTML = html;
     // Animation: slide in from right
     container.classList.remove('active');
     container.classList.add('contact-list-clicked');
     setTimeout(() => {
         container.classList.add('active');
     }, 10);
+}
+
+/**
+ * Returns the HTML and color class for the contact details view.
+ * @param {Object} contact - The contact object.
+ * @param {number} idx - Index of the contact in the contacts array.
+ * @returns {{html: string, colorClass: string}}
+ */
+function getContactDetailsHtml(contact, idx) {
+    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
+    const initials = getInitials(name);
+    const colorClass = colorMap[name] || 'contact-avatar-color10';
+    const contactForTemplate = {
+        ...contact,
+        name,
+        initials
+    };
+    return {
+        html: getContactDetailsTemplate(contactForTemplate, colorClass, initials, idx),
+        colorClass
+    };
 }
 
 
@@ -306,7 +326,19 @@ function addToContacts() {
     const email = document.getElementById('contactEmail').value.trim();
     const phone = document.getElementById('contactPhone').value.trim();
     if (!name || !email || !phone) return;
-    contacts.push({ name, email, phone });
+    // Split name into firstName and lastName
+    const [firstName, ...rest] = name.split(' ');
+    const lastName = rest.join(' ');
+    // Assign color class if not already present
+    const fullName = `${firstName} ${lastName}`.trim();
+    if (!colorMap[fullName]) {
+        // Find next available color class (1-10, skipping used)
+        const usedColors = Object.values(colorMap);
+        let colorIdx = 1;
+        while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
+        colorMap[fullName] = 'contact-avatar-color' + (colorIdx <= 10 ? colorIdx : 10);
+    }
+    contacts.push({ firstName, lastName, email, phone });
     document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
@@ -352,10 +384,9 @@ function setDefaultAvatar(avatar) {
  * @returns {string} Initials string.
  */
 function getInitials(name) {
+    // Liefert die Initialen (z.B. "Anton Mayer" -> "AM")
     return name.split(" ")
-        .filter(Boolean)
         .map(n => n[0].toUpperCase())
-        .filter(ch => /^[A-Z]$/.test(ch))
         .slice(0, 2)
         .join("");
 }
@@ -398,7 +429,9 @@ function editContact(idx) {
  * @param {Object} contact - The contact object.
  */
 function fillEditFormFields(contact) {
-    document.getElementById('editContactName').value = contact.name;
+    // Use contact.name if present, otherwise reconstruct from firstName/lastName
+    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
+    document.getElementById('editContactName').value = name;
     document.getElementById('editContactEmail').value = contact.email;
     document.getElementById('editContactPhone').value = contact.phone;
     updateEditFormAvatar();
@@ -445,4 +478,25 @@ function updateEditFormAvatar() {
         .map(n => n[0].toUpperCase())
         .slice(0, 2)
         .join('');
+}
+
+/**
+ * Hides the mobile contact details view and shows the sidebar again.
+ */
+function hideMobileContactDetails() {
+    document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
+    const section = document.querySelector('.contacts-section');
+    section.classList.remove('show-mobile-section');
+    section.style.display = '';
+    // Hide contact details container
+    const details = document.getElementById('contactListClicked');
+    details.style.display = '';
+    // Hide back button
+    const backBtn = document.getElementById('mobileBackBtn');
+    if (backBtn) backBtn.style.display = 'none';
+    // Hide edit button
+    const editBtn = document.getElementById('mobileEditBtn');
+    if (editBtn) editBtn.style.display = 'none';
+    // Show add-contact-btn-mobile
+    document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
 }
