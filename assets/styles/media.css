@@ -1,0 +1,27 @@
+/* Mobile-specific styles */
+.mobile-only {
+    display: none;
+}
+
+/* Desktop-specific styles */
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 1000px) {
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+}
+
+@media (max-width: 320px) {
+    .profile-dropdown {
+        width: 140px;
+        min-width: 100px;
+    }
+}
