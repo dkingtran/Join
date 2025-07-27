@@ -16,6 +16,17 @@ body {
     text-decoration: none;
 }
 
+.w-full {
+  width: 100%;
+}
+
+.max-w-440 {
+  max-width: 440px;
+}
+.rounded-10px{
+   border-radius: 10px;
+}
+
 .d-none {
     display: none;
 }
@@ -32,6 +43,14 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
+
+/* For add-task Input fields */
+.input-base {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 12px 21px;
+}
+
 .input-bundle{
   width: 100%;
   max-width: 440px;
