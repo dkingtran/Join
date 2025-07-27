@@ -76,39 +76,88 @@ function init() {
  * Renders all contacts in the contact list.
  * Sorts and groups contacts, then renders each group.
  */
+
+/**
+ * Renders all contacts in the contact list, sorted and grouped by initials.
+ * Uses helper functions for sorting, grouping, and rendering.
+ */
 function renderContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
-    // Map contacts to have a 'name' property for compatibility
-    const contactsWithName = contacts.map(c => ({
-        ...c,
-        name: `${c.firstName} ${c.lastName}`.trim()
-    }));
-    // Sort contacts by initials (Vorname Nachname)
-    const sorted = [...contactsWithName].sort((a, b) => {
-        const initialsA = getInitials(a.name);
-        const initialsB = getInitials(b.name);
-        if (initialsA < initialsB) return -1;
-        if (initialsA > initialsB) return 1;
-        return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-    });
-    // Group contacts by first letter of initials
-    const grouped = sorted.reduce((acc, contact) => {
-        const initials = getInitials(contact.name);
+    const sorted = getSortedContactsForRender();
+    const grouped = groupContactsByInitial(sorted);
+    renderContactGroups(contactList, grouped);
+    addContactItemListeners();
+}
+
+/**
+ * Returns the contacts sorted by initials (first name + last name).
+ * @returns {Array} Sorted array of contacts
+ */
+function getSortedContactsForRender() {
+    return contacts
+        .map(c => ({ ...c, name: `${c.firstName} ${c.lastName}`.trim() }))
+        .sort((a, b) => {
+            const initialsA = getInitials(`${a.firstName} ${a.lastName}`);
+            const initialsB = getInitials(`${b.firstName} ${b.lastName}`);
+            if (initialsA < initialsB) return -1;
+            if (initialsA > initialsB) return 1;
+            return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+        });
+}
+
+/**
+ * Groups contacts by the first letter of their initials.
+ * @param {Array} sortedContacts - Sorted array of contacts
+ * @returns {Object} Object with letters as keys and arrays of contacts as values
+ */
+function groupContactsByInitial(sortedContacts) {
+    return sortedContacts.reduce((acc, contact) => {
+        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
         const letter = initials[0] ? initials[0].toUpperCase() : '';
         if (!letter) return acc;
         (acc[letter] = acc[letter] || []).push(contact);
         return acc;
     }, {});
-    Object.keys(grouped).sort().forEach(letter => {
-        contactList.innerHTML += getGroupTemplate(letter);
-        contactList.innerHTML += getGroupContactsHtml(grouped[letter], sorted);
-    });
-    addContactItemListeners();
 }
 
-// getGroupTemplate ist jetzt in template.js
+/**
+ * Renders all contact groups (letter sections) into the contact list.
+ * @param {HTMLElement} contactList - The list element for contacts
+ * @param {Object} grouped - Object with letters as keys and arrays of contacts as values
+ */
+function renderContactGroups(contactList, grouped) {
+    let globalIndex = 0;
+    Object.keys(grouped).sort().forEach(letter => {
+        contactList.innerHTML += getGroupTemplate(letter);
+        globalIndex = renderContactsOfGroup(contactList, grouped[letter], globalIndex);
+    });
+}
 
+/**
+ * Renders all contacts of a group (same letter) into the contact list.
+ * @param {HTMLElement} contactList - The list element for contacts
+ * @param {Array} group - Array of contacts for a letter
+ * @param {number} startIndex - Start index for the global contact count
+ * @returns {number} New global index after rendering
+ */
+function renderContactsOfGroup(contactList, group, startIndex) {
+    let idx = startIndex;
+    group.forEach(contact => {
+        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
+        const name = `${contact.firstName} ${contact.lastName}`.trim();
+        const colorClass = colorMap[name] || 'contact-avatar-color10';
+        contactList.innerHTML += getContactListItemTemplate(contact, colorClass, initials, idx);
+        idx++;
+    });
+    return idx;
+}
+
+/**
+ * Returns a sorted copy of the contacts array.
+ * Sorts by initials, then by name.
+ * @returns {Array} Sorted contacts array.
+ */
 /**
  * Returns a sorted copy of the contacts array.
  * Sorts by initials, then by name.
@@ -134,6 +183,11 @@ function getSortedContacts() {
  * @param {Array} list - Array of contact objects.
  * @returns {Object} Grouped contacts by initial letter.
  */
+/**
+ * Groups contacts by their initial letter (last name preferred).
+ * @param {Array} list - Array of contact objects.
+ * @returns {Object} Grouped contacts by initial letter.
+ */
 function groupContactsByLetter(list) {
     return list.reduce((acc, contact) => {
         // Use lastName if available, otherwise firstName, fallback to empty string
@@ -144,8 +198,11 @@ function groupContactsByLetter(list) {
     }, {});
 }
 
-// ...existing code...
 
+/**
+ * Adds click event listeners to all contact items for selection and details display.
+ * Handles mobile view switching.
+ */
 /**
  * Adds click event listeners to all contact items for selection and details display.
  * Handles mobile view switching.
@@ -164,6 +221,10 @@ function addContactItemListeners() {
     });
 }
 
+/**
+ * Shows the contact details in mobile view, hides sidebar, shows back and edit button.
+ * @param {number} idx - Index of the contact in the sorted array.
+ */
 /**
  * Shows the contact details in mobile view, hides sidebar, shows back and edit button.
  * @param {number} idx - Index of the contact in the sorted array.
@@ -212,6 +273,11 @@ function showMobileContactDetails(idx) {
  * @param {number} idx - Index of the contact in the contacts array.
  * @param {HTMLElement} item - The clicked contact item element.
  */
+/**
+ * Toggles the contact details view for a selected contact item.
+ * @param {number} idx - Index of the contact in the contacts array.
+ * @param {HTMLElement} item - The clicked contact item element.
+ */
 function toggleContactDetails(idx, item) {
     const details = document.getElementById('contactListClicked');
     const sorted = getSortedContacts();
@@ -234,6 +300,11 @@ function toggleContactDetails(idx, item) {
  * @param {Object} contact - The contact object to display.
  * @param {number} idx - Index of the contact in the contacts array.
  */
+/**
+ * Prepares the contact details HTML and updates the details container.
+ * @param {Object} contact - The contact object to display.
+ * @param {number} idx - Index of the contact in the contacts array.
+ */
 function showContactDetails(contact, idx) {
     const container = document.getElementById('contactListClicked');
     const { html, colorClass } = getContactDetailsHtml(contact, idx);
@@ -246,6 +317,12 @@ function showContactDetails(contact, idx) {
     }, 10);
 }
 
+/**
+ * Returns the HTML and color class for the contact details view.
+ * @param {Object} contact - The contact object.
+ * @param {number} idx - Index of the contact in the contacts array.
+ * @returns {{html: string, colorClass: string}}
+ */
 /**
  * Returns the HTML and color class for the contact details view.
  * @param {Object} contact - The contact object.
@@ -274,6 +351,9 @@ function getContactDetailsHtml(contact, idx) {
 /**
  * Shows the add contact form and its modal overlay.
  */
+/**
+ * Shows the add contact form and its modal overlay.
+ */
 function showForm() {
   const form = document.getElementById('formContainer');
   form.classList.add('show');
@@ -286,6 +366,9 @@ function showForm() {
   }, 0);
 }
 
+/**
+ * Hides the add contact form and its modal overlay.
+ */
 /**
  * Hides the add contact form and its modal overlay.
  */
@@ -304,6 +387,10 @@ function hideForm() {
  * Closes the add contact form if clicking outside the form container.
  * @param {MouseEvent} e - The click event.
  */
+/**
+ * Closes the add contact form if clicking outside the form container.
+ * @param {MouseEvent} e - The click event.
+ */
 function closeFormOnOutsideClick(e) {
     const formContainer = document.getElementById('formContainer');
     if (formContainer.classList.contains('show') && !formContainer.contains(e.target)) {
@@ -317,6 +404,9 @@ function closeFormOnOutsideClick(e) {
  * @param {string} name - The name of the contact.
  * @param {string} email - The email of the contact.
  * @param {string} phone - The phone number of the contact.
+ */
+/**
+ * Adds a new contact to the contacts array and updates the contact list.
  */
 /**
  * Adds a new contact to the contacts array and updates the contact list.
@@ -349,6 +439,9 @@ function addToContacts() {
 /**
  * Updates the avatar in the add contact form based on the entered name.
  */
+/**
+ * Updates the avatar in the add contact form based on the entered name.
+ */
 function updateFormAvatar() {
     const name = document.getElementById("contactName").value.trim();
     const avatar = document.getElementById("formAvatar");
@@ -365,10 +458,18 @@ function updateFormAvatar() {
  * Removes all possible avatar color classes from the avatar element.
  * @param {HTMLElement} avatar - The avatar element.
  */
+/**
+ * Removes all possible avatar color classes from the avatar element.
+ * @param {HTMLElement} avatar - The avatar element.
+ */
 function resetAvatarColors(avatar) {
     for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
 }
 
+/**
+ * Sets the avatar element to the default image and color.
+ * @param {HTMLElement} avatar - The avatar element.
+ */
 /**
  * Sets the avatar element to the default image and color.
  * @param {HTMLElement} avatar - The avatar element.
@@ -378,6 +479,11 @@ function setDefaultAvatar(avatar) {
     avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
 }
 
+/**
+ * Returns the initials for a given name (max 2 letters).
+ * @param {string} name - The contact name.
+ * @returns {string} Initials string.
+ */
 /**
  * Returns the initials for a given name (max 2 letters).
  * @param {string} name - The contact name.
@@ -394,6 +500,9 @@ function getInitials(name) {
 /**
  * Cancels the add contact form and clears all input fields.
  */
+/**
+ * Cancels the add contact form and clears all input fields.
+ */
 function cancelForm() {
     document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
@@ -401,6 +510,10 @@ function cancelForm() {
     hideForm();
 }
 
+/**
+ * Opens the edit contact modal and fills in the contact data.
+ * @param {number} idx - Index of the contact to edit.
+ */
 /**
  * Opens the edit contact modal and fills in the contact data.
  * @param {number} idx - Index of the contact to edit.
@@ -420,10 +533,18 @@ function showEditForm(idx) {
  * Handles the edit button click for a contact item.
  * @param {number} idx - Index of the contact to edit.
  */
+/**
+ * Handles the edit button click for a contact item.
+ * @param {number} idx - Index of the contact to edit.
+ */
 function editContact(idx) {
     showEditForm(idx);
 }
 
+/**
+ * Fills the edit form fields and updates the avatar.
+ * @param {Object} contact - The contact object.
+ */
 /**
  * Fills the edit form fields and updates the avatar.
  * @param {Object} contact - The contact object.
@@ -440,6 +561,9 @@ function fillEditFormFields(contact) {
 /**
  * Hides the edit contact modal and its overlay.
  */
+/**
+ * Hides the edit contact modal and its overlay.
+ */
 function hideEditForm() {
     document.getElementById('editFormContainer').classList.remove('show');
     // Hide overlay
@@ -453,6 +577,10 @@ function hideEditForm() {
  * Closes the edit contact modal if clicking outside the edit form container.
  * @param {MouseEvent} e - The click event.
  */
+/**
+ * Closes the edit contact modal if clicking outside the edit form container.
+ * @param {MouseEvent} e - The click event.
+ */
 function closeEditFormOnOutsideClick(e) {
     const editFormContainer = document.getElementById('editFormContainer');
     if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) {
@@ -460,6 +588,9 @@ function closeEditFormOnOutsideClick(e) {
     }
 }
 
+/**
+ * Updates the avatar in the edit contact form based on the entered name.
+ */
 /**
  * Updates the avatar in the edit contact form based on the entered name.
  */
@@ -480,6 +611,9 @@ function updateEditFormAvatar() {
         .join('');
 }
 
+/**
+ * Hides the mobile contact details view and shows the sidebar again.
+ */
 /**
  * Hides the mobile contact details view and shows the sidebar again.
  */
