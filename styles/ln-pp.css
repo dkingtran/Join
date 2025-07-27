@@ -403,7 +403,10 @@ h3 {
     filter: brightness(0.9);
 }
 
-
+.join-highlight {
+    color: #29ABE2;
+    text-decoration: none;
+}
 
 /* Mobile styles */
 @media (max-width: 1280px) {
