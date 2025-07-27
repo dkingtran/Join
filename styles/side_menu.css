@@ -1,6 +1,6 @@
 /* Header styles */
 .header-content {
-    height: 80px;
+    height: 96px;
     background-color: #ffffff;
     position: fixed;
     top: 0;
@@ -46,6 +46,7 @@
 
 .profile-container {
     position: relative;
+    z-index: 10001;
 }
 
 .help-container {
@@ -94,7 +95,7 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 68px;
+    top: 76px;
     right: 0;
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
@@ -102,7 +103,7 @@
     min-width: 120px;
     width: auto;
     text-align: start;
-    z-index: 300;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -430,6 +431,11 @@
 
 /* Small mobile styles */
 @media (max-width: 490px) {
+    
+    .header-content {
+            height: 80px;
+        }
+    
     .header-inner {
         padding-left: 16px;
         padding-right: 16px;
@@ -544,6 +550,7 @@
         top: 60px;
         right: -8px;
         height: 204px;
+
     }
 
     .d_none {

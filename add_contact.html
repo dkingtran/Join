@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Contact</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./assets/img/logo/logo-dark.png" />
+    <link rel="stylesheet" href="./styles/add-contact.css" />
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
-    <link rel="stylesheet" href="./styles/add-contact.css" />
 
     <script src="./scripts/side-menu.js"></script>
-    <script src="script.js"></script>
+    <script src="./scripts/template.js"></script>
+    <script src="./scripts/add-contact.js"></script>
   </head>
   <body onload="init()">
     <header>
@@ -23,7 +24,7 @@
           <h1 class="header-title">Kanban Project Management Tool</h1>
           <div class="header-right">
             <div class="help-container" id="helpContainer">
-              <a href="../help.html" class="help-icon">
+              <a href="help.html" class="help-icon">
                 <img
                   src="../assets/img/icons/header-side-menu/help.png"
                   alt="Help Icon"
@@ -39,16 +40,16 @@
                 SM
               </button>
               <div id="profileDropdown" class="profile-dropdown">
-                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                <a href="help.html" class="dropdown-item mobile-only d_none"
                   >Help</a
                 >
-                <a href="./legal-notice.html" class="dropdown-item"
+                <a href="legal-notice.html" class="dropdown-item"
                   >Legal Notice</a
                 >
-                <a href="./privacy-policy.html" class="dropdown-item"
+                <a href="privacy-policy.html" class="dropdown-item"
                   >Privacy Policy</a
                 >
-                <a href="./login.html" class="dropdown-item">Log out</a>
+                <a href="index.html" class="dropdown-item">Log out</a>
               </div>
             </div>
           </div>
@@ -111,27 +112,182 @@
         </a>
       </div>
     </aside>
-    <!--End of Side-menu-->
-    <main class="main-content">
-      <div class="form-container">
-        <form onsubmit="addToContacts(); return false;">
-          <input required type="text" placeholder="Name" id="contactName" />
-          <input required type="email" placeholder="Email" id="contactEmail" />
-          <input
-            required
-            minlength="10"
-            type="tel"
-            placeholder="Phonenumber"
-            id="contactPhone"
-          />
+
+    <!-- Contact Sidebar -->
+    <div class="contact-sidebar">
+      <div class="contact-sidebar-inner">
+        <button class="add-contact-btn" onclick="showForm()">
+          <span>Add new contact</span>
+          <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+        </button>
+        <button class="add-contact-btn-mobile" onclick="showForm()">
+          <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
+        </button>
+        <div class="contact-list" id="contactList">
+          <!-- Contacts will be rendered here -->
+        </div>
+      </div>
+    </div>
+
+    <!--Contacts Section -->
+    <div class="contacts-section">
+      <div class="contacts-header">
+        <h1>Contacts</h1>
+        <hr class="logo-divider" />
+        <h2>Better with a team</h2>
+      </div>
+      <div class="contact-list-clicked" id="contactListClicked">
+        <!-- Contacts will be rendered here -->
+      </div>
+    </div>
+
+    <!-- Modal Overlay for Add Contact -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <!-- Form Container (hidden by default) -->
+    <div class="form-container" id="formContainer">
+      <button class="close-btn" onclick="hideForm()">
+        <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+      </button>
+      <div class="form-header">
+        <div class="form-title">
+          <img src="./assets/img/logo/logo-light.png" alt="form logo" />
+          <h1>Add contact</h1>
+          <p>Tasks are better with a team!</p>
+          <hr class="form-divider" />
+        </div>
+      </div>
+      <div class="contact-avatar-clicked" id="formAvatar">
+        <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
+      </div>
+      <div class="form-content">
+        <form class="form-wrapper" onsubmit="addToContacts(); return false;">
+          <div class="input-wrapper">
+            <input
+              required
+              type="text"
+              placeholder="Name"
+              id="contactName"
+              oninput="updateFormAvatar()"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/person.svg"
+              alt="Name Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              id="contactEmail"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/mail.svg"
+              alt="Mail Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              minlength="10"
+              type="tel"
+              placeholder="Phone"
+              id="contactPhone"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/call.svg"
+              alt="Phone Icon"
+            />
+          </div>
           <div class="button-group">
             <button type="button" class="cancel-btn" onclick="cancelForm()">
               Cancel
+              <img src="./assets/img/icons/add-contact/close.svg" alt="" />
             </button>
-            <button type="submit" class="create-btn">Create Contact</button>
+            <button type="submit" class="create-btn">
+              Create Contact
+              <img src="./assets/img/icons/add-contact/check.svg" alt="" />
+            </button>
           </div>
         </form>
       </div>
-    </main>
+    </div>
+
+    <!-- Modal Overlay for Edit Contact -->
+    <div class="modal-overlay" id="editModalOverlay"></div>
+    <!-- Edit Contact Modal (hidden by default) -->
+    <div class="form-container" id="editFormContainer">
+      <button class="close-btn" onclick="hideEditForm()">
+        <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+      </button>
+      <div class="form-header">
+        <div class="form-title">
+          <img src="./assets/img/logo/logo-light.png" alt="form logo" />
+          <h1>Edit contact</h1>
+          <hr class="form-divider" />
+        </div>
+      </div>
+      <div class="contact-avatar-clicked" id="editFormAvatar">
+        <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
+      </div>
+      <div class="form-content">
+        <form class="form-wrapper" onsubmit="saveEditContact(); return false;">
+          <div class="input-wrapper">
+            <input
+              required
+              type="text"
+              placeholder="Name"
+              id="editContactName"
+              oninput="updateEditFormAvatar()"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/person.svg"
+              alt="Name Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              id="editContactEmail"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/mail.svg"
+              alt="Mail Icon"
+            />
+          </div>
+          <div class="input-wrapper">
+            <input
+              required
+              minlength="10"
+              type="tel"
+              placeholder="Phone"
+              id="editContactPhone"
+            />
+            <img
+              class="icon"
+              src="./assets/img/icons/add-contact/call.svg"
+              alt="Phone Icon"
+            />
+          </div>
+          <div class="button-group">
+            <button type="button" class="cancel-btn" onclick="hideEditForm()">
+              Cancel
+              <img src="./assets/img/icons/add-contact/close.svg" alt="" />
+            </button>
+            <button type="submit" class="create-btn">
+              Save Changes
+              <img src="./assets/img/icons/add-contact/check.svg" alt="" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
