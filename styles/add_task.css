@@ -2,11 +2,9 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .main-container {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -14,9 +12,6 @@
 }
 
 .title-section {
-  display: flex;
-  align-items: center;
-  text-align: center;
   margin-top: 164px;
   margin-left: 328px;
   max-width: 625px;
@@ -39,24 +34,18 @@
   margin-left: 237px;
   width: 1400px;
   height: 562px;
-  top: 562px;
-  left: 328px;
-
 }
 
 form {
-  width: 100%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
 }
 
 .add-task-container {
-  width: 100%;
   max-width: 1200px;
   display: flex;
   gap: 50px;
-
 }
 
 .pipe {
@@ -67,35 +56,23 @@ form {
 
 /* Section left */
 .section-task-left {
-  width: 100%;
   max-width: 50%;
-
 }
 
 .input-title-task {
-  width: 100%;
-  max-width: 440px;
   height: 48px;
-  border: 1px solid black;
-  border-radius: 10px;
   margin: 10px 0;
-  padding: 12px 21px;
 }
 
 .textarea-task {
-  width: 100%;
-  max-width: 440px;
   height: 120px;
-  border-radius: 10px;
   padding: 12px 21px;
   margin-top: 10px;
 }
 
 /* Section right */
 .section-task-right {
-  width: 100%;
   max-width: 50%;
-
 }
 
 .btn-prio {
@@ -112,16 +89,12 @@ form {
   cursor: pointer;
 }
 
-
 .btn-prio-bundle {
-  width: 100%;
   max-width: 136px;
   height: 56px;
-  border-radius: 10px;
   padding: 16px 10px;
   background-color: white;
   cursor: pointer;
- 
 }
 
 .active-green {
@@ -150,27 +123,17 @@ form {
   border: 1px solid black;
 }
 
-.icon-subtask-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* section under */
-
 .section-task-under {
   margin-top: 48px;
   display: flex;
   justify-content: space-between;
-  /* border: 2px solid black; */
   align-items: flex-end;
 }
-
 
 /* Assigned CSS */
 .custom-dropdown {
   position: relative;
-  width: 100%;
 }
 
 .dropdown-input {
@@ -180,10 +143,8 @@ form {
   border: 1px solid black;
   padding: 23px;
   cursor: pointer;
-  border-radius: 10px;
   background: white;
-  max-width: 440px;
-    height: 48px;
+  height: 48px;
 }
 
 .input-field{
@@ -193,8 +154,6 @@ form {
 .input-field::placeholder {
   color: black;
 }
-
-
 
 .arrow {
   transition: transform 0.3s ease;
@@ -209,7 +168,6 @@ form {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
   border: 1px solid #ccc;
   border-top: none;
   background-color: #fff;
@@ -238,9 +196,6 @@ form {
   border-radius: 50%;
   color: white;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-right: 10px;
 }
 
@@ -253,39 +208,17 @@ form {
   margin-left: auto;
 }
 
-/* .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: rgb(95, 36, 36);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  font-size: 14px;
-} */
-
-.contact-name {
-  flex-grow: 1;
-}
-
 .contact-item input[type="checkbox"] {
   transform: scale(1.2);
 }
 
-
 /* Add Subtask CSS */
-
-
 .subtask-input-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  width: 440px;
   color: #D1D1D1;
-
 }
 
 .subtask-input-box input {
@@ -316,22 +249,14 @@ form {
 
 .btn-clear-task-container {
   gap: 10px;
-  width: 100%;
   max-width: 519px;
-
 }
 
 .btn-addtask-clear {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 8px;
-  width: 100%;
   max-width: 110px;
   height: 56px;
-  border-radius: 10px;
   border: 1px solid #2A3647;
-  padding: 16px;
   color: #2A3647;
   background: white;
   transition: all 100ms ease-in-out;
@@ -347,12 +272,9 @@ form {
 
 .btn-addtask-create {
   color: white;
-  width: 100%;
   max-width: 183px;
   height: 56px;
-  border-radius: 10px;
   background: #2A3647;
-  padding: 16px;
   transition: all 0.2s ease-in-out;
 }
 
@@ -360,7 +282,6 @@ form {
   background: #29ABE2;
   transform: scale(1.01);
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
-
 }
 
 .icon-close path {
@@ -374,7 +295,6 @@ form {
 .btn-addtask-clear:hover .icon-close path {
   stroke: #29ABE2;
 }
-
 
 .star {
   color: red;

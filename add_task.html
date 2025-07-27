@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/media.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="./styles/add_task.css" />
     <script src="../scripts/side-menu.js"></script>
@@ -48,44 +49,41 @@
     <!-- Add Task section -->
     <div class="wrapper">
 
-        <div class="main-container">
-            <div class="title-section">
+        <div class="main-container w-full">
+            <div class="title-section display-standard">
                 <h1>Add Task</h1>
             </div>
             <div class="add-task-section">
-                <form>
-                    <div class="add-task-container">
-                        <div class="section-task-left">
+                <form class="w-full">
+                    <div class="add-task-container w-full">
+                        <div class="section-task-left w-full">
 
                             <div class="title-task">
                                 <p class="title-task font-bundle">Title<span class="star">*</span></p>
-                                <label for=""></label>
-                                <input class="input-title-task font-bundle" id="" name="" type="text"
-                                    placeholder="Enter a title">
+                                <label for="title-task" class="sr-only">Titel</label>
+                                  <input class="input-title-task font-bundle input-base w-full max-w-440" id="title-task" name="title" type="text" placeholder="Enter a title">
                             </div>
 
                             <div class="decription-class">
                                 <p class="font-bundle">Description</p>
-                                <label for=""></label>
-                                <textarea class="textarea-task font-bundle" name="description"
-                                    id="">Enter a  Description</textarea>
+                               <label for="description" class="sr-only">Beschreibung</label>
+                                 <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px" name="description" id="description" placeholder="Enter a Description"></textarea>
                             </div>
 
                             <div class="date-task">
                                 <p class="font-bundle">Du date <span class="star">*</span></p>
-                                <label for=""></label>
-                                <input class="font-bundle date-input-task input-bundle" id="" name="" type="date"
-                                    placeholder="">
+                               <label for="due-date" class="sr-only">Fälligkeitsdatum</label>
+                                 <input class="font-bundle date-input-task input-bundle" id="due-date" name="dueDate" type="date" placeholder="">
                             </div>
                         </div>
 
                         <div class="pipe"></div>
 
-                        <div class="section-task-right">
+                        <div class="section-task-right w-full">
                             <div class="priority">
                                 <p class="font-bundle">Priority</p>
                                 <div class="btn-prio">
-                                    <button id="urgent" class="font-bundle btn-prio-bundle">Urgent <img
+                                    <button id="urgent" class="font-bundle btn-prio-bundle w-full border-radius-10px">Urgent <img
                                             src="./assets/img/icons/add_task/urgent_icon.svg"
                                             alt="Urgent Icon"></button>
                                     <button id="medium" class="medium-btn btn-prio-bundle">
@@ -101,39 +99,39 @@
 
                             <!-- Assigned -->
                             <div class="assigned-to">
-                                <div class="custom-dropdown">
+                                <div class="custom-dropdown w-full">
                                     <label class="font-bundle">Assigned to</label>
-                                    <div class="dropdown-input" onclick="toggleDropdown()">
+                                    <div class="dropdown-input max-w-440 border-radius-10px" onclick="toggleDropdown()">
                                         <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
-                                    <div class="dropdown-list" id="contactList">
+                                    <div class="dropdown-list w-full" id="contactList">
                                         <!-- Later render from Firebase here -->
-                                        <label class="contact-item">
-                                            <span class="avatar" style="background-color: #6A1B9A;">AK</span>
+                                        <div class="contact-item">
+                                            <span class="avatar display-standard" style="background-color: #6A1B9A;">AK</span>
                                             <span class="contact-name">Andreas Kissner</span>
                                             <input type="checkbox" class="contact-checkbox" data-name="Andreas Kissner"
                                                 data-initials="AK">
-                                        </label>
-                                        <label class="contact-item">
-                                            <span class="avatar" style="background-color: #8BC34A;">AB</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <span class="avatar display-standard" style="background-color: #8BC34A;">AB</span>
                                             <span class="contact-name">Anton Bauerma</span>
                                             <input type="checkbox" class="contact-checkbox" data-name="Anton Bauerma"
                                                 data-initials="AB">
-                                        </label>
-                                        <label class="contact-item">
-                                            <span class="avatar" style="background-color: #2196F3;">CS</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <span class="avatar display-standard" style="background-color: #2196F3;">CS</span>
                                             <span class="contact-name">Clara Schmidt</span>
                                             <input type="checkbox" class="contact-checkbox" data-name="Clara Schmidt"
                                                 data-initials="CS">
-                                        </label>
-                                        <label class="contact-item">
-                                            <span class="avatar" style="background-color: #FF9800;">EM</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <span class="avatar display-standard" style="background-color: #FF9800;">EM</span>
                                             <span class="contact-name">Elena Meier</span>
                                             <input type="checkbox" class="contact-checkbox" data-name="Elena Meier"
                                                 data-initials="EM">
-                                        </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +148,7 @@
                             <div class="subtask-container">
                                 <p class="font-bundle">Subtasks</p>
                                 <label for="subtask-input"></label>
-                                <div class="subtask-input-box input-bundle">
+                                <div class="subtask-input-box input-bundle max-w-440">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
                                         id="subtask-input" value="Add new subtask" disabled>
                                     <span class="icon plus"><img src="assets/img/icons/add_task/add.svg" alt=""></span>
@@ -178,8 +176,8 @@
                     <div class="section-task-under">
                         <p><sup class="star">*</sup>This fields is required</p>
 
-                        <div class="btn-clear-task-container display-standard">
-                            <button class="btn-addtask-clear font-bundle">Clear <svg class="icon-close" width="13"
+                        <div class="btn-clear-task-container display-standard w-full">
+                            <button class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16">Clear <svg class="icon-close" width="13"
                                     height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
@@ -188,7 +186,7 @@
                                 </svg>
                             </button>
 
-                            <button class="btn-addtask-create font-bundle">Create Task<img class="icon-task"
+                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16">Create Task<img class="icon-task"
                                     src="assets/img/icons/add_task/check.svg" alt="Ok Icon"></button>
                         </div>
                     </div>
