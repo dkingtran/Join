@@ -673,10 +673,10 @@ input:focus {
 
 .mobile-back-btn {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
+    top: 8px;
+    right: 32px;
+    width: 32px;
+    height: 32px;
     background: transparent;
     border: none;
     z-index: 2100;
@@ -684,6 +684,12 @@ input:focus {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.mobile-back-btn:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
 }
 
 .mobile-back-btn img {
@@ -761,7 +767,7 @@ input:focus {
     }
 
     .logo-divider {
-        width: 59px;
+        width: 90px;
         height: 3px;
         border-radius: 3px;
         order: 2;
@@ -868,6 +874,24 @@ input:focus {
         font-weight: 400;
     }
 
+    .contact-name-clicked {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .contact-details-top {
+        gap: 20px;
+    }
+
+    .contact-details-actions {
+        display: none;
+    }
+
+    .mobile-back-btn {
+        width: 32px;
+        height: 32px;
+    }
+
     header {
         position: fixed;
         top: 0;
@@ -876,6 +900,10 @@ input:focus {
         z-index: 200;
         background: #2A3647 !important;
         color: #fff;
+    }
+
+    .contact-details-info-title {
+        margin: 0;;
     }
     .side-menu {
         position: fixed;

@@ -354,12 +354,15 @@ function getContactDetailsHtml(contact, idx) {
 /**
  * Shows the add contact form and its modal overlay.
  */
+
 function showForm() {
   const form = document.getElementById('formContainer');
   form.classList.add('show');
   // Show overlay
   const overlay = document.getElementById('modalOverlay');
   if (overlay) overlay.classList.add('show');
+  // Reset avatar preview to default when opening modal
+  setDefaultAvatar(document.getElementById('formAvatar'));
   // Add outside click listener
   setTimeout(() => {
     document.addEventListener('click', closeFormOnOutsideClick);
@@ -422,16 +425,22 @@ function addToContacts() {
     // Assign color class if not already present
     const fullName = `${firstName} ${lastName}`.trim();
     if (!colorMap[fullName]) {
-        // Find next available color class (1-10, skipping used)
+        // Find next available color class (1-10, skipping used, but cycle if all used)
         const usedColors = Object.values(colorMap);
         let colorIdx = 1;
         while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-        colorMap[fullName] = 'contact-avatar-color' + (colorIdx <= 10 ? colorIdx : 10);
+        if (colorIdx > 10) {
+            // Cycle colors if all are used
+            colorIdx = ((Object.keys(colorMap).length - 1) % 10) + 1;
+        }
+        colorMap[fullName] = 'contact-avatar-color' + colorIdx;
     }
     contacts.push({ firstName, lastName, email, phone });
     document.getElementById('contactName').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
+    // Reset avatar preview to default after adding
+    setDefaultAvatar(document.getElementById('formAvatar'));
     renderContacts();
     hideForm();
 }
@@ -442,6 +451,7 @@ function addToContacts() {
 /**
  * Updates the avatar in the add contact form based on the entered name.
  */
+
 function updateFormAvatar() {
     const name = document.getElementById("contactName").value.trim();
     const avatar = document.getElementById("formAvatar");
@@ -450,7 +460,19 @@ function updateFormAvatar() {
         setDefaultAvatar(avatar);
         return;
     }
-    avatar.classList.add(colorMap[name] || 'contact-avatar-color10');
+    // Vorschau: gleiche Farblogik wie beim Hinzufügen
+    let colorClass = colorMap[name];
+    if (!colorClass) {
+        // Find next available color class (1-10, skipping used, but cycle if all used)
+        const usedColors = Object.values(colorMap);
+        let colorIdx = 1;
+        while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
+        if (colorIdx > 10) {
+            colorIdx = ((Object.keys(colorMap).length - 1) % 10) + 1;
+        }
+        colorClass = 'contact-avatar-color' + colorIdx;
+    }
+    avatar.classList.add(colorClass);
     avatar.textContent = getInitials(name);
 }
 
@@ -474,8 +496,10 @@ function resetAvatarColors(avatar) {
  * Sets the avatar element to the default image and color.
  * @param {HTMLElement} avatar - The avatar element.
  */
+
 function setDefaultAvatar(avatar) {
-    avatar.classList.remove('contact-avatar-color10');
+    // Remove ALL color classes (not nur -color10)
+    for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
     avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
 }
 
