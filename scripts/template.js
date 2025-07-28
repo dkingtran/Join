@@ -1,3 +1,14 @@
+// Returns the mobile edit dropdown HTML template
+function getMobileEditDropdownTemplate(idx) {
+    return `
+        <button class="edit-btn" onclick="editContact(${idx}); removeMobileEditDropdown(); event.stopPropagation();">
+            <img src="assets/img/icons/add-contact/edit.svg">
+            Edit</button>
+        <button class="delete-btn" onclick="deleteContact(${idx}); removeMobileEditDropdown(); event.stopPropagation();">
+            <img src="assets/img/icons/add-contact/delete.svg">
+            Delete</button>
+    `;
+}
 // Returns the contact group header HTML template
 function getGroupTemplate(letter) {
     return `

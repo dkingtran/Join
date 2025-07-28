@@ -248,23 +248,54 @@ function showMobileContactDetails(idx) {
         section.appendChild(backBtn);
     }
     backBtn.style.display = 'flex';
-    // Add edit button if not present
+    // Zeige mobilen Edit-Button
     let editBtn = document.getElementById('mobileEditBtn');
-    if (!editBtn) {
-        editBtn = document.createElement('button');
-        editBtn.className = 'mobile-edit-btn';
-        editBtn.id = 'mobileEditBtn';
-        editBtn.innerHTML = '<img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit">';
-        editBtn.onclick = function() { editContact(idx); };
-        document.body.appendChild(editBtn);
-    } else {
+    if (editBtn) {
         editBtn.style.display = 'flex';
-        editBtn.onclick = function() { editContact(idx); };
+        window._lastMobileEditIdx = idx;
     }
+    // Remove any existing dropdown when switching contacts
+    removeMobileEditDropdown();
     // Hide add-contact-btn-mobile
     document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
     // Show details
     showContactDetails(getSortedContacts()[idx], idx);
+}
+
+/**
+ * Toggles the mobile edit dropdown for Edit/Delete actions.
+ * @param {number} idx - Index of the contact in the sorted array.
+ */
+function toggleMobileEditDropdown(idx) {
+    const dropdown = document.getElementById('mobileEditDropdown');
+    if (!dropdown) return;
+    // Toggle show class
+    if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+        dropdown.style.display = 'none';
+    } else {
+        // Set content if needed
+        if (typeof getMobileEditDropdownTemplate === 'function') {
+            dropdown.innerHTML = getMobileEditDropdownTemplate(idx);
+        }
+        dropdown.classList.add('show');
+        dropdown.style.display = 'flex';
+        // Hide dropdown on outside click
+        setTimeout(() => {
+            document.addEventListener('click', removeMobileEditDropdown, { once: true });
+        }, 0);
+    }
+}
+
+/**
+ * Removes the mobile edit dropdown if present.
+ */
+function removeMobileEditDropdown() {
+    const dropdown = document.getElementById('mobileEditDropdown');
+    if (dropdown) {
+        dropdown.classList.remove('show');
+        dropdown.style.display = 'none';
+    }
 }
 
 

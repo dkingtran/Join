@@ -698,7 +698,7 @@ input:focus {
 }
 
 .mobile-edit-btn {
-    position: fixed;
+    position: absolute;
     right: 16px;
     bottom: 104px;
     width: 56px;
@@ -717,6 +717,10 @@ input:focus {
     border: none;
     padding: 0;
     display: flex;
+}
+
+.mobile-edit-btn:active {
+    background: #29ABE2;
 }
 
 .mobile-edit-btn img {
@@ -823,7 +827,7 @@ input:focus {
 
     .contact-sidebar {
         z-index: 10;
-        padding-bottom: 80px;/* Prevent last contact from being hidden */
+        padding-bottom: 96px;/* Prevent last contact from being hidden */
         scrollbar-width: thin;
         scrollbar-color: #A8A8A8 #fff;
     }
@@ -850,6 +854,37 @@ input:focus {
 }
 
 @media (max-width: 780px) {
+
+    /* Mobile Edit Dropdown (override for mobile) */
+    .mobile-edit-dropdown {
+        position: absolute;
+        bottom: 96px;
+        right: 8px;
+        background: #fff;
+        border-radius: 20px 20px 0px 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        width: 116px;
+        height: 100px;
+        padding: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        z-index: 3000;
+        font-size: 16px;
+        transition: transform 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .edit-btn {
+        padding-left: 12px;
+        padding-right: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .delete-btn {
+        padding: 8px 8px;
+    }
+
     .contacts-section {
         display: none !important;
     }
@@ -931,6 +966,7 @@ input:focus {
         position: fixed;
         width: 100%;
         padding: 16px;
+        padding-bottom: 96px;
         box-sizing: border-box;
     }
     .contact-group-letter {
@@ -954,6 +990,18 @@ input:focus {
         width: 100%;
         padding: 16px;
         box-sizing: border-box;
+    }
+
+    .contact-avatar-clicked {
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        min-height: 80px;
+        font-size: 24px;
+    }
+
+    .contact-list-clicked.active {
+        max-width: 280px;
     }
 
 }

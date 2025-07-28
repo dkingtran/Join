@@ -289,5 +289,20 @@
         </form>
       </div>
     </div>
+    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
+    <button
+      id="mobileEditBtn"
+      class="mobile-edit-btn"
+      style="display: none"
+      onclick="event.stopPropagation(); toggleMobileEditDropdown(window._lastMobileEditIdx)"
+    >
+      <img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit" />
+    </button>
+    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
+    <div
+      id="mobileEditDropdown"
+      class="mobile-edit-dropdown"
+      style="display: none"
+    ></div>
   </body>
 </html>
