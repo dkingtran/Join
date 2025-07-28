@@ -43,9 +43,10 @@ form {
 }
 
 .add-task-container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1102px;
   display: flex;
-  gap: 50px;
+  gap: 80px;
 }
 
 .pipe {
@@ -73,6 +74,7 @@ form {
 /* Section right */
 .section-task-right {
   max-width: 50%;
+  margin-left:20px
 }
 
 .btn-prio {
@@ -80,7 +82,7 @@ form {
   justify-content: flex-start;
   gap: 16px;
   margin: 10px 0;
-  background: white;
+/*   background: white; */
 }
 
 /* Nur normale Buttons beim Hover erhalten den Shadow */
