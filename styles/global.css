@@ -1,32 +1,33 @@
-
 .w-full {
   width: 100%;
 }
 
 .max-w-440 {
   max-width: 440px;
-}
-.border-radius-10px{
-   border-radius: 10px;
+  min-width: 440px;
 }
 
-.p-16{
+.border-radius-10px {
+  border-radius: 10px;
+}
+
+.p-16 {
   padding: 16px;
 }
 
 .d-none {
-    display: none;
+  display: none;
 }
 
 .display-standard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* css snippet addtask.html */
-.font-bundle{
- font-size: 20px;
+.font-bundle {
+  font-size: 20px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
@@ -38,12 +39,12 @@
   padding: 12px 21px;
 }
 
-.input-bundle{
+.input-bundle {
   width: 100%;
   max-width: 440px;
   height: 48px;
   border: 1px solid black;
   border-radius: 10px;
-  margin:10px 0;
-  padding:12px 21px;
+  margin: 10px 0;
+  padding: 12px 21px;
 }

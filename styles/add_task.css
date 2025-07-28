@@ -1,52 +1,67 @@
+html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
 .wrapper {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
 }
 
 .main-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin-left: 600px;
 }
 
 .title-section {
-  margin-top: 164px;
-  margin-left: 328px;
-  max-width: 625px;
-  height: 73px;
-  gap: 30px;
+  margin-top: 127px;
+  margin-left: 20px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
 }
 
 .title-section h1 {
   font-size: 61px;
-  color: #000000;
-  font-weight: bold;
-  font-family: 'inter', sans-serif;
 }
 
 .add-task-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-  margin-left: 237px;
-  width: 1400px;
-  height: 562px;
+  align-items: flex-start;
+  height: auto;
 }
 
 form {
-  max-width: 1200px;
   display: flex;
-  flex-direction: column;
+flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 20px;
 }
 
 .add-task-container {
   width: 100%;
   max-width: 1102px;
   display: flex;
-  gap: 80px;
+  gap: 60px;
 }
 
 .pipe {
@@ -63,36 +78,41 @@ form {
 .input-title-task {
   height: 48px;
   margin: 10px 0;
+  padding-left: 21px;
 }
 
 .textarea-task {
   height: 120px;
-  padding: 12px 21px;
-  margin: 10px 0 20px;
+  padding: 18px 21px;
+  margin: 10px 0 10px;
 }
 
 /* Section right */
 .section-task-right {
   max-width: 50%;
-  margin-left:20px
+}
+
+.du-date {
+  width: 100%;
+  width: 100px;
 }
 
 .btn-prio {
   display: flex;
   justify-content: flex-start;
-  gap: 16px;
+  width: 440px;
+  gap: 15px;
   margin: 10px 0;
-/*   background: white; */
 }
 
-/* Nur normale Buttons beim Hover erhalten den Shadow */
 .btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
 
 .btn-prio-bundle {
-  max-width: 136px;
+  max-width: 159px;
+  min-width: 136px;
   height: 56px;
   padding: 16px 10px;
   background-color: white;
@@ -120,20 +140,23 @@ form {
 .medium-btn {
   gap: 6px;
   font-size: 21px;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  border: 1px solid black;
 }
 
-/* section under */
 .section-task-under {
   margin-top: 48px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  flex-direction: row;
+  margin-bottom: 80px;
 }
 
 /* Assigned CSS */
+.assigned-to {
+  display: block;
+  width: 150px;
+}
+
 .custom-dropdown {
   position: relative;
 }
@@ -150,10 +173,11 @@ form {
   margin: 10px 0;
 }
 
-.input-field{
+.input-field {
   border: none;
   color: black;
 }
+
 .input-field::placeholder {
   color: black;
 }
@@ -169,6 +193,8 @@ form {
 
 .dropdown-list {
   position: absolute;
+  width: 310px;
+  
   top: 100%;
   left: 0;
   border: 1px solid #ccc;
@@ -226,7 +252,7 @@ form {
 
 .subtask-input-box input {
   border: none;
-  color: #D1D1D1;
+  color: black;
 }
 
 .subtask-input-box input:disabled {
@@ -250,9 +276,17 @@ form {
   font-weight: bold;
 }
 
+.input-second{
+  width: 250px;
+  border: none;
+  border-color: white;
+
+}
+
 .btn-clear-task-container {
   gap: 10px;
   max-width: 519px;
+  justify-content: flex-end;
 }
 
 .btn-addtask-clear {
@@ -301,4 +335,181 @@ form {
 
 .star {
   color: red;
+}
+
+.star-required {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 630px;
+  min-width: 200px;
+}
+
+/* Media */
+@media(max-width:1365px) {
+  .add-task-container {
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pipe {
+    display: none;
+  }
+  .btn-clear-task-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 399px;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
+  .section-task-under {
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .title-section {
+    margin-top: 127px;
+    margin-left: 260px;
+    width: 100%;
+    max-width: 377px;
+  }
+  .star-required {
+    max-width: 480px;
+  }
+}
+
+@media(max-width:1060px) {
+  .wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+  .star-required {
+    max-width: 300px;
+  }
+}
+
+@media(max-width:768px) {
+
+  .title-section {
+    margin-left: 190px;
+  }
+  .star-required {
+    max-width: 230px;
+  }
+}
+
+@media(max-width:634px) {
+  .title-section {
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
+  .title-section h1 {
+    font-size: 47px;
+    min-width: 220px;
+  }
+
+  .add-task-container {
+    max-width: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  form {
+    padding: 0;
+  }
+
+  .btn-clear-task-container {
+    margin-left: 0px;
+  }
+
+  .section-task-under {
+    align-items: flex-start;
+  }
+}
+
+@media(max-width:485px) {
+  .max-w-440 {
+    min-width: 320px;
+  }
+
+  .title-section {
+    margin-left: 0px;
+  }
+
+  .font-bundle {
+    font-size: 16px;
+  }
+
+  .btn-prio-bundle {
+    min-width: 96px;
+  }
+
+  .btn-prio{
+    width: 320px;
+  }
+  .btn-clear-task-container {
+    margin-left: 0;
+    display: flex;
+  }
+}
+
+@media(max-width:368px) {
+.add-task-section{
+  padding:15px
+}
+
+.subtask-input-box{
+  justify-content: flex-end;
+}
+
+  .max-w-440 {
+    min-width: 280px;
+  }
+
+  .title-section {
+    margin-left: 0px;
+  }
+
+  .font-bundle {
+    font-size: 16px;
+  }
+
+  .btn-prio-bundle {
+    min-width: 82px;
+    height: 40px;
+    padding: 0 4px
+ 
+  }
+
+  .btn-prio{
+    width:275px ;
+       gap: 5px;
+  }
+  .input-title-task {
+    height: 40px;
+  }
+
+  .textarea-task {
+    height: 80px;
+  }
+
+  .input-bundle {
+    height: 48px;
+  }
+  .input-second{
+    width: 180px;
+  }
+
+ .section-task-under{
+          max-width: 440px;
+        min-width: 279px;
+}
 }
