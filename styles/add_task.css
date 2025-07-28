@@ -67,7 +67,7 @@ form {
 .textarea-task {
   height: 120px;
   padding: 12px 21px;
-  margin-top: 10px;
+  margin: 10px 0 20px;
 }
 
 /* Section right */
@@ -145,6 +145,7 @@ form {
   cursor: pointer;
   background: white;
   height: 48px;
+  margin: 10px 0;
 }
 
 .input-field{
