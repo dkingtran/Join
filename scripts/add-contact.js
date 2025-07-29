@@ -269,17 +269,15 @@ function showMobileContactDetails(idx) {
 function toggleMobileEditDropdown(idx) {
     const dropdown = document.getElementById('mobileEditDropdown');
     if (!dropdown) return;
-    // Toggle show class
+    // Toggle show class (keine Manipulation von style.display!)
     if (dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
-        dropdown.style.display = 'none';
     } else {
         // Set content if needed
         if (typeof getMobileEditDropdownTemplate === 'function') {
             dropdown.innerHTML = getMobileEditDropdownTemplate(idx);
         }
         dropdown.classList.add('show');
-        dropdown.style.display = 'flex';
         // Hide dropdown on outside click
         setTimeout(() => {
             document.addEventListener('click', removeMobileEditDropdown, { once: true });
@@ -294,7 +292,6 @@ function removeMobileEditDropdown() {
     const dropdown = document.getElementById('mobileEditDropdown');
     if (dropdown) {
         dropdown.classList.remove('show');
-        dropdown.style.display = 'none';
     }
 }
 
@@ -666,12 +663,6 @@ function updateEditFormAvatar() {
         .join('');
 }
 
-/**
- * Hides the mobile contact details view and shows the sidebar again.
- */
-/**
- * Hides the mobile contact details view and shows the sidebar again.
- */
 function hideMobileContactDetails() {
     document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
     const section = document.querySelector('.contacts-section');
@@ -689,3 +680,51 @@ function hideMobileContactDetails() {
     // Show add-contact-btn-mobile
     document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
 }
+
+/**
+ * Restores the desktop view layout for the contacts section.
+ * Removes mobile-specific classes from the contacts section and sidebar,
+ * and ensures the contact details element is visible.
+ *
+ * @function
+ */
+function showDesktopView() {
+    const section = document.querySelector('.contacts-section');
+    const sidebar = document.querySelector('.contact-sidebar');
+    const details = document.getElementById('contactListClicked');
+    if (section) section.classList.remove('show-mobile-section');
+    if (sidebar) sidebar.classList.remove('hide-mobile-sidebar');
+    if (details) details.style.display = '';
+}
+
+function hideMobileButtons() {
+    const backBtn = document.getElementById('mobileBackBtn');
+    const editBtn = document.getElementById('mobileEditBtn');
+    if (backBtn) backBtn.style.display = 'none';
+    if (editBtn) editBtn.style.display = 'none';
+}
+
+function showAddContactBtnMobile() {
+    const addBtn = document.querySelector('.add-contact-btn-mobile');
+    if (addBtn) addBtn.classList.remove('hide-mobile-edit');
+}
+
+function closeMobileEditDropdownIfOpen() {
+    if (typeof removeMobileEditDropdown === 'function') {
+        removeMobileEditDropdown();
+    }
+}
+
+function handleResponsiveCloseMobileSection() {
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 780) {
+            showDesktopView();
+            hideMobileButtons();
+            closeMobileEditDropdownIfOpen();
+            showAddContactBtnMobile();
+        }
+    });
+}
+
+// Direkt beim Laden aufrufen:
+handleResponsiveCloseMobileSection();

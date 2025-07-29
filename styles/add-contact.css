@@ -857,21 +857,31 @@ input:focus {
 
     /* Mobile Edit Dropdown (override for mobile) */
     .mobile-edit-dropdown {
-        position: absolute;
+        position: fixed;
         bottom: 96px;
-        right: 8px;
+        right: -140px; /* Dropdown außerhalb des Viewports */
         background: #fff;
         border-radius: 20px 20px 0px 20px;
         box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         width: 116px;
         height: 100px;
         padding: 10px 10px;
-        display: flex;
+        /* display: flex; entfernt, damit Transition funktioniert */
         flex-direction: column;
         justify-content: space-around;
         z-index: 3000;
         font-size: 16px;
-        transition: transform 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: right 0.125s ease-in-out, opacity 0.125s ease-in-out, visibility 0.125s ease-in-out;
+    }
+
+    .mobile-edit-dropdown.show {
+        right: 8px;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .edit-btn {
@@ -888,6 +898,7 @@ input:focus {
     .contacts-section {
         display: none !important;
     }
+
     .contacts-section.show-mobile-section {
         display: block !important;
         background: #F4F7F7 !important;
