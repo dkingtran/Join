@@ -99,9 +99,7 @@ function setupCheckboxListener() {
         });
     }
 }
-window.onload = () => {
-    setupCheckboxListener();
-};
+
 
 // Subtask Input Field
 function showSubtaskInput() {
@@ -143,6 +141,46 @@ function deleteSubtask(element) {
     subtaskBox.remove();
   }
 }
+
+function startEditSubtask(element) {
+  const text = element.innerText;
+
+  element.outerHTML = `
+    <input class="subtask-entry font-bundle"
+           type="text"
+           value="${text}"
+           onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
+  `;
+}
+
+function startEditSubtask(element) {
+  const box = element.closest(".subtask-text-box");
+
+  const textElement = box.querySelector(".subtask-entry");
+  const text = textElement.innerText;
+  const iconBox = box.querySelector(".icon-edit-subtask-box");
+  iconBox.querySelector(".edit-icon").classList.add("d-none");         // Stift aus
+  iconBox.querySelector(".confirm-icon").classList.remove("d-none");   // OK an
+  textElement.outerHTML = changeDivtoInputTemplate(text);
+}
+
+function finishEditSubtask(iconElement) {
+  const box = iconElement.closest(".subtask-text-box");
+  const inputElement = box.querySelector("input.subtask-entry");
+  const text = inputElement.value.trim();
+
+  inputElement.outerHTML = getReturnToDivTemplate(text);
+ 
+
+  box.classList.remove("subtask-editing");
+
+box.querySelector(".edit-icon")?.classList.remove("d-none");
+box.querySelector(".confirm-icon")?.classList.add("d-none");
+box.querySelector(".delete-icon")?.classList.remove("d-none");
+
+}
+
+
 
 
 window.onload = () => {

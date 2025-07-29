@@ -1,8 +1,9 @@
+
 html,
 body {
   height: auto;
   min-height: 100%;
-  overflow-y: auto;
+/*   overflow-y: auto; */
   margin: 0;
   padding: 0;
 }
@@ -284,17 +285,12 @@ form {
   border-radius:10px;
 }
 .subtask-text-box:hover .icon-edit-subtask-box {
-  display: flex ;
+   display: flex !important;
 }
-
-.subtask-text-box li{
-  font-size: 14px;
-  list-style-position: inside;
-}
-
 .delete-subtask-input{
   padding: 0;
 }
+
 
 /* 2. Input field */
 .plus {
@@ -304,8 +300,9 @@ form {
 .input-second {
   width: 250px;
   border: none;
-  border-color: white;
-
+  outline: none;
+  background: transparent; 
+  box-shadow: none; 
 }
 
 .btn-clear-task-container {
@@ -469,6 +466,11 @@ form {
   .section-task-under {
     align-items: flex-start;
   }
+  .subtask-entry{
+    width: 100%;
+    max-width: 440px;
+    min-width: 360px;
+  }
 }
 
 @media(max-width:485px) {
@@ -495,6 +497,12 @@ form {
   .btn-clear-task-container {
     margin-left: 0;
     display: flex;
+  }  
+
+   .subtask-entry{
+    width: 100%;
+    max-width: 440px;
+    min-width: 240px;
   }
 }
 
@@ -549,5 +557,11 @@ form {
   .section-task-under {
     max-width: 440px;
     min-width: 279px;
+  }
+
+   .subtask-entry{
+    width: 100%;
+    max-width: 440px;
+    min-width: 200px;
   }
 }
