@@ -83,15 +83,47 @@ function toggleDropdown() {
   arrow.classList.toggle("rotate");
 }
 
-const checkboxes = document.querySelectorAll(".contact-checkbox");
-const input = document.getElementById("searchInput");
+function setupCheckboxListener() {
+  const checkboxes = document.querySelectorAll(".contact-checkbox");
+  const input = document.getElementById("searchInput");
+  for (let i = 0; i < checkboxes.length; i++) {
+    const checkbox = checkboxes[i];
+    checkbox.addEventListener("change", () => {
+      const ausgewählt = [];
+      for (let j = 0; j < checkboxes.length; j++) {
+        if (checkboxes[j].checked) {
+          ausgewählt.push(checkboxes[j].dataset.name);
+        }
+      }
+      input.value = ausgewählt.join(", ");
+    });
+  }
+}
+window.onload = () => {
+  setupCheckboxListener();
+};
 
-checkboxes.forEach(checkbox => {
-  checkbox.addEventListener("change", () => {
-    const selected = Array.from(checkboxes)
-      .filter(c => c.checked)
-      .map(c => c.dataset.name);
-    input.value = selected.join(", ");
-  });
-});
+// Subtask Input Field
+function showSubtaskInput() {
+  const initialBox = document.getElementById("subtask-initial");
+  const activeBox = document.getElementById("subtask-active");
+
+  initialBox.classList.add("d_none");
+  activeBox.classList.remove("d_none");
+}
+
+function cancelSubtaskInput() {
+  const initialBox = document.getElementById("subtask-initial");
+  const activeBox = document.getElementById("subtask-active");
+  const inputField = document.getElementById("subtask-input-second");
+
+  activeBox.classList.add("d_none");    // versteckt das Eingabefeld
+  initialBox.classList.remove("d_none"); // zeigt das erste Feld wieder
+  inputField.value = "";                // löscht den eingegebenen Text
+}
+
+window.onload = () => {
+  setupCheckboxListener();
+};
+
 
