@@ -136,6 +136,15 @@ function confirmSubtaskInput() {
     cancelSubtaskInput();
 }
 
+/* closest sucht vom Bild (element wird von onclick übergeben) das div subtask-text-box und gelöscht  */
+function deleteSubtask(element) {
+  const subtaskBox = element.closest(".subtask-text-box");
+  if (subtaskBox) {
+    subtaskBox.remove();
+  }
+}
+
+
 window.onload = () => {
     setupCheckboxListener();
 };

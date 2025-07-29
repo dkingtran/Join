@@ -271,6 +271,15 @@ flex-direction: column;
   padding-left: 10px;
 }
 
+.subtask-text-box{
+  display: flex;
+  justify-content: space-between;
+}
+.subtask-entry{
+  font-size: 14px;
+  list-style-position: inside;
+}
+
 /* 2. Input field */
 .plus {
   font-weight: bold;
@@ -344,6 +353,10 @@ flex-direction: column;
   width: 100%;
   max-width: 630px;
   min-width: 200px;
+}
+
+.d-none{
+  display:none;
 }
 
 /* Media */
