@@ -108,8 +108,8 @@ function showSubtaskInput() {
   const initialBox = document.getElementById("subtask-initial");
   const activeBox = document.getElementById("subtask-active");
 
-  initialBox.classList.add("d_none");
-  activeBox.classList.remove("d_none");
+  initialBox.classList.add("d-none");
+  activeBox.classList.remove("d-none");
 }
 
 function cancelSubtaskInput() {
@@ -117,9 +117,9 @@ function cancelSubtaskInput() {
   const activeBox = document.getElementById("subtask-active");
   const inputField = document.getElementById("subtask-input-second");
 
-  activeBox.classList.add("d_none");    // versteckt das Eingabefeld
-  initialBox.classList.remove("d_none"); // zeigt das erste Feld wieder
-  inputField.value = "";                // löscht den eingegebenen Text
+  activeBox.classList.add("d-none");    // versteckt
+  initialBox.classList.remove("d-none"); // Zeigt
+  inputField.value = "";                
 }
 
 window.onload = () => {

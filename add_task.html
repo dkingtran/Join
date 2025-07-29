@@ -8,9 +8,9 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/media.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/standard.css" />
-    <link rel="stylesheet" href="./styles/add_task.css" />
     <script src="../scripts/side-menu.js"></script>
 </head>
 
@@ -47,11 +47,11 @@
     <!-- Add Task section -->
     <div class="wrapper">
 
-        <div class="main-container w-full"> 
+        <div class="main-container w-full">
             <div class="add-task-section">
-                 <div class="title-section display-standard">
-                <h1>Add Task</h1>
-            </div>
+                <div class="title-section display-standard">
+                    <h1>Add Task</h1>
+                </div>
                 <form class="w-full">
                     <div class="add-task-container w-full">
                         <div class="section-task-left w-full">
@@ -59,8 +59,8 @@
                             <div class="title-task">
                                 <p class="title-task font-bundle">Title<span class="star">*</span></p>
                                 <label for="title-task" class="sr-only"></label>
-                                <input class="input-title-task font-bundle w-full max-w-440 border-radius-10px" id="title-task"
-                                    name="title" type="text" placeholder="Enter a title">
+                                <input class="input-title-task font-bundle w-full max-w-440 border-radius-10px"
+                                    id="title-task" name="title" type="text" placeholder="Enter a title">
                             </div>
 
                             <div class="decription-class">
@@ -73,37 +73,37 @@
                             <div class="date-task">
                                 <p class="font-bundle du-date">Du date <span class="star">*</span></p>
                                 <label for="due-date" class="sr-only"></label>
-                                <input class="font-bundle date-input-task input-bundle max-w-440" id="due-date" name="dueDate"
-                                    type="date" placeholder="">
+                                <input class="font-bundle date-input-task input-bundle max-w-440" id="due-date"
+                                    name="dueDate" type="date" placeholder="">
                             </div>
                         </div>
 
                         <div class="pipe"></div>
 
                         <div class="section-task-right w-full">
-                                <p class="font-bundle">Priority</p>
-                                <div class="btn-prio">
-                                    <button id="urgent"
-                                        class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
-                                            src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
-                                    </button>
-                                    <button id="medium" class="medium-btn btn-prio-bundle border-radius-10px font-bundle">
-                                        Medium
-                                        <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
-                                            alt="medium">
-                                    </button>
+                            <p class="font-bundle">Priority</p>
+                            <div class="btn-prio">
+                                <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
+                                        src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
+                                </button>
+                                <button id="medium" class="medium-btn btn-prio-bundle border-radius-10px font-bundle">
+                                    Medium
+                                    <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
+                                        alt="medium">
+                                </button>
 
-                                    <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">Low <img
-                                            src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
-                                    </button>
-                                </div>
-                         
+                                <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">Low <img
+                                        src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
+                                </button>
+                            </div>
+
 
                             <!-- Assigned -->
                             <div class="assigned-to">
                                 <div class="custom-dropdown w-full">
                                     <label class="font-bundle assigned-to">Assigned to</label>
-                                    <div class="dropdown-input max-w-440 border-radius-10px input-bundle" onclick="toggleDropdown()">
+                                    <div class="dropdown-input max-w-440 border-radius-10px input-bundle"
+                                        onclick="toggleDropdown()">
                                         <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
@@ -150,41 +150,47 @@
                                     <option value="saab">User Story</option>
                                 </select>
                             </div>
-
-                         <div class="subtask-container">
-                                <p class="font-bundle">Subtasks</p>
-                                <label for="subtask-input"></label>
-                                <div class="subtask-input-box input-bundle max-w-440">
-                                    <input class="add-subtask-input input-bundle font-bundle" type="text"
-                                        id="subtask-input" value="Add new subtask" disabled>
-                                    <span class="icon plus"><img src="assets/img/icons/add_task/add.svg" alt=""></span>
-                                </div>
-                            </div> 
-
                             <div class="subtask-container">
                                 <p class="font-bundle">Subtasks</p>
-                                <label for="subtask-input"></label>
-                                <div class="subtask-input-box input-bundle max-w-440">
+
+                                <!-- Zustand 1 -->
+                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440">
+                                    <input class="add-subtask-input input-bundle font-bundle" type="text"
+                                        value="Add new subtask" disabled>
+                                    <span id="open-subtask" class="icon plus" onclick="showSubtaskInput()">
+                                        <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
+                                    </span>
+                                </div>
+                                <div id="subtask-output"></div>
+
+
+                                <!-- Zustand 2 -->
+                                <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
                                     <input class="input-second font-bundle" type="text" id="subtask-input-second"
-                                        value="" />
+                                        placeholder="Add new subtask">
                                     <div class="icon-subtask-container display-standard">
-                                        <span class="icon cancel"><img class="icon-task"
-                                                src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon"></span>
-                                        <span class="icon confirm"><img class="icon-task"
-                                                src="assets/img/icons/add_task/check_noir.svg"
-                                                alt="Confirm Icon"></span>
+                                        <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
+                                            <img class="icon-task" src="assets/img/icons/add_task/delete.svg"
+                                                alt="Cancel Icon">
+                                        </span>
+                                        <span id="confirm-subtask" class="icon confirm">
+                                            <img class="icon-task" src="assets/img/icons/add_task/check_noir.svg"
+                                                alt="Confirm Icon">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
                     <div class="section-task-under">
                         <div class="star-required">
-                        <p class="required-task-text font-bundle"><sup class="star">*</sup>This fields is required</p>
-                          </div>
+                            <p class="required-task-text font-bundle"><sup class="star">*</sup>This fields is required
+                            </p>
+                        </div>
                         <div class="btn-clear-task-container display-standard w-full">
-                          
+
                             <button
                                 class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16">Clear
                                 <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
@@ -205,7 +211,7 @@
                 </form>
 
             </div>
-       </div> 
+        </div>
     </div>
     <!-- End add Task section -->
 
