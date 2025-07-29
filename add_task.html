@@ -156,13 +156,11 @@
                                 <!-- Zustand 1 -->
                                 <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
-                                        value="Add new subtask" disabled>
+                                        placeholder="Add new subtask" disabled>
                                     <span id="open-subtask" class="icon plus" onclick="showSubtaskInput()">
                                         <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
                                     </span>
                                 </div>
-
-
 
                                 <!-- Zustand 2 -->
                                 <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
@@ -180,7 +178,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="subtask-output"></div>
+                            <div id="subtask-output" class="output-subtask"></div>
 
                         </div>
 
@@ -258,9 +256,9 @@
             </a>
         </div>
     </aside>
-  
+
     <script src="./scripts/add_task.js"></script>
-        <script src="./scripts/add-task-templates.js"></script>
+    <script src="./scripts/add-task-templates.js"></script>
 </body>
 
 </html>
