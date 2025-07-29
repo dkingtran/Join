@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: auto;
   min-height: 100%;
   overflow-y: auto;
@@ -51,7 +52,7 @@ html, body {
 
 form {
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   width: 100%;
   max-width: 1000px;
   padding: 0 20px;
@@ -194,7 +195,7 @@ flex-direction: column;
 .dropdown-list {
   position: absolute;
   width: 310px;
-  
+
   top: 100%;
   left: 0;
   border: 1px solid #ccc;
@@ -271,13 +272,28 @@ flex-direction: column;
   padding-left: 10px;
 }
 
-.subtask-text-box{
+.subtask-text-box {
+  max-width: 450px;
   display: flex;
   justify-content: space-between;
+  padding-left: 20px;
+  transition: background-color 0.1s;
 }
-.subtask-entry{
+.subtask-text-box:hover {
+  background-color: #f0f0f0; /* oder was Helles */
+  border-radius:10px;
+}
+.subtask-text-box:hover .icon-edit-subtask-box {
+  display: flex ;
+}
+
+.subtask-text-box li{
   font-size: 14px;
   list-style-position: inside;
+}
+
+.delete-subtask-input{
+  padding: 0;
 }
 
 /* 2. Input field */
@@ -285,7 +301,7 @@ flex-direction: column;
   font-weight: bold;
 }
 
-.input-second{
+.input-second {
   width: 250px;
   border: none;
   border-color: white;
@@ -355,8 +371,8 @@ flex-direction: column;
   min-width: 200px;
 }
 
-.d-none{
-  display:none;
+.d-none {
+  display: none;
 }
 
 /* Media */
@@ -367,9 +383,11 @@ flex-direction: column;
     flex-direction: column;
     align-items: center;
   }
+
   .pipe {
     display: none;
   }
+
   .btn-clear-task-container {
     display: flex;
     justify-content: center;
@@ -388,12 +406,14 @@ flex-direction: column;
     flex-direction: column;
     flex-wrap: wrap;
   }
+
   .title-section {
     margin-top: 127px;
     margin-left: 260px;
     width: 100%;
     max-width: 377px;
   }
+
   .star-required {
     max-width: 480px;
   }
@@ -404,6 +424,7 @@ flex-direction: column;
     display: flex;
     align-items: flex-end;
   }
+
   .star-required {
     max-width: 300px;
   }
@@ -414,6 +435,7 @@ flex-direction: column;
   .title-section {
     margin-left: 190px;
   }
+
   .star-required {
     max-width: 230px;
   }
@@ -424,6 +446,7 @@ flex-direction: column;
     margin-left: 0px;
     margin-bottom: 10px;
   }
+
   .title-section h1 {
     font-size: 47px;
     min-width: 220px;
@@ -465,9 +488,10 @@ flex-direction: column;
     min-width: 96px;
   }
 
-  .btn-prio{
+  .btn-prio {
     width: 320px;
   }
+
   .btn-clear-task-container {
     margin-left: 0;
     display: flex;
@@ -475,13 +499,13 @@ flex-direction: column;
 }
 
 @media(max-width:368px) {
-.add-task-section{
-  padding:15px
-}
+  .add-task-section {
+    padding: 15px
+  }
 
-.subtask-input-box{
-  justify-content: flex-end;
-}
+  .subtask-input-box {
+    justify-content: flex-end;
+  }
 
   .max-w-440 {
     min-width: 280px;
@@ -499,13 +523,13 @@ flex-direction: column;
     min-width: 82px;
     height: 40px;
     padding: 0 4px
- 
   }
 
-  .btn-prio{
-    width:275px ;
-       gap: 5px;
+  .btn-prio {
+    width: 275px;
+    gap: 5px;
   }
+
   .input-title-task {
     height: 40px;
   }
@@ -517,12 +541,13 @@ flex-direction: column;
   .input-bundle {
     height: 48px;
   }
-  .input-second{
+
+  .input-second {
     width: 180px;
   }
 
- .section-task-under{
-          max-width: 440px;
-        min-width: 279px;
-}
+  .section-task-under {
+    max-width: 440px;
+    min-width: 279px;
+  }
 }
