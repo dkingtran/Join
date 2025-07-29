@@ -161,7 +161,7 @@
                                         <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
                                     </span>
                                 </div>
-                                <div id="subtask-output"></div>
+
 
 
                                 <!-- Zustand 2 -->
@@ -173,13 +173,14 @@
                                             <img class="icon-task" src="assets/img/icons/add_task/delete.svg"
                                                 alt="Cancel Icon">
                                         </span>
-                                        <span id="confirm-subtask" class="icon confirm">
+                                        <span id="confirm-subtask" class="icon confirm" onclick="confirmSubtaskInput()">
                                             <img class="icon-task" src="assets/img/icons/add_task/check_noir.svg"
                                                 alt="Confirm Icon">
                                         </span>
                                     </div>
                                 </div>
                             </div>
+                            <div id="subtask-output"></div>
 
                         </div>
 
@@ -257,8 +258,9 @@
             </a>
         </div>
     </aside>
-
+  
     <script src="./scripts/add_task.js"></script>
+        <script src="./scripts/add-task-templates.js"></script>
 </body>
 
 </html>

@@ -40,9 +40,9 @@ function activateButton(button, colorClass) {
 function setMediumIcon(active) {
     const icon = document.getElementById("medium-icon");
     if (active) {
-        icon.src = "./assets/img/icons/add_task/medium_vector.svg"; 
+        icon.src = "./assets/img/icons/add_task/medium_vector.svg";
     } else {
-        icon.src = "./assets/img/icons/add_task/prio_medium_orange.svg"; 
+        icon.src = "./assets/img/icons/add_task/prio_medium_orange.svg";
     }
 }
 
@@ -77,53 +77,67 @@ btnLow.addEventListener("click", function (event) {
 // Assigned
 
 function toggleDropdown() {
-  const list = document.getElementById("contactList");
-  const arrow = document.querySelector(".arrow");
-  list.style.display = list.style.display === "block" ? "none" : "block";
-  arrow.classList.toggle("rotate");
+    const list = document.getElementById("contactList");
+    const arrow = document.querySelector(".arrow");
+    list.style.display = list.style.display === "block" ? "none" : "block";
+    arrow.classList.toggle("rotate");
 }
 
 function setupCheckboxListener() {
-  const checkboxes = document.querySelectorAll(".contact-checkbox");
-  const input = document.getElementById("searchInput");
-  for (let i = 0; i < checkboxes.length; i++) {
-    const checkbox = checkboxes[i];
-    checkbox.addEventListener("change", () => {
-      const ausgewählt = [];
-      for (let j = 0; j < checkboxes.length; j++) {
-        if (checkboxes[j].checked) {
-          ausgewählt.push(checkboxes[j].dataset.name);
-        }
-      }
-      input.value = ausgewählt.join(", ");
-    });
-  }
+    const checkboxes = document.querySelectorAll(".contact-checkbox");
+    const input = document.getElementById("searchInput");
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        checkbox.addEventListener("change", () => {
+            const ausgewählt = [];
+            for (let j = 0; j < checkboxes.length; j++) {
+                if (checkboxes[j].checked) {
+                    ausgewählt.push(checkboxes[j].dataset.name);
+                }
+            }
+            input.value = ausgewählt.join(", ");
+        });
+    }
 }
 window.onload = () => {
-  setupCheckboxListener();
+    setupCheckboxListener();
 };
 
 // Subtask Input Field
 function showSubtaskInput() {
-  const initialBox = document.getElementById("subtask-initial");
-  const activeBox = document.getElementById("subtask-active");
+    const initialBox = document.getElementById("subtask-initial");
+    const activeBox = document.getElementById("subtask-active");
 
-  initialBox.classList.add("d-none");
-  activeBox.classList.remove("d-none");
+    initialBox.classList.add("d-none");
+    activeBox.classList.remove("d-none");
 }
 
 function cancelSubtaskInput() {
-  const initialBox = document.getElementById("subtask-initial");
-  const activeBox = document.getElementById("subtask-active");
-  const inputField = document.getElementById("subtask-input-second");
+    const initialBox = document.getElementById("subtask-initial");
+    const activeBox = document.getElementById("subtask-active");
+    const inputField = document.getElementById("subtask-input-second");
 
-  activeBox.classList.add("d-none");    // versteckt
-  initialBox.classList.remove("d-none"); // Zeigt
-  inputField.value = "";                
+    activeBox.classList.add("d-none");    // versteckt
+    initialBox.classList.remove("d-none"); // Zeigt
+    inputField.value = "";
+}
+
+function confirmSubtaskInput() {
+    const inputField = document.getElementById("subtask-input-second");
+    const outputBox = document.getElementById("subtask-output");
+    const inputText = inputField.value.trim();
+    if (inputText === "") {
+        alert("Bitte Schreibe was du SACK ");
+        return;
+    }
+    const subtaskHtml = getSubtaskTemplate(inputText);
+    outputBox.innerHTML += subtaskHtml;
+    inputField.value = "";
+    cancelSubtaskInput();
 }
 
 window.onload = () => {
-  setupCheckboxListener();
+    setupCheckboxListener();
 };
 
 
