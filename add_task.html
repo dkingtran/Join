@@ -71,13 +71,13 @@
                                 <p class="font-bundle">Description</p>
                                 <label for="description" class="sr-only"></label>
                                 <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
-                                    name="description" id="description" placeholder="Enter a Description"></textarea>
+                                    name="description" id="task-description" placeholder="Enter a Description"></textarea>
                             </div>
 
                             <div class="date-task">
                                 <p class="font-bundle du-date">Du date <span class="star">*</span></p>
                                 <label for="due-date" class="sr-only"></label>
-                                <input class="font-bundle date-input-task input-bundle max-w-440" id="due-date"
+                                <input class="font-bundle date-input-task input-bundle max-w-440" id="task-date"
                                     name="dueDate" type="date" placeholder="">
                             </div>
                         </div>
@@ -148,12 +148,13 @@
 
                             <div class="category-task">
                                 <p class="font-bundle">Category<span class="star">*</span></p>
-                                <select class="font-bundle input-bundle max-w-440" name="user" id="select-contacts">
+                                <select class="font-bundle input-bundle max-w-440" name="category" id="task-category">
                                     <option value="" disabled selected>Select task category</option>
                                     <option value="porsche">Technical Task</option>
                                     <option value="saab">User Story</option>
                                 </select>
                             </div>
+
                             <div class="subtask-container">
                                 <p class="font-bundle">Subtasks</p>
 

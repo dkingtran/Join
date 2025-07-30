@@ -1,16 +1,32 @@
+let title =[];
 let selectedPriority = "";
-let task =[];
+let task = [];
 let subtask = [];
+let assignedTo = [];
 
 const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
-function getTaskData(){
-    return{
+function getTaskData() {
+    return {
         title: document.getElementById('title-task').value.trim(),
-    }
+        description: document.getElementById('task-description').value.trim(),
+        "due-date": document.getElementById('task-date').value,
+        priority: selectedPriority,
+        "assigned-to": document.getElementById('assignedTo').value,
+        category: document.getElementById('task-category').value,
+        subtasks: subtask,
+        status: {
+            done: false,
+            feedback: false,
+            "in-progress": false,
+            "to-do": true
+        }
+    };
 }
+
+
 
 /**
  * Removes all active color classes from the priority buttons.
@@ -33,8 +49,8 @@ function resetButtons() {
 function activateButton(button, colorClass) {
     resetButtons();
     button.classList.add(colorClass);
-     selectedPriority = button.id;
-     console.log("Aktuelle Priorität:", selectedPriority);
+    selectedPriority = button.id;
+    console.log("Aktuelle Priorität:", selectedPriority);
     // Only switch the icon for the medium priority button
     if (button.id === "medium") {
         setMediumIcon(true);
@@ -109,6 +125,8 @@ function setupCheckboxListener() {
                 }
             }
             input.value = selected.join(", ");
+            assignedTo = selected; // 👈 merken!
+             console.log("Aktuell zugewiesen:", assignedTo);
         });
     }
 }
@@ -172,9 +190,20 @@ function finishEditSubtask(iconElement) {
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
+
+
+
+
+document.getElementById("form-element").addEventListener("submit", function(event) {
+    event.preventDefault(); // Verhindert Seite-Neuladen
+
+    const taskData = getTaskData(); // Holt die Eingaben
+    console.log("Titel ist:", taskData.title); // Logge Titel
+
+    // Du kannst hier später auch an Firebase senden
+});
+
+
 window.onload = () => {
     setupCheckboxListener();
 };
-
-
-
