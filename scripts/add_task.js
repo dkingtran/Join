@@ -120,7 +120,7 @@ function setupCheckboxListener() {
                 }
             }
             input.value = selected.join(", ");
-            assignedTo = selected; // 👈 merken!
+            assignedTo = selected; 
             console.log("Aktuell zugewiesen:", assignedTo);
         });
     }
@@ -148,7 +148,6 @@ function showSubtaskInput() {
     initialBox.classList.add("d-none");
     activeBox.classList.remove("d-none");
 }
-
 
 function cancelSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
@@ -202,25 +201,10 @@ function finishEditSubtask(iconElement) {
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
-/* async function postData(path="", data={}) {
-    let response = await fetch(BASE_URL + path +".json", {
-        method: "POST",
-        header: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
-}
- */
-
 document.getElementById("form-element").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Verhindert Seite-Neuladen
+    event.preventDefault(); 
     const taskData = getTaskData(); // Holt die Eingaben
-    console.log("Titel ist:", taskData.title); // Logge Titel
-    console.log("Task-Daten:", taskData);
-
-     await postData("tasks", taskData); // 🟢 Jetzt wird gesendet!
+    await postData("tasks", taskData); // Jetzt wird gesendet!
     console.log("Task erfolgreich gespeichert.");
 });
 
