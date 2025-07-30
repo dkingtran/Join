@@ -1,4 +1,4 @@
-let title =[];
+let title = [];
 let selectedPriority = "";
 let task = [];
 let subtask = [];
@@ -9,12 +9,13 @@ const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
 function getTaskData() {
+    
     return {
         title: document.getElementById('title-task').value.trim(),
         description: document.getElementById('task-description').value.trim(),
         "due-date": document.getElementById('task-date').value,
         priority: selectedPriority,
-        "assigned-to": document.getElementById('assignedTo').value,
+        "assigned-to": assignedTo,
         category: document.getElementById('task-category').value,
         subtasks: subtask,
         status: {
@@ -25,8 +26,6 @@ function getTaskData() {
         }
     };
 }
-
-
 
 /**
  * Removes all active color classes from the priority buttons.
@@ -126,7 +125,7 @@ function setupCheckboxListener() {
             }
             input.value = selected.join(", ");
             assignedTo = selected; // 👈 merken!
-             console.log("Aktuell zugewiesen:", assignedTo);
+            console.log("Aktuell zugewiesen:", assignedTo);
         });
     }
 }
@@ -158,6 +157,7 @@ function confirmSubtaskInput() {
     }
     const subtaskHtml = getSubtaskTemplate(inputText);
     outputBox.innerHTML += subtaskHtml;
+    subtask.push(inputText);
     inputField.value = "";
     cancelSubtaskInput();
 }
@@ -190,16 +190,12 @@ function finishEditSubtask(iconElement) {
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
-
-
-
-
-document.getElementById("form-element").addEventListener("submit", function(event) {
+document.getElementById("form-element").addEventListener("submit", function (event) {
     event.preventDefault(); // Verhindert Seite-Neuladen
 
     const taskData = getTaskData(); // Holt die Eingaben
     console.log("Titel ist:", taskData.title); // Logge Titel
-
+ console.log("Task-Daten:", taskData); 
     // Du kannst hier später auch an Firebase senden
 });
 
