@@ -9,7 +9,7 @@ const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
 function getTaskData() {
-    
+
     return {
         title: document.getElementById('title-task').value.trim(),
         description: document.getElementById('task-description').value.trim(),
@@ -190,14 +190,27 @@ function finishEditSubtask(iconElement) {
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
+
 document.getElementById("form-element").addEventListener("submit", function (event) {
     event.preventDefault(); // Verhindert Seite-Neuladen
-
     const taskData = getTaskData(); // Holt die Eingaben
     console.log("Titel ist:", taskData.title); // Logge Titel
- console.log("Task-Daten:", taskData); 
+    console.log("Task-Daten:", taskData);
     // Du kannst hier später auch an Firebase senden
 });
+
+
+async function sendToFirebase(task) {
+    const url = 'https://apifortest-766c5-default-rtdb.europe-west1.firebasedatabase.app/tasks.json';
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task)
+    });
+
+    return res.ok;
+}
+
 
 
 window.onload = () => {
