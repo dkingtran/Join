@@ -7,9 +7,9 @@ const btnLow = document.getElementById("low");
  * This ensures only one button is visibly active at any time.
  */
 function resetButtons() {
-    btnUrgent.classList.remove("active-green");
+    btnUrgent.classList.remove("active-red");
     btnMedium.classList.remove("active-yellow");
-    btnLow.classList.remove("active-red");
+    btnLow.classList.remove("active-green");
 }
 
 /**
@@ -23,7 +23,6 @@ function resetButtons() {
 function activateButton(button, colorClass) {
     resetButtons();
     button.classList.add(colorClass);
-
     // Only switch the icon for the medium priority button
     if (button.id === "medium") {
         setMediumIcon(true);
@@ -52,7 +51,7 @@ function setMediumIcon(active) {
  */
 btnUrgent.addEventListener("click", function (event) {
     event.preventDefault();
-    activateButton(btnUrgent, "active-green");
+    activateButton(btnUrgent, "active-red");
 });
 
 /**
@@ -70,7 +69,7 @@ btnMedium.addEventListener("click", function (event) {
  */
 btnLow.addEventListener("click", function (event) {
     event.preventDefault();
-    activateButton(btnLow, "active-red");
+    activateButton(btnLow, "active-green");
 });
 
 
@@ -89,23 +88,21 @@ function setupCheckboxListener() {
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         checkbox.addEventListener("change", () => {
-            const ausgewählt = [];
+            const selected = [];
             for (let j = 0; j < checkboxes.length; j++) {
                 if (checkboxes[j].checked) {
-                    ausgewählt.push(checkboxes[j].dataset.name);
+                    selected.push(checkboxes[j].dataset.name);
                 }
             }
-            input.value = ausgewählt.join(", ");
+            input.value = selected.join(", ");
         });
     }
 }
-
 
 // Subtask Input Field
 function showSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
     const activeBox = document.getElementById("subtask-active");
-
     initialBox.classList.add("d-none");
     activeBox.classList.remove("d-none");
 }
@@ -114,7 +111,6 @@ function cancelSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
     const activeBox = document.getElementById("subtask-active");
     const inputField = document.getElementById("subtask-input-second");
-
     activeBox.classList.add("d-none");    // versteckt
     initialBox.classList.remove("d-none"); // Zeigt
     inputField.value = "";
@@ -136,40 +132,31 @@ function confirmSubtaskInput() {
 
 /* closest sucht vom Bild (element wird von onclick übergeben) das div subtask-text-box und gelöscht  */
 function deleteSubtask(element) {
-  const subtaskBox = element.closest(".subtask-text-box");
-  if (subtaskBox) {
-    subtaskBox.remove();
-  }
+    const subtaskBox = element.closest(".subtask-text-box");
+    if (subtaskBox) {
+        subtaskBox.remove();
+    }
 }
 
-
-
 function startEditSubtask(element) {
-  const box = element.closest(".subtask-text-box");
-
-  const textElement = box.querySelector(".subtask-entry");
-  const text = textElement.innerText;
-  const iconBox = box.querySelector(".icon-edit-subtask-box");
-  iconBox.querySelector(".edit-icon").classList.add("d-none");         // Stift aus
-  iconBox.querySelector(".confirm-icon").classList.remove("d-none");   // OK an
-  textElement.outerHTML = changeDivtoInputTemplate(text);
+    const box = element.closest(".subtask-text-box");
+    const textElement = box.querySelector(".subtask-entry");
+    const text = textElement.innerText;
+    const iconBox = box.querySelector(".icon-edit-subtask-box");
+    iconBox.querySelector(".edit-icon").classList.add("d-none");         // Stift aus
+    iconBox.querySelector(".confirm-icon").classList.remove("d-none");   // OK an
+    textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
 function finishEditSubtask(iconElement) {
-  const box = iconElement.closest(".subtask-text-box");
-  const inputElement = box.querySelector("input.subtask-entry");
-  const text = inputElement.value.trim();
-
-  inputElement.outerHTML = getReturnToDivTemplate(text);
-
-box.querySelector(".edit-icon")?.classList.remove("d-none");
-box.querySelector(".confirm-icon")?.classList.add("d-none");
-box.querySelector(".delete-icon")?.classList.remove("d-none");
-
+    const box = iconElement.closest(".subtask-text-box");
+    const inputElement = box.querySelector("input.subtask-entry");
+    const text = inputElement.value.trim();
+    inputElement.outerHTML = getReturnToDivTemplate(text);
+    box.querySelector(".edit-icon")?.classList.remove("d-none");
+    box.querySelector(".confirm-icon")?.classList.add("d-none");
+    box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
-
-
-
 
 window.onload = () => {
     setupCheckboxListener();
