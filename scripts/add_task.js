@@ -1,3 +1,7 @@
+let selectedPriority = "";
+let task =[];
+let subtask = [];
+
 const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
@@ -23,6 +27,8 @@ function resetButtons() {
 function activateButton(button, colorClass) {
     resetButtons();
     button.classList.add(colorClass);
+     selectedPriority = button.id;
+     console.log("Aktuelle Priorität:", selectedPriority);
     // Only switch the icon for the medium priority button
     if (button.id === "medium") {
         setMediumIcon(true);
@@ -47,7 +53,7 @@ function setMediumIcon(active) {
 
 /**
  * Handles click on the "Urgent" button.
- * Prevents form submission and applies the green style.
+ * Prevents form submission and applies the red style.
  */
 btnUrgent.addEventListener("click", function (event) {
     event.preventDefault();
@@ -65,12 +71,14 @@ btnMedium.addEventListener("click", function (event) {
 
 /**
  * Handles click on the "Low" button.
- * Prevents form submission and applies the red style.
+ * Prevents form submission and applies the grenn style.
  */
 btnLow.addEventListener("click", function (event) {
     event.preventDefault();
     activateButton(btnLow, "active-green");
 });
+
+
 
 
 // Assigned
@@ -161,5 +169,6 @@ function finishEditSubtask(iconElement) {
 window.onload = () => {
     setupCheckboxListener();
 };
+
 
 
