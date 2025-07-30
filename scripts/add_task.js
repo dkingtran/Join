@@ -127,17 +127,17 @@ function setupCheckboxListener() {
 }
 
 async function loadContactsIntoDropdown() {
-    const data = await loadData("contacts"); // Holt das komplette Kontakte-Array
+    const data = await loadData("contacts");
     const list = document.getElementById("contactList");
-    list.innerHTML = ""; // Vorherige Inhalte leeren
-    for (let key in data) {
-        const contact = data[key];
+    list.innerHTML = "";
+    const contacts = Object.values(data);
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
         const name = contact.name;
         const initials = name["first-name"][0] + name["last-name"][0];
-
-        list.innerHTML += getAssignedNameTemplate(initials,name);
+        list.innerHTML += getAssignedNameTemplate(initials, name);
     }
-    setupCheckboxListener(); // Danach Hakenfunktion wieder aktivieren
+    setupCheckboxListener();
 }
 
 

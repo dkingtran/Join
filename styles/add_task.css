@@ -228,6 +228,7 @@ form {
   color: white;
   font-weight: bold;
   margin-right: 10px;
+  border:3px solid rgb(248, 243, 243);
 }
 
 .contact-name {
