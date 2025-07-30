@@ -747,10 +747,15 @@ input:focus {
 
 @media (max-width: 1300px) {
 
+    .contact-sidebar {
+        position: fixed;
+        width: 420px;
+    }
+
     .contacts-section {
         position: absolute;
         top: 206px;
-        left: 720px;
+        left: 700px;
         z-index: 20;
     }
     
@@ -799,8 +804,8 @@ input:focus {
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
-        height: 66vh;
-        width: 40vw;
+        height: 70vh;
+        width: 600px;
         gap: 0;
     }
 
@@ -985,7 +990,6 @@ input:focus {
         width: 116px;
         height: 100px;
         padding: 10px 10px;
-        /* display: flex; entfernt, damit Transition funktioniert */
         flex-direction: column;
         justify-content: space-around;
         z-index: 3000;
@@ -996,6 +1000,25 @@ input:focus {
         transition: right 0.125s ease-in-out, opacity 0.125s ease-in-out, visibility 0.125s ease-in-out;
     }
 
+    .form-container.show {
+        height: 80vh;
+        width: 95vw;
+        z-index: 3500;
+    }
+
+    .form-header {
+        width: 100%;
+    }
+
+    .form-container.show .contact-avatar-clicked {
+        position: absolute;
+        top: calc(50% - 110px);
+        left: calc(50% - 60px);
+    }
+
+    .input-wrapper {
+        margin-bottom: 16px;
+    }
 
     .mobile-edit-dropdown.show {
         right: 8px;
@@ -1115,6 +1138,24 @@ input:focus {
 }
 
 @media (max-width: 490px) {
+
+    .form-container.show {
+        height: 75vh;
+    }
+
+    .form-container.show .contact-avatar-clicked {
+        position: absolute;
+        top: calc(50% - 68px);
+        left: calc(50% - 40px);
+        min-width: 80px !important;
+        min-height: 80px !important;
+        font-size: 32px;
+    }
+
+    .form-wrapper {
+        min-width: 280px;
+    }
+
     .contact-sidebar {
         position: fixed;
         top: 80px;
@@ -1135,4 +1176,14 @@ input:focus {
         max-width: 280px;
     }
 
+    .contact-name-clicked {
+        width: 320px;
+    }
+}
+
+@media (max-width: 410px) {
+
+    .contact-name-clicked {
+        width: 200px;
+    }
 }
