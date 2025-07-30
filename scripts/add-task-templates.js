@@ -1,7 +1,7 @@
 function getSubtaskTemplate(text) {
 return `
  <div class="subtask-text-box">
-  <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">${text}</div>
+  <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
     <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon" onclick="startEditSubtask(this)">
     <svg width="2" height="24" viewBox="0 0 2 24" fill="none" xmlns="http://www.w3.org/2000/svg">

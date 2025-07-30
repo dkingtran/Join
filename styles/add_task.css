@@ -254,6 +254,7 @@ form {
 
 .subtask-input-box input {
   border: none;
+  height: auto;
   color: black;
 }
 
@@ -272,9 +273,16 @@ form {
   cursor: pointer;
   padding-left: 10px;
 }
+.output-subtask{
+ max-width: 440px;
+  max-height: 70px;
+  min-width: 320px;
+  overflow: auto;
+}
 
 .subtask-text-box {
   max-width: 450px;
+  min-width: 320px;
   display: flex;
   justify-content: space-between;
   padding-left: 20px;
@@ -290,7 +298,6 @@ form {
 .delete-subtask-input{
   padding: 0;
 }
-
 
 /* 2. Input field */
 .plus {
@@ -502,7 +509,7 @@ form {
    .subtask-entry{
     width: 100%;
     max-width: 440px;
-    min-width: 240px;
+    min-width: 230px;
   }
 }
 

@@ -142,16 +142,7 @@ function deleteSubtask(element) {
   }
 }
 
-function startEditSubtask(element) {
-  const text = element.innerText;
 
-  element.outerHTML = `
-    <input class="subtask-entry font-bundle"
-           type="text"
-           value="${text}"
-           onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
-  `;
-}
 
 function startEditSubtask(element) {
   const box = element.closest(".subtask-text-box");
@@ -170,9 +161,6 @@ function finishEditSubtask(iconElement) {
   const text = inputElement.value.trim();
 
   inputElement.outerHTML = getReturnToDivTemplate(text);
- 
-
-  box.classList.remove("subtask-editing");
 
 box.querySelector(".edit-icon")?.classList.remove("d-none");
 box.querySelector(".confirm-icon")?.classList.add("d-none");

@@ -158,13 +158,15 @@
                                 <p class="font-bundle">Subtasks</p>
 
                                 <!-- Zustand 1 -->
-                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440">
+                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440"
+                                    onclick="showSubtaskInput()">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
-                                        placeholder="Add new subtask" disabled>
-                                    <span id="open-subtask" class="icon plus" onclick="showSubtaskInput()">
+                                        placeholder="Add new subtask" readonly>
+                                    <span id="open-subtask" class="icon plus">
                                         <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
                                     </span>
                                 </div>
+
 
                                 <!-- Zustand 2 -->
                                 <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
