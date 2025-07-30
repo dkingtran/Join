@@ -56,7 +56,7 @@
                 <div class="title-section display-standard">
                     <h1>Add Task</h1>
                 </div>
-                <form id ="form-element" class="w-full">
+                <form id="form-element" class="w-full">
                     <div class="add-task-container w-full">
                         <div class="section-task-left w-full">
 
@@ -71,7 +71,8 @@
                                 <p class="font-bundle">Description</p>
                                 <label for="description" class="sr-only"></label>
                                 <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
-                                    name="description" id="task-description" placeholder="Enter a Description"></textarea>
+                                    name="description" id="task-description"
+                                    placeholder="Enter a Description"></textarea>
                             </div>
 
                             <div class="date-task">
@@ -121,27 +122,7 @@
                                             <input type="checkbox" class="contact-checkbox" data-name="Andreas Kissner"
                                                 data-initials="AK">
                                         </div>
-                                        <div class="contact-item">
-                                            <span class="avatar display-standard"
-                                                style="background-color: #8BC34A;">AB</span>
-                                            <span class="contact-name">Anton Bauerma</span>
-                                            <input type="checkbox" class="contact-checkbox" data-name="Anton Bauerma"
-                                                data-initials="AB">
-                                        </div>
-                                        <div class="contact-item">
-                                            <span class="avatar display-standard"
-                                                style="background-color: #2196F3;">CS</span>
-                                            <span class="contact-name">Clara Schmidt</span>
-                                            <input type="checkbox" class="contact-checkbox" data-name="Clara Schmidt"
-                                                data-initials="CS">
-                                        </div>
-                                        <div class="contact-item">
-                                            <span class="avatar display-standard"
-                                                style="background-color: #FF9800;">EM</span>
-                                            <span class="contact-name">Elena Meier</span>
-                                            <input type="checkbox" class="contact-checkbox" data-name="Elena Meier"
-                                                data-initials="EM">
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +189,8 @@
                                 </svg>
                             </button>
 
-                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16" type="submit">Create
+                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16"
+                                type="submit">Create
                                 Task<img class="icon-task" src="assets/img/icons/add_task/check.svg"
                                     alt="Ok Icon"></button>
                         </div>
@@ -264,7 +246,7 @@
         </div>
     </aside>
 
-
+    <script src="./scripts/firebase.js"></script>
     <script src="./scripts/add-task-templates.js"></script>
     <script src="./scripts/add_task.js"></script>
 
