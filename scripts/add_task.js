@@ -6,6 +6,12 @@ const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
+function getTaskData(){
+    return{
+        title: document.getElementById('title-task').value.trim(),
+    }
+}
+
 /**
  * Removes all active color classes from the priority buttons.
  * This ensures only one button is visibly active at any time.
