@@ -99,11 +99,7 @@ btnLow.addEventListener("click", function (event) {
     activateButton(btnLow, "active-green");
 });
 
-
-
-
 // Assigned
-
 function toggleDropdown() {
     const list = document.getElementById("contactList");
     const arrow = document.querySelector(".arrow");
@@ -189,7 +185,6 @@ function finishEditSubtask(iconElement) {
     box.querySelector(".confirm-icon")?.classList.add("d-none");
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
-
 
 document.getElementById("form-element").addEventListener("submit", function (event) {
     event.preventDefault(); // Verhindert Seite-Neuladen
