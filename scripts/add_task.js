@@ -126,6 +126,21 @@ function setupCheckboxListener() {
     }
 }
 
+async function loadContactsIntoDropdown() {
+    const data = await loadData("contacts"); // Holt das komplette Kontakte-Array
+    const list = document.getElementById("contactList");
+    list.innerHTML = ""; // Vorherige Inhalte leeren
+    for (let key in data) {
+        const contact = data[key];
+        const name = contact.name;
+        const initials = name["first-name"][0] + name["last-name"][0];
+
+        list.innerHTML += getAssignedNameTemplate(initials,name);
+    }
+    setupCheckboxListener(); // Danach Hakenfunktion wieder aktivieren
+}
+
+
 // Subtask Input Field
 function showSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
@@ -133,6 +148,7 @@ function showSubtaskInput() {
     initialBox.classList.add("d-none");
     activeBox.classList.remove("d-none");
 }
+
 
 function cancelSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
@@ -196,4 +212,5 @@ document.getElementById("form-element").addEventListener("submit", function (eve
 
 window.onload = () => {
     setupCheckboxListener();
+    loadContactsIntoDropdown();
 };
