@@ -9,7 +9,6 @@ const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
 function getTaskData() {
-
     return {
         title: document.getElementById('title-task').value.trim(),
         description: document.getElementById('task-description').value.trim(),
@@ -140,7 +139,6 @@ async function loadContactsIntoDropdown() {
     setupCheckboxListener();
 }
 
-
 // Subtask Input Field
 function showSubtaskInput() {
     const initialBox = document.getElementById("subtask-initial");
@@ -203,7 +201,7 @@ function finishEditSubtask(iconElement) {
 
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault(); 
-    const taskData = getTaskData(); // Holt die Eingaben
+    const taskData = getTaskData(); 
     await postData("tasks", taskData); // Jetzt wird gesendet!
     console.log("Task erfolgreich gespeichert.");
 });
