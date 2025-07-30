@@ -199,20 +199,6 @@ document.getElementById("form-element").addEventListener("submit", function (eve
     // Du kannst hier später auch an Firebase senden
 });
 
-
-async function sendToFirebase(task) {
-    const url = 'https://apifortest-766c5-default-rtdb.europe-west1.firebasedatabase.app/tasks.json';
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(task)
-    });
-
-    return res.ok;
-}
-
-
-
 window.onload = () => {
     setupCheckboxListener();
 };
