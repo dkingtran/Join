@@ -1,5 +1,5 @@
 // Load tasks from Firebase and return them as an array
-async function loadTasks() {
+/*async function loadTasks() {
     const data = await loadData("tasks");
 
     if (data) {
@@ -8,6 +8,20 @@ async function loadTasks() {
     else {
         return [];
     }
+}*/
+
+async function loadTasks() {
+    const data = await loadData("tasks");
+
+    if (!data) return [];
+
+    if (Array.isArray(data)) {
+        // Entfernt leere Einträge (z. B. null)
+        return data.filter(task => task !== null && typeof task === "object");
+    }
+
+    // Wenn es ein Objekt ist (korrekte Firebase-Struktur)
+    return Object.values(data);
 }
 
 // Determine the status of a single task using switch
@@ -72,6 +86,7 @@ function updateDOM(id, value) {
 // Load task summary and update all related counters and values in the DOM
 async function updateSummary() {
     const tasks = await loadTasks();
+    console.log("Geladene Tasks:", tasks);
     updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
     updateDOM("done-counter", countTasksByStatus(tasks, "done"));
     updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
