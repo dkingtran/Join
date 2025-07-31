@@ -1,67 +1,59 @@
 
-const emailRef = document.getElementById('email');
-const passwordRef = document.getElementById('password');
+
 const passwordLockIcon = document.getElementById('lock-password');
 const passwordVisibilityOffIcon = document.getElementById('visibility-off-password');
 const passwordVisibilityOnIcon = document.getElementById('visibility-on-password');
 const passwordWrapperRef = document.getElementById('password-wrapper');
 const errorMessageRef = document.getElementById('error-msg');
-const loginForm = document.getElementById('login-form');
 
 
 /**
- * eventlistener on focus password-input 
- * changes lock-icon to the visibility-off-icon
+ * Eventlistener on focus password-input.
+ * Changes lock-icon to the visibility-off-icon.
  */
 passwordRef.addEventListener("focus", () => {
+  if (passwordVisibilityOnIcon.classList.contains('d-none')) {
     passwordLockIcon.classList.add('d-none');
     passwordVisibilityOffIcon.classList.remove('d-none');
+  }
 });
 
 
 /**
- * eventlistener on password-input-wrapper
- * stops propagation from input-wrapper to login-form
+ * Click eventlistener on document.
+ * Resets password visibility when clicking outside of input.
  */
-passwordWrapperRef.addEventListener("click", (event) => {
-    event.stopPropagation();
-})
-
-
-/**
- * eventlistener click on login-form
- * changes password-input icon mach to lock
- * makes password not visible
- */
-loginForm.addEventListener("click", () => {
+document.addEventListener("click", event => {
+  if (!passwordWrapperRef.contains(event.target)) {
     passwordLockIcon.classList.remove('d-none');
     passwordRef.type = "password";
     passwordVisibilityOffIcon.classList.add('d-none');
     passwordVisibilityOnIcon.classList.add('d-none');
+  }
 });
 
 
 /**
- * eventlistener click on visibility-off-icon
- * changes icon to visibility-on-icon
- * makes password visible
+ * Eventlistener click on visibility-off-icon.
+ * Changes icon to visibility-on-icon.
+ * Makes password visible.
  */
 passwordVisibilityOffIcon.addEventListener("click", () => {
-    passwordRef.type = "text";
-    passwordVisibilityOffIcon.classList.add('d-none');
-    passwordVisibilityOnIcon.classList.remove('d-none');
+  passwordRef.type = "text";
+  passwordVisibilityOffIcon.classList.add('d-none');
+  passwordVisibilityOnIcon.classList.remove('d-none');
 });
 
 
 /**
- * eventlistener click on visibility-oon-icon
- * changes icon to visibility-off-icon
- * makes password not visible
+ * Eventlistener click on visibility-oon-icon.
+ * Changes icon to visibility-off-icon.
+ * Makes password not visible.
  */
 passwordVisibilityOnIcon.addEventListener("click", () => {
-    passwordRef.type = "password";
-    passwordVisibilityOnIcon.classList.add('d-none');
-    passwordVisibilityOffIcon.classList.remove('d-none');
+  passwordRef.type = "password";
+  passwordVisibilityOnIcon.classList.add('d-none');
+  passwordVisibilityOffIcon.classList.remove('d-none');
 });
 
 
