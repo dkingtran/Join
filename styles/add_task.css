@@ -195,13 +195,12 @@ form {
 
 .dropdown-list {
   position: absolute;
-  width: 310px;
-
+  max-width: 440px;
+  min-width: 280px;
   top: 100%;
   left: 0;
-  border: 1px solid #ccc;
   border-top: none;
-  background-color: #fff;
+  background-color: white;
   z-index: 10;
   display: none;
   max-height: 200px;
@@ -213,12 +212,12 @@ form {
   align-items: center;
   justify-content: space-between;
   padding: 8px 10px;
-  border-bottom: 1px solid #f0f0f0;
+border-radius: 10px;
   cursor: pointer;
 }
 
 .contact-item:hover {
-  background-color: #f9f9f9;
+  background-color: #605c5c61;
 }
 
 .avatar {
