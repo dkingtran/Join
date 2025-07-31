@@ -789,10 +789,8 @@ input:focus {
 
     .form-container.show .contact-avatar-clicked {
         position: absolute;
-        top: calc(50% - 104px);
-        /* 100px / 2 */
+        top: calc(50% - 110px);
         left: calc(50% - 60px);
-        /* 100px / 2 */
     }
 
     .contact-details-top {
@@ -804,7 +802,7 @@ input:focus {
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
-        height: 70vh;
+        height: 80vh;
         width: 600px;
         gap: 0;
     }
@@ -842,8 +840,17 @@ input:focus {
 
     .form-content {
         flex: 55%;
-        padding-top: 24px;
+        padding-top: 40px;
         margin: 0;
+    }
+
+    .form-wrapper {
+        padding: 0;
+        min-width: 364px;
+    }
+
+    .input-wrapper {
+        margin-bottom: 24px;
     }
 
     .close-btn {
@@ -871,10 +878,7 @@ input:focus {
         display: none;
     }
 
-    .form-wrapper {
-        padding: 0;
-        min-width: 364px;
-    }
+
 
     .button-group {
         display: flex;
@@ -888,12 +892,12 @@ input:focus {
     .form-header {
         width: 100%;
         height: 32vh;
-        width: 60vw;
+        width: 600px;
     }
 
     .form-container.show {
-        height: 70vh;
-        width: 60vw;
+        height: 80vh;
+        width: 600px;
     }
 
     .contact-sidebar {
@@ -1012,12 +1016,12 @@ input:focus {
 
     .form-container.show .contact-avatar-clicked {
         position: absolute;
-        top: calc(50% - 110px);
+        top: calc(50% - 98px);
         left: calc(50% - 60px);
     }
 
     .input-wrapper {
-        margin-bottom: 16px;
+        margin-bottom: 24px;
     }
 
     .mobile-edit-dropdown.show {
@@ -1145,11 +1149,16 @@ input:focus {
 
     .form-container.show .contact-avatar-clicked {
         position: absolute;
-        top: calc(50% - 68px);
-        left: calc(50% - 40px);
+        top: calc(50% - 84px);
+        left: calc(50% - 48px);
         min-width: 80px !important;
         min-height: 80px !important;
         font-size: 32px;
+    }
+
+    .contact-avatar-clicked img {
+        width: 32px;
+        height: 32px;
     }
 
     .form-wrapper {
@@ -1164,13 +1173,6 @@ input:focus {
         box-sizing: border-box;
     }
 
-    .contact-avatar-clicked {
-        width: 80px;
-        min-width: 80px;
-        height: 80px;
-        min-height: 80px;
-        font-size: 24px;
-    }
 
     .contact-list-clicked.active {
         max-width: 280px;
@@ -1185,5 +1187,60 @@ input:focus {
 
     .contact-name-clicked {
         width: 200px;
+    }
+
+    .form-container.show .contact-avatar-clicked {
+        position: absolute;
+        top: calc(50% - 76px);
+        left: calc(50% - 40px);
+    }
+
+    .contact-avatar-clicked {
+        width: 80px;
+        min-width: 80px !important;
+        height: 80px;
+        min-height: 80px !important;
+        font-size: 24px;
+    }
+}
+
+@media (max-height: 760px) {
+
+    .form-container.show {
+        height: 90vh;
+    }
+
+    .form-container.show .contact-avatar-clicked {
+        position: absolute;
+        top: calc(50% - 72px);
+        left: calc(50% - 40px);
+        font-size: 28px;
+    }
+
+    .contact-avatar-clicked {
+        width: 80px;
+        min-width: 80px !important;
+        height: 80px;
+        min-height: 80px !important;
+    }
+
+    .form-header {
+        padding: 46px 36px;
+    }
+
+    .form-title h1 {
+        font-size: 47px;
+    }
+
+    .form-title p {
+        font-size: 20px;
+    }
+
+    .input-wrapper {
+        margin-bottom: 16px;
+    }
+
+    .button-group {
+        margin-top: 16px;
     }
 }

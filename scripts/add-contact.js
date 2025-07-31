@@ -589,8 +589,21 @@ function showEditForm(idx) {
  * Handles the edit button click for a contact item.
  * @param {number} idx - Index of the contact to edit.
  */
-function editContact(idx) {
-    showEditForm(idx);
+function editContact(sortedIdx) {
+    // Find the correct contact in the original contacts array
+    const sorted = getSortedContacts();
+    const contact = sorted[sortedIdx];
+    // Find the index in the original contacts array
+    const originalIdx = contacts.findIndex(c => {
+        // Compare by all fields to avoid duplicate name issues
+        return c.firstName === contact.firstName &&
+               c.lastName === contact.lastName &&
+               c.email === contact.email &&
+               c.phone === contact.phone;
+    });
+    if (originalIdx !== -1) {
+        showEditForm(originalIdx);
+    }
 }
 
 /**
