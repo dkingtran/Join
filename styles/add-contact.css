@@ -895,10 +895,25 @@ input:focus {
         width: 600px;
     }
 
-    .form-container.show {
-        height: 80vh;
-        width: 600px;
-    }
+.form-container {
+    display: flex !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 200%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 1000;
+}
+
+.form-container.show {
+    display: flex !important;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    height: 80vh;
+    width: 600px;
+}
 
     .contact-sidebar {
         position: fixed;
@@ -979,6 +994,7 @@ input:focus {
         height: 0;
         width: 0;
     }
+
 }
 
 @media (max-width: 780px) {
@@ -1004,7 +1020,21 @@ input:focus {
         transition: right 0.125s ease-in-out, opacity 0.125s ease-in-out, visibility 0.125s ease-in-out;
     }
 
+    .form-container {
+        display: flex !important;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 200%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        z-index: 3500;
+    }
     .form-container.show {
+        display: flex !important;
+        transform: translate(-50%, -50%);
+        opacity: 1;
         height: 80vh;
         width: 95vw;
         z-index: 3500;
@@ -1055,6 +1085,10 @@ input:focus {
         width: calc(100vw - 0px);
         height: calc(100vh - 128px);
         z-index: 100;
+    }
+
+    .contact-divider {
+        width: 90vw;
     }
 
     .contacts-header h1 {
@@ -1117,9 +1151,6 @@ input:focus {
         background: #091931 !important;
         color: #fff !important;
     }
-    .form-container {
-        display: none !important;
-    }
     .contact-sidebar {
         position: fixed;
         width: 100%;
@@ -1128,7 +1159,7 @@ input:focus {
         box-sizing: border-box;
     }
     .contact-group-letter {
-        margin-left: calc(50% - 144px); 
+        margin-left: calc(50% - 144px);
     }
     /* Add-Contact-Button mobile: bleibt wie gehabt, wird aber bei Detailsansicht versteckt */
     .add-contact-btn-mobile.hide-mobile-edit {
@@ -1143,8 +1174,24 @@ input:focus {
 
 @media (max-width: 490px) {
 
+    .form-container {
+        display: flex !important;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 200%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        z-index: 4000;
+    }
     .form-container.show {
+        display: flex !important;
+        transform: translate(-50%, -50%);
+        opacity: 1;
         height: 75vh;
+        width: 95vw;
+        z-index: 4000;
     }
 
     .form-container.show .contact-avatar-clicked {
@@ -1170,9 +1217,9 @@ input:focus {
         top: 80px;
         width: 100%;
         padding: 16px;
+        padding-bottom: 80px;
         box-sizing: border-box;
     }
-
 
     .contact-list-clicked.active {
         max-width: 280px;
@@ -1185,10 +1232,30 @@ input:focus {
 
 @media (max-width: 410px) {
 
+
     .contact-name-clicked {
         width: 200px;
     }
 
+    .form-container {
+        display: flex !important;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 200%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.125s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        z-index: 4500;
+    }
+    .form-container.show {
+        display: flex !important;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        height: 70vh;
+        width: 98vw;
+        z-index: 4500;
+    }
     .form-container.show .contact-avatar-clicked {
         position: absolute;
         top: calc(50% - 76px);
@@ -1202,6 +1269,19 @@ input:focus {
         min-height: 80px !important;
         font-size: 24px;
     }
+
+    .contact-divider {
+        width: 90vw !important;
+    }
+
+    .contact-group-letter {
+        margin-left: 8px;
+    }
+
+    .contact-item {
+        width: 100%;
+    }
+
 }
 
 @media (max-height: 760px) {
