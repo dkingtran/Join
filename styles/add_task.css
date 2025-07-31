@@ -1,9 +1,8 @@
-
 html,
 body {
   height: auto;
   min-height: 100%;
-/*   overflow-y: auto; */
+  /*   overflow-y: auto; */
   margin: 0;
   padding: 0;
 }
@@ -28,7 +27,7 @@ body {
 }
 
 .title-section {
-  margin-top: 127px;
+  margin-top: 190px;
   margin-left: 20px;
   width: 100%;
   max-width: 1200px;
@@ -212,7 +211,7 @@ form {
   align-items: center;
   justify-content: space-between;
   padding: 8px 10px;
-border-radius: 10px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -227,7 +226,7 @@ border-radius: 10px;
   color: white;
   font-weight: bold;
   margin-right: 10px;
-  border:3px solid rgb(248, 243, 243);
+  border: 3px solid rgb(248, 243, 243);
 }
 
 .contact-name {
@@ -273,8 +272,9 @@ border-radius: 10px;
   cursor: pointer;
   padding-left: 10px;
 }
-.output-subtask{
- max-width: 440px;
+
+.output-subtask {
+  max-width: 440px;
   max-height: 70px;
   min-width: 320px;
   overflow: auto;
@@ -288,14 +288,18 @@ border-radius: 10px;
   padding-left: 20px;
   transition: background-color 0.1s;
 }
+
 .subtask-text-box:hover {
-  background-color: #f0f0f0; /* oder was Helles */
-  border-radius:10px;
+  background-color: #f0f0f0;
+  /* oder was Helles */
+  border-radius: 10px;
 }
+
 .subtask-text-box:hover .icon-edit-subtask-box {
-   display: flex !important;
+  display: flex !important;
 }
-.delete-subtask-input{
+
+.delete-subtask-input {
   padding: 0;
 }
 
@@ -308,8 +312,8 @@ border-radius: 10px;
   width: 250px;
   border: none;
   outline: none;
-  background: transparent; 
-  box-shadow: none; 
+  background: transparent;
+  box-shadow: none;
 }
 
 .btn-clear-task-container {
@@ -473,7 +477,8 @@ border-radius: 10px;
   .section-task-under {
     align-items: flex-start;
   }
-  .subtask-entry{
+
+  .subtask-entry {
     width: 100%;
     max-width: 440px;
     min-width: 360px;
@@ -504,9 +509,9 @@ border-radius: 10px;
   .btn-clear-task-container {
     margin-left: 0;
     display: flex;
-  }  
+  }
 
-   .subtask-entry{
+  .subtask-entry {
     width: 100%;
     max-width: 440px;
     min-width: 230px;
@@ -566,7 +571,7 @@ border-radius: 10px;
     min-width: 279px;
   }
 
-   .subtask-entry{
+  .subtask-entry {
     width: 100%;
     max-width: 440px;
     min-width: 200px;
