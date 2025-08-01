@@ -36,7 +36,7 @@ function addToContacts() {
 
 
 /**
- * * Cancels the form by clearing the input fields.
+ * Cancels the form by clearing the input fields.
  */
 function cancelForm() {
     document.getElementById('contactName').value = '';
@@ -44,3 +44,14 @@ function cancelForm() {
     document.getElementById('contactPhone').value = '';
 }
 
+
+/**
+ * Returns a random color from the global `colors` array.
+ * The color is selected by generating a random index between 0 and 14.
+ *
+ * @returns {*} A randomly selected color from the `colors` array.
+ */
+function getRandomColor() {
+   let colorIndex = Math.floor(Math.random() * 15);
+   return colors[colorIndex];
+}

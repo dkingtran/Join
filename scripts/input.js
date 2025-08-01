@@ -43,10 +43,11 @@ function emailCheck(email) {
 /**
  * Checks if the provided password is not an empty string after trimming whitespace.
  * @param {string} password - The password string to check.
- * @returns {boolean} Returns false if the trimmed password is an empty string, otherwise undefined.
+ * @returns {boolean} Returns false if the trimmed password is an empty string, otherwise returns true.
  */
 function passwordCheck(password) {
     if (removeSpaces(password) == "") return false;
+    else return true;
 }
 
 
@@ -64,4 +65,21 @@ function passwordConCheck(password, passwordCon) {
 
 function removeSpaces(string) {
     return string.replace(/\s+/gm, '');
+}
+
+
+function generateNameObject(name) {
+    let parts = name.trim().split(/\s+/);
+    parts = parts.map(word => capitalizeFirstLetter(word))
+    let lastName = parts.pop();
+    let firstName = parts.join(' ');
+    return {
+        "first-name": firstName,
+        "last-name": lastName
+    };
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
