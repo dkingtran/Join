@@ -1,3 +1,7 @@
+
+.black-color{
+  color: black;
+}
 .w-full {
   width: 100%;
 }
@@ -8,6 +12,7 @@
 }
 
 .border-radius-10px {
+  
   border-radius: 10px;
 }
 
@@ -43,7 +48,8 @@
   width: 100%;
   max-width: 440px;
   height: 48px;
-  border: 1px solid black;
+  color: #d1d1d1;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   margin: 10px 0;
   padding: 12px 21px;

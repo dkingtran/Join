@@ -1,7 +1,8 @@
-html, body {
+html,
+body {
   height: auto;
   min-height: 100%;
-  overflow-y: auto;
+  /*   overflow-y: auto; */
   margin: 0;
   padding: 0;
 }
@@ -26,7 +27,7 @@ html, body {
 }
 
 .title-section {
-  margin-top: 127px;
+  margin-top: 190px;
   margin-left: 20px;
   width: 100%;
   max-width: 1200px;
@@ -51,7 +52,7 @@ html, body {
 
 form {
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   width: 100%;
   max-width: 1000px;
   padding: 0 20px;
@@ -82,6 +83,7 @@ flex-direction: column;
 }
 
 .textarea-task {
+  border-color: #d1d1d1;
   height: 120px;
   padding: 18px 21px;
   margin: 10px 0 10px;
@@ -115,6 +117,7 @@ flex-direction: column;
   min-width: 136px;
   height: 56px;
   padding: 16px 10px;
+  border-color: #d1d1d1;
   background-color: white;
   cursor: pointer;
 }
@@ -166,40 +169,46 @@ flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border: 1px solid black;
+  border-color: #d1d1d1;
   padding: 23px;
   cursor: pointer;
   background: white;
   height: 48px;
   margin: 10px 0;
+  transition: border-color 0.1s;
+}
+
+.dropdown-input:hover {
+  border-color: rgb(81, 78, 78);
 }
 
 .input-field {
+  color: black;
   border: none;
-  color: black;
-}
-
-.input-field::placeholder {
-  color: black;
 }
 
 .arrow {
   transition: transform 0.3s ease;
   margin-left: 8px;
+  color: #2A3647;
+  display: inline-block;
 }
+
 
 .arrow.rotate {
   transform: rotate(180deg);
+  transition: transform 0.2s ease;
 }
+
 
 .dropdown-list {
   position: absolute;
-  width: 310px;
   
+  min-width: 440px;
   top: 100%;
   left: 0;
-  border: 1px solid #ccc;
   border-top: none;
-  background-color: #fff;
+  background-color: white;
   z-index: 10;
   display: none;
   max-height: 200px;
@@ -211,12 +220,12 @@ flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 8px 10px;
-  border-bottom: 1px solid #f0f0f0;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .contact-item:hover {
-  background-color: #f9f9f9;
+  background-color:#D1D1D1;
 }
 
 .avatar {
@@ -226,6 +235,37 @@ flex-direction: column;
   color: white;
   font-weight: bold;
   margin-right: 10px;
+  border: 3px solid rgb(248, 243, 243);
+}
+
+
+
+.select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 440px;
+  min-width: 440px;
+}
+
+.select-container select {
+  padding:0 21px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem; /* Platz für das Custom-Icon */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dein Custom-Pfeil – sitzt im Feld */
+.select-container .arrow {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  color: #2A3647;
+pointer-events: none;
 }
 
 .contact-name {
@@ -241,18 +281,27 @@ flex-direction: column;
   transform: scale(1.2);
 }
 
+.category-text {
+   transition: border-color 0.1s;
+   color: black;
+}
+
+
+.category-text:hover {
+  border-color: rgb(81, 78, 78);
+}
+
 /* Add Subtask CSS */
 .subtask-input-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  color: #D1D1D1;
 }
 
 .subtask-input-box input {
   border: none;
-  color: black;
+  height: auto;
 }
 
 .subtask-input-box input:disabled {
@@ -269,6 +318,47 @@ flex-direction: column;
   color: #333;
   cursor: pointer;
   padding-left: 10px;
+  .icon-task {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.subtask-input-box .icon-task.visible {
+  visibility: visible;
+}
+
+}
+
+.output-subtask {
+  max-width: 440px;
+  max-height: 70px;
+  min-width: 320px;
+  overflow: auto;
+}
+
+.subtask-text-box {
+  max-width: 450px;
+  min-width: 320px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  transition: background-color 0.1s;
+}
+
+.subtask-text-box:hover {
+  background-color: #f0f0f0;
+  /* oder was Helles */
+  border-radius: 10px;
+}
+
+.subtask-text-box:hover .icon-edit-subtask-box {
+  display: flex !important;
+}
+
+.delete-subtask-input {
+  padding: 0;
 }
 
 /* 2. Input field */
@@ -276,11 +366,12 @@ flex-direction: column;
   font-weight: bold;
 }
 
-.input-second{
+.input-second {
   width: 250px;
   border: none;
-  border-color: white;
-
+  outline: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .btn-clear-task-container {
@@ -346,6 +437,21 @@ flex-direction: column;
   min-width: 200px;
 }
 
+.d-none {
+  display: none;
+}
+
+.message-box {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  z-index: 200;
+}
+
+
 /* Media */
 @media(max-width:1365px) {
   .add-task-container {
@@ -354,9 +460,11 @@ flex-direction: column;
     flex-direction: column;
     align-items: center;
   }
+
   .pipe {
     display: none;
   }
+
   .btn-clear-task-container {
     display: flex;
     justify-content: center;
@@ -375,141 +483,16 @@ flex-direction: column;
     flex-direction: column;
     flex-wrap: wrap;
   }
+
   .title-section {
     margin-top: 127px;
     margin-left: 260px;
     width: 100%;
     max-width: 377px;
   }
+
   .star-required {
     max-width: 480px;
   }
 }
 
-@media(max-width:1060px) {
-  .wrapper {
-    display: flex;
-    align-items: flex-end;
-  }
-  .star-required {
-    max-width: 300px;
-  }
-}
-
-@media(max-width:768px) {
-
-  .title-section {
-    margin-left: 190px;
-  }
-  .star-required {
-    max-width: 230px;
-  }
-}
-
-@media(max-width:634px) {
-  .title-section {
-    margin-left: 0px;
-    margin-bottom: 10px;
-  }
-  .title-section h1 {
-    font-size: 47px;
-    min-width: 220px;
-  }
-
-  .add-task-container {
-    max-width: 0;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  form {
-    padding: 0;
-  }
-
-  .btn-clear-task-container {
-    margin-left: 0px;
-  }
-
-  .section-task-under {
-    align-items: flex-start;
-  }
-}
-
-@media(max-width:485px) {
-  .max-w-440 {
-    min-width: 320px;
-  }
-
-  .title-section {
-    margin-left: 0px;
-  }
-
-  .font-bundle {
-    font-size: 16px;
-  }
-
-  .btn-prio-bundle {
-    min-width: 96px;
-  }
-
-  .btn-prio{
-    width: 320px;
-  }
-  .btn-clear-task-container {
-    margin-left: 0;
-    display: flex;
-  }
-}
-
-@media(max-width:368px) {
-.add-task-section{
-  padding:15px
-}
-
-.subtask-input-box{
-  justify-content: flex-end;
-}
-
-  .max-w-440 {
-    min-width: 280px;
-  }
-
-  .title-section {
-    margin-left: 0px;
-  }
-
-  .font-bundle {
-    font-size: 16px;
-  }
-
-  .btn-prio-bundle {
-    min-width: 82px;
-    height: 40px;
-    padding: 0 4px
- 
-  }
-
-  .btn-prio{
-    width:275px ;
-       gap: 5px;
-  }
-  .input-title-task {
-    height: 40px;
-  }
-
-  .textarea-task {
-    height: 80px;
-  }
-
-  .input-bundle {
-    height: 48px;
-  }
-  .input-second{
-    width: 180px;
-  }
-
- .section-task-under{
-          max-width: 440px;
-        min-width: 279px;
-}
-}
