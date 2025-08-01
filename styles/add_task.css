@@ -77,7 +77,6 @@ form {
 }
 
 .input-title-task {
-  color: black;
   height: 48px;
   margin: 10px 0;
   padding-left: 21px;
@@ -185,11 +184,6 @@ form {
 
 .input-field {
   border: none;
-  color: black;
-}
-
-.input-field::placeholder {
-  color: black;
 }
 
 .arrow {
@@ -287,7 +281,6 @@ pointer-events: none;
 }
 
 .category-text {
-  color: black;
    transition: border-color 0.1s;
 }
 
@@ -307,7 +300,6 @@ pointer-events: none;
 .subtask-input-box input {
   border: none;
   height: auto;
-  color: black;
 }
 
 .subtask-input-box input:disabled {
