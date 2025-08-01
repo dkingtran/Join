@@ -8,21 +8,23 @@ const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
 
+/**
+ * Retrieves all form data for a task and returns it as an object.
+ * Uses a shorthand for `getElementById(...).value.trim()` to simplify the code.
+ * 
+ * @returns {Object} Task data object
+ */
 function getTaskData() {
+    const $ = id => document.getElementById(id).value.trim();
     return {
-        title: document.getElementById('title-task').value.trim(),
-        description: document.getElementById('task-description').value.trim(),
-        "due-date": document.getElementById('task-date').value,
+        title: $('title-task'),
+        description: $('task-description'),
+        "due-date": document.getElementById('task-date').value, // kein trim() nötig
         priority: selectedPriority,
         "assigned-to": assignedTo,
-        category: document.getElementById('task-category').value,
-        subtasks: subtask,
-        status: {
-            done: false,
-            feedback: false,
-            "in-progress": false,
-            "to-do": true
-        }
+        category: $('task-category'),
+        subtasks: collectSubtasksFromDOM(),
+        status: { done: false, feedback: false, "in-progress": false, "to-do": true }
     };
 }
 
@@ -99,8 +101,16 @@ btnLow.addEventListener("click", function (event) {
 });
 
 // Assigned
+/**
+ * Toggles the visibility of the dropdown list when clicked.
+ * 
+ * - Prevents the click event from bubbling up to avoid closing the dropdown unintentionally.
+ * - Switches the display of the contact list between "block" and "none".
+ * - Toggles the rotation class on the arrow for visual feedback.
+ * @param {Event} event - The click event triggering the dropdown toggle.
+ */
 function toggleDropdown(event) {
-    event.stopPropagation(); // Verhindert, dass der äußere Click mitschwingt
+    event.stopPropagation(); // Prevents outer click handler from interfering
     const list = document.getElementById("contactList");
     const arrow = document.querySelector(".arrow");
     const visible = list.style.display === "block";
@@ -108,18 +118,39 @@ function toggleDropdown(event) {
     arrow.classList.toggle("rotate", !visible);
 }
 
+/**
+ * Handles clicks outside the dropdown input or contact list items.
+ * 
+ * - Checks if the click occurred inside the dropdown input or a contact item.
+ * - If the click was outside both, it closes the dropdown and resets the arrow.
+ * 
+ * @param {Event} event - The click event on the document.
+ */
 function handleDropdownClick(event) {
     const clickedInsideInput = event.target.closest(".dropdown-input");
     const clickedContactItem = event.target.closest(".contact-item");
+    checkClickOutside(clickedInsideInput, clickedContactItem);
+}
 
+/**
+ * Closes the contact dropdown if the user clicked outside both
+ * the dropdown input field and the contact list items.
+ * @param {HTMLElement|null} clickedInsideInput - Element if the input field was clicked, otherwise null
+ * @param {HTMLElement|null} clickedContactItem - Element if a contact item was clicked, otherwise null
+ */
+function checkClickOutside(clickedInsideInput, clickedContactItem) {
     if (!clickedInsideInput && !clickedContactItem) {
         document.getElementById("contactList").style.display = "none";
         document.querySelector(".arrow").classList.remove("rotate");
     }
 }
 
-
-
+/**
+ * Toggles the "rotate" class on the category dropdown arrow
+ * based on the provided boolean value.
+ * 
+ * @param {boolean} rotate - If true, adds the "rotate" class; if false, removes it.
+ */
 function rotateCategoryArrow(rotate) {
     const arrow = document.getElementById("category-arrow");
     if (arrow) {
@@ -127,33 +158,56 @@ function rotateCategoryArrow(rotate) {
     }
 }
 
+/**
+ * Toggles the state of a checkbox within a container.
+ * When this function is called (e.g., by clicking on the container), it finds
+ * the checkbox inside, inverts its 'checked' state, and dispatches a 'change' event.
+ * This allows the user to check/uncheck the box by clicking on the entire
+ * clickable area, improving usability.
+ *
+ * @param {HTMLElement} container The HTML element container that holds the checkbox.
+ */
 function toggleCheckboxContact(container) {
     const checkbox = container.querySelector(".contact-checkbox");
     checkbox.checked = !checkbox.checked;
-    checkbox.dispatchEvent(new Event("change")); 
+    checkbox.dispatchEvent(new Event("change"));
 }
 
-
-
+/**
+ * Adds a change listener to each contact checkbox.
+ * Whenever a checkbox is toggled (on/off),
+ * it triggers an update of the assigned list.
+ */
 function setupCheckboxListener() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
-    const input = document.getElementById("searchInput");
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
-        checkbox.addEventListener("change", () => {
-            const selected = [];
-            for (let j = 0; j < checkboxes.length; j++) {
-                if (checkboxes[j].checked) {
-                    selected.push(checkboxes[j].dataset.name);
-                }
-            }
-            input.value = selected.join(", ");
-            assignedTo = selected;
-            console.log("Aktuell zugewiesen:", assignedTo);
-        });
+        checkbox.addEventListener("change", updateAssignedList);
     }
 }
 
+/**
+ * Collects all currently checked contacts.
+ * Updates the visible input field with their names
+ * and stores the selected names in the `assignedTo` array.
+ */
+function updateAssignedList() {
+    const checkboxes = document.querySelectorAll(".contact-checkbox");
+    const input = document.getElementById("searchInput");
+    const selected = [];
+
+    for (let j = 0; j < checkboxes.length; j++) {
+        if (checkboxes[j].checked) {
+            selected.push(checkboxes[j].dataset.name);
+        }
+    }
+    input.value = selected.join(", "); 
+    assignedTo = selected;            
+}
+
+/** 
+ * Loads all contacts from Firebase and displays them in the dropdown menu.
+ */
 async function loadContactsIntoDropdown() {
     const data = await loadData("contacts");
     const list = document.getElementById("contactList");
@@ -168,43 +222,101 @@ async function loadContactsIntoDropdown() {
     setupCheckboxListener();
 }
 
-// Subtask Input Field
+const initialBox = document.getElementById("subtask-initial");
+const activeBox = document.getElementById("subtask-active");
+const inputField = document.getElementById("subtask-input-second");
+
+/**
+ * Displays the active subtask input field by hiding the initial field
+ * and showing the one where the user can type a new subtask.
+ */
 function showSubtaskInput() {
-    const initialBox = document.getElementById("subtask-initial");
-    const activeBox = document.getElementById("subtask-active");
     initialBox.classList.add("d-none");
     activeBox.classList.remove("d-none");
 }
 
+/**
+ * Resets the subtask input to its initial state.
+ * Hides the active input field, shows the placeholder input, and clears the input value.
+ */
 function cancelSubtaskInput() {
-    const initialBox = document.getElementById("subtask-initial");
-    const activeBox = document.getElementById("subtask-active");
-    const inputField = document.getElementById("subtask-input-second");
-    activeBox.classList.add("d-none");    // versteckt
-    initialBox.classList.remove("d-none"); // Zeigt
+    activeBox.classList.add("d-none");
+    initialBox.classList.remove("d-none");
     inputField.value = "";
 }
 
-function confirmSubtaskInput() {
+
+
+/**
+ * Reads the current input value, trims whitespace, and returns it.
+ * If the field is empty, shows an alert and returns null.
+ * @returns {string|null}
+ */
+function getTrimmedSubtaskInput() {
     const inputField = document.getElementById("subtask-input-second");
-    const outputBox = document.getElementById("subtask-output");
     const inputText = inputField.value.trim();
+
     if (inputText === "") {
-        alert("Bitte Schreibe was du SACK ");
-        return;
+        alert("Please enter a subtask.");
+        return null;
     }
-    const subtaskHtml = getSubtaskTemplate(inputText);
+    return inputText;
+}
+
+/**
+ * Generates subtask HTML, displays it in the output box,
+ * and stores the subtask text in the subtask array.
+ * @param {string} text - The subtask text to add
+ */
+function renderAndStoreSubtask(text) {
+    const outputBox = document.getElementById("subtask-output");
+    const subtaskHtml = getSubtaskTemplate(text);
     outputBox.innerHTML += subtaskHtml;
-    subtask.push(inputText);
-    inputField.value = "";
+    subtask.push(text);
+}
+
+/**
+ * Handles the subtask confirmation process:
+ * validates input, updates UI, and resets the input.
+ */
+function confirmSubtaskInput() {
+    const inputText = getTrimmedSubtaskInput();
+    if (!inputText) return;
+    renderAndStoreSubtask(inputText);
+    document.getElementById("subtask-input-second").value = "";
     cancelSubtaskInput();
 }
 
-/* closest sucht vom Bild (element wird von onclick übergeben) das div subtask-text-box und gelöscht  */
+function collectSubtasksFromDOM() {
+    const subtaskDivs = document.querySelectorAll(".subtask-entry");
+    const collected = [];
+
+    for (let i = 0; i < subtaskDivs.length; i++) {
+        collected.push(subtaskDivs[i].innerText.trim());
+    }
+
+    return collected;
+}
+
+/**
+ * Deletes a specific subtask from the DOM and removes it from the subtask array.
+ * Triggered by clicking the delete icon. It finds the surrounding .subtask-text-box,
+ * removes it from the DOM, and deletes the matching text from the array.
+ */
 function deleteSubtask(element) {
     const subtaskBox = element.closest(".subtask-text-box");
-    if (subtaskBox) {
-        subtaskBox.remove();
+    if (!subtaskBox) return;
+
+    const textElement = subtaskBox.querySelector(".subtask-entry");
+    const text = textElement?.innerText?.trim();
+
+    // Entferne das Subtask-Element aus dem DOM
+    subtaskBox.remove();
+
+    // Entferne den Text auch aus dem Array
+    const index = subtask.indexOf(text);
+    if (index !== -1) {
+        subtask.splice(index, 1);
     }
 }
 
@@ -231,24 +343,23 @@ function finishEditSubtask(iconElement) {
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault();
     const taskData = getTaskData();
-
-    await postData("tasks", taskData); // Jetzt wird gesendet!
+    await postData("tasks", taskData);
     const messageBox = document.getElementById("task-message");
-    messageBox.textContent = "Task added to Board";
+    messageBox.textContent = "✅ Task erfolgreich erstellt!";
     messageBox.classList.remove("d-none");
     setTimeout(() => {
         messageBox.classList.add("d-none");
-    }, 4000);
-    messageBox.classList.remove("d-none");
-setTimeout(() => {
-    messageBox.classList.add("d-none");
-}, 3000);
-document.getElementById("form-element").reset();
+    }, 3000);
+    document.getElementById("form-element").reset();
+    document.getElementById("subtask-output").innerHTML = "";
+    subtask = [];
+    cancelSubtaskInput(); // nur einmal korrekt aufrufen
 });
 
 
 
-document.addEventListener("click", function(event) {
+
+document.addEventListener("click", function (event) {
     const dropdown = document.querySelector(".custom-dropdown");
     const list = document.getElementById("contactList");
     if (!dropdown.contains(event.target)) {
@@ -256,7 +367,6 @@ document.addEventListener("click", function(event) {
         document.querySelector(".arrow").classList.remove("rotate");
     }
 });
-
 
 window.onload = () => {
     setupCheckboxListener();
