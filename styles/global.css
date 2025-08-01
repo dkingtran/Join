@@ -19,6 +19,9 @@
 .d-none {
   display: none;
 }
+.black-color{
+  color: black;
+}
 
 .display-standard {
   display: flex;
