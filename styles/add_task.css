@@ -183,6 +183,7 @@ form {
 }
 
 .input-field {
+  color: black;
   border: none;
 }
 
@@ -282,6 +283,7 @@ pointer-events: none;
 
 .category-text {
    transition: border-color 0.1s;
+   color: black;
 }
 
 

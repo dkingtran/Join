@@ -1,3 +1,7 @@
+
+.black-color{
+  color: black;
+}
 .w-full {
   width: 100%;
 }
@@ -18,9 +22,6 @@
 
 .d-none {
   display: none;
-}
-.black-color{
-  color: black;
 }
 
 .display-standard {
