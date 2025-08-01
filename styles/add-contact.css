@@ -1158,8 +1158,9 @@ input:focus {
         padding-bottom: 96px;
         box-sizing: border-box;
     }
-    .contact-group-letter {
-        margin-left: calc(50% - 144px);
+
+    .contact-item{
+        width: 100%;
     }
     /* Add-Contact-Button mobile: bleibt wie gehabt, wird aber bei Detailsansicht versteckt */
     .add-contact-btn-mobile.hide-mobile-edit {
