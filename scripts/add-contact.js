@@ -100,7 +100,7 @@ function getSortedContacts() {
         const initialsB = getInitials(b.name);
         if (initialsA < initialsB) return -1;
         if (initialsA > initialsB) return 1;
-        return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+        return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
     });
 }
 
