@@ -106,6 +106,14 @@ function toggleDropdown() {
     arrow.classList.toggle("rotate");
 }
 
+function rotateCategoryArrow(rotate) {
+    const arrow = document.getElementById("category-arrow");
+    if (arrow) {
+        arrow.classList.toggle("rotate", rotate);
+    }
+}
+
+
 function setupCheckboxListener() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const input = document.getElementById("searchInput");
@@ -119,7 +127,7 @@ function setupCheckboxListener() {
                 }
             }
             input.value = selected.join(", ");
-            assignedTo = selected; 
+            assignedTo = selected;
             console.log("Aktuell zugewiesen:", assignedTo);
         });
     }
@@ -200,8 +208,8 @@ function finishEditSubtask(iconElement) {
 }
 
 document.getElementById("form-element").addEventListener("submit", async function (event) {
-    event.preventDefault(); 
-    const taskData = getTaskData(); 
+    event.preventDefault();
+    const taskData = getTaskData();
     await postData("tasks", taskData); // Jetzt wird gesendet!
     console.log("Task erfolgreich gespeichert.");
 });

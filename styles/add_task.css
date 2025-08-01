@@ -83,6 +83,7 @@ form {
 }
 
 .textarea-task {
+  border-color: #d1d1d1;
   height: 120px;
   padding: 18px 21px;
   margin: 10px 0 10px;
@@ -116,6 +117,7 @@ form {
   min-width: 136px;
   height: 56px;
   padding: 16px 10px;
+  border-color: #d1d1d1;
   background-color: white;
   cursor: pointer;
 }
@@ -167,11 +169,17 @@ form {
   align-items: center;
   justify-content: space-between;
   border: 1px solid black;
+  border-color: #d1d1d1;
   padding: 23px;
   cursor: pointer;
   background: white;
   height: 48px;
   margin: 10px 0;
+  transition: border-color 0.1s;
+}
+
+.dropdown-input:hover {
+  border-color: rgb(81, 78, 78);
 }
 
 .input-field {
@@ -186,16 +194,21 @@ form {
 .arrow {
   transition: transform 0.3s ease;
   margin-left: 8px;
+  color: #2A3647;
+  display: inline-block;
 }
+
 
 .arrow.rotate {
   transform: rotate(180deg);
+  transition: transform 0.2s ease;
 }
+
 
 .dropdown-list {
   position: absolute;
-  max-width: 440px;
-  min-width: 280px;
+  
+  min-width: 440px;
   top: 100%;
   left: 0;
   border-top: none;
@@ -216,7 +229,7 @@ form {
 }
 
 .contact-item:hover {
-  background-color: #605c5c61;
+  background-color:#D1D1D1;
 }
 
 .avatar {
@@ -228,6 +241,39 @@ form {
   margin-right: 10px;
   border: 3px solid rgb(248, 243, 243);
 }
+
+
+/* Wrapper für das ganze Feld */
+.select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Standard-Pfeil ausblenden */
+.select-container select {
+  padding:0 21px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem; /* Platz für das Custom-Icon */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dein Custom-Pfeil – sitzt im Feld */
+.select-container .arrow {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  color: #2A3647;
+pointer-events: none;
+}
+
+
+
 
 .contact-name {
   flex: 1;
@@ -242,13 +288,22 @@ form {
   transform: scale(1.2);
 }
 
+.category-text {
+  color: black;
+   transition: border-color 0.1s;
+}
+
+.category-text:hover {
+  border-color: rgb(81, 78, 78);
+}
+
+
 /* Add Subtask CSS */
 .subtask-input-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  color: #D1D1D1;
 }
 
 .subtask-input-box input {
@@ -575,5 +630,9 @@ form {
     width: 100%;
     max-width: 440px;
     min-width: 200px;
+  }
+  .dropdown-list{
+
+    min-width: 280px;
   }
 }

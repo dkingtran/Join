@@ -63,7 +63,7 @@
                             <div class="title-task">
                                 <p class="title-task font-bundle">Title<span class="star">*</span></p>
                                 <label for="title-task" class="sr-only"></label>
-                                <input class="input-title-task font-bundle w-full max-w-440 border-radius-10px input-bundle"
+                                <input class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle"
                                     id="title-task" name="title" type="text" placeholder="Enter a title">
                             </div>
 
@@ -109,7 +109,7 @@
                                     <label class="font-bundle assigned-to">Assigned to</label>
                                     <div class="dropdown-input max-w-440 border-radius-10px input-bundle"
                                         onclick="toggleDropdown()">
-                                        <input class="font-bundle input-field input-bundle" type="text"
+                                        <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
@@ -118,7 +118,7 @@
                                         <div class="contact-item">
                                             <span class="avatar display-standard"
                                                 style="background-color: #6A1B9A;">AK</span>
-                                            <span class="contact-name">Andreas Kissner</span>
+                                            <span class="contact-name font-bundle">Andreas Kissner</span>
                                             <input type="checkbox" class="contact-checkbox" data-name="Andreas Kissner"
                                                 data-initials="AK">
                                         </div>
@@ -127,14 +127,24 @@
                                 </div>
                             </div>
 
-                            <div class="category-task">
+                            <!-- HTML -->
+                            <div class="category-task select-wrapper">
                                 <p class="font-bundle">Category<span class="star">*</span></p>
-                                <select class="font-bundle input-bundle max-w-440" name="category" id="task-category">
-                                    <option value="" disabled selected>Select task category</option>
-                                    <option value="Technical Task">Technical Task</option>
-                                    <option value="User Story">User Story</option>
-                                </select>
+
+                                <div class="select-container">
+                                    <select class="font-bundle input-bundle max-w-440 category-text" name="category"
+                                        id="task-category"   onfocus="rotateCategoryArrow(true)" onblur="rotateCategoryArrow(false)" >
+                                     
+                                        <option value="" disabled selected hidden>Select task category</option>
+
+                                        <option value="Technical Task">Technical Task</option>
+                                        <option value="User Story">User Story</option>
+                                    </select>
+                                    <span class="arrow p-16 " id="category-arrow">&#9662;</span>
+                                </div>
                             </div>
+
+
 
                             <div class="subtask-container">
                                 <p class="font-bundle">Subtasks</p>
