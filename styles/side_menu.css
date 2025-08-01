@@ -274,6 +274,11 @@
     flex-shrink: 0;
 }
 
+.d_none {
+    display: none;
+}
+
+
 /* Mobile hover styles - applies to both breakpoints */
 @media (max-width: 1000px) {
     .menu-item:hover {
@@ -288,12 +293,13 @@
     }
 
     .d_none {
-        display: none;
+        display: block;
     }
 
     .notice-side-menu {
         display: none !important;
     }
+
 }
 
 /* Mobile styles */
