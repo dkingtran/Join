@@ -77,6 +77,7 @@ form {
 }
 
 .input-title-task {
+  color: black;
   height: 48px;
   margin: 10px 0;
   padding-left: 21px;
@@ -97,6 +98,14 @@ form {
 .du-date {
   width: 100%;
   width: 100px;
+}
+
+/* Mit der Klasse 'date-input-task' */
+
+
+
+#task-date:valid {
+  color:#706b6b;
 }
 
 .btn-prio {
