@@ -99,12 +99,26 @@ btnLow.addEventListener("click", function (event) {
 });
 
 // Assigned
-function toggleDropdown() {
+function toggleDropdown(event) {
+    event.stopPropagation(); // Verhindert, dass der äußere Click mitschwingt
     const list = document.getElementById("contactList");
     const arrow = document.querySelector(".arrow");
-    list.style.display = list.style.display === "block" ? "none" : "block";
-    arrow.classList.toggle("rotate");
+    const visible = list.style.display === "block";
+    list.style.display = visible ? "none" : "block";
+    arrow.classList.toggle("rotate", !visible);
 }
+
+function handleDropdownClick(event) {
+    const clickedInsideInput = event.target.closest(".dropdown-input");
+    const clickedContactItem = event.target.closest(".contact-item");
+
+    if (!clickedInsideInput && !clickedContactItem) {
+        document.getElementById("contactList").style.display = "none";
+        document.querySelector(".arrow").classList.remove("rotate");
+    }
+}
+
+
 
 function rotateCategoryArrow(rotate) {
     const arrow = document.getElementById("category-arrow");
@@ -112,6 +126,13 @@ function rotateCategoryArrow(rotate) {
         arrow.classList.toggle("rotate", rotate);
     }
 }
+
+function toggleCheckboxContact(container) {
+    const checkbox = container.querySelector(".contact-checkbox");
+    checkbox.checked = !checkbox.checked;
+    checkbox.dispatchEvent(new Event("change")); 
+}
+
 
 
 function setupCheckboxListener() {
@@ -210,9 +231,32 @@ function finishEditSubtask(iconElement) {
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault();
     const taskData = getTaskData();
+
     await postData("tasks", taskData); // Jetzt wird gesendet!
-    console.log("Task erfolgreich gespeichert.");
+    const messageBox = document.getElementById("task-message");
+    messageBox.textContent = "Task added to Board";
+    messageBox.classList.remove("d-none");
+    setTimeout(() => {
+        messageBox.classList.add("d-none");
+    }, 4000);
+    messageBox.classList.remove("d-none");
+setTimeout(() => {
+    messageBox.classList.add("d-none");
+}, 3000);
+document.getElementById("form-element").reset();
 });
+
+
+
+document.addEventListener("click", function(event) {
+    const dropdown = document.querySelector(".custom-dropdown");
+    const list = document.getElementById("contactList");
+    if (!dropdown.contains(event.target)) {
+        list.style.display = "none"; // Dropdown schließen
+        document.querySelector(".arrow").classList.remove("rotate");
+    }
+});
+
 
 window.onload = () => {
     setupCheckboxListener();
