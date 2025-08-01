@@ -201,8 +201,8 @@ function updateAssignedList() {
             selected.push(checkboxes[j].dataset.name);
         }
     }
-    input.value = selected.join(", "); 
-    assignedTo = selected;            
+    input.value = selected.join(", ");
+    assignedTo = selected;
 }
 
 /** 
@@ -244,8 +244,6 @@ function cancelSubtaskInput() {
     initialBox.classList.remove("d-none");
     inputField.value = "";
 }
-
-
 
 /**
  * Reads the current input value, trims whitespace, and returns it.
@@ -306,10 +304,8 @@ function collectSubtasksFromDOM() {
 function deleteSubtask(element) {
     const subtaskBox = element.closest(".subtask-text-box");
     if (!subtaskBox) return;
-
     const textElement = subtaskBox.querySelector(".subtask-entry");
     const text = textElement?.innerText?.trim();
-
     // Entferne das Subtask-Element aus dem DOM
     subtaskBox.remove();
 
@@ -320,26 +316,59 @@ function deleteSubtask(element) {
     }
 }
 
+/**
+ * Handles switching a subtask into edit mode and saving the result.
+ * - `startEditSubtask` replaces the subtask display text with an input field.
+ * - `finishEditSubtask` confirms the edit and converts the input back into a div.
+ */
+
+/**
+ * Activates edit mode for the clicked subtask.
+ * Replaces the displayed text with an input field and switches the icons.
+ */
 function startEditSubtask(element) {
-    const box = element.closest(".subtask-text-box");
-    const textElement = box.querySelector(".subtask-entry");
+    const { box, textElement, iconBox } = getSubtaskParts(element);
     const text = textElement.innerText;
-    const iconBox = box.querySelector(".icon-edit-subtask-box");
-    iconBox.querySelector(".edit-icon").classList.add("d-none");         // Stift aus
-    iconBox.querySelector(".confirm-icon").classList.remove("d-none");   // OK an
+
+    iconBox.querySelector(".edit-icon").classList.add("d-none");
+    iconBox.querySelector(".confirm-icon").classList.remove("d-none");
+
     textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
+/**
+ * Finishes the subtask editing.
+ * Converts the input back into a regular div and resets the icons.
+ */
 function finishEditSubtask(iconElement) {
-    const box = iconElement.closest(".subtask-text-box");
+    const { box, iconBox } = getSubtaskParts(iconElement);
     const inputElement = box.querySelector("input.subtask-entry");
     const text = inputElement.value.trim();
+
     inputElement.outerHTML = getReturnToDivTemplate(text);
-    box.querySelector(".edit-icon")?.classList.remove("d-none");
-    box.querySelector(".confirm-icon")?.classList.add("d-none");
+
+    iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
+    iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
+/**
+ * Utility: Finds and returns relevant parts of a subtask block.
+ */
+function getSubtaskParts(element) {
+    const box = element.closest(".subtask-text-box");
+    const iconBox = box.querySelector(".icon-edit-subtask-box");
+    const textElement = box.querySelector(".subtask-entry") || box.querySelector("input.subtask-entry");
+
+    return { box, iconBox, textElement };
+}
+
+
+/**
+ * Handles the form submission for creating a new task.
+ * Prevents page reload, collects form data, sends it to Firebase,
+ * shows a temporary success message, and resets the form and subtasks.
+ */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault();
     const taskData = getTaskData();
@@ -356,9 +385,10 @@ document.getElementById("form-element").addEventListener("submit", async functio
     cancelSubtaskInput(); // nur einmal korrekt aufrufen
 });
 
-
-
-
+/**
+ * Closes the contact dropdown when the user clicks outside of it.
+ * Ensures the dropdown collapses and the arrow resets.
+ */
 document.addEventListener("click", function (event) {
     const dropdown = document.querySelector(".custom-dropdown");
     const list = document.getElementById("contactList");
@@ -368,6 +398,11 @@ document.addEventListener("click", function (event) {
     }
 });
 
+
+/**
+ * Closes the contact dropdown when the user clicks outside of it.
+ * Ensures the dropdown collapses and the arrow resets.
+ */
 window.onload = () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
