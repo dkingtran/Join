@@ -27,9 +27,10 @@ function getTaskData() {
         status: { done: false, feedback: false, "in-progress": false, "to-do": true }
     };
 }
+
 /**
  * Validates the "title" and "date" input fields.
- 
+
  * Retrieves the input elements and their associated error message elements from the DOM,
  * calls the checkInput function for each field to validate them,
  * and returns whether both fields are valid (not empty).
@@ -405,13 +406,27 @@ function showSuccessMessage(message) {
   hideMessageAfterDelay(messageBox, 3000);
 }
 
-
+/**
+ * Hides a given element after a specified delay.
+ * 
+ * Adds the CSS class "d-none" to the element after the delay (default is 3000 ms),
+ * effectively hiding it from view.
+ * 
+ * @param {HTMLElement} element - The DOM element to hide
+ * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
+ */
 function hideMessageAfterDelay(element, delay = 3000) {
   setTimeout(() => {
     element.classList.add("d-none");
   }, delay);
 }
 
+/**
+ * Resets the form and clears subtasks.
+ * Resets the form with ID "form-element", clears the inner HTML of the
+ * subtask output container, resets the subtask array, and calls
+ * cancelSubtaskInput() to clear or update the subtask input UI.
+ */
 function resetFormAndSubtasks() {
   document.getElementById("form-element").reset();
   document.getElementById("subtask-output").innerHTML = "";
@@ -419,12 +434,18 @@ function resetFormAndSubtasks() {
   cancelSubtaskInput();
 }
 
+/**
+ * Form submission event listener with validation and data posting.
+ * Prevents the default form submit behavior, validates inputs using checkTitleDateInput(),
+ * retrieves form data, sends it asynchronously to the server, shows a success message,
+ * and resets the form and subtasks after successful submission.
+ */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
   event.preventDefault();
   if (!checkTitleDateInput()) return;
   const taskData = getTaskData();
   await postData("tasks", taskData);
-  showSuccessMessage("✅ Task erfolgreich erstellt!");
+  showSuccessMessage("✅ Task successfully created!");
   resetFormAndSubtasks();
 });
 
