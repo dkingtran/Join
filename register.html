@@ -3,18 +3,19 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Register Join</title>
-	<link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml" />
+	<link rel="icon" href="assets/img/Capa1.svg" type="image/svg+xml">
 	<link rel="stylesheet" href="./styles/global.css">
-	<link rel="stylesheet" href="./styles/standard.css" />
-	<link rel="stylesheet" href="./styles/login.css" />
-	<link rel="stylesheet" href="./styles/register.css" />
+	<link rel="stylesheet" href="./styles/standard.css">
+	<link rel="stylesheet" href="./styles/login.css">
+	<link rel="stylesheet" href="./styles/register.css">
+	<link rel="stylesheet" href="styles/media-query-register.css">
 	<script src="./scripts/firebase.js"></script>
 </head>
 
 <body>
-<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated" id="logo" />
+<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated" id="logo">
 
 	<div class="intro" id="intro">
 		<div class="white-overlay" id="whiteOverlay"></div>
@@ -25,64 +26,64 @@
 			<div class="login-box-register">
 				<div class="sign-up-box">
 					<a href="index.html" class="left-flash" id="flash-left">
-						<img src="assets/img/icons/register/flashleft.svg" alt="Flash left" />
+						<img src="assets/img/icons/register/flashleft.svg" alt="Flash left">
 					</a>
 
 					<h2 class="sign-up">Sign up</h2>
 				</div>
 
 				<div class="underline">
-					<img src="./assets/img/icons/login/underline.svg" alt="" />
+					<img src="./assets/img/icons/login/underline.svg" alt="">
 				</div>
 				<form onsubmit="addUser(); return false;" class="form-box" id="login-form">
 					<div class="input-box">
 						<div class="input-group">
 							<div class="input-wrapper">
 								<label for="name" class="sr-only"></label>
-								<input id="name" type="text" placeholder="Name" />
-								<img class="icon" src="./assets/img/icons/register/person.svg" alt="Icon of a Person" />
+								<input id="name" type="text" placeholder="Name">
+								<img class="icon" src="./assets/img/icons/register/person.svg" alt="Icon of a Person">
 							</div>
 						</div>
 
 						<div class="input-group">
 							<div class="input-wrapper">
 								<label for="email" class="sr-only"></label>
-								<input id="email" type="text" placeholder="Email" />
-								<img class="icon" src="./assets/img/icons/login/mail.svg" alt="Mail Icon" />
+								<input id="email" type="text" placeholder="Email">
+								<img class="icon" src="./assets/img/icons/login/mail.svg" alt="Mail Icon">
 							</div>
 						</div>
 
 						<div class="input-group">
 							<div id="password-wrapper" class="input-wrapper">
 								<label for="password" class="sr-only"></label>
-								<input id="password" type="password" placeholder="Password" />
+								<input id="password" type="password" placeholder="Password">
 								<img id="lock-password" class="icon password-icon"
-									src="./assets/img/icons/login/lock.svg" alt="Lock Password" />
+									src="./assets/img/icons/login/lock.svg" alt="Lock Password">
 								<img id="visibility-off-password" class="icon password-icon d-none"
-									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
+									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
 								<img id="visibility-on-password" class="icon password-icon d-none"
-									src="./assets/img/icons/register/visibility.svg" alt="Visibility on Icon" />
+									src="./assets/img/icons/register/visibility.svg" alt="Visibility on Icon">
 							</div>
 						</div>
 
 						<div class="input-group">
 							<div id="password-confirmation-wrapper" class="input-wrapper">
 								<label for="password-confirmation" class="sr-only"></label>
-								<input id="password-confirmation" type="password" placeholder="Confirm Password" />
+								<input id="password-confirmation" type="password" placeholder="Confirm Password">
 
 								<img id="lock-confirm-password" class="icon password-icon"
 									src="./assets/img/icons/login/lock.svg" alt="" />
 								<img id="visibility-off-confirm-password" class="icon password-icon d-none"
-									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon" />
+									src="./assets/img/icons/register/visibility_off.svg" alt="Visibility off Icon">
 								<img id="visibility-on-confirm-password" class="icon password-icon d-none"
-									src="./assets/img/icons/register/visibility.svg" alt="Lock Password" />
+									src="./assets/img/icons/register/visibility.svg" alt="Lock Password">
 							</div>
 						</div>
 
 						<div class="checkbox-box">
 							<label for="privacy-policy-checkbox"></label>
 							<label for="checkbox" class="sr-only"></label>
-							<input class="checkbox" id="privacy-policy-checkbox" type="checkbox" />
+							<input class="checkbox" id="privacy-policy-checkbox" type="checkbox">
 							<p>
 								I accept the
 								<a class="privacy-police" href="privacy_police.html">Privacy Policy</a>
