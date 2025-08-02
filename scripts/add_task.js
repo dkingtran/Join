@@ -4,7 +4,6 @@ let task = [];
 let subtask = [];
 let assignedTo = [];
 
-
 const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
@@ -12,7 +11,6 @@ const btnLow = document.getElementById("low");
 /**
  * Retrieves all form data for a task and returns it as an object.
  * Uses a shorthand for `getElementById(...).value.trim()` to simplify the code.
- * 
  * @returns {Object} Task data object
  */
 function getTaskData() {
@@ -20,7 +18,7 @@ function getTaskData() {
     return {
         title: $('title-task'),
         description: $('task-description'),
-        "due-date": document.getElementById('task-date').value, // kein trim() nötig
+        "due-date": document.getElementById('task-date').value,
         priority: selectedPriority,
         "assigned-to": assignedTo,
         category: $('task-category'),
@@ -29,25 +27,17 @@ function getTaskData() {
     };
 }
 
-
-
 function checkTitleDateInput() {
     const titleInput = document.getElementById('title-task');
     const dateInput = document.getElementById('task-date');
-
-    // Zugriff auf den error-text über den error-container
     const titleErrorContainer = titleInput.nextElementSibling;
     const titleError = titleErrorContainer.querySelector('.error-text');
-
     const dateError = document.getElementById('error-info');
-
     const titleOk = checkInput(titleInput, titleError);
     const dateOk = checkInput(dateInput, dateError);
-
     return titleOk && dateOk;
 }
 
-// Der Rest deiner checkInput-Funktion bleibt unverändert
 function checkInput(input, errorElement) {
     const isEmpty = input.value.trim() === "";
     input.classList.toggle("border-red", isEmpty);
@@ -55,12 +45,11 @@ function checkInput(input, errorElement) {
     return !isEmpty;
 }
 
-
-
 /**
  * Removes all active color classes from the priority buttons.
  * This ensures only one button is visibly active at any time.
  */
+
 function resetButtons() {
     btnUrgent.classList.remove("active-red");
     btnMedium.classList.remove("active-yellow");
@@ -75,12 +64,12 @@ function resetButtons() {
  * @param {HTMLElement} button - The button to activate
  * @param {string} colorClass - The CSS class for the active color state
  */
+
 function activateButton(button, colorClass) {
     resetButtons();
     button.classList.add(colorClass);
     selectedPriority = button.id;
     console.log("Aktuelle Priorität:", selectedPriority);
-    // Only switch the icon for the medium priority button
     if (button.id === "medium") {
         setMediumIcon(true);
     } else {
@@ -207,6 +196,7 @@ function toggleCheckboxContact(container) {
  * Whenever a checkbox is toggled (on/off),
  * it triggers an update of the assigned list.
  */
+
 function setupCheckboxListener() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     for (let i = 0; i < checkboxes.length; i++) {
@@ -220,6 +210,7 @@ function setupCheckboxListener() {
  * Updates the visible input field with their names
  * and stores the selected names in the `assignedTo` array.
  */
+
 function updateAssignedList() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const input = document.getElementById("searchInput");
@@ -268,6 +259,7 @@ function showSubtaskInput() {
  * Resets the subtask input to its initial state.
  * Hides the active input field, shows the placeholder input, and clears the input value.
  */
+
 function cancelSubtaskInput() {
     activeBox.classList.add("d-none");
     initialBox.classList.remove("d-none");
@@ -380,24 +372,13 @@ function getSubtaskParts(element) {
  * Prevents page reload, collects form data, sends it to Firebase,
  * shows a temporary success message, and resets the form and subtasks.
  */
-document.getElementById("form-element").addEventListener("submit", async function (event) {
-  event.preventDefault();
-  if (!checkTitleDateInput()) return;
-
-  const taskData = getTaskData();
-  await postData("tasks", taskData);
-
+function showSuccessMessage(message) {
   const messageBox = document.getElementById("task-message");
-  messageBox.textContent = "✅ Task erfolgreich erstellt!";
+  messageBox.textContent = message;
   messageBox.classList.remove("d-none");
+  hideMessageAfterDelay(messageBox, 3000);
+}
 
-  hideMessageAfterDelay(messageBox, 3000); // neue Funktion
-
-  document.getElementById("form-element").reset();
-  document.getElementById("subtask-output").innerHTML = "";
-  subtask = [];
-  cancelSubtaskInput(); // nur einmal korrekt aufrufen
-});
 
 function hideMessageAfterDelay(element, delay = 3000) {
   setTimeout(() => {
@@ -405,6 +386,21 @@ function hideMessageAfterDelay(element, delay = 3000) {
   }, delay);
 }
 
+function resetFormAndSubtasks() {
+  document.getElementById("form-element").reset();
+  document.getElementById("subtask-output").innerHTML = "";
+  subtask = [];
+  cancelSubtaskInput();
+}
+
+document.getElementById("form-element").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  if (!checkTitleDateInput()) return;
+  const taskData = getTaskData();
+  await postData("tasks", taskData);
+  showSuccessMessage("✅ Task erfolgreich erstellt!");
+  resetFormAndSubtasks();
+});
 
 
 /**
