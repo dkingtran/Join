@@ -132,12 +132,12 @@ btnLow.addEventListener("click", function (event) {
 // Assigned
 /**
  * Toggles the visibility of the dropdown list when clicked.
- * 
  * - Prevents the click event from bubbling up to avoid closing the dropdown unintentionally.
  * - Switches the display of the contact list between "block" and "none".
  * - Toggles the rotation class on the arrow for visual feedback.
  * @param {Event} event - The click event triggering the dropdown toggle.
  */
+
 function toggleDropdown(event) {
     event.stopPropagation(); // Prevents outer click handler from interfering
     const list = document.getElementById("contactList");
@@ -282,7 +282,6 @@ function cancelSubtaskInput() {
 function getTrimmedSubtaskInput() {
     const inputField = document.getElementById("subtask-input-second");
     const inputText = inputField.value.trim();
-
     if (inputText === "") {
         alert("Please enter a subtask.");
         return null;
@@ -317,11 +316,9 @@ function confirmSubtaskInput() {
 function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
     const collected = [];
-
     for (let i = 0; i < subtaskDivs.length; i++) {
         collected.push(subtaskDivs[i].innerText.trim());
     }
-
     return collected;
 }
 
@@ -335,21 +332,12 @@ function deleteSubtask(element) {
     if (!subtaskBox) return;
     const textElement = subtaskBox.querySelector(".subtask-entry");
     const text = textElement?.innerText?.trim();
-    // Entferne das Subtask-Element aus dem DOM
     subtaskBox.remove();
-
-    // Entferne den Text auch aus dem Array
     const index = subtask.indexOf(text);
     if (index !== -1) {
         subtask.splice(index, 1);
     }
 }
-
-/**
- * Handles switching a subtask into edit mode and saving the result.
- * - `startEditSubtask` replaces the subtask display text with an input field.
- * - `finishEditSubtask` confirms the edit and converts the input back into a div.
- */
 
 /**
  * Activates edit mode for the clicked subtask.
@@ -358,10 +346,8 @@ function deleteSubtask(element) {
 function startEditSubtask(element) {
     const { box, textElement, iconBox } = getSubtaskParts(element);
     const text = textElement.innerText;
-
     iconBox.querySelector(".edit-icon").classList.add("d-none");
     iconBox.querySelector(".confirm-icon").classList.remove("d-none");
-
     textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
@@ -373,9 +359,7 @@ function finishEditSubtask(iconElement) {
     const { box, iconBox } = getSubtaskParts(iconElement);
     const inputElement = box.querySelector("input.subtask-entry");
     const text = inputElement.value.trim();
-
     inputElement.outerHTML = getReturnToDivTemplate(text);
-
     iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
     iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
     box.querySelector(".delete-icon")?.classList.remove("d-none");
@@ -388,10 +372,8 @@ function getSubtaskParts(element) {
     const box = element.closest(".subtask-text-box");
     const iconBox = box.querySelector(".icon-edit-subtask-box");
     const textElement = box.querySelector(".subtask-entry") || box.querySelector("input.subtask-entry");
-
     return { box, iconBox, textElement };
 }
-
 
 /**
  * Handles the form submission for creating a new task.
@@ -399,21 +381,31 @@ function getSubtaskParts(element) {
  * shows a temporary success message, and resets the form and subtasks.
  */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
-    event.preventDefault();
-      if (!checkTitleDateInput()) return;
-    const taskData = getTaskData();
-    await postData("tasks", taskData);
-    const messageBox = document.getElementById("task-message");
-    messageBox.textContent = "✅ Task erfolgreich erstellt!";
-    messageBox.classList.remove("d-none");
-    setTimeout(() => {
-        messageBox.classList.add("d-none");
-    }, 3000);
-    document.getElementById("form-element").reset();
-    document.getElementById("subtask-output").innerHTML = "";
-    subtask = [];
-    cancelSubtaskInput(); // nur einmal korrekt aufrufen
+  event.preventDefault();
+  if (!checkTitleDateInput()) return;
+
+  const taskData = getTaskData();
+  await postData("tasks", taskData);
+
+  const messageBox = document.getElementById("task-message");
+  messageBox.textContent = "✅ Task erfolgreich erstellt!";
+  messageBox.classList.remove("d-none");
+
+  hideMessageAfterDelay(messageBox, 3000); // neue Funktion
+
+  document.getElementById("form-element").reset();
+  document.getElementById("subtask-output").innerHTML = "";
+  subtask = [];
+  cancelSubtaskInput(); // nur einmal korrekt aufrufen
 });
+
+function hideMessageAfterDelay(element, delay = 3000) {
+  setTimeout(() => {
+    element.classList.add("d-none");
+  }, delay);
+}
+
+
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.
@@ -427,7 +419,16 @@ document.addEventListener("click", function (event) {
         document.querySelector(".arrow").classList.remove("rotate");
     }
 });
-
+function resetFormState() {
+ /*    subtask = [];
+    assignedTo = [];
+    selectedPriority = ""; */
+    document.getElementById("subtask-output").innerHTML = "";
+    document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
+    document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
+    resetButtons(); 
+    cancelSubtaskInput();  
+}
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.
