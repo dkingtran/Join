@@ -50,7 +50,7 @@
     </header>
 
     <!-- Add Task section -->
-    <div class="wrapper">
+    <div class="wrapper display-standard">
 
         <div class="main-container w-full">
             <div class="add-task-section">
@@ -67,10 +67,13 @@
                                 <input
                                     class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle"
                                     id="title-task" name="title" type="text" placeholder="Enter a title">
+                                    <div class="error-container">
+                                    <div class="error-text d-none">This fields is required</div>
+                                    </div>
                             </div>
 
                             <div class="decription-class">
-                                <p class="font-bundle">Description</p>
+                                <p class="font-bundle description-title">Description</p>
                                 <label for="description" class="sr-only"></label>
                                 <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
                                     name="description" id="task-description"
@@ -80,8 +83,11 @@
                             <div class="date-task">
                                 <p class="font-bundle du-date">Du date <span class="star">*</span></p>
                                 <label for="due-date" class="sr-only"></label>
-                                <input class="font-bundle date-input-task input-bundle max-w-440" id="task-date"
-                                    name="dueDate" type="date" placeholder="">
+                                <input class="font-bundle date-input-task input-bundle max-w-440 " id="task-date"
+                                    name="dueDate" type="date">
+                                    <div class="error-container">
+                                    <div id="error-info" class="error-text d-none ">This fields is required</div>
+                                    </div>
                             </div>
                         </div>
 
@@ -130,7 +136,7 @@
 
                             <!-- HTML -->
                             <div class="category-task select-wrapper">
-                                <p class="font-bundle">Category<span class="star">*</span></p>
+                                <p class="font-bundle m-top">Category<span class="star">*</span></p>
 
                                 <div class="select-container">
                                     <select class="font-bundle input-bundle max-w-440 category-text" name="category"
@@ -148,7 +154,7 @@
                             </div>
 
                             <div class="subtask-container">
-                                <p class="font-bundle">Subtasks</p>
+                                <p class="font-bundle m-top">Subtasks</p>
 
                                 <!-- Zustand 1 -->
                                 <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440 black-color"

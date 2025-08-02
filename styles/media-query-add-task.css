@@ -71,6 +71,10 @@
 
   .btn-prio-bundle {
     min-width: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0;
   }
 
   .btn-prio {

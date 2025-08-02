@@ -4,6 +4,7 @@ let task = [];
 let subtask = [];
 let assignedTo = [];
 
+
 const btnUrgent = document.getElementById("urgent");
 const btnMedium = document.getElementById("medium");
 const btnLow = document.getElementById("low");
@@ -27,6 +28,34 @@ function getTaskData() {
         status: { done: false, feedback: false, "in-progress": false, "to-do": true }
     };
 }
+
+
+
+function checkTitleDateInput() {
+    const titleInput = document.getElementById('title-task');
+    const dateInput = document.getElementById('task-date');
+
+    // Zugriff auf den error-text über den error-container
+    const titleErrorContainer = titleInput.nextElementSibling;
+    const titleError = titleErrorContainer.querySelector('.error-text');
+
+    const dateError = document.getElementById('error-info');
+
+    const titleOk = checkInput(titleInput, titleError);
+    const dateOk = checkInput(dateInput, dateError);
+
+    return titleOk && dateOk;
+}
+
+// Der Rest deiner checkInput-Funktion bleibt unverändert
+function checkInput(input, errorElement) {
+    const isEmpty = input.value.trim() === "";
+    input.classList.toggle("border-red", isEmpty);
+    errorElement.classList.toggle("d-none", !isEmpty);
+    return !isEmpty;
+}
+
+
 
 /**
  * Removes all active color classes from the priority buttons.
@@ -371,6 +400,7 @@ function getSubtaskParts(element) {
  */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault();
+      if (!checkTitleDateInput()) return;
     const taskData = getTaskData();
     await postData("tasks", taskData);
     const messageBox = document.getElementById("task-message");

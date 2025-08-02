@@ -2,9 +2,9 @@ html,
 body {
   height: auto;
   min-height: 100%;
-  /*   overflow-y: auto; */
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .wrapper {
@@ -79,7 +79,6 @@ form {
 .input-title-task {
   color: black;
   height: 48px;
-  margin: 10px 0;
   padding-left: 21px;
 }
 
@@ -87,7 +86,7 @@ form {
   border-color: #d1d1d1;
   height: 120px;
   padding: 18px 21px;
-  margin: 10px 0 10px;
+   margin: 10px 0 25px 0;
 }
 
 /* Section right */
@@ -102,8 +101,6 @@ form {
 
 /* Mit der Klasse 'date-input-task' */
 
-
-
 #task-date:valid {
   color:#706b6b;
 }
@@ -113,7 +110,7 @@ form {
   justify-content: flex-start;
   width: 440px;
   gap: 15px;
-  margin: 10px 0;
+   margin: 10px 0 25px 0;
 }
 
 .btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
@@ -183,7 +180,7 @@ form {
   cursor: pointer;
   background: white;
   height: 48px;
-  margin: 10px 0;
+
   transition: border-color 0.1s;
 }
 
@@ -505,4 +502,18 @@ pointer-events: none;
     max-width: 480px;
   }
 }
+.error-container{
+height: 25px;
+width: 150px;
+}
 
+.error-text{
+  min-width: 150px;
+  width: 100%;
+  color:red;
+  font-size: 12px;
+  z-index: 3000;
+}
+.border-red{
+  border-color: red;
+}
