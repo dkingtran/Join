@@ -45,6 +45,106 @@
     margin-left: calc(50% - 720px + 250px);
     margin-top: 80px;
     padding: 24px;
-    min-height: calc(100vh - 80px);
-    max-width: calc(1440px - 250px);
+}
+
+.header-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.header-title-container {
+    flex: 50%;
+}
+
+.header-title-container h1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.search-add-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 32px;
+    flex: 50%;
+    gap: 32px;
+}
+
+.search-add-container {
+    position: relative;
+}
+
+
+.search-input-wrapper {
+    position: relative;
+    flex: 60%;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 8px 56px 8px 16px; /* extra right padding for icons */
+    font-size: 16px;
+    box-sizing: border-box;
+    background-size: 20px 20px;
+    transition: border-color 0.2s;
+}
+
+.search-input-wrapper .search-divider {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 2px;
+    pointer-events: none;
+}
+
+.search-input-wrapper .search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 24px;
+    pointer-events: none;
+}
+
+.search-add-container input:hover {
+    color: #999;
+}
+
+.search-add-container input:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.search-add-container button {
+    background-color: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    gap: 4px;
+    font-size: 21px;
+    font-weight: 700;
+    display: flex;
+    flex: 40%;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 160px;
+    height: 48px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Drag and drop areas */
+.drag-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
 }

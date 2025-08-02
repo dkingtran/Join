@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
   </head>
   <body onload="updateHTML()">
@@ -109,9 +110,25 @@
     <!--End of Side-menu--> 
 
     <main class="main-content">
-      <button id="addTaskButton" onclick="showAddTask()">+</button>
-      <button id="logoutButton" onclick="logout()">Logout</button>
-
+      <section>
+      <div class="header-board">
+        <div class="header-title-container">
+          <h1>Board</h1>
+        </div>
+        <div class="search-add-container">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="Find Task" />
+            <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+            <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+          </div>
+          <button id="addTaskButton" onclick="showAddTask()">Add Task
+            <img src="./assets/img/icons/board/add-task.svg" alt="">
+          </button>
+        </div>
+      </div>
+      </section>
+      <section>
+        <div class="drag-board"></div>
       <div
         class="drag-area"
         id="open"
@@ -126,6 +143,7 @@
         ondragleave="removeHighlight('closed')"
         ondragover="allowDrop(event); highlight('closed')"
       ></div>
+      </section>
     </main>
   </body>
 </html>
