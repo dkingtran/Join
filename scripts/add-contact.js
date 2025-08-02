@@ -165,6 +165,14 @@ function showMobileContactDetails(idx) {
     const section = document.querySelector('.contacts-section');
     section.classList.add('show-mobile-section');
     document.getElementById('contactListClicked').style.display = 'block';
+    setupMobileBackButton(section);
+    setupMobileEditButton(idx);
+    document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
+    removeMobileEditDropdown();
+    showContactDetails(getSortedContacts()[idx], idx);
+}
+
+function setupMobileBackButton(section) {
     let backBtn = document.getElementById('mobileBackBtn');
     if (!backBtn) {
         backBtn = document.createElement('button');
@@ -175,14 +183,14 @@ function showMobileContactDetails(idx) {
         section.appendChild(backBtn);
     }
     backBtn.style.display = 'flex';
+}
+
+function setupMobileEditButton(idx) {
     const editBtn = document.getElementById('mobileEditBtn');
     if (editBtn) {
         editBtn.style.display = 'flex';
         window._lastMobileEditIdx = idx;
     }
-    document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
-    removeMobileEditDropdown();
-    showContactDetails(getSortedContacts()[idx], idx);
 }
 
 function toggleMobileEditDropdown(idx) {
@@ -281,40 +289,56 @@ function addToContacts() {
     const [firstName, ...rest] = name.split(' ');
     const lastName = rest.join(' ');
     const fullName = `${firstName} ${lastName}`.trim();
+    assignColorToContact(fullName);
+    contacts.push({ firstName, lastName, email, phone });
+    clearFormAndUpdate();
+}
+
+function assignColorToContact(fullName) {
     if (!colorMap[fullName]) {
         const usedColors = Object.values(colorMap);
         let colorIdx = 1;
         while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-        if (colorIdx > 10) colorIdx = ((Object.keys(colorMap).length - 1) % 10) + 1;
-        colorMap[fullName] = 'contact-avatar-color' + colorIdx;
+        colorMap[fullName] = colorIdx > 10 ? 'contact-avatar-color' + (((Object.keys(colorMap).length - 1) % 10) + 1) : 'contact-avatar-color' + colorIdx;
     }
-    contacts.push({ firstName, lastName, email, phone });
-    document.getElementById('contactName').value = '';
-    document.getElementById('contactEmail').value = '';
-    document.getElementById('contactPhone').value = '';
+}
+
+function clearFormAndUpdate() {
+    ['contactName', 'contactEmail', 'contactPhone'].forEach(id => document.getElementById(id).value = '');
     setDefaultAvatar(document.getElementById('formAvatar'));
     renderContacts();
     hideForm();
+    showContactCreatedModal();
+}
+
+function showContactCreatedModal() {
+    const modal = document.getElementById('contactCreatedModal');
+    if (!modal) return;
+    modal.classList.add('show');
+    setTimeout(() => {
+        modal.classList.remove('show');
+    }, 2000);
 }
 
 function updateFormAvatar() {
     const name = document.getElementById("contactName").value.trim();
     const avatar = document.getElementById("formAvatar");
-    for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
+    resetAvatarColors(avatar);
     if (!name) {
         setDefaultAvatar(avatar);
         return;
     }
-    let colorClass = colorMap[name];
-    if (!colorClass) {
-        const usedColors = Object.values(colorMap);
-        let colorIdx = 1;
-        while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-        if (colorIdx > 10) colorIdx = ((Object.keys(colorMap).length - 1) % 10) + 1;
-        colorClass = 'contact-avatar-color' + colorIdx;
-    }
+    const colorClass = getOrCreateColorClass(name);
     avatar.classList.add(colorClass);
     avatar.textContent = getInitials(name);
+}
+
+function getOrCreateColorClass(name) {
+    if (colorMap[name]) return colorMap[name];
+    const usedColors = Object.values(colorMap);
+    let colorIdx = 1;
+    while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
+    return colorIdx > 10 ? 'contact-avatar-color' + (((Object.keys(colorMap).length - 1) % 10) + 1) : 'contact-avatar-color' + colorIdx;
 }
 
 
@@ -332,9 +356,7 @@ function getInitials(name) {
 }
 
 function cancelForm() {
-    document.getElementById('contactName').value = '';
-    document.getElementById('contactEmail').value = '';
-    document.getElementById('contactPhone').value = '';
+    ['contactName', 'contactEmail', 'contactPhone'].forEach(id => document.getElementById(id).value = '');
     hideForm();
 }
 
@@ -360,12 +382,16 @@ function showEditForm(idx) {
     document.getElementById('editContactEmail').value = contact.email;
     document.getElementById('editContactPhone').value = contact.phone;
     updateEditFormAvatar();
-    document.getElementById('editFormContainer').classList.add('show');
-    const overlay = document.getElementById('editModalOverlay');
-    if (overlay) overlay.classList.add('show');
+    showEditModal();
     hideForm();
     setTimeout(() => document.addEventListener('click', closeEditFormOnOutsideClick), 0);
     window.editContactIdx = idx;
+}
+
+function showEditModal() {
+    document.getElementById('editFormContainer').classList.add('show');
+    const overlay = document.getElementById('editModalOverlay');
+    if (overlay) overlay.classList.add('show');
 }
 
 
@@ -391,7 +417,7 @@ function closeEditFormOnOutsideClick(e) {
 function updateEditFormAvatar() {
     const name = document.getElementById('editContactName').value.trim();
     const avatar = document.getElementById('editFormAvatar');
-    for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
+    resetAvatarColors(avatar);
     if (!name) {
         avatar.classList.add('contact-avatar-color10');
         avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
@@ -407,12 +433,15 @@ function hideMobileContactDetails() {
     section.classList.remove('show-mobile-section');
     section.style.display = '';
     document.getElementById('contactListClicked').style.display = '';
-    
-    const backBtn = document.getElementById('mobileBackBtn');
-    if (backBtn) backBtn.style.display = 'none';
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (editBtn) editBtn.style.display = 'none';
+    hideMobileButtons();
     document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
+}
+
+function hideMobileButtons() {
+    const backBtn = document.getElementById('mobileBackBtn');
+    const editBtn = document.getElementById('mobileEditBtn');
+    if (backBtn) backBtn.style.display = 'none';
+    if (editBtn) editBtn.style.display = 'none';
 }
 
 function showDesktopView() {
@@ -422,13 +451,6 @@ function showDesktopView() {
     if (section) section.classList.remove('show-mobile-section');
     if (sidebar) sidebar.classList.remove('hide-mobile-sidebar');
     if (details) details.style.display = '';
-}
-
-function hideMobileButtons() {
-    const backBtn = document.getElementById('mobileBackBtn');
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (backBtn) backBtn.style.display = 'none';
-    if (editBtn) editBtn.style.display = 'none';
 }
 
 function showAddContactBtnMobile() {
