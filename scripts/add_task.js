@@ -43,7 +43,6 @@ function checkTitleDateInput() {
   const dateError = document.querySelector('#date-error-border .error-text');
   const titleOk = checkInput(titleInput, titleError);
   const dateOk = checkInput(dateInput, dateError);
-  return titleOk && dateOk;
 }
 
 /**
@@ -56,6 +55,7 @@ function checkTitleDateInput() {
  */
 function checkInput(input, errorElement) {
     const isEmpty = input.value.trim() === "";
+
     input.classList.toggle("border-red", isEmpty);
     errorElement.classList.toggle("d-none", !isEmpty);
     return !isEmpty;
@@ -254,6 +254,7 @@ async function loadContactsIntoDropdown() {
         const name = contact.name;
         const initials = name["first-name"][0] + name["last-name"][0];
         list.innerHTML += getAssignedNameTemplate(initials, name);
+        console.log(contact);
     }
     setupCheckboxListener();
 }
@@ -340,12 +341,12 @@ function collectSubtasksFromDOM() {
     return collected;
 }
 
-
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
  * Triggered by clicking the delete icon. It finds the surrounding .subtask-text-box,
  * removes it from the DOM, and deletes the matching text from the array.
  */
+
 function deleteSubtask(element) {
     const subtaskBox = element.closest(".subtask-text-box");
     if (!subtaskBox) return;
@@ -399,6 +400,7 @@ function getSubtaskParts(element) {
  * Prevents page reload, collects form data, sends it to Firebase,
  * shows a temporary success message, and resets the form and subtasks.
  */
+
 function showSuccessMessage(message) {
   const messageBox = document.getElementById("task-message");
   messageBox.textContent = message;
@@ -415,6 +417,7 @@ function showSuccessMessage(message) {
  * @param {HTMLElement} element - The DOM element to hide
  * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
  */
+
 function hideMessageAfterDelay(element, delay = 3000) {
   setTimeout(() => {
     element.classList.add("d-none");

@@ -86,7 +86,7 @@ form {
   border-color: #d1d1d1;
   height: 120px;
   padding: 18px 21px;
-   margin: 10px 0 25px 0;
+  margin: 10px 0 25px 0;
 }
 
 /* Section right */
@@ -102,7 +102,7 @@ form {
 /* Mit der Klasse 'date-input-task' */
 
 #task-date:valid {
-  color:#706b6b;
+  color: #706b6b;
 }
 
 .btn-prio {
@@ -110,7 +110,7 @@ form {
   justify-content: flex-start;
   width: 440px;
   gap: 15px;
-   margin: 10px 0 25px 0;
+  margin: 10px 0 25px 0;
 }
 
 .btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
@@ -212,7 +212,7 @@ form {
 
 .dropdown-list {
   position: absolute;
-  
+
   min-width: 440px;
   top: 100%;
   left: 0;
@@ -234,17 +234,19 @@ form {
 }
 
 .contact-item:hover {
-  background-color:#D1D1D1;
+  background-color: #D1D1D1;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  background: #2A3647;
   color: white;
-  font-weight: bold;
-  margin-right: 10px;
-  border: 3px solid rgb(248, 243, 243);
+  border-radius: 50%;
+  border: 2px solid white;
+  font-weight: 400;
+  font-size: 12px;
+  margin-right: 16px;
 }
 
 .select-container {
@@ -256,11 +258,12 @@ form {
 }
 
 .select-container select {
-  padding:0 21px;
+  padding: 0 21px;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 2.5rem; /* Platz für das Custom-Icon */
+  padding-right: 2.5rem;
+  /* Platz für das Custom-Icon */
   width: 100%;
   box-sizing: border-box;
 }
@@ -272,7 +275,7 @@ form {
   right: 6px;
   transform: translateY(-50%);
   color: #2A3647;
-pointer-events: none;
+  pointer-events: none;
 }
 
 .contact-name {
@@ -289,8 +292,8 @@ pointer-events: none;
 }
 
 .category-text {
-   transition: border-color 0.1s;
-   color: black;
+  transition: border-color 0.1s;
+  color: black;
 }
 
 
@@ -325,16 +328,17 @@ pointer-events: none;
   color: #333;
   cursor: pointer;
   padding-left: 10px;
-  .icon-task {
-  font-size: 24px;
-  color: #333;
-  cursor: pointer;
-  padding-left: 10px;
-}
 
-.subtask-input-box .icon-task.visible {
-  visibility: visible;
-}
+  .icon-task {
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding-left: 10px;
+  }
+
+  .subtask-input-box .icon-task.visible {
+    visibility: visible;
+  }
 
 }
 
@@ -502,18 +506,20 @@ pointer-events: none;
     max-width: 480px;
   }
 }
-.error-container{
-height: 25px;
-width: 150px;
+
+.error-container {
+  height: 25px;
+  width: 150px;
 }
 
-.error-text{
+.error-text {
   min-width: 150px;
   width: 100%;
-  color:red;
+  color: red;
   font-size: 12px;
   z-index: 3000;
 }
-.border-red{
+
+.border-red {
   border-color: red;
 }
