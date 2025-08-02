@@ -13,6 +13,7 @@ const btnLow = document.getElementById("low");
  * Uses a shorthand for `getElementById(...).value.trim()` to simplify the code.
  * @returns {Object} Task data object
  */
+
 function getTaskData() {
     const $ = id => document.getElementById(id).value.trim();
     return {
@@ -26,18 +27,32 @@ function getTaskData() {
         status: { done: false, feedback: false, "in-progress": false, "to-do": true }
     };
 }
-
+/**
+ * Validates the "title" and "date" input fields.
+ 
+ * Retrieves the input elements and their associated error message elements from the DOM,
+ * calls the checkInput function for each field to validate them,
+ * and returns whether both fields are valid (not empty).
+ * @returns {boolean} true if both title and date inputs are valid, otherwise false
+ */
 function checkTitleDateInput() {
-    const titleInput = document.getElementById('title-task');
-    const dateInput = document.getElementById('task-date');
-    const titleErrorContainer = titleInput.nextElementSibling;
-    const titleError = titleErrorContainer.querySelector('.error-text');
-    const dateError = document.getElementById('error-info');
-    const titleOk = checkInput(titleInput, titleError);
-    const dateOk = checkInput(dateInput, dateError);
-    return titleOk && dateOk;
+  const titleInput = document.getElementById('title-task');
+  const dateInput = document.getElementById('task-date');
+  const titleError = document.querySelector('#title-error-border .error-text');
+  const dateError = document.querySelector('#date-error-border .error-text');
+  const titleOk = checkInput(titleInput, titleError);
+  const dateOk = checkInput(dateInput, dateError);
+  return titleOk && dateOk;
 }
 
+/**
+ * Checks whether a given input field is empty and toggles error display accordingly.
+ * If the input field is empty, adds a red border and shows the associated error message element.
+ * If the input field has content, removes the error indicators.
+ * @param {HTMLInputElement} input - The input element to validate
+ * @param {HTMLElement} errorElement - The element displaying the error message
+ * @returns {boolean} true if the input is not empty, otherwise false
+ */
 function checkInput(input, errorElement) {
     const isEmpty = input.value.trim() === "";
     input.classList.toggle("border-red", isEmpty);
@@ -305,6 +320,16 @@ function confirmSubtaskInput() {
     cancelSubtaskInput();
 }
 
+/**
+ * Collects all current subtasks from the DOM.
+ * Instead of relying on a separate JavaScript array (which can become outdated),
+ * this function fetches all subtask elements that are currently visible on the page.
+ * This ensures that the returned list is always accurate – including any additions,
+ * deletions, or edits made by the user.
+ * Returns:
+ *   An array of strings representing the visible subtask texts.
+ */
+
 function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
     const collected = [];
@@ -313,6 +338,7 @@ function collectSubtasksFromDOM() {
     }
     return collected;
 }
+
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
@@ -416,9 +442,6 @@ document.addEventListener("click", function (event) {
     }
 });
 function resetFormState() {
- /*    subtask = [];
-    assignedTo = [];
-    selectedPriority = ""; */
     document.getElementById("subtask-output").innerHTML = "";
     document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
     document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
