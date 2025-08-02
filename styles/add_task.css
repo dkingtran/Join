@@ -523,3 +523,38 @@ form {
 .border-red {
   border-color: red;
 }
+.task-message {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.task-message.show {
+  bottom: 40%;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.task-successful-info {
+  width: 100%;
+  width: 400px;
+  padding: 1.5rem;
+  background-color: #2A3647;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.task-successful-info-text {
+  font-size: 16px;
+  color: white;
+}
+
+/* optional für .hidden */
+.hidden {
+  display: none;
+}

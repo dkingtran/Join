@@ -13,7 +13,6 @@ const btnLow = document.getElementById("low");
  * Uses a shorthand for `getElementById(...).value.trim()` to simplify the code.
  * @returns {Object} Task data object
  */
-
 function getTaskData() {
     const $ = id => document.getElementById(id).value.trim();
     return {
@@ -28,37 +27,48 @@ function getTaskData() {
     };
 }
 
-/**
- * Validates the "title" and "date" input fields.
 
- * Retrieves the input elements and their associated error message elements from the DOM,
- * calls the checkInput function for each field to validate them,
- * and returns whether both fields are valid (not empty).
- * @returns {boolean} true if both title and date inputs are valid, otherwise false
- */
 function checkTitleDateInput() {
-  const titleInput = document.getElementById('title-task');
-  const dateInput = document.getElementById('task-date');
-  const titleError = document.querySelector('#title-error-border .error-text');
-  const dateError = document.querySelector('#date-error-border .error-text');
-  const titleOk = checkInput(titleInput, titleError);
-  const dateOk = checkInput(dateInput, dateError);
+  let titleOk = validateTitleInput();
+  let dateOk = validateDateInput();
+
+  if (titleOk && dateOk) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-/**
- * Checks whether a given input field is empty and toggles error display accordingly.
- * If the input field is empty, adds a red border and shows the associated error message element.
- * If the input field has content, removes the error indicators.
- * @param {HTMLInputElement} input - The input element to validate
- * @param {HTMLElement} errorElement - The element displaying the error message
- * @returns {boolean} true if the input is not empty, otherwise false
- */
-function checkInput(input, errorElement) {
-    const isEmpty = input.value.trim() === "";
+function validateTitleInput() {
+  const titleInput = document.getElementById('title-task');
+  const titleError = document.querySelector('#title-error-border .error-text');
+  const isEmpty = titleInput.value.trim() === "";
 
-    input.classList.toggle("border-red", isEmpty);
-    errorElement.classList.toggle("d-none", !isEmpty);
-    return !isEmpty;
+  if (isEmpty) {
+    titleInput.classList.add("border-red");
+    titleError.classList.remove("d-none");
+    return false;
+  } else {
+    titleInput.classList.remove("border-red");
+    titleError.classList.add("d-none");
+    return true;
+  }
+}
+
+function validateDateInput() {
+  const dateInput = document.getElementById('task-date');
+  const dateError = document.querySelector('#date-error-border .error-text');
+  const isEmpty = dateInput.value.trim() === "";
+
+  if (isEmpty) {
+    dateInput.classList.add("border-red");
+    dateError.classList.remove("d-none");
+    return false;
+  } else {
+    dateInput.classList.remove("border-red");
+    dateError.classList.add("d-none");
+    return true;
+  }
 }
 
 /**
@@ -85,7 +95,6 @@ function activateButton(button, colorClass) {
     resetButtons();
     button.classList.add(colorClass);
     selectedPriority = button.id;
-    console.log("Aktuelle Priorität:", selectedPriority);
     if (button.id === "medium") {
         setMediumIcon(true);
     } else {
@@ -401,9 +410,8 @@ function getSubtaskParts(element) {
  * shows a temporary success message, and resets the form and subtasks.
  */
 
-function showSuccessMessage(message) {
+function showSuccessMessage() {
   const messageBox = document.getElementById("task-message");
-  messageBox.textContent = message;
   messageBox.classList.remove("d-none");
   hideMessageAfterDelay(messageBox, 3000);
 }
@@ -417,7 +425,6 @@ function showSuccessMessage(message) {
  * @param {HTMLElement} element - The DOM element to hide
  * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
  */
-
 function hideMessageAfterDelay(element, delay = 3000) {
   setTimeout(() => {
     element.classList.add("d-none");
@@ -448,10 +455,11 @@ document.getElementById("form-element").addEventListener("submit", async functio
   if (!checkTitleDateInput()) return;
   const taskData = getTaskData();
   await postData("tasks", taskData);
-  showSuccessMessage("✅ Task successfully created!");
+ if (checkTitleDateInput()) {
+  showSuccessMessage();
+}
   resetFormAndSubtasks();
 });
-
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.
@@ -465,13 +473,44 @@ document.addEventListener("click", function (event) {
         document.querySelector(".arrow").classList.remove("rotate");
     }
 });
+
 function resetFormState() {
     document.getElementById("subtask-output").innerHTML = "";
-    document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
-    document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
+    const errorTexts = document.querySelectorAll(".error-text");
+    for (let i = 0; i < errorTexts.length; i++) {
+        errorTexts[i].classList.add("d-none");
+    }
+    const redBorders = document.querySelectorAll(".border-red");
+    for (let i = 0; i < redBorders.length; i++) {
+        redBorders[i].classList.remove("border-red");
+    }
     resetButtons(); 
     cancelSubtaskInput();  
 }
+
+function showSuccessMessage() {
+  const messageBox = document.getElementById('task-message');
+  
+  // Startanzeige vorbereiten
+  messageBox.classList.remove('hidden');
+
+  // Leicht verzögern, damit Transition wirkt
+  setTimeout(() => {
+    messageBox.classList.add('show');
+  }, 10);
+
+  // Nach 3 Sekunden wieder verschwinden lassen
+  setTimeout(() => {
+    messageBox.classList.remove('show');
+    
+    // Nach der Animation wieder aus dem DOM-Fluss nehmen
+    setTimeout(() => {
+      messageBox.classList.add('hidden');
+    }, 500); // entspricht der CSS-Transition-Zeit
+  }, 3000);
+}
+
+
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.
