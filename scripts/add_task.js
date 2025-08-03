@@ -490,24 +490,20 @@ function resetFormState() {
 
 function showSuccessMessage() {
   const messageBox = document.getElementById('task-message');
-  
   // Startanzeige vorbereiten
-  messageBox.classList.remove('hidden');
-
+  messageBox.classList.remove('d-none');
   // Leicht verzögern, damit Transition wirkt
   setTimeout(() => {
     messageBox.classList.add('show');
   }, 10);
-
   // Nach 3 Sekunden wieder verschwinden lassen
   setTimeout(() => {
     messageBox.classList.remove('show');
-    
     // Nach der Animation wieder aus dem DOM-Fluss nehmen
     setTimeout(() => {
-      messageBox.classList.add('hidden');
+      messageBox.classList.add('d-none');
     }, 500); // entspricht der CSS-Transition-Zeit
-  }, 3000);
+  }, 1000);
 }
 
 

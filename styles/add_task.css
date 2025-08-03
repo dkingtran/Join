@@ -554,7 +554,7 @@ form {
   color: white;
 }
 
-/* optional für .hidden */
-.hidden {
+/* Change in d-none */
+.d-none {
   display: none;
 }
