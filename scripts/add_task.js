@@ -28,46 +28,46 @@ function getTaskData() {
 }
 
 function checkTitleDateInput() {
-  let titleOk = validateTitleInput();
-  let dateOk = validateDateInput();
+    let titleOk = validateTitleInput();
+    let dateOk = validateDateInput();
 
-  if (titleOk && dateOk) {
-    return true;
-  } else {
-    return false;
-  }
+    if (titleOk && dateOk) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function validateTitleInput() {
-  const titleInput = document.getElementById('title-task');
-  const titleError = document.querySelector('#title-error-border .error-text');
-  const isEmpty = titleInput.value.trim() === "";
+    const titleInput = document.getElementById('title-task');
+    const titleError = document.querySelector('#title-error-border .error-text');
+    const isEmpty = titleInput.value.trim() === "";
 
-  if (isEmpty) {
-    titleInput.classList.add("border-red");
-    titleError.classList.remove("d-none");
-    return false;
-  } else {
-    titleInput.classList.remove("border-red");
-    titleError.classList.add("d-none");
-    return true;
-  }
+    if (isEmpty) {
+        titleInput.classList.add("border-red");
+        titleError.classList.remove("d-none");
+        return false;
+    } else {
+        titleInput.classList.remove("border-red");
+        titleError.classList.add("d-none");
+        return true;
+    }
 }
 
 function validateDateInput() {
-  const dateInput = document.getElementById('task-date');
-  const dateError = document.querySelector('#date-error-border .error-text');
-  const isEmpty = dateInput.value.trim() === "";
+    const dateInput = document.getElementById('task-date');
+    const dateError = document.querySelector('#date-error-border .error-text');
+    const isEmpty = dateInput.value.trim() === "";
 
-  if (isEmpty) {
-    dateInput.classList.add("border-red");
-    dateError.classList.remove("d-none");
-    return false;
-  } else {
-    dateInput.classList.remove("border-red");
-    dateError.classList.add("d-none");
-    return true;
-  }
+    if (isEmpty) {
+        dateInput.classList.add("border-red");
+        dateError.classList.remove("d-none");
+        return false;
+    } else {
+        dateInput.classList.remove("border-red");
+        dateError.classList.add("d-none");
+        return true;
+    }
 }
 
 /**
@@ -238,16 +238,37 @@ function setupCheckboxListener() {
 function updateAssignedList() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const input = document.getElementById("searchInput");
+    const selectedContainer = document.getElementById("selectedContacts");
+
     const selected = [];
+    selectedContainer.innerHTML = ""; // Container leeren
 
     for (let j = 0; j < checkboxes.length; j++) {
-        if (checkboxes[j].checked) {
-            selected.push(checkboxes[j].dataset.name);
+        const checkbox = checkboxes[j];
+        if (checkbox.checked) {
+            const name = checkbox.dataset.name;
+            const initials = checkbox.dataset.initials;
+
+            // 🟡 Holt Farbe aus dem Avatar der gleichen Zeile
+            const color = checkbox.closest(".contact-item")
+                .querySelector(".avatar").style.backgroundColor;
+
+            selected.push(name);
+
+            // 🔵 Nur Avatar-Initialen mit Farbe
+            const avatar = document.createElement("span");
+            avatar.classList.add("avatar", "display-standard");
+            avatar.style.backgroundColor = color;
+            avatar.textContent = initials;
+
+            selectedContainer.appendChild(avatar);
         }
     }
+
     input.value = selected.join(", ");
     assignedTo = selected;
 }
+
 
 /** 
  * Loads all contacts from Firebase and displays them in the dropdown menu.
@@ -259,17 +280,28 @@ async function loadContactsIntoDropdown() {
     const contacts = Object.values(data);
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        const name = contact.name;
-        const initials = name["first-name"][0] + name["last-name"][0];
-
-        const colorClass = contact.color || ".bg-cccccc";
-        const hexColor = "#" + colorClass.replace(".bg-", "");
-
-        list.innerHTML += getAssignedNameTemplate(initials, name, hexColor);
+        const prepared = prepareContactData(contact);
+        renderContactToDropdown(prepared, list);
         console.log(contact);
     }
     setupCheckboxListener();
 }
+
+function prepareContactData(contact) {
+    const name = contact.name;
+    const initials = name["first-name"][0] + name["last-name"][0];
+    const colorClass = contact.color || ".bg-cccccc";
+    const hexColor = "#" + colorClass.replace(".bg-", "");
+
+    return { initials, name, hexColor };
+}
+
+function renderContactToDropdown({ initials, name, hexColor }, container) {
+    container.innerHTML += getAssignedNameTemplate(initials, name, hexColor);
+}
+
+
+
 
 const initialBox = document.getElementById("subtask-initial");
 const activeBox = document.getElementById("subtask-active");
@@ -413,9 +445,9 @@ function getSubtaskParts(element) {
  * shows a temporary success message, and resets the form and subtasks.
  */
 function showSuccessMessage() {
-  const messageBox = document.getElementById("task-message");
-  messageBox.classList.remove("d-none");
-  hideMessageAfterDelay(messageBox, 3000);
+    const messageBox = document.getElementById("task-message");
+    messageBox.classList.remove("d-none");
+    hideMessageAfterDelay(messageBox, 3000);
 }
 
 /**
@@ -426,22 +458,9 @@ function showSuccessMessage() {
  * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
  */
 function hideMessageAfterDelay(element, delay = 3000) {
-  setTimeout(() => {
-    element.classList.add("d-none");
-  }, delay);
-}
-
-/**
- * Resets the form and clears subtasks.
- * Resets the form with ID "form-element", clears the inner HTML of the
- * subtask output container, resets the subtask array, and calls
- * cancelSubtaskInput() to clear or update the subtask input UI.
- */
-function resetFormAndSubtasks() {
-  document.getElementById("form-element").reset();
-  document.getElementById("subtask-output").innerHTML = "";
-  subtask = [];
-  cancelSubtaskInput();
+    setTimeout(() => {
+        element.classList.add("d-none");
+    }, delay);
 }
 
 /**
@@ -451,14 +470,14 @@ function resetFormAndSubtasks() {
  * and resets the form and subtasks after successful submission.
  */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
-  event.preventDefault();
-  if (!checkTitleDateInput()) return;
-  const taskData = getTaskData();
-  await postData("tasks", taskData);
- if (checkTitleDateInput()) {
-  showSuccessMessage();
-}
-  resetFormAndSubtasks();
+    event.preventDefault();
+    if (!checkTitleDateInput()) return;
+    const taskData = getTaskData();
+    await postData("tasks", taskData);
+    if (checkTitleDateInput()) {
+        showSuccessMessage();
+    }
+    resetFormState();
 });
 
 /**
@@ -475,7 +494,9 @@ document.addEventListener("click", function (event) {
 });
 
 function resetFormState() {
+    document.getElementById("form-element").reset();
     document.getElementById("subtask-output").innerHTML = "";
+    document.getElementById("selectedContacts").innerHTML = "";
     const errorTexts = document.querySelectorAll(".error-text");
     for (let i = 0; i < errorTexts.length; i++) {
         errorTexts[i].classList.add("d-none");
@@ -484,22 +505,23 @@ function resetFormState() {
     for (let i = 0; i < redBorders.length; i++) {
         redBorders[i].classList.remove("border-red");
     }
-    resetButtons(); 
-    cancelSubtaskInput();  
+    subtask = [];
+    resetButtons();
+    cancelSubtaskInput();
 }
 
 function showSuccessMessage() {
-  const messageBox = document.getElementById('task-message');
-  messageBox.classList.remove('d-none');
-  setTimeout(() => {
-    messageBox.classList.add('show');
-  }, 10);
-  setTimeout(() => {
-    messageBox.classList.remove('show');
+    const messageBox = document.getElementById('task-message');
+    messageBox.classList.remove('d-none');
     setTimeout(() => {
-      messageBox.classList.add('d-none');
-    }, 500);
-  }, 1000);
+        messageBox.classList.add('show');
+    }, 10);
+    setTimeout(() => {
+        messageBox.classList.remove('show');
+        setTimeout(() => {
+            messageBox.classList.add('d-none');
+        }, 500);
+    }, 1000);
 }
 
 /**

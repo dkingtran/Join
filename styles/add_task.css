@@ -291,6 +291,46 @@ form {
   transform: scale(1.2);
 }
 
+#selectedContacts {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  z-index: 10; /* sicher über dem Dropdown */
+  background-color: white; /* oder transparent, wie du willst */
+  border-radius: 6px;
+}
+
+.custom-dropdown {
+  position: relative;
+}
+
+
+.selected-contact {
+  display: inline-flex;
+  align-items: center;
+  margin: 4px;
+  padding: 4px 8px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.selected-contact .avatar {
+  margin-right: 6px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+}
+
+
 .category-text {
   transition: border-color 0.1s;
   color: black;
