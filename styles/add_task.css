@@ -1,6 +1,5 @@
 html,
 body {
-  
   min-height: 100%;
   margin: 0;
   padding: 0;
@@ -95,11 +94,8 @@ form {
 }
 
 .du-date {
-  width: 100%;
   width: 100px;
 }
-
-/* Mit der Klasse 'date-input-task' */
 
 #task-date:valid {
   color: #706b6b;
@@ -160,7 +156,6 @@ form {
   margin-bottom: 80px;
 }
 
-/* Assigned CSS */
 .assigned-to {
   width: 150px;
 }
@@ -179,7 +174,6 @@ form {
   cursor: pointer;
   background: white;
   height: 48px;
-
   transition: border-color 0.1s;
 }
 
