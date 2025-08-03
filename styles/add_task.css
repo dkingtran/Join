@@ -290,6 +290,16 @@ form {
 .contact-item input[type="checkbox"] {
   transform: scale(1.2);
 }
+.contact-item.active {
+  color: white;
+  background-color: #2A3647; /* Helles Blau als Beispiel */
+  border-radius: 6px;
+}
+
+.contact-item.active:hover {
+  background-color: #091931; /* dunkleres Hover bei aktiver Auswahl */
+}
+
 
 #selectedContacts {
   position: absolute;
@@ -299,7 +309,6 @@ form {
   gap: 6px;
   padding: 6px;
   z-index: 10; /* sicher über dem Dropdown */
-  background-color: white; /* oder transparent, wie du willst */
   border-radius: 6px;
 }
 

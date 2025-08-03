@@ -1,5 +1,5 @@
 function getSubtaskTemplate(text) {
-return `
+  return `
  <div class="subtask-text-box">
   <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
@@ -15,14 +15,14 @@ return `
 }
 
 function changeDivtoInputTemplate(text) {
-return `
+  return `
 <input class="subtask-entry font-bundle" type="text" value="${text}"
     onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
 `;
 }
 
 function getReturnToDivTemplate(text) {
-return `
+  return `
 <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">
     ${text}
 </div>
@@ -39,7 +39,7 @@ function getAssignedNameTemplate(initials, name, color) {
              class="contact-checkbox"
              data-name="${name["first-name"]} ${name["last-name"]}"
              data-initials="${initials}"
-             onclick="event.stopPropagation()">
+             onclick="toggleCheckboxContact(this); event.stopPropagation();">
     </div>
   `;
 }

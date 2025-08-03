@@ -209,11 +209,24 @@ function rotateCategoryArrow(rotate) {
  *
  * @param {HTMLElement} container The HTML element container that holds the checkbox.
  */
-function toggleCheckboxContact(container) {
+function toggleCheckboxContact(containerOrCheckbox) {
+    const isCheckbox = containerOrCheckbox.classList.contains("contact-checkbox");
+    const container = isCheckbox
+        ? containerOrCheckbox.closest(".contact-item")
+        : containerOrCheckbox;
     const checkbox = container.querySelector(".contact-checkbox");
-    checkbox.checked = !checkbox.checked;
-    checkbox.dispatchEvent(new Event("change"));
+    if (!isCheckbox) {
+        checkbox.checked = !checkbox.checked;
+    }
+    if (checkbox.checked) {
+        container.classList.add("active");
+    } else {
+        container.classList.remove("active");
+    }
+    updateAssignedList();
 }
+
+
 
 /**
  * Adds a change listener to each contact checkbox.
@@ -239,32 +252,23 @@ function updateAssignedList() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const input = document.getElementById("searchInput");
     const selectedContainer = document.getElementById("selectedContacts");
-
     const selected = [];
     selectedContainer.innerHTML = ""; // Container leeren
-
     for (let j = 0; j < checkboxes.length; j++) {
         const checkbox = checkboxes[j];
         if (checkbox.checked) {
             const name = checkbox.dataset.name;
             const initials = checkbox.dataset.initials;
-
-            // 🟡 Holt Farbe aus dem Avatar der gleichen Zeile
             const color = checkbox.closest(".contact-item")
                 .querySelector(".avatar").style.backgroundColor;
-
             selected.push(name);
-
-            // 🔵 Nur Avatar-Initialen mit Farbe
             const avatar = document.createElement("span");
             avatar.classList.add("avatar", "display-standard");
             avatar.style.backgroundColor = color;
             avatar.textContent = initials;
-
             selectedContainer.appendChild(avatar);
         }
     }
-
     input.value = selected.join(", ");
     assignedTo = selected;
 }
@@ -506,6 +510,10 @@ function resetFormState() {
         redBorders[i].classList.remove("border-red");
     }
     subtask = [];
+    const activeContacts = document.querySelectorAll(".contact-item.active");
+    for (let i = 0; i < activeContacts.length; i++) {
+    activeContacts[i].classList.remove("active");
+}
     resetButtons();
     cancelSubtaskInput();
 }
