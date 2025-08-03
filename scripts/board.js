@@ -3,7 +3,7 @@ function onSearchClick() {
     // Hier kann die Suchfunktionalität ergänzt werden
     alert('Suche nach: ' + value);
 }
-let todos = [{
+let tasks = [{
     'id': 0,
     'title': 'Putzen',
     'category': 'open'
@@ -14,37 +14,52 @@ let todos = [{
 }, {
     'id': 2,
     'title': 'Einkaufen',
-    'category': 'closed'
+    'category': 'done'
 }];
 
 let currentDraggedElement;
 
 function updateHTML() {
-    let open = todos.filter(t => t['category'] == 'open');
+    // Kategorien: open, inprogress, awaitfeedback, done
+    const categories = [
+        { key: 'open', id: 'open', label: 'To do' },
+        { key: 'inprogress', id: 'inprogress', label: 'In Progress' },
+        { key: 'awaitfeedback', id: 'awaitfeedback', label: 'Await Feedback' },
+        { key: 'done', id: 'done', label: 'Done' }
+    ];
+    categories.forEach(cat => {
+        const items = tasks.filter(t => t['category'] === cat.key);
+        const columnElement = document.getElementById(cat.id);
+        if (columnElement) {
+            // Entferne alte Tasks
+            columnElement.querySelectorAll('.task-card').forEach(e => e.remove());
+            // Füge neue Tasks als HTML-String ein
+            const tasksHTML = items.map(generateTasksHTML).join('');
+            columnElement.insertAdjacentHTML('beforeend', tasksHTML);
 
-    document.getElementById('open').innerHTML = '';
+            // Zeige/hide die drag-area je nach Tasks
+            const dragArea = columnElement.querySelector('.drag-area');
+            if (dragArea) {
+                dragArea.style.display = items.length === 0 ? 'flex' : 'none';
+            }
+        }
+    });
+}
 
-    for (let index = 0; index < open.length; index++) {
-        const element = open[index];
-        document.getElementById('open').innerHTML += generateTodoHTML(element);
-    }
-
-    let closed = todos.filter(t => t['category'] == 'closed');
-
-    document.getElementById('closed').innerHTML = '';
-
-    for (let index = 0; index < closed.length; index++) {
-        const element = closed[index];
-        document.getElementById('closed').innerHTML += generateTodoHTML(element);
-    }
+// Hilfsfunktion: HTML-String zu Element
+function htmlToElement(html) {
+    const template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
 }
 
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
-function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
+function generateTasksHTML(element) {
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="task-card">${element['title']}</div>`;
 }
 
 function allowDrop(ev) {
@@ -52,8 +67,18 @@ function allowDrop(ev) {
 }
 
 function moveTo(category) {
-    todos[currentDraggedElement]['category'] = category;
-    updateHTML();
+    const task = tasks[currentDraggedElement];
+    if (task) {
+        task.category = category;
+
+        // 🆕 Reihenfolge neu zuordnen
+        tasks.splice(currentDraggedElement, 1);
+        tasks.push(task);
+
+        // IDs neu vergeben
+        tasks.forEach((t, idx) => t.id = idx);
+        updateHTML();
+    }
 }
 
 function highlight(id) {
@@ -72,4 +97,41 @@ function toggleHelpDropdown() {
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('profileDropdown');
     dropdown.classList.toggle('show');
+}
+    
+// Öffnet das Add Task Modal und lädt das Formular aus add_task.html
+function showAddTaskModal() {
+    const modal = document.getElementById('addTaskModal');
+    const inner = document.getElementById('addTaskModalInner');
+    modal.style.display = 'flex';
+    // Lade add_task.html und extrahiere NUR den .wrapper Inhalt
+    fetch('add_task.html')
+        .then(response => response.text())
+        .then(html => {
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            const wrapper = temp.querySelector('.wrapper');
+            inner.innerHTML = wrapper ? wrapper.outerHTML : '';
+            // Lade ggf. JS nach
+            const script = document.createElement('script');
+            script.src = './scripts/add_task.js';
+            document.body.appendChild(script);
+        });
+    document.body.style.overflow = 'hidden';
+}
+
+function closeAddTaskModal() {
+    document.getElementById('addTaskModal').style.display = 'none';
+    document.getElementById('addTaskModalInner').innerHTML = '';
+    document.body.style.overflow = '';
+}
+
+
+// Für beide Buttons das Modal öffnen (globale Funktionen für Inline-Handler)
+function showAddTask() {
+    showAddTaskModal();
+}
+
+function addBoardTask(param) {
+    showAddTaskModal();
 }

@@ -1,3 +1,4 @@
+
 .board-design {
     background: #FF7A00;
 }
@@ -176,9 +177,10 @@
     max-width: 25%;
     display: flex;
     flex-direction: column;
-    background: #f9f9f9;
     border-radius: 12px;
     box-sizing: border-box;
+    position: relative;
+    min-height: 300px; /* optional: für bessere Optik */
 }
 
 .column-header {
@@ -227,18 +229,54 @@
     margin-bottom: 24px;
     display: flex;
     align-items: center;
-    width: 252px;
+    width: 100%;
     box-shadow: 0px 0px 4px 0px #00000029;
+    justify-content: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    z-index: 0;
+}
+
+.drag-area.hide {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.todo {
+.task-card {
     background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px #00000014;
+    padding: 16px;
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.no-tasks-message {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A8A8A8;
+    font-size: 16px;
+    font-weight: 500;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
 }

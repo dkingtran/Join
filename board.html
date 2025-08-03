@@ -6,9 +6,17 @@
     <title>Join - Board</title>
     <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/media-query-add-task.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/media.css" />
+    <link rel="stylesheet" href="./styles/media-query-add-task.css" />
+    <link rel="stylesheet" href="./styles/add-task-template.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./scripts/add-task-templates.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
   </head>
@@ -108,7 +116,6 @@
       </div>
     </aside>
     <!--End of Side-menu--> 
-
     <main class="main-content">
       <section>
       <div class="header-board">
@@ -133,11 +140,13 @@
           <div class="board-column">
             <div class="column-header">
               <span>To do</span>
-              <button class="add-board-btn" onclick="addBoardTask('todo')">
+              <button class="add-board-btn" onclick="addBoardTask('tasks')">
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
+            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')">
+              <span class="no-tasks-message">No Tasks To do</span>
+            </div>
           </div>
           <div class="board-column">
             <div class="column-header">
@@ -146,7 +155,9 @@
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="inprogress" ondrop="moveTo('inprogress')" ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')"></div>
+            <div class="drag-area" id="inprogress" ondrop="moveTo('inprogress')" ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')">
+              <span class="no-tasks-message">No Tasks In Progress</span>
+            </div>
           </div>
           <div class="board-column">
             <div class="column-header">
@@ -155,17 +166,29 @@
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="awaitfeedback" ondrop="moveTo('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')"></div>
+            <div class="drag-area" id="awaitfeedback" ondrop="moveTo('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')">
+              <span class="no-tasks-message">No Tasks Await Feedback</span>
+            </div>
           </div>
           <div class="board-column">
             <div class="column-header">
               <span>Done</span>
             </div>
-            <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
+            <div class="drag-area" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')">
+              <span class="no-tasks-message">No Tasks Done</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+            <!-- Modal für Add Task -->
+          <div id="addTaskModal" class="add-task-modal" style="display:none;">
+            <div class="add-task-modal-content">
+            <button class="add-task-modal-close" onclick="closeAddTaskModal()">&times;</button>
+            <div class="add-task-modal-inner" id="addTaskModalInner"></div>
           </div>
         </div>
       </section>
     </main>
   </body>
-</html>
 </html>
