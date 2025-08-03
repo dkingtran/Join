@@ -1,12 +1,8 @@
-let title = [];
+/* let title = []; */
 let selectedPriority = "";
-let task = [];
-let subtask = [];
+/* let task = []; */
+ let subtask = []; 
 let assignedTo = [];
-
-const btnUrgent = document.getElementById("urgent");
-const btnMedium = document.getElementById("medium");
-const btnLow = document.getElementById("low");
 
 /**
  * Retrieves all form data for a task and returns it as an object.
@@ -26,6 +22,21 @@ function getTaskData() {
     };
 }
 
+/* function isInputValid(id, errorSelector) {
+    const input = document.getElementById(id);
+    const error = document.querySelector(errorSelector);
+    const isEmpty = input.value.trim() === "";
+    input.classList.toggle("border-red", isEmpty);
+    error.classList.toggle("d-none", !isEmpty);
+    return !isEmpty;
+}
+
+function checkTitleDateInput() {
+    const titleOk = isInputValid("title-task", "#title-error-border .error-text");
+    const dateOk = isInputValid("task-date", "#date-error-border .error-text");
+    return titleOk && dateOk;
+}
+ */
 
 function checkTitleDateInput() {
     let titleOk = validateTitleInput();
@@ -69,79 +80,11 @@ function validateDateInput() {
     }
 }
 
-/**
- * Removes all active color classes from the priority buttons.
- */
-
-function resetButtons() {
-    btnUrgent.classList.remove("active-red");
-    btnMedium.classList.remove("active-yellow");
-    btnLow.classList.remove("active-green");
-}
-
-/**
-
- * If the "medium" button is selected, it changes its icon as well.
- * 
- * @param {HTMLElement} button - The button to activate
- * @param {string} colorClass - The CSS class for the active color state
- */
-
-function activateButton(button, colorClass) {
-    resetButtons();
-    button.classList.add(colorClass);
-    selectedPriority = button.id;
-    if (button.id === "medium") {
-        setMediumIcon(true);
-    } else {
-        setMediumIcon(false);
-    }
-}
-
-/**
- * Switches the icon of the medium priority button.
- * @param {boolean} active - true = use active icon, false = use default icon
- */
-function setMediumIcon(active) {
-    const icon = document.getElementById("medium-icon");
-    if (active) {
-        icon.src = "./assets/img/icons/add_task/medium_vector.svg";
-    } else {
-        icon.src = "./assets/img/icons/add_task/prio_medium_orange.svg";
-    }
-}
-
-/**
- * Handles click on the "Urgent" button.
- */
-btnUrgent.addEventListener("click", function (event) {
-    event.preventDefault();
-    activateButton(btnUrgent, "active-red");
-});
-
-/**
- * Handles click on the "Medium" button.
- */
-btnMedium.addEventListener("click", function (event) {
-    event.preventDefault();
-    activateButton(btnMedium, "active-yellow");
-});
-
-/**
- * Handles click on the "Low" button.
- */
-btnLow.addEventListener("click", function (event) {
-    event.preventDefault();
-    activateButton(btnLow, "active-green");
-});
-
 // Assigned
 /**
  * Toggles the visibility of the dropdown list when clicked.
- * - Toggles the rotation class on the arrow for visual feedback.
  * @param {Event} event - The click event triggering the dropdown toggle.
  */
-
 function toggleDropdown(event) {
     event.stopPropagation(); // Prevents outer click handler from interfering
     const list = document.getElementById("contactList");
@@ -404,15 +347,6 @@ function getSubtaskParts(element) {
 }
 
 /**
- * shows a temporary success message, and resets the form and subtasks.
- */
-function showSuccessMessage() {
-    const messageBox = document.getElementById("task-message");
-    messageBox.classList.remove("d-none");
-    hideMessageAfterDelay(messageBox, 3000);
-}
-
-/**
  * Form submission event listener with validation and data posting.
  */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
@@ -442,45 +376,23 @@ function resetFormState() {
     document.getElementById("form-element").reset();
     document.getElementById("subtask-output").innerHTML = "";
     document.getElementById("selectedContacts").innerHTML = "";
-    const errorTexts = document.querySelectorAll(".error-text");
-    for (let i = 0; i < errorTexts.length; i++) {
-        errorTexts[i].classList.add("d-none");
-    }
-    const redBorders = document.querySelectorAll(".border-red");
-    for (let i = 0; i < redBorders.length; i++) {
-        redBorders[i].classList.remove("border-red");
-    }
     subtask = [];
-    const activeContacts = document.querySelectorAll(".contact-item.active");
-    for (let i = 0; i < activeContacts.length; i++) {
-        activeContacts[i].classList.remove("active");
-    }
+    document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
+    document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
+    document.querySelectorAll(".contact-item.active").forEach(el => el.classList.remove("active"));
     resetButtons();
     cancelSubtaskInput();
 }
 
 function showSuccessMessage() {
     const messageBox = document.getElementById('task-message');
-    messageBox.classList.remove('d-none');
-    setTimeout(() => {
-        messageBox.classList.add('show');
-    }, 10);
+    messageBox.classList.remove('hidden');
     setTimeout(() => {
         messageBox.classList.remove('show');
-        setTimeout(() => {
-            messageBox.classList.add('d-none');
-        }, 500);
     }, 1000);
-}
-
-/**
- * @param {HTMLElement} element - The DOM element to hide
- * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
- */
-function hideMessageAfterDelay(element, delay = 3000) {
     setTimeout(() => {
-        element.classList.add("d-none");
-    }, delay);
+        messageBox.classList.add('hidden');
+    }, 1500); //
 }
 
 /**

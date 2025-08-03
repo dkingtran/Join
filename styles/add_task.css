@@ -577,14 +577,16 @@ form {
   transform: translateX(-50%);
   z-index: 1000;
   opacity: 0;
-  transition: all 0.5s ease;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .task-message.show {
   bottom: 40%;
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 .task-successful-info {
