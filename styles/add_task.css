@@ -300,22 +300,21 @@ form {
   background-color: #091931; /* dunkleres Hover bei aktiver Auswahl */
 }
 
-
 #selectedContacts {
-  position: absolute;
-  top: 100%;
-  left: 0;
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   padding: 6px;
-  z-index: 10; /* sicher über dem Dropdown */
+  margin-top: 8px; /* Abstand zum Eingabefeld */
+  min-width: 335px;
   border-radius: 6px;
+  background-color: #f9f9f9; /* optional visuelle Trennung */
 }
+
 
 .custom-dropdown {
   position: relative;
 }
-
 
 .selected-contact {
   display: inline-flex;

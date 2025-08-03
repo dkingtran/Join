@@ -98,7 +98,8 @@
                                 <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
                                         src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
                                 </button>
-                                <button id="medium" class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
+                                <button id="medium"
+                                    class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
                                     Medium
                                     <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
                                         alt="medium">
@@ -112,20 +113,21 @@
 
                             <!-- Assigned -->
                             <div class="assigned-to">
+                                <label class="font-bundle assigned-to">Assigned to</label>
                                 <div class="custom-dropdown w-full" onclick="handleDropdownClick(event)">
-                                    <label class="font-bundle assigned-to">Assigned to</label>
                                     <div class="dropdown-input max-w-440 border-radius-10px input-bundle"
                                         onclick="toggleDropdown(event)">
                                         <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
-                                    <div id="selectedContacts" class="contact-selected"></div>
-                                    <div class="dropdown-list w-full " id="contactList">
+                                    <div class="dropdown-list w-full" id="contactList">
                                         <div class="contact-item"></div>
                                     </div>
                                 </div>
+                                <div id="selectedContacts" class="contact-selected"></div>
                             </div>
+
 
                             <!-- HTML -->
                             <div class="category-task select-wrapper">
@@ -208,9 +210,9 @@
         </div>
     </div>
 
-  <div id="task-message" class="task-message d-none">
-  <div class="task-successful-info">
-    <p class="task-successful-info-text">Task successfully created!</p>
+    <div id="task-message" class="task-message d-none">
+        <div class="task-successful-info">
+            <p class="task-successful-info-text">Task successfully created!</p>
 
             <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
