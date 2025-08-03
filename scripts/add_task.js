@@ -20,64 +20,28 @@ function getTaskData() {
     };
 }
 
-/* function isInputValid(id, errorSelector) {
-    const input = document.getElementById(id);
-    const error = document.querySelector(errorSelector);
-    const isEmpty = input.value.trim() === "";
-    input.classList.toggle("border-red", isEmpty);
-    error.classList.toggle("d-none", !isEmpty);
-    return !isEmpty;
-}
-
-function checkTitleDateInput() {
-    const titleOk = isInputValid("title-task", "#title-error-border .error-text");
-    const dateOk = isInputValid("task-date", "#date-error-border .error-text");
-    return titleOk && dateOk;
-}
- */
-
-function checkTitleDateInput() {
-    let titleOk = validateTitleInput();
-    let dateOk = validateDateInput();
-    if (titleOk && dateOk) {
-        return true;
-    } else {
-        return false;
-    }
-    console.log(dateOk);
-}
-
 function validateTitleInput() {
     const titleInput = document.getElementById('title-task');
     const titleError = document.querySelector('#title-error-border .error-text');
-    const isEmpty = titleInput.value.trim() === "";
-
-    if (isEmpty) {
-        titleInput.classList.add("border-red");
-        titleError.classList.remove("d-none");
-        return false;
-    } else {
-        titleInput.classList.remove("border-red");
-        titleError.classList.add("d-none");
-        return true;
-    }
+    const isValid = titleCheck(titleInput.value);
+    titleInput.classList.toggle("border-red", !isValid);
+    titleError.classList.toggle("d-none", isValid);
+    return isValid;
 }
 
 function validateDateInput() {
     const dateInput = document.getElementById('task-date');
     const dateError = document.querySelector('#date-error-border .error-text');
-    const isEmpty = dateInput.value.trim() === "";
+    const isValid = dateCheck(dateInput.value);
+    dateInput.classList.toggle("border-red", !isValid);
+    dateError.classList.toggle("d-none", isValid);
+    return isValid;
+}
 
-    if (isEmpty) {
-        dateInput.classList.add("border-red");
-        dateError.classList.remove("d-none");
-        return false;
-
-    } else {
-        dateInput.classList.remove("border-red");
-        dateError.classList.add("d-none");
-        return true;
-    }
+function checkTitleDateInput() {
+    const titleOk = validateTitleInput(); // ← funktioniert nur, wenn sie vorher definiert wurde
+    const dateOk = validateDateInput();
+    return titleOk && dateOk;
 }
 
 // Assigned
