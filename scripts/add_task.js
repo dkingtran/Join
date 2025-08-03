@@ -27,7 +27,6 @@ function getTaskData() {
     };
 }
 
-
 function checkTitleDateInput() {
   let titleOk = validateTitleInput();
   let dateOk = validateDateInput();
@@ -262,7 +261,11 @@ async function loadContactsIntoDropdown() {
         const contact = contacts[i];
         const name = contact.name;
         const initials = name["first-name"][0] + name["last-name"][0];
-        list.innerHTML += getAssignedNameTemplate(initials, name);
+
+        const colorClass = contact.color || ".bg-cccccc";
+        const hexColor = "#" + colorClass.replace(".bg-", "");
+
+        list.innerHTML += getAssignedNameTemplate(initials, name, hexColor);
         console.log(contact);
     }
     setupCheckboxListener();
@@ -409,7 +412,6 @@ function getSubtaskParts(element) {
  * Prevents page reload, collects form data, sends it to Firebase,
  * shows a temporary success message, and resets the form and subtasks.
  */
-
 function showSuccessMessage() {
   const messageBox = document.getElementById("task-message");
   messageBox.classList.remove("d-none");
@@ -418,10 +420,8 @@ function showSuccessMessage() {
 
 /**
  * Hides a given element after a specified delay.
- * 
  * Adds the CSS class "d-none" to the element after the delay (default is 3000 ms),
  * effectively hiding it from view.
- * 
  * @param {HTMLElement} element - The DOM element to hide
  * @param {number} [delay=3000] - Delay in milliseconds before hiding the element
  */
@@ -490,23 +490,17 @@ function resetFormState() {
 
 function showSuccessMessage() {
   const messageBox = document.getElementById('task-message');
-  // Startanzeige vorbereiten
   messageBox.classList.remove('d-none');
-  // Leicht verzögern, damit Transition wirkt
   setTimeout(() => {
     messageBox.classList.add('show');
   }, 10);
-  // Nach 3 Sekunden wieder verschwinden lassen
   setTimeout(() => {
     messageBox.classList.remove('show');
-    // Nach der Animation wieder aus dem DOM-Fluss nehmen
     setTimeout(() => {
       messageBox.classList.add('d-none');
-    }, 500); // entspricht der CSS-Transition-Zeit
+    }, 500);
   }, 1000);
 }
-
-
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.

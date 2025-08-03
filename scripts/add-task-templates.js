@@ -29,19 +29,19 @@ return `
 `;
 }
 
-function getAssignedNameTemplate(initials,name){
-  return`
-           <div class="contact-item" onclick="toggleCheckboxContact(this)">
-    <span class="avatar display-standard"
-          style="background-color: #0c1663ff;">${initials}</span>
-    <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
-<input type="checkbox"
-       class="contact-checkbox"
-       data-name="${name["first-name"]} ${name["last-name"]}"
-       data-initials="${initials}"
-       onclick="event.stopPropagation()">
-</div>
-
-        `;
+function getAssignedNameTemplate(initials, name, color) {
+  return `
+    <div class="contact-item" onclick="toggleCheckboxContact(this)">
+      <span class="avatar display-standard"
+            style="background-color: ${color};">${initials}</span>
+      <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
+      <input type="checkbox"
+             class="contact-checkbox"
+             data-name="${name["first-name"]} ${name["last-name"]}"
+             data-initials="${initials}"
+             onclick="event.stopPropagation()">
+    </div>
+  `;
 }
+
 
