@@ -1,6 +1,6 @@
 html,
 body {
-  height: auto;
+  
   min-height: 100%;
   margin: 0;
   padding: 0;
@@ -19,11 +19,11 @@ body {
 .main-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
   max-width: 1200px;
   height: auto;
   margin-left: 600px;
+  align-items: flex-start;
 }
 
 .title-section {
@@ -162,7 +162,6 @@ form {
 
 /* Assigned CSS */
 .assigned-to {
-  display: block;
   width: 150px;
 }
 
@@ -197,22 +196,18 @@ form {
 }
 
 .arrow {
-  transition: transform 0.3s ease;
   margin-left: 8px;
   color: #2A3647;
   display: inline-block;
 }
-
 
 .arrow.rotate {
   transform: rotate(180deg);
   transition: transform 0.2s ease;
 }
 
-
 .dropdown-list {
   position: absolute;
-
   min-width: 440px;
   top: 100%;
   left: 0;
@@ -309,10 +304,6 @@ form {
   min-width: 335px;
   border-radius: 6px;
   background-color: #f9f9f9; /* optional visuelle Trennung */
-}
-
-.custom-dropdown {
-  position: relative;
 }
 
 .selected-contact {
@@ -603,7 +594,6 @@ form {
   color: white;
 }
 
-/* Change in d-none */
 .d-none {
   display: none;
 }

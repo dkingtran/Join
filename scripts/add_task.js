@@ -1,7 +1,5 @@
-/* let title = []; */
 let selectedPriority = "";
-/* let task = []; */
- let subtask = []; 
+let subtask = [];
 let assignedTo = [];
 
 /**
@@ -46,6 +44,7 @@ function checkTitleDateInput() {
     } else {
         return false;
     }
+    console.log(dateOk);
 }
 
 function validateTitleInput() {
@@ -73,6 +72,7 @@ function validateDateInput() {
         dateInput.classList.add("border-red");
         dateError.classList.remove("d-none");
         return false;
+
     } else {
         dateInput.classList.remove("border-red");
         dateError.classList.add("d-none");
@@ -134,7 +134,7 @@ function rotateCategoryArrow(rotate) {
 function toggleCheckboxContact(containerOrCheckbox) {
     const isCheckbox = containerOrCheckbox.classList.contains("contact-checkbox");
     const container = isCheckbox
-        ? containerOrCheckbox.closest(".contact-item")
+        ? containerOrCheckbox.closest(".contact-item")// Ternary Operator
         : containerOrCheckbox;
     const checkbox = container.querySelector(".contact-checkbox");
     if (!isCheckbox) {
@@ -185,7 +185,7 @@ function updateAssignedList() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const selectedContainer = document.getElementById("selectedContacts");
     const selected = [];
-    selectedContainer.innerHTML = ""; 
+    selectedContainer.innerHTML = "";
     for (let j = 0; j < checkboxes.length; j++) {
         const checkbox = checkboxes[j];
         if (checkbox.checked) {
@@ -299,7 +299,6 @@ function collectSubtasksFromDOM() {
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
  */
-
 function deleteSubtask(element) {
     const subtaskBox = element.closest(".subtask-text-box");
     if (!subtaskBox) return;
@@ -388,12 +387,17 @@ function showSuccessMessage() {
     const messageBox = document.getElementById('task-message');
     messageBox.classList.remove('hidden');
     setTimeout(() => {
+        messageBox.classList.add('show');
+    }, 10);
+    setTimeout(() => {
         messageBox.classList.remove('show');
     }, 1000);
     setTimeout(() => {
         messageBox.classList.add('hidden');
-    }, 1500); //
+        window.location.href = "board.html"; // 🔁 Zielseite hier eintragen
+    }, 1500);
 }
+
 
 /**
  * Closes the contact dropdown when the user clicks outside of it.
