@@ -1,3 +1,8 @@
+function onSearchClick() {
+    const value = document.getElementById('searchInput').value;
+    // Hier kann die Suchfunktionalität ergänzt werden
+    alert('Suche nach: ' + value);
+}
 let todos = [{
     'id': 0,
     'title': 'Putzen',

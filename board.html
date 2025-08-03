@@ -119,30 +119,51 @@
           <div class="search-input-wrapper">
             <input type="text" id="searchInput" placeholder="Find Task" />
             <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
-            <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+            <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+              <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+            </button>
           </div>
-          <button id="addTaskButton" onclick="showAddTask()">Add Task
+          <button class="add-task-button" id="addTaskButton" onclick="showAddTask()">Add Task
             <img src="./assets/img/icons/board/add-task.svg" alt="">
           </button>
-        </div>
       </div>
       </section>
       <section>
-        <div class="drag-board"></div>
-      <div
-        class="drag-area"
-        id="open"
-        ondrop="moveTo('open')"
-        ondragleave="removeHighlight('open')"
-        ondragover="allowDrop(event); highlight('open')"
-      ></div>
-      <div
-        class="drag-area"
-        id="closed"
-        ondrop="moveTo('closed')"
-        ondragleave="removeHighlight('closed')"
-        ondragover="allowDrop(event); highlight('closed')"
-      ></div>
+        <div class="drag-board">
+          <div class="board-column">
+            <div class="column-header">
+              <span>To do</span>
+              <button class="add-board-btn" onclick="addBoardTask('todo')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
+          </div>
+          <div class="board-column">
+            <div class="column-header">
+              <span>In progress</span>
+              <button class="add-board-btn" onclick="addBoardTask('inprogress')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="drag-area" id="inprogress" ondrop="moveTo('inprogress')" ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')"></div>
+          </div>
+          <div class="board-column">
+            <div class="column-header">
+              <span>Await feedback</span>
+              <button class="add-board-btn" onclick="addBoardTask('awaitfeedback')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="drag-area" id="awaitfeedback" ondrop="moveTo('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')"></div>
+          </div>
+          <div class="board-column">
+            <div class="column-header">
+              <span>Done</span>
+            </div>
+            <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
+          </div>
+        </div>
       </section>
     </main>
   </body>
