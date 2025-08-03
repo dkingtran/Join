@@ -1,17 +1,14 @@
 
-
 let nameRef;
 let emailRef;
 let passwordRef;
 let passwordConRef;
-
 
 const firstNameRegex = /^[a-z]+\s/gi;
 const lastNameRegex = /\s[a-z]+$/gi;
 const lettersRegex = /^[a-z]+$/gi;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
-
 
 /**
  * Validates a given name string based on specific regex patterns.
@@ -26,7 +23,6 @@ function nameCheck(name) {
     else return true;
 }
 
-
 /**
  * Checks if the provided email is valid.
  * Tests if email is empty and has a valid email-form.
@@ -39,7 +35,6 @@ function emailCheck(email) {
     else return true;
 }
 
-
 /**
  * Checks if the provided password is not an empty string after trimming whitespace.
  * @param {string} password - The password string to check.
@@ -49,7 +44,6 @@ function passwordCheck(password) {
     if (removeSpaces(password) == "") return false;
     else return true;
 }
-
 
 /**
  * Checks if the password confirmation matches the original password and is not empty.
@@ -62,15 +56,14 @@ function passwordConCheck(password, passwordCon) {
     else return true;
 }
 
-
-function removeSpaces(string) {
-    return string.replace(/\s+/gm, '');
-}
-
-
+/**
+ * Generates an object containing the first name(s) and last name from a full name string.
+ * Capitalizes the first letter of each word.
+ * @returns generated Object.
+ */
 function generateNameObject(name) {
     let parts = name.trim().split(/\s+/);
-    parts = parts.map(word => capitalizeFirstLetter(word))
+    parts = parts.map(word => capitalizeFirstLetter(word));
     let lastName = parts.pop();
     let firstName = parts.join(' ');
     return {
@@ -79,7 +72,24 @@ function generateNameObject(name) {
     };
 }
 
+/**
+ * Checks if the provided date string is valid and represents a future date.
+ *
+ * @param {string} date - The date string to check.
+ * @returns {boolean} Returns true if the date is not empty and is in the future, otherwise false.
+ */
+function dateCheck(date) {
+    if(removeSpaces(date) == "") return false;
+    let dateInput = new Date(date);
+    let dateNow = new Date();
+    if (dateInput < dateNow) return false;
+    else return true;
+}
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+/**
+ * Checks if the given title is not empty after removing spaces.
+ */
+function titleCheck(title) {
+    if(removeSpaces(title) == "") return false;
+    else return true;
 }

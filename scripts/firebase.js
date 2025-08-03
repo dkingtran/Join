@@ -1,7 +1,6 @@
 
 const BASE_URL = "https://join-f4dc9-default-rtdb.europe-west1.firebasedatabase.app/";
 
-
 async function loadData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json");
@@ -10,7 +9,6 @@ async function loadData(path = "") {
         console.error("Fetch error:", error);
     }
 }
-
 
 async function postData(path = "", data = {}) {
     try {
@@ -27,7 +25,6 @@ async function postData(path = "", data = {}) {
     }
 }
 
-
 async function deleteData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json", {
@@ -38,7 +35,6 @@ async function deleteData(path = "") {
         console.error("Delete error:", error);
     }
 }
-
 
 async function putData(path = "", data = {}) {
     try {
@@ -54,7 +50,6 @@ async function putData(path = "", data = {}) {
         console.error("Put error:", error);
     }
 }
-
 
 /**
  * Adds an 'id' property to a Firebase object using the provided idObject's name,
