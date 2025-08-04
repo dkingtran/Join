@@ -20,7 +20,7 @@
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
   </head>
-  <body onload="updateHTML()">
+  <body onload="loadTasksFromFirebase()">
     <header>
       <!--Header content-->
       <div class="header-content">
@@ -137,46 +137,38 @@
       </section>
       <section>
         <div class="drag-board">
-          <div class="board-column">
+          <div class="board-column" id="open">
             <div class="column-header">
               <span>To do</span>
-              <button class="add-board-btn" onclick="addBoardTask('tasks')">
+              <button class="add-board-btn" onclick="addBoardTask('open')">
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')">
-              <span class="no-tasks-message">No Tasks To do</span>
-            </div>
+            <div class="tasks-list" id="tasks-list-open"></div>
           </div>
-          <div class="board-column">
+          <div class="board-column" id="inprogress">
             <div class="column-header">
               <span>In progress</span>
               <button class="add-board-btn" onclick="addBoardTask('inprogress')">
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="inprogress" ondrop="moveTo('inprogress')" ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')">
-              <span class="no-tasks-message">No Tasks In Progress</span>
-            </div>
+            <div class="tasks-list" id="tasks-list-inprogress"></div>
           </div>
-          <div class="board-column">
+          <div class="board-column" id="awaitfeedback">
             <div class="column-header">
               <span>Await feedback</span>
               <button class="add-board-btn" onclick="addBoardTask('awaitfeedback')">
                 <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
               </button>
             </div>
-            <div class="drag-area" id="awaitfeedback" ondrop="moveTo('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')">
-              <span class="no-tasks-message">No Tasks Await Feedback</span>
-            </div>
+            <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
           </div>
-          <div class="board-column">
+          <div class="board-column" id="done">
             <div class="column-header">
               <span>Done</span>
             </div>
-            <div class="drag-area" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')">
-              <span class="no-tasks-message">No Tasks Done</span>
-            </div>
+            <div class="tasks-list" id="tasks-list-done"></div>
           </div>
         </div>
       </section>

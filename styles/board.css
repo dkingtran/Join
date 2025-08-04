@@ -1,3 +1,51 @@
+/* Tasks-List für Board: Task-Cards untereinander */
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 50px;
+}
+
+/* Drop-Vorschau Elemente */
+.drop-preview {
+    height: 60px;
+    background: rgba(41, 171, 226, 0.1);
+    border: 2px dashed #29ABE2;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #29ABE2;
+    font-weight: 500;
+    width: 100%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.insert-preview {
+    height: 4px;
+    background: #29ABE2;
+    border-radius: 2px;
+    margin: 4px 0;
+    width: 100%;
+    animation: slideIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { width: 0; }
+    to { width: 100%; }
+}
 
 .board-design {
     background: #FF7A00;
@@ -229,7 +277,7 @@
     margin-bottom: 24px;
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 246px;
     box-shadow: 0px 0px 4px 0px #00000029;
     justify-content: center;
     position: relative;
@@ -255,8 +303,7 @@
     border-radius: 24px;
     box-shadow: 0px 0px 10px 3px #00000014;
     padding: 16px;
-    margin: 10px 0;
-    width: 100%;
+    min-width: 252px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
