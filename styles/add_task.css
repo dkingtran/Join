@@ -63,6 +63,9 @@ form {
 #task-date:valid {
   color: #706b6b;
 }
+.date{
+  min-width: 120px;
+}
 
 .btn-prio {
   gap: 15px;
