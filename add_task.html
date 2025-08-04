@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
 
     <link rel="stylesheet" href="../styles/global.css" />
-
     <link rel="stylesheet" href="../styles/media-query-add-task.css">
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
@@ -50,21 +49,21 @@
     </header>
 
     <!-- Add Task section -->
-    <div class="wrapper display-standard">
+    <div class="wrapper flex flex-column align-center w-full max-w-1200">
 
-        <div class="main-container w-full">
-            <div class="add-task-section">
-                <div class="title-section display-standard">
+        <div class="main-container w-full flex flex-column max-w-1200">
+            <div class="add-task-section w-full max-w-1200 p-20 flex flex-column">
+                <div class="title-section w-full max-w-1200 flex">
                     <h1>Add Task</h1>
                 </div>
-                <form id="form-element" class="w-full">
-                    <div class="add-task-container w-full">
-                        <div class="section-task-left w-full">
+                <form id="form-element" class="w-full flex flex-column ">
+                    <div class="add-task-container w-full flex">
+                        <div class="section-task-left w-full max-w-50">
 
                             <div class="title-task">
                                 <p class="title-task font-bundle">Title<span class="star">*</span></p>
                                 <label for="title-task" class="sr-only"></label>
-                                <input class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle"
+                                <input class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle black-color"
                                     id="title-task" name="title" type="text" placeholder="Enter a title">
                                 <div class="error-container" id="title-error-border">
                                     <div class="error-text d-none">This fields is required</div>
@@ -80,7 +79,7 @@
                             </div>
 
                             <div class="date-task">
-                                <p class="font-bundle du-date">Du date <span class="star">*</span></p>
+                                <p class="font-bundle w-full">Du date <span class="star">*</span></p>
                                 <label for="due-date" class="sr-only"></label>
                                 <input class="font-bundle date-input-task input-bundle max-w-440 " id="task-date"
                                     name="dueDate" type="date">
@@ -92,9 +91,9 @@
 
                         <div class="pipe"></div>
 
-                        <div class="section-task-right w-full">
+                        <div class="section-task-right w-full max-w-50">
                             <p class="font-bundle">Priority</p>
-                            <div class="btn-prio">
+                            <div class="btn-prio flex justify-start max-w-440">
                                 <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
                                         src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
                                 </button>
@@ -115,26 +114,24 @@
                             <div class="assigned-to">
                                 <label class="font-bundle assigned-to">Assigned to</label>
                                 <div class="custom-dropdown w-full" onclick="handleDropdownClick(event)">
-                                    <div class="dropdown-input max-w-440 border-radius-10px input-bundle"
+                                    <div class="dropdown-input max-w-440 border-radius-10px input-bundle flex align-center justify-between bg-white"
                                         onclick="toggleDropdown(event)">
                                         <input class="font-bundle input-field" type="text"
                                             placeholder="Select contacts to assign" id="searchInput">
                                         <span class="arrow">&#9662;</span>
                                     </div>
-                                    <div class="dropdown-list w-full" id="contactList">
-                                        <div class="contact-item"></div>
+                                    <div class="dropdown-list w-full bg-white" id="contactList">
+                                        <div class="contact-item flex align-center justify-between border-radius-10px"></div>
                                     </div>
                                 </div>
-                                <div id="selectedContacts" class="contact-selected"></div>
+                                <div id="selectedContacts flex" class="contact-selected"></div>
                             </div>
 
-
-                            <!-- HTML -->
                             <div class="category-task select-wrapper">
                                 <p class="font-bundle m-top">Category<span class="star">*</span></p>
 
-                                <div class="select-container">
-                                    <select class="font-bundle input-bundle max-w-440 category-text" name="category"
+                                <div class="select-container w-full max-w-440">
+                                    <select class="font-bundle input-bundle max-w-440 category-text black-color" name="category"
                                         id="task-category" onfocus="rotateCategoryArrow(true)"
                                         onblur="rotateCategoryArrow(false)">
 
@@ -152,7 +149,7 @@
                                 <p class="font-bundle m-top">Subtasks</p>
 
                                 <!-- Zustand 1 -->
-                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440 black-color"
+                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
                                     onclick="showSubtaskInput()">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
                                         placeholder="Add new subtask" readonly>
@@ -182,14 +179,14 @@
                     </div>
 
                     <div class="section-task-under">
-                        <div class="star-required">
+                        <div class="star-required flex justify-start align-center w-full">
                             <p class="required-task-text font-bundle"><sup class="star">*</sup>This fields is required
                             </p>
                         </div>
                         <div class="btn-clear-task-container display-standard w-full">
 
                             <button
-                                class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16"
+                                class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
                                 type="reset" onclick="resetFormState()">Clear
                                 <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -199,7 +196,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </button>
-                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16"
+                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
                                 type="submit">Create
                                 Task<img class="icon-task" src="assets/img/icons/add_task/check.svg"
                                     alt="Ok Icon"></button>

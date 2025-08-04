@@ -1,6 +1,6 @@
 function getSubtaskTemplate(text) {
   return `
- <div class="subtask-text-box">
+ <div class="subtask-text-box flex justify-between">
   <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
     <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon" onclick="startEditSubtask(this)">
@@ -32,7 +32,7 @@ function getReturnToDivTemplate(text) {
 function getAssignedNameTemplate(initials, name, color) {
   return `
     <div class="contact-item" onclick="toggleCheckboxContact(this)">
-      <span class="avatar display-standard"
+      <span class="avatar display-standard white-color"
             style="background-color: ${color};">${initials}</span>
       <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
       <input type="checkbox"

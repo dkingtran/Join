@@ -7,19 +7,11 @@ body {
 }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
+
   height: auto;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1200px;
   height: auto;
   margin-left: 600px;
   align-items: flex-start;
@@ -28,9 +20,6 @@ body {
 .title-section {
   margin-top: 175px;
   margin-left: 20px;
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
   justify-content: flex-start;
   margin-bottom: 30px;
 }
@@ -40,27 +29,17 @@ body {
 }
 
 .add-task-section {
-  width: 100%;
-  max-width: 1200px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
   height: auto;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   max-width: 1000px;
   padding: 0 20px;
 }
 
 .add-task-container {
-  width: 100%;
   max-width: 1102px;
-  display: flex;
   gap: 60px;
 }
 
@@ -70,13 +49,7 @@ form {
   border: 1px solid #D1D1D1;
 }
 
-/* Section left */
-.section-task-left {
-  max-width: 50%;
-}
-
 .input-title-task {
-  color: black;
   height: 48px;
   padding-left: 21px;
 }
@@ -88,23 +61,11 @@ form {
   margin: 10px 0 25px 0;
 }
 
-/* Section right */
-.section-task-right {
-  max-width: 50%;
-}
-
-.du-date {
-  width: 100px;
-}
-
 #task-date:valid {
   color: #706b6b;
 }
 
 .btn-prio {
-  display: flex;
-  justify-content: flex-start;
-  width: 440px;
   gap: 15px;
   margin: 10px 0 25px 0;
 }
@@ -165,14 +126,10 @@ form {
 }
 
 .dropdown-input {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border: 1px solid black;
   border-color: #d1d1d1;
   padding: 23px;
   cursor: pointer;
-  background: white;
   height: 48px;
   transition: border-color 0.1s;
 }
@@ -206,7 +163,6 @@ form {
   top: 100%;
   left: 0;
   border-top: none;
-  background-color: white;
   z-index: 10;
   display: none;
   max-height: 200px;
@@ -214,11 +170,7 @@ form {
 }
 
 .contact-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 8px 10px;
-  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -230,7 +182,6 @@ form {
   width: 42px;
   height: 42px;
   background: #2A3647;
-  color: white;
   border-radius: 50%;
   border: 2px solid white;
   font-weight: 400;
@@ -241,9 +192,6 @@ form {
 .select-container {
   position: relative;
   display: inline-block;
-  width: 100%;
-  max-width: 440px;
-  min-width: 440px;
 }
 
 .select-container select {
@@ -279,14 +227,17 @@ form {
 .contact-item input[type="checkbox"] {
   transform: scale(1.2);
 }
+
 .contact-item.active {
   color: white;
-  background-color: #2A3647; /* Helles Blau als Beispiel */
+  background-color: #2A3647;
+  /* Helles Blau als Beispiel */
   border-radius: 6px;
 }
 
 .contact-item.active:hover {
-  background-color: #091931; /* dunkleres Hover bei aktiver Auswahl */
+  background-color: #091931;
+  /* dunkleres Hover bei aktiver Auswahl */
 }
 
 #selectedContacts {
@@ -294,10 +245,12 @@ form {
   flex-wrap: wrap;
   gap: 6px;
   padding: 6px;
-  margin-top: 8px; /* Abstand zum Eingabefeld */
+  margin-top: 8px;
+  /* Abstand zum Eingabefeld */
   min-width: 335px;
   border-radius: 6px;
-  background-color: #f9f9f9; /* optional visuelle Trennung */
+  background-color: #f9f9f9;
+  /* optional visuelle Trennung */
 }
 
 .selected-contact {
@@ -322,12 +275,9 @@ form {
   color: white;
 }
 
-
 .category-text {
   transition: border-color 0.1s;
-  color: black;
 }
-
 
 .category-text:hover {
   border-color: rgb(81, 78, 78);
@@ -360,19 +310,11 @@ form {
   color: #333;
   cursor: pointer;
   padding-left: 10px;
-
-  .icon-task {
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-    padding-left: 10px;
-  }
+}
 
   .subtask-input-box .icon-task.visible {
     visibility: visible;
   }
-
-}
 
 .output-subtask {
   max-width: 440px;
@@ -384,8 +326,6 @@ form {
 .subtask-text-box {
   max-width: 450px;
   min-width: 320px;
-  display: flex;
-  justify-content: space-between;
   padding-left: 20px;
   transition: background-color 0.1s;
 }
@@ -429,7 +369,6 @@ form {
   height: 56px;
   border: 1px solid #2A3647;
   color: #2A3647;
-  background: white;
   transition: all 100ms ease-in-out;
   cursor: pointer;
 }
@@ -442,7 +381,6 @@ form {
 }
 
 .btn-addtask-create {
-  color: white;
   max-width: 183px;
   height: 56px;
   background: #2A3647;
@@ -472,16 +410,8 @@ form {
 }
 
 .star-required {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
   max-width: 630px;
   min-width: 200px;
-}
-
-.d-none {
-  display: none;
 }
 
 .message-box {
@@ -492,102 +422,4 @@ form {
   color: #155724;
   font-weight: bold;
   z-index: 200;
-}
-
-
-/* Media */
-@media(max-width:1365px) {
-  .add-task-container {
-    gap: 10px;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pipe {
-    display: none;
-  }
-
-  .btn-clear-task-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    max-width: 399px;
-    justify-content: flex-end;
-    margin-top: 30px;
-  }
-
-  .section-task-under {
-    margin-top: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-
-  .title-section {
-    margin-top: 127px;
-    margin-left: 260px;
-    width: 100%;
-    max-width: 377px;
-  }
-
-  .star-required {
-    max-width: 480px;
-  }
-}
-
-.error-container {
-  height: 25px;
-  width: 150px;
-}
-
-.error-text {
-  min-width: 150px;
-  width: 100%;
-  color: red;
-  font-size: 12px;
-  z-index: 3000;
-}
-
-.border-red {
-  border-color: red;
-}
-.task-message {
-  position: fixed;
-  bottom: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  opacity: 0;
-  transition: bottom 0.5s ease, opacity 0.5s ease;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.task-message.show {
-  bottom: 40%;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.task-successful-info {
-  width: 100%;
-  width: 400px;
-  padding: 1.5rem;
-  background-color: #2A3647;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.task-successful-info-text {
-  font-size: 16px;
-  color: white;
-}
-
-.d-none {
-  display: none;
 }
