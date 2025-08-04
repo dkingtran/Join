@@ -1,4 +1,3 @@
-
 let nameRef;
 let emailRef;
 let passwordRef;
@@ -83,13 +82,5 @@ function dateCheck(date) {
     let dateInput = new Date(date);
     let dateNow = new Date();
     if (dateInput < dateNow) return false;
-    else return true;
-}
-
-/**
- * Checks if the given title is not empty after removing spaces.
- */
-function titleCheck(title) {
-    if(removeSpaces(title) == "") return false;
     else return true;
 }

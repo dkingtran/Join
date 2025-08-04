@@ -1,6 +1,6 @@
 function getSubtaskTemplate(text) {
-return `
- <div class="subtask-text-box">
+  return `
+ <div class="subtask-text-box flex justify-between">
   <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
     <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon" onclick="startEditSubtask(this)">
@@ -15,32 +15,33 @@ return `
 }
 
 function changeDivtoInputTemplate(text) {
-return `
+  return `
 <input class="subtask-entry font-bundle" type="text" value="${text}"
     onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
 `;
 }
 
 function getReturnToDivTemplate(text) {
-return `
+  return `
 <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">
     ${text}
 </div>
 `;
 }
 
-function getAssignedNameTemplate(initials,name){
-  return`
-           <div class="contact-item" onclick="toggleCheckboxContact(this)">
-    <span class="avatar display-standard"
-          style="background-color: #0c1663ff;">${initials}</span>
-    <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
-<input type="checkbox"
-       class="contact-checkbox"
-       data-name="${name["first-name"]} ${name["last-name"]}"
-       data-initials="${initials}"
-       onclick="event.stopPropagation()">
-</div>
-
-        `;
+function getAssignedNameTemplate(initials, name, color) {
+  return `
+    <div class="contact-item" onclick="toggleCheckboxContact(this)">
+      <span class="avatar display-standard white-color"
+            style="background-color: ${color};">${initials}</span>
+      <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
+      <input type="checkbox"
+             class="contact-checkbox"
+             data-name="${name["first-name"]} ${name["last-name"]}"
+             data-initials="${initials}"
+             onclick="toggleCheckboxContact(this); event.stopPropagation();">
+    </div>
+  `;
 }
+
+
