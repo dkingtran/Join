@@ -7,8 +7,11 @@ body {
 }
 
 .wrapper {
-
   height: auto;
+}
+
+.d-none {
+  display: none;
 }
 
 .main-container {
@@ -196,6 +199,7 @@ form {
 }
 
 .select-container select {
+  color: black;
   padding: 0 21px;
   appearance: none;
   -webkit-appearance: none;
