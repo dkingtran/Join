@@ -10,9 +10,7 @@ body {
   height: auto;
 }
 
-.d-none {
-  display: none;
-}
+
 
 .main-container {
   height: auto;
@@ -418,4 +416,8 @@ form {
   color: #155724;
   font-weight: bold;
   z-index: 200;
+}
+
+.d-none {
+  display: none;
 }
