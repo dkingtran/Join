@@ -39,7 +39,7 @@ function validateDateInput() {
 }
 
 function checkTitleDateInput() {
-    const titleOk = validateTitleInput(); // ← funktioniert nur, wenn sie vorher definiert wurde
+    const titleOk = validateTitleInput(); 
     const dateOk = validateDateInput();
     return titleOk && dateOk;
 }
