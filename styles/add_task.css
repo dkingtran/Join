@@ -170,6 +170,7 @@ form {
 }
 
 .contact-item {
+  display: flex;
   padding: 8px 10px;
   cursor: pointer;
 }
@@ -200,12 +201,10 @@ form {
   -webkit-appearance: none;
   -moz-appearance: none;
   padding-right: 2.5rem;
-  /* Platz für das Custom-Icon */
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Dein Custom-Pfeil – sitzt im Feld */
 .select-container .arrow {
   position: absolute;
   top: 50%;
@@ -231,13 +230,11 @@ form {
 .contact-item.active {
   color: white;
   background-color: #2A3647;
-  /* Helles Blau als Beispiel */
   border-radius: 6px;
 }
 
 .contact-item.active:hover {
   background-color: #091931;
-  /* dunkleres Hover bei aktiver Auswahl */
 }
 
 #selectedContacts {
@@ -246,11 +243,9 @@ form {
   gap: 6px;
   padding: 6px;
   margin-top: 8px;
-  /* Abstand zum Eingabefeld */
   min-width: 335px;
   border-radius: 6px;
   background-color: #f9f9f9;
-  /* optional visuelle Trennung */
 }
 
 .selected-contact {
@@ -283,7 +278,6 @@ form {
   border-color: rgb(81, 78, 78);
 }
 
-/* Add Subtask CSS */
 .subtask-input-box {
   display: flex;
   align-items: center;
@@ -332,7 +326,6 @@ form {
 
 .subtask-text-box:hover {
   background-color: #f0f0f0;
-  /* oder was Helles */
   border-radius: 10px;
 }
 
@@ -344,7 +337,6 @@ form {
   padding: 0;
 }
 
-/* 2. Input field */
 .plus {
   font-weight: bold;
 }
