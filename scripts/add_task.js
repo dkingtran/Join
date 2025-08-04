@@ -362,7 +362,6 @@ function showSuccessMessage() {
     }, 1500);
 }
 
-
 /**
  * Closes the contact dropdown when the user clicks outside of it.
  */
