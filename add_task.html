@@ -63,7 +63,8 @@
                             <div class="title-task">
                                 <p class="title-task font-bundle">Title<span class="star">*</span></p>
                                 <label for="title-task" class="sr-only"></label>
-                                <input class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle black-color"
+                                <input
+                                    class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle black-color"
                                     id="title-task" name="title" type="text" placeholder="Enter a title">
                                 <div class="error-container" id="title-error-border">
                                     <div class="error-text d-none">This fields is required</div>
@@ -84,7 +85,7 @@
                                 <input class="font-bundle date-input-task input-bundle max-w-440 " id="task-date"
                                     name="dueDate" type="date">
                                 <div class="error-container" id="date-error-border">
-                                    <div id="error-info" class="error-text d-none ">This fields is required</div>
+                                    <div id="error-info" class="error-text d-none ">This fields is required or the date in the past</div>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +122,8 @@
                                         <span class="arrow">&#9662;</span>
                                     </div>
                                     <div class="dropdown-list w-full bg-white" id="contactList">
-                                        <div class="contact-item flex align-center justify-between border-radius-10px"></div>
+                                        <div class="contact-item flex align-center justify-between border-radius-10px">
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="selectedContacts" class="contact-selected flex"></div>
@@ -131,8 +133,8 @@
                                 <p class="font-bundle m-top">Category<span class="star">*</span></p>
 
                                 <div class="select-container w-full max-w-440 black-color">
-                                    <select class="font-bundle input-bundle max-w-440 category-text black-color" name="category"
-                                        id="task-category" onfocus="rotateCategoryArrow(true)"
+                                    <select class="font-bundle input-bundle max-w-440 category-text black-color"
+                                        name="category" id="task-category" onfocus="rotateCategoryArrow(true)"
                                         onblur="rotateCategoryArrow(false)">
 
                                         <option value="" disabled selected hidden>Select task category</option>
@@ -149,7 +151,8 @@
                                 <p class="font-bundle m-top">Subtasks</p>
 
                                 <!-- Zustand 1 -->
-                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
+                                <div id="subtask-initial"
+                                    class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
                                     onclick="showSubtaskInput()">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
                                         placeholder="Add new subtask" readonly>
@@ -268,15 +271,17 @@
         </div>
     </aside>
 
-  <script src="./scripts/firebase.js"></script>
-<script src="./scripts/add-task-templates.js"></script>
-<script src="./scripts/add_task_button.js"></script>
+    <script src="./scripts/firebase.js"></script>
+    <!--   <script src="./scripts/login-status.js"></script> -->
+    <script src="./scripts/add-task-templates.js"></script>
+    <script src="./scripts/add_task_button.js"></script>
 
-<!-- 🔄 input.js muss VOR add_task.js -->
-<script src="./scripts/input.js"></script>
-<script src="./scripts/add_task.js"></script>
+    <!-- 🔄 input.js muss VOR add_task.js -->
+    <script src="./scripts/input.js"></script>
+    <script src="./scripts/add_task.js"></script>
 
 
 </body>
 
 </html>
+

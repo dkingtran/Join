@@ -63,7 +63,8 @@ form {
 #task-date:valid {
   color: #706b6b;
 }
-.date{
+
+.date {
   min-width: 120px;
 }
 
@@ -175,6 +176,7 @@ form {
   display: flex;
   padding: 8px 10px;
   cursor: pointer;
+  align-items: center;
 }
 
 .contact-item:hover {
@@ -282,6 +284,7 @@ form {
 }
 
 .subtask-input-box {
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -309,9 +312,9 @@ form {
   padding-left: 10px;
 }
 
-  .subtask-input-box .icon-task.visible {
-    visibility: visible;
-  }
+.subtask-input-box .icon-task.visible {
+  visibility: visible;
+}
 
 .output-subtask {
   max-width: 440px;
@@ -325,15 +328,34 @@ form {
   min-width: 320px;
   padding-left: 20px;
   transition: background-color 0.1s;
-}
-
-.subtask-text-box:hover {
-  background-color: #f0f0f0;
+  height: 32px;
+  margin-top: 10px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .subtask-text-box:hover .icon-edit-subtask-box {
-  display: flex !important;
+  display: flex;
+}
+
+.subtask-entry {
+  border: none;
+  width: 440px;
+  max-width: 440px;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+
+.subtask-entry:hover {
+  height: 32px;
+  min-width: 340px;
+  border-radius: 10px;
+  background-color: #e0dddd;
+  display: flex;
+  align-items: center;
 }
 
 .delete-subtask-input {
@@ -350,6 +372,10 @@ form {
   outline: none;
   background: transparent;
   box-shadow: none;
+}
+
+.border-bottom-blue {
+  min-width: 360px;
 }
 
 .btn-clear-task-container {
