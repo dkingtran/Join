@@ -1,272 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join Add Task</title>
-    <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/logo/logo-dark.png"
+    />
 
     <link rel="stylesheet" href="../styles/global.css" />
 
-    <link rel="stylesheet" href="../styles/media-query-add-task.css">
+    <link rel="stylesheet" href="../styles/media-query-add-task.css" />
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/media.css" />
-    <link rel="stylesheet" href="../styles/media-query-add-task.css">
+    <link rel="stylesheet" href="../styles/media-query-add-task.css" />
 
     <script src="../scripts/side-menu.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="header-content">
-            <div class="header-inner">
-                <div class="logo-mobile d_none">
-                    <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
-                </div>
-                <h1 class="header-title">Kanban Project Management Tool</h1>
-                <div class="header-right">
-                    <div class="help-container" id="helpContainer">
-                        <a href="../help.html" class="help-icon">
-                            <img src="../assets/img/icons/header-side-menu/help.png" alt="Help Icon" />
-                        </a>
-                    </div>
-                    <div class="profile-container" id="profileContainer">
-                        <button class="profile-btn" onclick="toggleProfileDropdown()" aria-label="Profile menu">
-
-                        </button>
-                        <div id="profileDropdown" class="profile-dropdown">
-                            <a href="../help.html" class="dropdown-item mobile-only d_none">Help</a>
-                            <a href="legal-notice.html" class="dropdown-item">Legal Notice</a>
-                            <a href="privacy-policy.html" class="dropdown-item">Privacy Policy</a>
-                            <a href="index.html" class="dropdown-item">Log out</a>
-                        </div>
-                    </div>
-                </div>
+      <div class="header-content">
+        <div class="header-inner">
+          <div class="logo-mobile d_none">
+            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+          </div>
+          <h1 class="header-title">Kanban Project Management Tool</h1>
+          <div class="header-right">
+            <div class="help-container" id="helpContainer">
+              <a href="../help.html" class="help-icon">
+                <img
+                  src="../assets/img/icons/header-side-menu/help.png"
+                  alt="Help Icon"
+                />
+              </a>
             </div>
+            <div class="profile-container" id="profileContainer">
+              <button
+                class="profile-btn"
+                onclick="toggleProfileDropdown()"
+                aria-label="Profile menu"
+              ></button>
+              <div id="profileDropdown" class="profile-dropdown">
+                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                  >Help</a
+                >
+                <a href="legal-notice.html" class="dropdown-item"
+                  >Legal Notice</a
+                >
+                <a href="privacy-policy.html" class="dropdown-item"
+                  >Privacy Policy</a
+                >
+                <a href="index.html" class="dropdown-item">Log out</a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Add Task section -->
     <div class="wrapper">
-
-        <div class="main-container w-full">
-            <div class="add-task-section">
-                <div class="title-section display-standard">
-                    <h1>Add Task</h1>
+      <div class="main-container w-full">
+        <div class="add-task-section">
+          <div class="title-section display-standard">
+            <h1>Add Task</h1>
+          </div>
+          <form id="form-element" class="w-full">
+            <div class="add-task-container w-full">
+              <div class="section-task-left w-full">
+                <div class="title-task">
+                  <p class="title-task font-bundle">
+                    Title<span class="star">*</span>
+                  </p>
+                  <label for="title-task" class="sr-only"></label>
+                  <input
+                    class="input-title-task font-bundle max-w-440 border-radius-10px input-bundle black-color"
+                    id="title-task"
+                    name="title"
+                    type="text"
+                    placeholder="Enter a title"
+                  />
                 </div>
-                <form id="form-element" class="w-full">
-                    <div class="add-task-container w-full">
-                        <div class="section-task-left w-full">
 
-                            <div class="title-task">
-                                <p class="title-task font-bundle">Title<span class="star">*</span></p>
-                                <label for="title-task" class="sr-only"></label>
-                                <input
-                                    class="input-title-task font-bundle  max-w-440 border-radius-10px input-bundle black-color"
-                                    id="title-task" name="title" type="text" placeholder="Enter a title">
-                            </div>
+                <div class="decription-class">
+                  <p class="font-bundle">Description</p>
+                  <label for="description" class="sr-only"></label>
+                  <textarea
+                    class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
+                    name="description"
+                    id="task-description"
+                    placeholder="Enter a Description"
+                  ></textarea>
+                </div>
 
-                            <div class="decription-class">
-                                <p class="font-bundle">Description</p>
-                                <label for="description" class="sr-only"></label>
-                                <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
-                                    name="description" id="task-description"
-                                    placeholder="Enter a Description"></textarea>
-                            </div>
+                <div class="date-task">
+                  <p class="font-bundle du-date">
+                    Du date <span class="star">*</span>
+                  </p>
+                  <label for="due-date" class="sr-only"></label>
+                  <input
+                    class="font-bundle date-input-task input-bundle max-w-440"
+                    id="task-date"
+                    name="dueDate"
+                    type="date"
+                    placeholder=""
+                  />
+                </div>
+              </div>
 
-                            <div class="date-task">
-                                <p class="font-bundle du-date">Du date <span class="star">*</span></p>
-                                <label for="due-date" class="sr-only"></label>
-                                <input class="font-bundle date-input-task input-bundle max-w-440" id="task-date"
-                                    name="dueDate" type="date" placeholder="">
-                            </div>
-                        </div>
+              <div class="pipe"></div>
 
-                        <div class="pipe"></div>
+              <div class="section-task-right w-full">
+                <p class="font-bundle">Priority</p>
+                <div class="btn-prio">
+                  <button
+                    id="urgent"
+                    class="font-bundle btn-prio-bundle border-radius-10px"
+                  >
+                    Urgent
+                    <img
+                      src="./assets/img/icons/add_task/urgent_icon.svg"
+                      alt="Urgent Icon"
+                    />
+                  </button>
+                  <button
+                    id="medium"
+                    class="medium-btn btn-prio-bundle border-radius-10px font-bundle"
+                  >
+                    Medium
+                    <img
+                      id="medium-icon"
+                      src="./assets/img/icons/add_task/prio_medium_orange.svg"
+                      alt="medium"
+                    />
+                  </button>
 
-                        <div class="section-task-right w-full">
-                            <p class="font-bundle">Priority</p>
-                            <div class="btn-prio">
-                                <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
-                                        src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
-                                </button>
-                                <button id="medium" class="medium-btn btn-prio-bundle border-radius-10px font-bundle">
-                                    Medium
-                                    <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
-                                        alt="medium">
-                                </button>
+                  <button
+                    id="low"
+                    class="font-bundle btn-prio-bundle border-radius-10px"
+                  >
+                    Low
+                    <img
+                      src="./assets/img/icons/add_task/low_Icon.svg"
+                      alt="Low Icon"
+                    />
+                  </button>
+                </div>
 
-                                <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">Low <img
-                                        src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
-                                </button>
-                            </div>
-
-
-                            <!-- Assigned -->
-                            <div class="assigned-to">
-                                <div class="custom-dropdown w-full" onclick="handleDropdownClick(event)">
-                                    <label class="font-bundle assigned-to">Assigned to</label>
-                                    <div class="dropdown-input max-w-440 border-radius-10px input-bundle"
-                                        onclick="toggleDropdown(event)">
-                                        <input class="font-bundle input-field" type="text"
-                                            placeholder="Select contacts to assign" id="searchInput">
-                                        <span class="arrow">&#9662;</span>
-                                    </div>
-
-                                    <div class="dropdown-list w-full " id="contactList">
-                                        <div class="contact-item">
-                                            <span class="avatar display-standard"
-                                                style="background-color: #6A1B9A;">AK</span>
-                                            <span class="contact-name font-bundle">Andreas Kissner</span>
-                                            <input type="checkbox" class="contact-checkbox" data-name="Andreas Kissner"
-                                                data-initials="AK">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- HTML -->
-                            <div class="category-task select-wrapper">
-                                <p class="font-bundle">Category<span class="star">*</span></p>
-
-                                <div class="select-container">
-                                    <select class="font-bundle input-bundle max-w-440 category-text"
-                                        name="category" id="task-category" onfocus="rotateCategoryArrow(true)"
-                                        onblur="rotateCategoryArrow(false)">
-
-                                        <option value="" disabled selected hidden>Select task category</option>
-
-                                        <option value="Technical Task">Technical Task</option>
-                                        <option value="User Story">User Story</option>
-                                        <option value="Reminder Task">Reminder Task</option>
-                                    </select>
-                                    <span class="arrow p-16 " id="category-arrow">&#9662;</span>
-                                </div>
-                            </div>
-
-
-
-                            <div class="subtask-container">
-                                <p class="font-bundle">Subtasks</p>
-
-                                <!-- Zustand 1 -->
-                                <div id="subtask-initial" class="subtask-input-box input-bundle max-w-440 black-color"
-                                    onclick="showSubtaskInput()">
-                                    <input class="add-subtask-input input-bundle font-bundle" type="text"
-                                        placeholder="Add new subtask" readonly>
-                                    <span id="open-subtask" class="icon plus">
-                                        <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
-                                    </span>
-                                </div>
-
-
-                                <!-- Zustand 2 -->
-                                <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
-                                    <input class="input-second font-bundle" type="text" id="subtask-input-second"
-                                        placeholder="Add new subtask">
-                                    <div class="icon-subtask-container display-standard">
-                                        <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
-                                            <img class="icon-task" src="assets/img/icons/add_task/delete.svg"
-                                                alt="Cancel Icon">
-                                        </span>
-                                        <span id="confirm-subtask" class="icon confirm" onclick="confirmSubtaskInput()">
-                                            <img class="icon-task" src="assets/img/icons/add_task/check_noir.svg"
-                                                alt="Confirm Icon">
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="subtask-output" class="output-subtask"></div>
-
-                        </div>
-
+                <!-- Assigned -->
+                <div class="assigned-to">
+                  <div
+                    class="custom-dropdown w-full"
+                    onclick="handleDropdownClick(event)"
+                  >
+                    <label class="font-bundle assigned-to">Assigned to</label>
+                    <div
+                      class="dropdown-input max-w-440 border-radius-10px input-bundle"
+                      onclick="toggleDropdown(event)"
+                    >
+                      <input
+                        class="font-bundle input-field"
+                        type="text"
+                        placeholder="Select contacts to assign"
+                        id="searchInput"
+                      />
+                      <span class="arrow">&#9662;</span>
                     </div>
-                    <div class="section-task-under">
-                        <div class="star-required">
-                            <p class="required-task-text font-bundle"><sup class="star">*</sup>This fields is required
-                            </p>
-                        </div>
-                        <div class="btn-clear-task-container display-standard w-full">
 
-                            <button
-                                class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16">Clear
-                                <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
-                                        stroke="#2A3647" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <div id="task-message" class="d-none font-bundle">
-                            </div>
-
-                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16"
-                                type="submit">Create
-                                Task<img class="icon-task" src="assets/img/icons/add_task/check.svg"
-                                    alt="Ok Icon"></button>
-                        </div>
+                    <div class="dropdown-list w-full" id="contactList">
+                      <div class="contact-item">
+                        <span
+                          class="avatar display-standard"
+                          style="background-color: #6a1b9a"
+                          >AK</span
+                        >
+                        <span class="contact-name font-bundle"
+                          >Andreas Kissner</span
+                        >
+                        <input
+                          type="checkbox"
+                          class="contact-checkbox"
+                          data-name="Andreas Kissner"
+                          data-initials="AK"
+                        />
+                      </div>
                     </div>
-                </form>
+                  </div>
+                </div>
 
+                <!-- HTML -->
+                <div class="category-task select-wrapper">
+                  <p class="font-bundle">Category<span class="star">*</span></p>
 
+                  <div class="select-container">
+                    <select
+                      class="font-bundle input-bundle max-w-440 category-text"
+                      name="category"
+                      id="task-category"
+                      onfocus="rotateCategoryArrow(true)"
+                      onblur="rotateCategoryArrow(false)"
+                    >
+                      <option value="" disabled selected hidden>
+                        Select task category
+                      </option>
 
+                      <option value="Technical Task">Technical Task</option>
+                      <option value="User Story">User Story</option>
+                      <option value="Reminder Task">Reminder Task</option>
+                    </select>
+                    <span class="arrow p-16" id="category-arrow">&#9662;</span>
+                  </div>
+                </div>
 
+                <div class="subtask-container">
+                  <p class="font-bundle">Subtasks</p>
+
+                  <!-- Zustand 1 -->
+                  <div
+                    id="subtask-initial"
+                    class="subtask-input-box input-bundle max-w-440 black-color"
+                    onclick="showSubtaskInput()"
+                  >
+                    <input
+                      class="add-subtask-input input-bundle font-bundle"
+                      type="text"
+                      placeholder="Add new subtask"
+                      readonly
+                    />
+                    <span id="open-subtask" class="icon plus">
+                      <img
+                        src="assets/img/icons/add_task/add.svg"
+                        alt="Plus Icon"
+                      />
+                    </span>
+                  </div>
+
+                  <!-- Zustand 2 -->
+                  <div
+                    id="subtask-active"
+                    class="subtask-input-box input-bundle max-w-440 d-none"
+                  >
+                    <input
+                      class="input-second font-bundle"
+                      type="text"
+                      id="subtask-input-second"
+                      placeholder="Add new subtask"
+                    />
+                    <div class="icon-subtask-container display-standard">
+                      <span
+                        id="cancel-subtask"
+                        class="icon cancel"
+                        onclick="cancelSubtaskInput()"
+                      >
+                        <img
+                          class="icon-task"
+                          src="assets/img/icons/add_task/delete.svg"
+                          alt="Cancel Icon"
+                        />
+                      </span>
+                      <span
+                        id="confirm-subtask"
+                        class="icon confirm"
+                        onclick="confirmSubtaskInput()"
+                      >
+                        <img
+                          class="icon-task"
+                          src="assets/img/icons/add_task/check_noir.svg"
+                          alt="Confirm Icon"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="subtask-output" class="output-subtask"></div>
+              </div>
             </div>
+            <div class="section-task-under">
+              <div class="star-required">
+                <p class="required-task-text font-bundle">
+                  <sup class="star">*</sup>This fields is required
+                </p>
+              </div>
+              <div class="btn-clear-task-container display-standard w-full">
+                <button
+                  class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16"
+                >
+                  Clear
+                  <svg
+                    class="icon-close"
+                    width="13"
+                    height="14"
+                    viewBox="0 0 13 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
+                      stroke="#2A3647"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <div id="task-message" class="d-none font-bundle"></div>
+
+                <button
+                  class="btn-addtask-create font-bundle w-full border-radius-10px p-16"
+                  type="submit"
+                >
+                  Create Task<img
+                    class="icon-task"
+                    src="assets/img/icons/add_task/check.svg"
+                    alt="Ok Icon"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
     <!-- End add Task section -->
 
     <!--Side-menu-->
     <aside class="side-menu background-side-menu">
-        <div class="logo-section">
-            <img src="../assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
-        </div>
+      <div class="logo-section">
+        <img
+          src="../assets/img/logo/logo-light.png"
+          alt="Logo"
+          class="logo-side-menu-img"
+        />
+      </div>
 
-        <div class="menu-section">
-            <a href="../summary.html" class="menu-item">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/summary.svg" alt="" />
-                </span>
-                <span>Summary</span>
-            </a>
-            <a href="../board.html" class="menu-item active">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
-                </span>
-                <span>Board</span>
-            </a>
-            <a href="../add_task.html" class="menu-item">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/add-task.svg" alt="" />
-                </span>
-                <span>Add Task</span>
-            </a>
-            <a href="../add_contact.html" class="menu-item">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/contacts.svg" alt="" />
-                </span>
-                <span>Contacts</span>
-            </a>
-        </div>
+      <div class="menu-section">
+        <a href="../summary.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/summary.svg"
+              alt=""
+            />
+          </span>
+          <span>Summary</span>
+        </a>
+        <a href="../add_task.html" class="menu-item active">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/add-task.svg"
+              alt=""
+            />
+          </span>
+          <span>Add Task</span>
+        </a>
+        <a href="../board.html" class="menu-item">
+          <span class="menu-icon">
+            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
+          <span>Board</span>
+        </a>
+        <a href="../add_contact.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/contacts.svg"
+              alt=""
+            />
+          </span>
+          <span>Contacts</span>
+        </a>
+      </div>
 
-        <div class="notice-side-menu">
-            <a href="../legal-notice.html" class="menu-item menu-bottom">
-                <span>Legal notice</span>
-            </a>
-            <a href="../privacy-policy.html" class="menu-item menu-bottom">
-                <span>Privacy Policy</span>
-            </a>
-        </div>
+      <div class="notice-side-menu">
+        <a href="../legal-notice.html" class="menu-item menu-bottom">
+          <span>Legal notice</span>
+        </a>
+        <a href="../privacy-policy.html" class="menu-item menu-bottom">
+          <span>Privacy Policy</span>
+        </a>
+      </div>
     </aside>
 
     <script src="./scripts/firebase.js"></script>
     <script src="./scripts/add-task-templates.js"></script>
     <script src="./scripts/add_task.js"></script>
-
-</body>
-
+  </body>
 </html>

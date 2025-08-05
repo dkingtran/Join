@@ -223,6 +223,10 @@
     filter: brightness(0) invert(1);
 }
 
+.menu-item.active:hover {
+    background-color: #091931 !important;
+}
+
 .menu-bottom {
     display: flex;
     align-items: center;
