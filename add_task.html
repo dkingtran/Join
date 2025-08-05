@@ -85,7 +85,8 @@
                                 <input class="font-bundle date-input-task input-bundle max-w-440 " id="task-date"
                                     name="dueDate" type="date">
                                 <div class="error-container" id="date-error-border">
-                                    <div id="error-info" class="error-text d-none ">This fields is required or the date in the past</div>
+                                    <div id="error-info" class="error-text d-none ">This fields is required or the date
+                                        in the past</div>
                                 </div>
                             </div>
                         </div>
@@ -285,3 +286,19 @@
 
 </html>
 
+<div class="subtask-text-box flex justify-between ">
+    <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text} <div
+            class="icon-edit-subtask-box display-standard d-none">
+            <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon"
+                onclick="startEditSubtask(this)">
+            <svg width="2" height="24" viewBox="0 0 2 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.14453 0V24" stroke="#A8A8A8" />
+            </svg>
+        </div>
+
+        <img class="icon-task delete-subtask-input" src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon"
+            onclick="deleteSubtask(this)">
+        <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" alt="Confirm Icon"
+            onclick="finishEditSubtask(this)">
+    </div>
+</div>
