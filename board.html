@@ -135,6 +135,9 @@
             <img src="./assets/img/icons/board/add-task.svg" alt="">
           </button>
       </div>
+          <button class="plus-add-task-button" id="plusAddTaskButton" onclick="showAddTask()" style="display:none;" aria-label="Add Task">
+            <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />
+          </button>
       </section>
       <section>
         <div class="drag-board">
@@ -176,7 +179,7 @@
       </section>
       <section>
             <!-- Modal für Add Task -->
-          <div id="addTaskModal" class="add-task-modal" style="display:none;">
+          <div id="addTaskModal" class="add-task-modal">
             <div class="add-task-modal-content">
             <button class="add-task-modal-close" onclick="closeAddTaskModal()">&times;</button>
             <div class="add-task-modal-inner" id="addTaskModalInner"></div>

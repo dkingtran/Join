@@ -1,10 +1,14 @@
 @media (max-width: 1420px) {
   .drag-board {
     grid-template-columns: repeat(3, 1fr);
+    max-width: 252px;
   }
+
   .search-input-wrapper {
     min-width: 300px;
   }
+
+
 }
 
 @media (max-width: 1150px) {
@@ -37,8 +41,87 @@
   }
 }
 
+@media (max-width: 760px) {
+
+  .header-board {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .add-task-button {
+    display: none !important;
+  }
+
+  .plus-add-task-button {
+    display: flex !important;
+    position: absolute;
+    right: 40px;
+    top: 180px;
+  }
+
+  .search-add-container {
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    width: 100%;
+  }
+
+  .search-input-wrapper {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .add-task-modal-content {
+    /* Slide from bottom on mobile */
+    transform: translateY(100vh);
+  }
+
+  .add-task-modal.show .add-task-modal-content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 @media (max-width: 640px) {
   .drag-board {
     grid-template-columns: 1fr;
+    margin-top: 16px;
+  }
+  .tasks-list {
+    flex-direction: row !important;
+    overflow-y: visible;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+
+  .tasks-list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 490px) {
+  .main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .plus-add-task-button {
+    right: 8px;
+    top: 170px;
+  }
+  
+  .header-title-container h1 {
+    font-size: 47px;
+  }
+
+  .search-input-wrapper {
+    min-width: 280px;
   }
 }

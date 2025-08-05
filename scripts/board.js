@@ -248,15 +248,25 @@ async function loadTasksFromFirebase() {
     try {
         const response = await fetch('https://join-f4dc9-default-rtdb.europe-west1.firebasedatabase.app/tasks.json');
         const data = await response.json();
-        
-        if (data) {
-            tasks = Object.keys(data).map((key, index) => ({
-                id: index,
-                title: data[key].title || 'Untitled',
-                category: data[key].category || 'open'
+        if (Array.isArray(data)) {
+            // Daten sind ein Array
+            tasks = data
+                .filter(Boolean)
+                .map((task, idx) => ({
+                    id: idx,
+                    title: task.title || 'Untitled',
+                    category: task.category || 'open'
+                }));
+        } else if (typeof data === 'object' && data !== null) {
+            // Daten sind ein Objekt mit Keys
+            tasks = Object.entries(data).map(([key, task]) => ({
+                id: key,
+                title: task.title || 'Untitled',
+                category: task.category || 'open'
             }));
+        } else {
+            tasks = [];
         }
-        
         updateHTML();
     } catch (error) {
         console.error('Error loading tasks from Firebase:', error);
@@ -300,7 +310,7 @@ function toggleProfileDropdown() {
 function showAddTaskModal() {
     const modal = document.getElementById('addTaskModal');
     const inner = document.getElementById('addTaskModalInner');
-    modal.style.display = 'flex';
+    modal.classList.add('show');
     // Lade add_task.html und extrahiere NUR den .wrapper Inhalt
     fetch('add_task.html')
         .then(response => response.text())
@@ -318,7 +328,7 @@ function showAddTaskModal() {
 }
 
 function closeAddTaskModal() {
-    document.getElementById('addTaskModal').style.display = 'none';
+    document.getElementById('addTaskModal').classList.remove('show');
     document.getElementById('addTaskModalInner').innerHTML = '';
     document.body.style.overflow = '';
 }
