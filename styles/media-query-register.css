@@ -31,14 +31,14 @@
 }
 
 @media(max-width: 380px) {
- .logo-animated.shrink {
-    left: 40px;
-    width: 64px;
-    height: 78px;
-}
-.logo-animated {
-   width: 100px;
-   height: 121px;
-}
+    .logo-animated.shrink {
+        left: 40px;
+        width: 64px;
+        height: 78px;
+    }
 
+    .logo-animated {
+        width: 100px;
+        height: 121px;
+    }
 }
