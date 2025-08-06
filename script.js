@@ -1,46 +1,27 @@
-let contacts = [];
-
-
-
-function init() {
-    // Initialize the page - don't call addToContacts() here
-
-}
-
 
 /**
- * Adds a new contact to the contacts array.
- * @param {string} name - The name of the contact.
- * @param {string} email - The email of the contact.
- * @param {string} phone - The phone number of the contact.
+ * @param {String} takes String. 
+ * @returns String with whitespaces removed.
  */
-function addToContacts() {
-    
-    // Get form elements by ID
-    let nameInput = document.getElementById('contactName');
-    let emailInput = document.getElementById('contactEmail');
-    let phoneInput = document.getElementById('contactPhone');
-    
-    let contact = {
-        "name": nameInput.value,
-        "email": emailInput.value,
-        "phone": phoneInput.value
-    };
-    contacts.push(contact);
-    console.log(contacts);
-    
-    nameInput.value = '';
-    emailInput.value = '';
-    phoneInput.value = '';
+function removeSpaces(string) {
+    return string.replace(/\s+/gm, '');
 }
-
 
 /**
- * * Cancels the form by clearing the input fields.
+ * @param {String} 
+ * @returns String with first Char capitalized.
  */
-function cancelForm() {
-    document.getElementById('contactName').value = '';
-    document.getElementById('contactEmail').value = '';
-    document.getElementById('contactPhone').value = '';
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
+/**
+ * Returns a random color from the global `colors` array.
+ * The color is selected by generating a random index between 0 and 14.
+ *
+ * @returns {*} A randomly selected color from the `colors` array.
+ */
+function getRandomColor() {
+    let colorIndex = Math.floor(Math.random() * 15);
+    return colors[colorIndex];
+}

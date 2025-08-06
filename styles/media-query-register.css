@@ -1,0 +1,44 @@
+/* Media Query */
+@media(max-width: 650px) {
+    .login-box-register {
+        max-width: 411px;
+        height: 650px;
+    }
+}
+
+@media(max-width: 600px) {
+    .login-box-register {
+        max-width: 445px;
+        height: 600px;
+    }
+}
+
+@media(max-width: 470px) {
+    .login-box-register {
+        max-width: 310px;
+        height: 620px;
+        padding: 80px 10px;
+    }
+
+    .sign-up {
+        font-size: 47px;
+        width: 100%;
+    }
+
+    .signup-btn-register {
+        max-width: 160px;
+    }
+}
+
+@media(max-width: 380px) {
+    .logo-animated.shrink {
+        left: 40px;
+        width: 64px;
+        height: 78px;
+    }
+
+    .logo-animated {
+        width: 100px;
+        height: 121px;
+    }
+}
