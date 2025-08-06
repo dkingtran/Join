@@ -20,10 +20,6 @@
   padding: 16px;
 }
 
-.d-none {
-  display: none;
-}
-
 .display-standard {
   display: flex;
   justify-content: center;

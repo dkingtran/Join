@@ -1,76 +1,21 @@
-let contacts = [
-    {
-        "firstName": "Anton",
-        "lastName": "Mayer",
-        "email": "antom@gmail.com",
-        "phone": "+49 1111 111 11 1"
-    },
-    {
-        "firstName": "Anja",
-        "lastName": "Schulz",
-        "email": "schulz@hotmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Benedikt",
-        "lastName": "Ziegler",
-        "email": "benedikt@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "David",
-        "lastName": "Eisenberg",
-        "email": "davidberg@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Eva",
-        "lastName": "Fischer",
-        "email": "eva@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Emmanuel",
-        "lastName": "Mauer",
-        "email": "emmanuelma@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Marcel",
-        "lastName": "Bauer",
-        "email": "bauer@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Tatjana",
-        "lastName": "Wolf",
-        "email": "wolf@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    }
-];
-
-// Mapping name -> color class
-const colorMap = {
-    'Anton Mayer': 'contact-avatar-color1',
-    'Anja Schulz': 'contact-avatar-color2',
-    'Benedikt Ziegler': 'contact-avatar-color3',
-    'David Eisenberg': 'contact-avatar-color4',
-    'Eva Fischer': 'contact-avatar-color5',
-    'Emmanuel Mauer': 'contact-avatar-color6',
-    'Marcel Bauer': 'contact-avatar-color7',
-    'Tatjana Wolf': 'contact-avatar-color8',
-    'Sofia Müller': 'contact-avatar-color9',
-    '': 'contact-avatar-color10' // Default color for any other names
-};
+let contacts = [];
 
 let lastShownContactIdx = null;
 
 /**
  * Initializes the contact list and hides the add contact form on page load.
  */
-function init() {
+async function init() {
+    await getContactsArray();
     renderContacts();
     hideForm();
+}
+
+async function getContactsArray() {
+    let contactObjects = await loadData("/contacts/");
+    Object.keys(contactObjects).forEach(key => {
+        contacts.push(contactObjects[key]);
+    });
 }
 
 /**
@@ -91,23 +36,19 @@ function renderContacts() {
  * @returns {Array} Sorted array of contacts
  */
 function getSortedContacts() {
-    const contactsWithName = contacts.map(c => ({
-        ...c,
-        name: c.name || `${c.firstName || ''} ${c.lastName || ''}`.trim()
-    }));
-    return [...contactsWithName].sort((a, b) => {
-        const initialsA = getInitials(a.name);
-        const initialsB = getInitials(b.name);
-        if (initialsA < initialsB) return -1;
-        if (initialsA > initialsB) return 1;
-        return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    return contacts.sort((a, b) => {
+        const lastNameA = a.name["last-name"];
+        const lastNameB = b.name["last-name"];
+        if (lastNameA < lastNameB) return -1;
+        if (lastNameA > lastNameB) return 1;
+        return a.name["last-name"].localeCompare(b.name["last-name"], 'en', { sensitivity: 'base' });
     });
 }
 
 function groupContactsByInitial(sortedContacts) {
     return sortedContacts.reduce((acc, contact) => {
-        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
-        const letter = initials[0] ? initials[0].toUpperCase() : '';
+        const initial = contact.name["first-name"].slice(0, 1);
+        const letter = initial ? initial.toUpperCase() : '';
         if (!letter) return acc;
         (acc[letter] = acc[letter] || []).push(contact);
         return acc;
@@ -125,9 +66,8 @@ function renderContactGroups(contactList, grouped) {
 function renderContactsOfGroup(contactList, group, startIndex) {
     let idx = startIndex;
     group.forEach(contact => {
-        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
-        const name = `${contact.firstName} ${contact.lastName}`.trim();
-        const colorClass = colorMap[name] || 'contact-avatar-color10';
+        const initials = getInitials(contact.name["first-name"] + " " + contact.name["last-name"]);
+        const colorClass = contact.color;
         contactList.innerHTML += getContactListItemTemplate(contact, colorClass, initials, idx);
         idx++;
     });
@@ -235,16 +175,13 @@ function toggleContactDetails(idx, item) {
 
 function showContactDetails(contact, idx) {
     const container = document.getElementById('contactListClicked');
-    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
-    const initials = getInitials(name);
-    const colorClass = colorMap[name] || 'contact-avatar-color10';
-    const contactForTemplate = { ...contact, name, initials };
-    container.innerHTML = getContactDetailsTemplate(contactForTemplate, colorClass, initials, idx);
+    const initials = getInitials(contact.name["first-name"] + " " + contact.name["last-name"]);
+    const colorClass = contact.color;
+    container.innerHTML = getContactDetailsTemplate(contact, colorClass, initials, idx);
     container.classList.remove('active');
     container.classList.add('contact-list-clicked');
     setTimeout(() => container.classList.add('active'), 10);
 }
-
 
 /**
  * Shows the add contact form and its modal overlay.
@@ -271,12 +208,6 @@ function closeFormOnOutsideClick(e) {
     const formContainer = document.getElementById('formContainer');
     if (formContainer.classList.contains('show') && !formContainer.contains(e.target)) hideForm();
 }
-
-function closeEditFormOnOutsideClick(e) {
-    const editFormContainer = document.getElementById('editFormContainer');
-    if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) hideEditForm();
-}
-
 
 /**
  * Adds a new contact to the contacts array and updates the contact list.
@@ -333,15 +264,6 @@ function updateFormAvatar() {
     avatar.textContent = getInitials(name);
 }
 
-function getOrCreateColorClass(name) {
-    if (colorMap[name]) return colorMap[name];
-    const usedColors = Object.values(colorMap);
-    let colorIdx = 1;
-    while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-    return colorIdx > 10 ? 'contact-avatar-color' + (((Object.keys(colorMap).length - 1) % 10) + 1) : 'contact-avatar-color' + colorIdx;
-}
-
-
 function resetAvatarColors(avatar) {
     for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
 }
@@ -349,10 +271,6 @@ function resetAvatarColors(avatar) {
 function setDefaultAvatar(avatar) {
     for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
     avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
-}
-
-function getInitials(name) {
-    return name.split(" ").map(n => n[0].toUpperCase()).slice(0, 2).join("");
 }
 
 function cancelForm() {
@@ -377,8 +295,7 @@ function editContact(sortedIdx) {
 
 function showEditForm(idx) {
     const contact = contacts[idx];
-    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
-    document.getElementById('editContactName').value = name;
+    document.getElementById('editContactName').value = contact.name["first-name"] + " " + contact.name["last-name"];
     document.getElementById('editContactEmail').value = contact.email;
     document.getElementById('editContactPhone').value = contact.phone;
     updateEditFormAvatar();
@@ -409,9 +326,7 @@ function hideEditForm() {
  */
 function closeEditFormOnOutsideClick(e) {
     const editFormContainer = document.getElementById('editFormContainer');
-    if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) {
-        hideEditForm();
-    }
+    if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) hideEditForm();
 }
 
 function updateEditFormAvatar() {

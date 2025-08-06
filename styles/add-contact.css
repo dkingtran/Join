@@ -1,16 +1,4 @@
 
-/* Kontakt-Avatar Farben (10 verschiedene) */
-.contact-avatar-color1 { background: #FF7A00 !important; }
-.contact-avatar-color2 { background: #9327FF !important; }
-.contact-avatar-color3 { background: #6E52FF !important; }
-.contact-avatar-color4 { background: #FC71FF !important; }
-.contact-avatar-color5 { background: #FFBB2B !important; }
-.contact-avatar-color6 { background: #1FD7C1 !important; }
-.contact-avatar-color7 { background: #462F8A !important; }
-.contact-avatar-color8 { background: #FF4646 !important; }
-.contact-avatar-color9 { background: #00BEE8 !important; }
-.contact-avatar-color10 { background: #48b848 !important; }
-
 /* Contact Sidebar */
 .contact-sidebar {
     position: fixed;
@@ -124,7 +112,6 @@
 .contact-avatar {
     width: 42px;
     height: 42px;
-    background: #2A3647;
     color: white;
     border-radius: 50%;
     border: 2px solid white;
@@ -228,7 +215,6 @@
     min-height: 120px;
     width: 120px;
     height: 120px;
-    background: #2A3647;
     color: white;
     border-radius: 50%;
     border: 3px solid #ffffff;

@@ -89,14 +89,14 @@
     border-radius: 8px;
     padding: 15px 16px 15px 16px;
     color: white;
-    cursor: pointer;
     border: none;
     transition: background-color 100ms ease-in-out;
 }
 
-.signup-btn-register:hover {
+.signup-btn-register:hover:enabled {
     background-color: #00BEE8;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .confirm-register-template {
