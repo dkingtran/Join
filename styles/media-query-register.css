@@ -13,10 +13,10 @@
     }
 }
 
-@media(max-width: 450px) {
+@media(max-width: 470px) {
     .login-box-register {
         max-width: 310px;
-        height: 480px;
+        height: 620px;
         padding: 80px 10px;
     }
 
@@ -28,5 +28,17 @@
     .signup-btn-register {
         max-width: 160px;
     }
+}
 
+@media(max-width: 380px) {
+    .logo-animated.shrink {
+        left: 40px;
+        width: 64px;
+        height: 78px;
+    }
+
+    .logo-animated {
+        width: 100px;
+        height: 121px;
+    }
 }
