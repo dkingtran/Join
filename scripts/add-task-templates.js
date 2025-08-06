@@ -1,6 +1,6 @@
 function getSubtaskTemplate(text) {
   return `
- <div class="subtask-text-box flex justify-between">
+ <div class="subtask-text-box flex justify-between ">
   <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
     <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon" onclick="startEditSubtask(this)">
@@ -16,7 +16,7 @@ function getSubtaskTemplate(text) {
 
 function changeDivtoInputTemplate(text) {
   return `
-<input class="subtask-entry font-bundle" type="text" value="${text}"
+<input class="subtask-entry font-bundle border-bottom-blue" type="text" value="${text}"
     onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
 `;
 }

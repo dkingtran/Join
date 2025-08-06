@@ -9,6 +9,10 @@ const lettersRegex = /^[a-z]+$/gi;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
 
+function removeSpaces(string) {
+    return string.replace(/\s+/gm, '');
+}
+
 /**
  * Validates a given name string based on specific regex patterns.
  * Tests if name is empty, has first and last name and has no numbers.
@@ -77,10 +81,17 @@ function generateNameObject(name) {
  * @param {string} date - The date string to check.
  * @returns {boolean} Returns true if the date is not empty and is in the future, otherwise false.
  */
+
 function dateCheck(date) {
     if(removeSpaces(date) == "") return false;
     let dateInput = new Date(date);
     let dateNow = new Date();
     if (dateInput < dateNow) return false;
+    else return true;
+}
+
+
+function titleCheck(title) {
+    if(removeSpaces(title) == "") return false;
     else return true;
 }
