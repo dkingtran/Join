@@ -1,0 +1,32 @@
+/* Media Query */
+@media(max-width: 650px) {
+    .login-box-register {
+        max-width: 411px;
+        height: 650px;
+    }
+}
+
+@media(max-width: 600px) {
+    .login-box-register {
+        max-width: 445px;
+        height: 600px;
+    }
+}
+
+@media(max-width: 450px) {
+    .login-box-register {
+        max-width: 310px;
+        height: 480px;
+        padding: 80px 10px;
+    }
+
+    .sign-up {
+        font-size: 47px;
+        width: 100%;
+    }
+
+    .signup-btn-register {
+        max-width: 160px;
+    }
+
+}

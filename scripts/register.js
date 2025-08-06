@@ -1,213 +1,181 @@
 
-const nameRef = document.getElementById('name');
-const passwordConfirmationRef = document.getElementById('password-confirmation');
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
-
 const passwordConLockIcon = document.getElementById('lock-confirm-password');
 const passwordConVisibilityOffIcon = document.getElementById('visibility-off-confirm-password');
 const passwordConVisibilityOnIcon = document.getElementById('visibility-on-confirm-password');
-const passwordConfirmationWrapperRef = document.getElementById('password-confirmation-wrapper');
+const passwordConWrapperRef = document.getElementById('password-confirmation-wrapper');
 
-let emailCheck = false;
-let nameCheck = false;
-let passwordCheck = false;
-let passwordConfirmationCheck = false;
+let nameIsValid = false;
+let emailIsValid = false;
+let passwordIsValid = false;
+let passwordConIsValid = false;
 
+nameRef = document.getElementById('name');
+emailRef = document.getElementById('email');
+passwordRef = document.getElementById('password');
+passwordConRef = document.getElementById('password-confirmation');
 
 /**
- * waits for the boolean from checkRegisterForm()
- * if true fetches users from Firebase
+ * Waits for the boolean from checkRegisterForm().
+ * If true fetches users from Firebase.
  * creates new user and adds it to the downloaded user array
  * uploads new user array
  * redirects to login
  * if false shows error message
  */
 async function addUser() {
-  if (checkRegisterForm()) {
-    let users = await loadData("/users/");
-    let newUser = {
-      "name": nameRef.value,
-      "email": emailRef.value,
-      "password": passwordRef.value,
-    };
-    users.push(newUser);
-    await putData("/users/", users);
-    showSuccess();
-    redirectToLogin();
-  } else {
+  if (!checkRegisterForm()) {
     showErrorMessage();
+  } else if (await checkForUserDuplicate(emailRef.value)) {
+    showErrorMessage();
+  } else {
+    let contactId = await postData("/contacts/", generateContact());
+    await addIdToObject(contactId, "/contacts/");
+    let userId = await postData("/users/", generateUser());
+    await addIdToObject(userId, "/users/");
+    showSuccess();
   }
 }
 
-
 /**
- * Displays the success message and the overlay,
- * fades both out after 1 second,
- * and then redirects the user to the login page.
+ * Generates a contact object with email, name, phone number, and color properties.
+ * @returns {Object} The generated contact object.
  */
-function showSuccess() {
-  const confirmLoginDiv = document.getElementById('confirm-register');
-
-  confirmLoginDiv.classList.remove('hide', 'fadeout');
-  confirmLoginDiv.classList.add('show');
-
-  toggleOverlay();
+function generateContact() {
+  return {
+    "email": emailRef.value,
+    "name": generateNameObject(nameRef.value),
+    "phone-number": "xxxx - xxxxx",
+    "color": getRandomColor(),
+  };
 }
 
-
 /**
- * Shows or hides the overlay based on the given boolean value.
- * @param {boolean} visible - true to show the overlay, false to hide it
+ * Generates a user object containing email, name, and password properties.
+ * @returns {Object} The generated user object.
  */
-function toggleOverlay() {
-  const overlay = document.getElementById('register-succ-overlay');
-  overlay.classList.remove('hide');
-  overlay.classList.add('show');
+function generateUser() {
+  return {
+    "email": emailRef.value,
+    "name": generateNameObject(nameRef.value),
+    "password": passwordRef.value,
+  };
 }
 
-
 /**
- * sets timeout for redirection to login
- * and redirects to the login page after 2.5 seconds.
+ * Checks if a user with the specified email already exists in the users data.
+ *
+ * @async
+ * @function
+ * @param {string} email - The email address to check for duplication.
+ * @returns {Promise<boolean>} - Resolves to true if a user with the given email exists, otherwise false.
  */
-function redirectToLogin() {
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 1500); 
+async function checkForUserDuplicate(email) {
+  let users = await loadData("/users/");
+  let userKeyArray = Object.keys(users);
+  return userKeyArray.some(userKey => {
+    return users[userKey].email == email;
+  });
 }
 
-
 /**
- * Executes the functions for the register-form inputs
- * @returns true if all inputs have been checked and validated
+ * Validates the registration form fields by checking the validity of name, email, password, and password confirmation.
+ * Updates error messages if any field is invalid.
+ *
+ * @returns {boolean} Returns true if all form fields are valid, otherwise false.
  */
 function checkRegisterForm() {
-  checkName();
-  checkEmail();
-  checkPassword();
-  checkPasswordConfirmation();
-  if (emailCheck && nameCheck && passwordCheck && passwordConfirmationCheck) {
-    return true;
-  } else return false;
+  nameIsValid = nameCheck(nameRef.value);
+  emailIsValid = emailCheck(emailRef.value);
+  passwordIsValid = passwordCheck(passwordRef.value);
+  passwordConIsValid = passwordConCheck(passwordRef.value, passwordConRef.value);
+  return emailIsValid && nameIsValid && passwordIsValid && passwordConIsValid;
 }
 
 /**
- * shows error message
+ * Adds an 'error' class to the parent element of the specified input reference if the input is invalid.
+ *
+ * @param {string} inputRef - The reference name of the input field ('name', 'email', 'password', or 'passwordCon').
+ * @param {boolean} isValid - Indicates whether the input is valid.
+ */
+function showInputError(inputRef, isValid) {
+  if (!isValid) {
+    switch (inputRef) {
+      case "name":
+        nameRef.parentElement.classList.add('error');
+        break;
+      case "email":
+        emailRef.parentElement.classList.add('error');
+        break;
+      case "password":
+        passwordRef.parentElement.classList.add('error');
+        break;
+      case "passwordCon":
+        passwordConRef.parentElement.classList.add('error');
+        break;
+    }
+  }
+}
+
+/**
+ * Displays error messages for the registration form fields by validating each input
+ * (name, email, password, and password confirmation) and showing corresponding error styles.
+ * Also makes the general error message visible.
+ *
+ * Assumes the existence of validation flags (nameIsValid, emailIsValid, passwordIsValid, passwordConIsValid)
+ * and a reference to the error message element (errorMessageRef).
  */
 function showErrorMessage() {
+  showInputError("name", nameIsValid);
+  showInputError("email", emailIsValid);
+  showInputError("password", passwordIsValid);
+  showInputError("passwordCon", passwordConIsValid);
   errorMessageRef.classList.add('show');
 }
 
-
 /**
- * lets error message dissapear when all input fields have been corrected
+ * lets error message disappear when all input fields have been corrected
  */
 document.getElementById('login-form').addEventListener("input", () => {
-  if (emailCheck && nameCheck && passwordCheck && passwordConfirmationCheck) {
+  if (emailIsValid && nameIsValid && passwordIsValid && passwordConIsValid) {
     errorMessageRef.classList.remove('show');
   }
 });
 
-
-/**
- * checks if name input is empty
- * if empty adds error class to input and nameCheck = false
- * if valid nameCheck = true
- */
-function checkName() {
-  if (!(nameRef.value == '')) {
-    nameCheck = true;
-  } else {
-    nameRef.parentElement.classList.add('error');
-    nameCheck = false;
-  }
-}
-
-
 /**
  * eventlistener removes error class if name has been edited
- * nameCheck = true
+ * nameIsVaild = true
  */
 nameRef.addEventListener("input", () => {
   nameRef.parentElement.classList.remove('error');
-  nameCheck = true;
+  nameIsValid = true;
 });
-
-
-/**
- * checks if email input has valid email adress
- * adds error class if not valid and emailCheck = false
- * if valid emailCheck = true
- */
-function checkEmail() {
-  if (emailRegex.test(emailRef.value)) {
-    emailCheck = true;
-  } else {
-    emailRef.parentElement.classList.add('error');
-    emailCheck = false;
-  }
-}
-
 
 /**
  * eventlistener removes error class if email has been edited
- * emailCheck = true
+ * emailIsValid = true
  */
 emailRef.addEventListener("input", () => {
   emailRef.parentElement.classList.remove('error');
-  emailCheck = true;
+  emailIsValid = true;
 });
-
-
-/**
- * checks if password input is empty
- * if empty adds error class to input and passwordCheck = false
- * if valid passwordCheck = true
- */
-function checkPassword() {
-  if (!(passwordRef.value == '')) {
-    passwordCheck = true;
-  } else {
-    passwordRef.parentElement.classList.add('error');
-    passwordCheck = false;
-  }
-}
-
 
 /**
  * eventlistener removes error class if password has been edited
- * passwordCheck = true
+ * passwordIsValid = true
  */
 passwordRef.addEventListener("input", () => {
   passwordRef.parentElement.classList.remove('error');
-  passwordCheck = true;
+  passwordIsValid = true;
 });
-
-
-/**
- * checks if password confirmation input is not empty and matches password input
- * if valid passwordConfirmationCheck = true
- * if not adds error class to input and sets passwordConfirmationCheck = false
- */
-function checkPasswordConfirmation() {
-  if (!(passwordConfirmationRef.value == '') && passwordRef.value == passwordConfirmationRef.value) {
-    passwordConfirmationCheck = true;
-  } else {
-    passwordConfirmationRef.parentElement.classList.add('error');
-    passwordConfirmationCheck = false;
-  }
-}
-
 
 /**
  * eventlistener removes error class if password confirmation has been edited
- * passwordConfirmationCheck = true
+ * passwordConIsValid = true
  */
-passwordConfirmationRef.addEventListener("input", () => {
-  passwordConfirmationRef.parentElement.classList.remove('error');
-  passwordConfirmationCheck = true;
+passwordConRef.addEventListener("input", () => {
+  passwordConRef.parentElement.classList.remove('error');
+  passwordConIsValid = true;
 });
-
 
 /**
  * checks if privacy policy has been accepted
@@ -225,36 +193,60 @@ document.getElementById('privacy-policy-checkbox').addEventListener("click", (ev
 });
 
 /**
+ * Displays the success message and toggles overlay.
+ */
+function showSuccess() {
+  const confirmLoginDiv = document.getElementById('confirm-register');
+  confirmLoginDiv.classList.remove('hide', 'fadeout');
+  confirmLoginDiv.classList.add('show');
+  toggleOverlay();
+  redirectToLogin();
+}
+
+/**
+ * Shows or hides the overlay based on the given boolean value.
+ * @param {boolean} visible - true to show the overlay, false to hide it
+ */
+function toggleOverlay() {
+  const overlay = document.getElementById('register-succ-overlay');
+  overlay.classList.remove('hide');
+  overlay.classList.add('show');
+}
+
+/**
+ * sets timeout for redirection to login
+ * and redirects to the login page after 2.5 seconds.
+ */
+function redirectToLogin() {
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1500);
+}
+
+/**
  * eventlistener on focus password-confirmation-input 
  * changes lock-icon to the visibility-off-icon
  */
-passwordConfirmationRef.addEventListener("focus", () => {
-  passwordConLockIcon.classList.add('d-none');
-  passwordConVisibilityOffIcon.classList.remove('d-none');
+passwordConRef.addEventListener("focus", () => {
+  if (passwordConVisibilityOnIcon.classList.contains('d-none')) {
+    passwordConLockIcon.classList.add('d-none');
+    passwordConVisibilityOffIcon.classList.remove('d-none');
+  }
 });
 
-
 /**
- * eventlistener on password-conformation-input-wrapper
- * stops propagation from input-wrapper to login-form
- */
-passwordConfirmationWrapperRef.addEventListener("click", (event) => {
-  event.stopPropagation();
-})
-
-
-/**
- * eventlistener click on login-form
- * changes password-confirmation-input icon mach to lock
+ * eventlistener click on document
+ * changes password-confirmation-input icon to lock
  * makes password not visible
  */
-loginForm.addEventListener("click", () => {
+document.addEventListener("click", event => {
+  if (!passwordConWrapperRef.contains(event.target)) {
     passwordConLockIcon.classList.remove('d-none');
-    passwordConfirmationRef.type = "password";
+    passwordConRef.type = "password";
     passwordConVisibilityOffIcon.classList.add('d-none');
     passwordConVisibilityOnIcon.classList.add('d-none');
+  }
 });
-
 
 /**
  * eventlistener click on visibility-off-icon
@@ -262,11 +254,10 @@ loginForm.addEventListener("click", () => {
  * makes password confirmation visible
  */
 passwordConVisibilityOffIcon.addEventListener("click", () => {
-    passwordConfirmationRef.type = "text";
-    passwordConVisibilityOffIcon.classList.add('d-none');
-    passwordConVisibilityOnIcon.classList.remove('d-none');
+  passwordConRef.type = "text";
+  passwordConVisibilityOffIcon.classList.add('d-none');
+  passwordConVisibilityOnIcon.classList.remove('d-none');
 });
-
 
 /**
  * eventlistener click on visibility-oon-icon
@@ -274,7 +265,7 @@ passwordConVisibilityOffIcon.addEventListener("click", () => {
  * makes password confirmation not visible
  */
 passwordConVisibilityOnIcon.addEventListener("click", () => {
-    passwordConfirmationRef.type = "password";
-    passwordConVisibilityOnIcon.classList.add('d-none');
-    passwordConVisibilityOffIcon.classList.remove('d-none');
+  passwordConRef.type = "password";
+  passwordConVisibilityOnIcon.classList.add('d-none');
+  passwordConVisibilityOffIcon.classList.remove('d-none');
 });

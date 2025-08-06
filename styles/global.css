@@ -1,3 +1,14 @@
+.d-none {
+  display: none;
+}
+
+.black-color{
+  color: black;
+}
+
+.white-color{
+  color:white;
+}
 
 .w-full {
   width: 100%;
@@ -5,45 +16,76 @@
 
 .max-w-440 {
   max-width: 440px;
-}
-.border-radius-10px{
-   border-radius: 10px;
+  min-width: 440px;
 }
 
-.p-16{
+.max-w-1200{
+  max-width: 1200px;
+}
+
+.max-w-50{
+  max-width: 50%;
+}
+
+.border-radius-10px {
+  border-radius: 10px;
+}
+
+.p-16 {
   padding: 16px;
 }
 
-.d-none {
-    display: none;
-}
-
 .display-standard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* css snippet addtask.html */
-.font-bundle{
- font-size: 20px;
+.flex { display: flex; }
+
+.flex-row { flex-direction: row; }
+
+.flex-column { flex-direction: column; }
+
+.justify-start { justify-content: flex-start; }
+
+.justify-between { justify-content: space-between; }
+
+.align-center { align-items: center; }
+
+.bg-white { background-color: white; }
+
+.mt-10 { margin-top: 10px; }
+
+.p-20 { padding: 20px; }
+
+.pl-21 { padding-left: 21px; }
+
+
+.font-bundle {
+  font-size: 20px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
 
-/* For add-task Input fields */
+
 .input-base {
   border: 1px solid black;
   border-radius: 10px;
   padding: 12px 21px;
 }
 
-.input-bundle{
+.m-top{
+  margin-top: 25px;
+}
+
+.input-bundle {
   width: 100%;
   max-width: 440px;
   height: 48px;
-  border: 1px solid black;
+  color: #d1d1d1;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
-  margin:10px 0;
-  padding:12px 21px;
+   margin-top: 6px;
+  padding: 12px 21px;
 }
