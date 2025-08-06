@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="profile-container" id="profileContainer">
-                    <img src="./assets/profile.jpg"  class="profile-img" onclick="toggleProfileDropdown()" alt="Profile"/>
+                    <img src="./assets/img/icons/header-side-menu/sm.png"  class="profile-img" onclick="toggleProfileDropdown()" alt="Profile"/>
+                    <img src="./assets/img/icons/header-side-menu/sm-hover.png"  class="profile-img-hover" onclick="toggleProfileDropdown()" alt="Profile"/>
 
                     <div id="profileDropdown" class="profile-dropdown">
                         <a href="" class="dropdown-item mobile-only d_none">Impressum</a>
@@ -43,24 +44,25 @@
             <h1>Join 360</h1>
             <div class="pipe"></div>
             <span>Key Metrics at a Glance</span>
+            <div class="horizontal-pipe"> </div>
         </div>
 
         <div class="main-container">
             <div class="summary-section">
                 <div class="todo-subsection">
                     
-                    <a href="board.html" class="display-todo element-hover">
-                        <img class="default-img" src="./assets/img/icons/summary/edit-icon.png" alt="Edit ToDo">
-                        <img class="hover-img" src="./assets/img/icons/summary/edit-icon-hover.png" alt="Edit ToDo">
+                    <a href="board.html" class="display-todo element-hover todo-responsive">
+                        <img class="default-img responsive-todo-icon" src="./assets/img/icons/summary/edit-icon.png" alt="Edit ToDo">
+                        <img class="hover-img responsive-todo-icon" src="./assets/img/icons/summary/edit-icon-hover.png" alt="Edit ToDo">
                         <div>
                             <h1 id="board-counter">0</h1>
                             <span>To-do</span>
                         </div>
                     </a>
 
-                    <a href="board.html" class="display-done element-hover">
-                        <img class="default-img" src="./assets/img/icons/summary/done-icon.png" alt="Done">
-                        <img class="hover-img" src="./assets/img/icons/summary/done-icon-hover.png" alt="Done">
+                    <a href="board.html" class="display-done element-hover todo-responsive">
+                        <img class="default-img responsive-todo-icon" src="./assets/img/icons/summary/done-icon.png" alt="Done">
+                        <img class="hover-img responsive-todo-icon" src="./assets/img/icons/summary/done-icon-hover.png" alt="Done">
                         <div>
                             <h1 id="done-counter">1</h1>
                             <span>Done</span>
@@ -69,7 +71,7 @@
                 </div>
                 <a href="board.html" class="urgency-subsection element-hover">
                     <div class="display-urgency">
-                        <img src="./assets/img/icons/summary/urgency-icon.png" alt="Urgency">
+                        <img class="reponsive-urgency-icon" src="./assets/img/icons/summary/urgency-icon.png" alt="Urgency">
                         <div class="urgency-counter">
                             <h1 id="urgency-counter">1</h1>
                             <span>Urgent</span>

@@ -59,6 +59,13 @@ function findEarliestUrgentDate(tasks) {
     return earliest["due-date"];
 }
 
+function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning,";
+    if (hour < 18) return "Good afternoon,";
+    return "Good evening,";
+}
+
 // Replace the text content of a DOM element by ID
 function updateDOM(id, value) {
     const element = document.getElementById(id);
@@ -77,7 +84,8 @@ async function updateSummary() {
     updateDOM("urgency-counter", countUrgentTasks(tasks));
     updateDOM("inBord-counter", tasks.length);
     const deadline = findEarliestUrgentDate(tasks);
-    updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "Keine");
+    updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
+    document.getElementById("greetUser").innerText = getGreeting();
 }
 
 // Ensure the summary is updated when the page loads
