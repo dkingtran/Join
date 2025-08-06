@@ -309,27 +309,12 @@ function toggleProfileDropdown() {
 
 function showAddTaskModal() {
     const modal = document.getElementById('addTaskModal');
-    const inner = document.getElementById('addTaskModalInner');
     modal.classList.add('show');
-    // Lade add_task.html und extrahiere NUR den .wrapper Inhalt
-    fetch('add_task.html')
-        .then(response => response.text())
-        .then(html => {
-            const temp = document.createElement('div');
-            temp.innerHTML = html;
-            const wrapper = temp.querySelector('.wrapper');
-            inner.innerHTML = wrapper ? wrapper.outerHTML : '';
-            // Lade ggf. JS nach
-            const script = document.createElement('script');
-            script.src = './scripts/add_task.js';
-            document.body.appendChild(script);
-        });
     document.body.style.overflow = 'hidden';
 }
 
 function closeAddTaskModal() {
     document.getElementById('addTaskModal').classList.remove('show');
-    document.getElementById('addTaskModalInner').innerHTML = '';
     document.body.style.overflow = '';
 }
 

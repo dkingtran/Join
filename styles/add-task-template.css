@@ -44,7 +44,7 @@
 
 .add-task-modal-content {
     width: 1196px;
-    height: 880px;
+    height: auto;
     background: #fff;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
@@ -85,5 +85,24 @@
 }
 
 .section-task-under {
+    margin-top: 96px;
     margin-bottom: 0;
+}
+
+.task-message {
+    bottom: 40px;
+}
+
+@media (max-width: 1365px) {
+    .add-task-modal-content {
+        width: auto;
+    }
+
+    .section-task-left {
+        max-width: none !important;
+    }
+
+    .section-task-right {
+        max-width: none !important;
+    }
 }
