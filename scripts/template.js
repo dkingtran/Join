@@ -52,7 +52,7 @@ function getContactDetailsTemplate(contact, colorClass, initials, idx) {
                 </div>
                 <div class="contact-details-info-section">
                     <div class="contact-details-info-section-title">Phone</div>
-                    <div class="contact-details-info-phone">${contact.phone}</div>
+                    <div class="contact-details-info-phone">${contact["phone-number"]}</div>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@
     <script src="./scripts/firebase.js"></script>
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/template.js"></script>
+    <script src="./scripts/render-contacts.js"></script>
     <script src="./scripts/add-contact.js"></script>
   </head>
   <body onload="init()">
@@ -170,7 +171,7 @@
               required
               type="text"
               placeholder="Name"
-              id="contactName"
+              id="name"
               oninput="updateFormAvatar()"
             />
             <img
@@ -184,7 +185,7 @@
               required
               type="email"
               placeholder="Email"
-              id="contactEmail"
+              id="email"
             />
             <img
               class="icon"
@@ -198,7 +199,7 @@
               minlength="10"
               type="tel"
               placeholder="Phone"
-              id="contactPhone"
+              id="phone"
             />
             <img
               class="icon"
@@ -206,13 +207,22 @@
               alt="Phone Icon"
             />
           </div>
-          <div class="button-group">
+          <div class="button-group" id="add-form-buttons">
             <button type="button" class="cancel-btn" onclick="cancelForm()">
               Cancel
               <img src="./assets/img/icons/add-contact/close.svg" alt="" />
             </button>
             <button type="submit" class="create-btn">
               Create Contact
+              <img src="./assets/img/icons/add-contact/check.svg" alt="" />
+            </button>
+          </div>
+          <div class="button-group d-none" id="edit-form-buttons">
+            <button type="button" class="cancel-btn" onclick="hideEditForm()">
+              Delete
+            </button>
+            <button type="submit" class="create-btn">
+              Save Changes
               <img src="./assets/img/icons/add-contact/check.svg" alt="" />
             </button>
           </div>

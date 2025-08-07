@@ -3,13 +3,14 @@ let nameRef;
 let emailRef;
 let passwordRef;
 let passwordConRef;
+let phoneRef;
 
 const firstNameRegex = /^[a-z]+\s/gi;
 const lastNameRegex = /\s[a-z]+$/gi;
 const lettersRegex = /^[a-z]+$/gi;
 const numbersRegex = /^[0-9]+$/gi;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
-const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/gm
+const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/gm;
 
 /**
  * Validates a given name string based on specific regex patterns.
@@ -110,5 +111,5 @@ function phoneNumberForm(phoneNumber) {
     if (phoneNumberClear.charAt(0) == "0") {
         phoneNumberClear = phoneNumberClear.replace(/^0/, "+49");
     }
-    return phoneNumberClear.slice(0,3) + " " + phoneNumberClear.slice(3, 7) + " " + phoneNumberClear.slice(7);
+    return phoneNumberClear.slice(0, 3) + " " + phoneNumberClear.slice(3, 7) + " " + phoneNumberClear.slice(7);
 }
