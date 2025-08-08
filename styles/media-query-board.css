@@ -8,6 +8,10 @@
     min-width: 300px;
   }
 
+  .btn-clear-task-container {
+    min-width: 436px !important;
+  }
+
 
 }
 
@@ -15,6 +19,12 @@
   .drag-board {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+@media (max-width: 1160px) {
+    .star-required {
+      max-width: 480px !important;
+    }
 }
 
 @media (max-width: 1040px) {
