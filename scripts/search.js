@@ -1,6 +1,3 @@
-let tasks = [];
-
-let displayedTasks = [];
 
 document.getElementById('search').addEventListener("input", debounce(handleSearch, 250));
 
