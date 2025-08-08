@@ -25,3 +25,11 @@ function getRandomColor() {
     let colorIndex = Math.floor(Math.random() * 15);
     return colors[colorIndex];
 }
+
+function debounce(cb, delay) {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => cb(...args), delay);
+    };
+}
