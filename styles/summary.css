@@ -123,6 +123,10 @@
     gap: 18px;
 }
 
+.display-todo h1 {
+    font-size: 64px;
+}
+
 .display-done {
     text-align: center;
     display: flex;
@@ -133,6 +137,10 @@
     width: 246px;
     height: 168px;
     gap: 18px;
+}
+
+.display-done h1 {
+    font-size: 64px;
 }
 
 .default-img {
@@ -162,6 +170,10 @@
     gap: 18px;
 }
 
+.display-urgency h1 {
+    font-size: 64px;
+}
+
 .urgency-pipe{
     width: 2px;
     height: 102px;
@@ -170,6 +182,10 @@
 
 .display-deadline{
     text-align: center;
+}
+
+#deadline {
+    font-size: 21px;
 }
 
 .task-subsection {
