@@ -44,13 +44,28 @@
 
 .add-task-modal-close {
     position: absolute;
-    top: 16px;
+    top: 24px;
     right: 24px;
     background: none;
     border: none;
-    font-size: 2rem;
+    height: 32px;
+    width: 32px;
     cursor: pointer;
+    align-items: center;
     z-index: 10;
+}
+
+.add-task-modal-close img {
+  width: 16px;
+  height: 16px;
+}
+.add-task-modal-close:hover {
+    background: #CDCDCD;
+    border-radius: 50%;
+}
+
+.padding-0 {
+  padding: 0 !important;
 }
 
 .add-task-modal {
@@ -194,7 +209,7 @@
     position: sticky;
     width: 80vw !important;
     min-width: 150px !important;
-    margin: auto;
+    margin-left: auto !important;
     bottom: 24px;
     right: 24px;
     z-index: 20;
@@ -214,7 +229,7 @@
 
   .max-w-440 {
     width: 80vw !important;
-    min-width: 300px !important;
+    min-width: 288px !important;
   }
 
   .title-task input {
@@ -279,7 +294,6 @@
 
   .section-task-under {
     width: 80vw;
-    min-width: none;
   }
 
   .star-required {
@@ -293,11 +307,10 @@
 @media (max-width: 485px) {
 
   .btn-prio .font-bundle {
-    gap: 6px;
+    gap: 4px;
   }
 
   .add-task-modal-close {
-    top: 12px;
     right: 16px;
   }
 
@@ -317,6 +330,10 @@
     padding: 24px 16px !important;
   }
 
+  .btn-prio {
+    gap: 5px;
+  }
+
 
 }
 
@@ -333,3 +350,10 @@
 
 }
 
+@media (max-width: 350px) {
+
+  .btn-prio button {
+    min-width: 88px;
+  }
+
+}
