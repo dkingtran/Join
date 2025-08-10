@@ -8,11 +8,50 @@
     min-width: 300px;
   }
 
-  .btn-clear-task-container {
-    min-width: 436px !important;
+  
+
+
+}
+
+@media (max-width: 1365px) {
+  .add-task-modal-content {
+    width: auto;
+    height: 85vh;
   }
 
+  .section-task-left {
+    max-width: none !important;
+  }
 
+  .section-task-right {
+    max-width: none !important;
+  }
+
+  .section-task-under {
+    margin-top: 0;
+  }
+
+  /* Für Webkit-Browser (Chrome, Edge, Safari) */
+  .add-task-modal-content::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+    border-radius: 30px;
+  }
+
+  .add-task-modal-content::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 30px;
+  }
+
+  .add-task-modal-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 30px;
+  }
+
+  .star-required {
+    margin-top: 16px;
+    margin-bottom: 64px;
+  }
 }
 
 @media (max-width: 1150px) {
