@@ -84,7 +84,7 @@ function generateNameObject(name) {
 
 function dateCheck(date) {
     if(removeSpaces(date) == "") return false;
-    let dateInput = new Date(date);
+    let dateInput = new Date();
     let dateNow = new Date();
     if (dateInput < dateNow) return false;
     else return true;
