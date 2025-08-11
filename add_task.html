@@ -273,11 +273,10 @@
     </aside>
 
     <script src="./scripts/firebase.js"></script>
-    <!--   <script src="./scripts/login-status.js"></script> -->
+  
     <script src="./scripts/add-task-templates.js"></script>
     <script src="./scripts/add_task_button.js"></script>
 
-    <!-- 🔄 input.js muss VOR add_task.js -->
     <script src="./scripts/input.js"></script>
     <script src="./scripts/add_task.js"></script>
 
@@ -286,19 +285,3 @@
 
 </html>
 
-<div class="subtask-text-box flex justify-between ">
-    <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">•${text} <div
-            class="icon-edit-subtask-box display-standard d-none">
-            <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon"
-                onclick="startEditSubtask(this)">
-            <svg width="2" height="24" viewBox="0 0 2 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.14453 0V24" stroke="#A8A8A8" />
-            </svg>
-        </div>
-
-        <img class="icon-task delete-subtask-input" src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon"
-            onclick="deleteSubtask(this)">
-        <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" alt="Confirm Icon"
-            onclick="finishEditSubtask(this)">
-    </div>
-</div>

@@ -144,7 +144,7 @@
   }
 
   .subtask-entry {
-    width: 100%;
+  
     max-width: 440px;
     min-width: 360px;
   }
@@ -244,7 +244,7 @@
   }
 
   .subtask-entry {
-    width: 100%;
+ 
     max-width: 440px;
     min-width: 200px;
   }

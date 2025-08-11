@@ -184,6 +184,7 @@ form {
 }
 
 .avatar {
+  color: white;
   width: 42px;
   height: 42px;
   background: #2A3647;
@@ -250,7 +251,6 @@ form {
   margin-top: 8px;
   min-width: 335px;
   border-radius: 6px;
-  background-color: #f9f9f9;
 }
 
 .selected-contact {
@@ -324,7 +324,9 @@ form {
 }
 
 .subtask-text-box {
-  max-width: 450px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 440px;
   min-width: 320px;
   padding-left: 20px;
   transition: background-color 0.1s;
@@ -337,11 +339,11 @@ form {
 
 .subtask-text-box:hover .icon-edit-subtask-box {
   display: flex;
+  background-color: rgb(127, 123, 123);
 }
 
 .subtask-entry {
   border: none;
-  width: 440px;
   max-width: 440px;
   display: flex;
   justify-content: space-between;
@@ -353,7 +355,7 @@ form {
   height: 32px;
   min-width: 340px;
   border-radius: 10px;
-  background-color: #e0dddd;
+
   display: flex;
   align-items: center;
 }

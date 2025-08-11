@@ -179,8 +179,8 @@ async function loadContactsIntoDropdown() {
 function prepareContactData(contact) {
     const name = contact.name;
     const initials = name["first-name"][0] + name["last-name"][0];
-    const colorClass = contact.color || ".bg-cccccc";
-    const hexColor = "#" + colorClass.replace(".bg-", "");
+    const colorClass = contact.color || "bg-cccccc";
+    const hexColor = "#" + colorClass.replace("bg-", "");
 
     return { initials, name, hexColor };
 }
@@ -355,7 +355,7 @@ function showSuccessMessage() {
     }, 10);
     setTimeout(() => {
         messageBox.classList.remove('show');
-    }, 1000);
+    }, 3000);
     setTimeout(() => {
         messageBox.classList.add('hidden');
         window.location.href = "board.html"; // 🔁 Zielseite hier eintragen
