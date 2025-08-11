@@ -247,7 +247,7 @@ form {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 6px;
+  /* padding: 6px; */
   margin-top: 8px;
   min-width: 335px;
   border-radius: 6px;
@@ -284,7 +284,6 @@ form {
 }
 
 .subtask-input-box {
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -292,7 +291,8 @@ form {
 }
 
 .subtask-input-box input {
-  border: none;
+  border-color: transparent;
+ 
   height: auto;
 }
 
