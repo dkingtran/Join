@@ -75,7 +75,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.35);
-    z-index: 9999;
+    z-index: 9998;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,6 +142,8 @@
 
 .task-message {
     bottom: 96px;
+    z-index: 9999;
+    flex-wrap: nowrap;
 }
 
 .add-task-modal.show {
@@ -161,6 +163,10 @@
     margin-bottom: 8px;
 }
 
+#selectedContacts {
+  background-color: transparent;
+}
+
 .category-task p {
     margin-bottom: 8px;
 }
@@ -175,6 +181,10 @@
 
 .btn-clear-task-container {
   max-width: 440px !important;
+}
+
+.add-subtask-input {
+  padding-left: 2px;
 }
 
 @media (max-width: 634px) {
@@ -301,6 +311,11 @@
     align-items: center;
     justify-content: start;
   }
+
+  .dropdown-list {
+    width: 80vw !important;
+    min-width: 288px;
+  }
   
 }
 
@@ -321,6 +336,12 @@
   .btn-addtask-clear {
     max-width: 100px;
   }
+
+    #selectedContacts {
+      min-width: 288px;
+      width: 80vw;
+      background-color: transparent;
+    }
 
 }
 

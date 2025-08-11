@@ -9,6 +9,9 @@ const lettersRegex = /^[a-z]+$/gi;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
 
+function removeSpaces(string) {
+    return string.replace(/\s+/gm, '');
+}
 
 /**
  * Validates a given name string based on specific regex patterns.

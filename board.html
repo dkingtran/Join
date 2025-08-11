@@ -15,8 +15,10 @@
     <link rel="stylesheet" href="./styles/media-query-add-task.css" />
     <link rel="stylesheet" href="./styles/add-task-template.css" />
     <link rel="stylesheet" href="./styles/media-query-board.css" />
-    <script src="./scripts/add-task-templates.js"></script>
+    <script src="./scripts/add-task-templates.js" defer></script>
+    <script src="./scripts/add_task_button.js" defer></script>
     <script src="./scripts/firebase.js"></script>
+    <script src="./scripts/input.js" defer></script>
     <script src="./scripts/add_task.js" defer></script>
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
@@ -298,7 +300,9 @@
             </div>
           </div>
         </div>
-          <div id="task-message" class="task-message hidden">
+      </section>
+      <section>
+            <div id="task-message" class="task-message hidden">
             <div class="task-successful-info">
               <p class="task-successful-info-text">Task successfully created!</p>
               <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">

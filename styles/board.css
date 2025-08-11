@@ -1,3 +1,6 @@
+/* * {
+    border: 1px solid red;
+} */
 
 .board-design {
     background: #FF7A00;
@@ -33,7 +36,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f4f4f4;
 }
 
 .header-title-container {
