@@ -135,10 +135,23 @@
     padding: 0;
   }
 
-  .btn-clear-task-container {
-    margin-left: 0px;
+    .btn-clear-task-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 80px;
+    width: min(100vw, 1200px); 
+    padding: 12px 20px;
+    background: #fff;
+    box-shadow: 0 -6px 16px rgba(0,0,0,0.08);
+    z-index: 1000;
   }
 
+
+/*   .main-container {
+    padding-bottom: 96px;  
+  }
+ */
   .section-task-under {
     align-items: flex-start;
   }
@@ -178,7 +191,7 @@
   .btn-clear-task-container {
     margin-left: 0;
     display: flex;
-  }
+    justify-content: center; }
 
   .subtask-entry {
     width: 100%;
