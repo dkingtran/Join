@@ -36,7 +36,10 @@ function getRandomColor() {
 
 function getInitials(name) {
     let nameArray = name.split(" ");
-    let firstNameInitial = nameArray[0].toUpperCase().slice(0,1);
-    let lastNameInitial = nameArray[nameArray.length - 1].toUpperCase().slice(0,1);
+    let firstNameInitial = nameArray[0].toUpperCase().slice(0, 1);
+    let lastNameInitial = nameArray[nameArray.length - 1].toUpperCase().slice(0, 1);
+    if (nameArray.length == 1) {
+        return firstNameInitial;
+    }
     return firstNameInitial + lastNameInitial;
 }

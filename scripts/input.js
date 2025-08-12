@@ -5,12 +5,12 @@ let passwordRef;
 let passwordConRef;
 let phoneRef;
 
-const firstNameRegex = /^[a-z]+\s/gi;
-const lastNameRegex = /\s[a-z]+$/gi;
-const lettersRegex = /^[a-z]+$/gi;
-const numbersRegex = /^[0-9]+$/gi;
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
-const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/gm;
+const firstNameRegex = /^[a-z]+\s/i;
+const lastNameRegex = /\s[a-z]+$/i;
+const lettersRegex = /^[a-z]+$/i;
+const numbersRegex = /^[0-9]+$/i;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/i;
+const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/m;
 
 /**
  * Validates a given name string based on specific regex patterns.
@@ -98,7 +98,7 @@ function titleCheck(title) {
 
 function phoneNumberCheck(phoneNumber) {
     if (removeSpaces(phoneNumber) == "") return false;
-    else if (!(numbersRegex.test(clearPhoneNumber(phoneNumber)))) return false;
+    else if (!(phoneNumberRegex.test(clearPhoneNumber(phoneNumber)))) return false;
     else return true;
 }
 

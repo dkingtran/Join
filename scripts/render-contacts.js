@@ -8,10 +8,10 @@ let lastShownContactIdx = null;
 async function init() {
     await getContactsArray();
     renderContacts();
-    hideForm();
 }
 
 async function getContactsArray() {
+    contacts = [];
     let contactObjects = await loadData("/contacts/");
     Object.keys(contactObjects).forEach(key => {
         contacts.push(contactObjects[key]);
@@ -25,6 +25,7 @@ async function getContactsArray() {
 function renderContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
+    sortedContacts = [];
     sortedContacts = getSortedContacts();
     const grouped = groupContactsByInitial();
     renderContactGroups(contactList, grouped);
@@ -37,8 +38,6 @@ function renderContacts() {
  */
 function getSortedContacts() {
     return contacts.sort((a, b) => {
-        const lastNameA = a.name["last-name"];
-        const lastNameB = b.name["last-name"];
         return a.name["last-name"].localeCompare(b.name["last-name"], 'en', { sensitivity: 'base' });
     });
 }
@@ -84,38 +83,17 @@ function showMobileContactDetails(idx) {
     const section = document.querySelector('.contacts-section');
     section.classList.add('show-mobile-section');
     document.getElementById('contactListClicked').style.display = 'block';
-    setupMobileBackButton(section);
-    setupMobileEditButton(idx);
+    document.getElementById('mobileBackBtn').style.display = 'flex';
+    document.getElementById('mobileEditBtn').style.display = 'flex';
     document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
-    removeMobileEditDropdown();
-    showContactDetails(getSortedContacts()[idx], idx);
+    showContactDetails(sortedContacts[idx], idx);
+    lastShownContactIdx = idx;
 }
 
-function setupMobileBackButton(section) {
-    let backBtn = document.getElementById('mobileBackBtn');
-    if (!backBtn) {
-        backBtn = document.createElement('button');
-        backBtn.className = 'mobile-back-btn';
-        backBtn.id = 'mobileBackBtn';
-        backBtn.innerHTML = '<img src="./assets/img/icons/content/help/back.png" alt="Back">';
-        backBtn.onclick = hideMobileContactDetails;
-        section.appendChild(backBtn);
-    }
-    backBtn.style.display = 'flex';
-}
-
-function setupMobileEditButton(idx) {
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (editBtn) {
-        editBtn.style.display = 'flex';
-        window._lastMobileEditIdx = idx;
-    }
-}
-
-function toggleMobileEditDropdown(idx) {
+function toggleMobileEditDropdown() {
     const dropdown = document.getElementById('mobileEditDropdown');
     if (!dropdown) return;
-    dropdown.classList.contains('show') ? hideMobileEditDropdown(dropdown) : showMobileEditDropdown(dropdown, idx);
+    dropdown.classList.contains('show') ? hideMobileEditDropdown(dropdown) : showMobileEditDropdown(dropdown, lastShownContactIdx);
 }
 
 function hideMobileEditDropdown(dropdown) {
@@ -123,32 +101,30 @@ function hideMobileEditDropdown(dropdown) {
 }
 
 function showMobileEditDropdown(dropdown, idx) {
-    if (typeof getMobileEditDropdownTemplate === 'function') {
-        dropdown.innerHTML = getMobileEditDropdownTemplate(idx);
-    }
+    dropdown.innerHTML = getMobileEditDropdownTemplate(idx);
     dropdown.classList.add('show');
-    setTimeout(() => document.addEventListener('click', removeMobileEditDropdown, { once: true }), 0);
 }
 
-function removeMobileEditDropdown() {
+document.addEventListener('click', e => {
     const dropdown = document.getElementById('mobileEditDropdown');
-    if (dropdown) dropdown.classList.remove('show');
-}
+    if (!dropdown.contains(e.target)) {
+        if (dropdown) dropdown.classList.remove('show');
+    }
+});
 
 
 function toggleContactDetails(idx, item) {
     const details = document.getElementById('contactListClicked');
     const sorted = getSortedContacts();
     if (lastShownContactIdx === idx) {
-        // details.style.display = 'none';
         details.innerHTML = '';
         item.classList.remove('selected');
+        details.classList.remove('active');
         lastShownContactIdx = null;
     } else {
         document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('selected'));
         item.classList.add('selected');
         showContactDetails(sorted[idx], idx);
-        // details.style.display = '';
         lastShownContactIdx = idx;
     }
 }
@@ -158,19 +134,18 @@ function showContactDetails(contact, idx) {
     const initials = getInitials(contact.name["first-name"] + " " + contact.name["last-name"]);
     const colorClass = contact.color;
     container.innerHTML = getContactDetailsTemplate(contact, colorClass, initials, idx);
-    // container.classList.remove('active');
-    // container.classList.add('contact-list-clicked');
-    setTimeout(() => container.classList.add('active'), 10);
+    container.classList.add('contact-list-clicked');
+    container.classList.add('active');
 }
 
 function hideMobileContactDetails() {
     document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
     const section = document.querySelector('.contacts-section');
     section.classList.remove('show-mobile-section');
-    section.style.display = '';
-    // document.getElementById('contactListClicked').style.display = '';
+    document.getElementById('contactListClicked').innerHTML = '';
     hideMobileButtons();
     document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
+    lastShownContactIdx = null;
 }
 
 function hideMobileButtons() {
@@ -183,10 +158,8 @@ function hideMobileButtons() {
 function showDesktopView() {
     const section = document.querySelector('.contacts-section');
     const sidebar = document.querySelector('.contact-sidebar');
-    const details = document.getElementById('contactListClicked');
     if (section) section.classList.remove('show-mobile-section');
     if (sidebar) sidebar.classList.remove('hide-mobile-sidebar');
-    // if (details) details.style.display = '';
 }
 
 function showAddContactBtnMobile() {
@@ -194,8 +167,9 @@ function showAddContactBtnMobile() {
     if (addBtn) addBtn.classList.remove('hide-mobile-edit');
 }
 
-function closeMobileEditDropdownIfOpen() {
-    if (typeof removeMobileEditDropdown === 'function') removeMobileEditDropdown();
+function removeMobileEditDropdown() {
+    const dropdown = document.getElementById('mobileEditDropdown');
+    dropdown.classList.remove('show');
 }
 
 function handleResponsiveCloseMobileSection() {
@@ -203,8 +177,12 @@ function handleResponsiveCloseMobileSection() {
         if (window.innerWidth > 780) {
             showDesktopView();
             hideMobileButtons();
-            closeMobileEditDropdownIfOpen();
+            removeMobileEditDropdown();
             showAddContactBtnMobile();
+            let selectedContact = document.querySelector(`[data-index="${lastShownContactIdx}"]`);
+            if (selectedContact) selectedContact.classList.add('selected');
+        } else {
+            document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('selected'));
         }
     });
 }
