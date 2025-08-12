@@ -7,10 +7,6 @@
   .search-input-wrapper {
     min-width: 300px;
   }
-
-  
-
-
 }
 
 @media (max-width: 1365px) {
@@ -29,6 +25,14 @@
 
   .section-task-under {
     margin-top: 0;
+  }
+
+  .btn-clear-task-container {
+    position: sticky;
+    bottom: 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    background-color: #fff;
   }
 
   /* Für Webkit-Browser (Chrome, Edge, Safari) */
@@ -58,12 +62,6 @@
   .drag-board {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media (max-width: 1160px) {
-    .star-required {
-      max-width: 480px !important;
-    }
 }
 
 @media (max-width: 1040px) {

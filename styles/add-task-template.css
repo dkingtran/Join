@@ -23,17 +23,20 @@
 }
 
 /* Modal für Add Task */
-.add-task-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+  .add-task-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .add-task-modal-inner {
@@ -66,22 +69,6 @@
 
 .padding-0 {
   padding: 0 !important;
-}
-
-.add-task-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 9998;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .add-task-modal-content {
@@ -138,11 +125,6 @@
 .section-task-under {
     margin-top: 96px;
     margin-bottom: 0;
-}
-
-.add-task-modal.show {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 .dropdown-list input {
@@ -219,6 +201,12 @@
   padding: 24px 0 !important;
 }
 
+@media (max-width: 1160px) {
+  .star-required {
+    max-width: 480px !important;
+  }
+}
+
 @media (max-width: 634px) {
 
   .add-task-modal-content .add-task-modal-inner {
@@ -247,7 +235,6 @@
   .btn-clear-task-container {
     margin-left: auto !important;
   }
-
 }
 
 @media (max-width: 580px) {
@@ -303,7 +290,6 @@
   .btn-clear-task-container {
     margin-left: auto !important;
   }
-
 }
 
 @media (max-width: 561px) {
@@ -344,7 +330,6 @@
     width: 70vw;
     padding: 16px 16px;
   }
-  
 }
 
 @media (max-width: 485px) {
@@ -381,8 +366,6 @@
   .btn-prio {
     gap: 5px;
   }
-
-
 }
 
 @media (max-width: 369px) {
@@ -395,7 +378,6 @@
   .add-task-modal .wrapper {
     padding: 24px 8px !important;
   }
-
 }
 
 @media (max-width: 350px) {
@@ -408,5 +390,5 @@
 @media (max-width: 330px) {
   .btn-clear-task-container {
       width: 90vw;
-    }
+  }
 }
