@@ -174,7 +174,17 @@
 }
 
 .btn-clear-task-container {
-  max-width: 440px !important;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: sticky;
+  width: 80vw;
+  min-width: 150px !important;
+  max-width: 440px;
+  margin-left: auto !important;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20;
 }
 
 .add-subtask-input {
@@ -235,17 +245,9 @@
   }
 
   .btn-clear-task-container {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    position: sticky;
-    width: 80vw !important;
-    min-width: 150px !important;
     margin-left: auto !important;
-    bottom: 24px;
-    right: 24px;
-    z-index: 20;
   }
+
 }
 
 @media (max-width: 580px) {
@@ -299,7 +301,7 @@
   }
 
   .btn-clear-task-container {
-    margin: 0;
+    margin-left: auto !important;
   }
 
 }
@@ -401,5 +403,10 @@
   .btn-prio button {
     min-width: 88px;
   }
+}
 
+@media (max-width: 330px) {
+  .btn-clear-task-container {
+      width: 90vw;
+    }
 }
