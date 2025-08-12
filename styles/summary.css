@@ -32,6 +32,32 @@
     color: #29ABE2;
 }
 
+.header-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img-hover {
+    display: none;
+}
+
+.profile-container:hover .profile-img-hover {
+    display: block;
+    cursor: pointer;
+}
+
+.profile-container:hover .profile-img {
+    display: none;
+}
+
 .title-section {
     display: flex;
     align-items: center;
@@ -47,6 +73,10 @@
     width: 3px;
     height: 59px;
     background-color: #29ABE2;
+}
+
+.horizontal-pipe {
+    display: none;
 }
 
 .title-section span{
@@ -93,6 +123,10 @@
     gap: 18px;
 }
 
+.display-todo h1 {
+    font-size: 64px;
+}
+
 .display-done {
     text-align: center;
     display: flex;
@@ -103,6 +137,10 @@
     width: 246px;
     height: 168px;
     gap: 18px;
+}
+
+.display-done h1 {
+    font-size: 64px;
 }
 
 .default-img {
@@ -132,6 +170,10 @@
     gap: 18px;
 }
 
+.display-urgency h1 {
+    font-size: 64px;
+}
+
 .urgency-pipe{
     width: 2px;
     height: 102px;
@@ -140,6 +182,10 @@
 
 .display-deadline{
     text-align: center;
+}
+
+#deadline {
+    font-size: 21px;
 }
 
 .task-subsection {

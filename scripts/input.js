@@ -1,4 +1,3 @@
-
 let nameRef;
 let emailRef;
 let passwordRef;
@@ -11,6 +10,7 @@ const lettersRegex = /^[a-z]+$/i;
 const numbersRegex = /^[0-9]+$/i;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/i;
 const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/m;
+
 
 /**
  * Validates a given name string based on specific regex patterns.
@@ -80,6 +80,7 @@ function generateNameObject(name) {
  * @param {string} date - The date string to check.
  * @returns {boolean} Returns true if the date is not empty and is in the future, otherwise false.
  */
+
 function dateCheck(date) {
     if (removeSpaces(date) == "") return false;
     let dateInput = new Date(date);
@@ -88,9 +89,7 @@ function dateCheck(date) {
     else return true;
 }
 
-/**
- * Checks if the given title is not empty after removing spaces.
- */
+
 function titleCheck(title) {
     if (removeSpaces(title) == "") return false;
     else return true;
