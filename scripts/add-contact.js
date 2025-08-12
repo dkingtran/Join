@@ -1,314 +1,117 @@
-let contacts = [
-    {
-        "firstName": "Anton",
-        "lastName": "Mayer",
-        "email": "antom@gmail.com",
-        "phone": "+49 1111 111 11 1"
-    },
-    {
-        "firstName": "Anja",
-        "lastName": "Schulz",
-        "email": "schulz@hotmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Benedikt",
-        "lastName": "Ziegler",
-        "email": "benedikt@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "David",
-        "lastName": "Eisenberg",
-        "email": "davidberg@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Eva",
-        "lastName": "Fischer",
-        "email": "eva@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Emmanuel",
-        "lastName": "Mauer",
-        "email": "emmanuelma@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Marcel",
-        "lastName": "Bauer",
-        "email": "bauer@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
-    },
-    {
-        "firstName": "Tatjana",
-        "lastName": "Wolf",
-        "email": "wolf@gmail.com",
-        "phone": "+49 XXXX XXX XX X"
+
+nameRef = document.getElementById('name');
+emailRef = document.getElementById('email');
+phoneRef = document.getElementById('phone');
+
+const addFormButtons = document.getElementById('add-form-buttons');
+const editFormButtons = document.getElementById('edit-form-buttons');
+const contactFormSubtitle = document.getElementById('contact-form-subtitle');
+const contactFormTitle = document.getElementById('contact-form-title');
+
+let currentAvatarColor;
+let nameIsValid;
+let emailIsValid;
+let phoneIsValid;
+let editId;
+
+function openContactForm(formType = "add", idx = "") {
+    showForm();
+    if (formType == "add") {
+        showAddForm();
     }
-];
-
-// Mapping name -> color class
-const colorMap = {
-    'Anton Mayer': 'contact-avatar-color1',
-    'Anja Schulz': 'contact-avatar-color2',
-    'Benedikt Ziegler': 'contact-avatar-color3',
-    'David Eisenberg': 'contact-avatar-color4',
-    'Eva Fischer': 'contact-avatar-color5',
-    'Emmanuel Mauer': 'contact-avatar-color6',
-    'Marcel Bauer': 'contact-avatar-color7',
-    'Tatjana Wolf': 'contact-avatar-color8',
-    'Sofia Müller': 'contact-avatar-color9',
-    '': 'contact-avatar-color10' // Default color for any other names
-};
-
-let lastShownContactIdx = null;
-
-/**
- * Initializes the contact list and hides the add contact form on page load.
- */
-function init() {
-    renderContacts();
-    hideForm();
-}
-
-/**
- * Renders all contacts in the contact list, sorted and grouped by initials.
- * Uses helper functions for sorting, grouping, and rendering.
- */
-function renderContacts() {
-    const contactList = document.getElementById('contactList');
-    contactList.innerHTML = '';
-    const sorted = getSortedContacts();
-    const grouped = groupContactsByInitial(sorted);
-    renderContactGroups(contactList, grouped);
-    addContactItemListeners();
-}
-
-/**
- * Returns the contacts sorted by initials (first name + last name).
- * @returns {Array} Sorted array of contacts
- */
-function getSortedContacts() {
-    const contactsWithName = contacts.map(c => ({
-        ...c,
-        name: c.name || `${c.firstName || ''} ${c.lastName || ''}`.trim()
-    }));
-    return [...contactsWithName].sort((a, b) => {
-        const initialsA = getInitials(a.name);
-        const initialsB = getInitials(b.name);
-        if (initialsA < initialsB) return -1;
-        if (initialsA > initialsB) return 1;
-        return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
-    });
-}
-
-function groupContactsByInitial(sortedContacts) {
-    return sortedContacts.reduce((acc, contact) => {
-        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
-        const letter = initials[0] ? initials[0].toUpperCase() : '';
-        if (!letter) return acc;
-        (acc[letter] = acc[letter] || []).push(contact);
-        return acc;
-    }, {});
-}
-
-function renderContactGroups(contactList, grouped) {
-    let globalIndex = 0;
-    Object.keys(grouped).sort().forEach(letter => {
-        contactList.innerHTML += getGroupTemplate(letter);
-        globalIndex = renderContactsOfGroup(contactList, grouped[letter], globalIndex);
-    });
-}
-
-function renderContactsOfGroup(contactList, group, startIndex) {
-    let idx = startIndex;
-    group.forEach(contact => {
-        const initials = getInitials(`${contact.firstName} ${contact.lastName}`);
-        const name = `${contact.firstName} ${contact.lastName}`.trim();
-        const colorClass = colorMap[name] || 'contact-avatar-color10';
-        contactList.innerHTML += getContactListItemTemplate(contact, colorClass, initials, idx);
-        idx++;
-    });
-    return idx;
-}
-
-/**
- * Groups contacts by their initial letter (last name preferred).
- * @param {Array} list - Array of contact objects.
- * @returns {Object} Grouped contacts by initial letter.
- */
-function groupContactsByLetter(list) {
-    return list.reduce((acc, contact) => {
-        // Use lastName if available, otherwise firstName, fallback to empty string
-        const letter = (contact.lastName ? contact.lastName[0] : (contact.firstName ? contact.firstName[0] : '')).toUpperCase();
-        if (!letter) return acc;
-        (acc[letter] = acc[letter] || []).push(contact);
-        return acc;
-    }, {});
-}
-
-
-function addContactItemListeners() {
-    document.querySelectorAll('.contact-item').forEach(item => {
-        item.onclick = function (e) {
-            const idx = parseInt(this.dataset.index);
-            (window.innerWidth <= 780) ? showMobileContactDetails(idx) : toggleContactDetails(idx, this);
-            e.stopPropagation();
-        };
-    });
-}
-
-function showMobileContactDetails(idx) {
-    document.querySelector('.contact-sidebar').classList.add('hide-mobile-sidebar');
-    const section = document.querySelector('.contacts-section');
-    section.classList.add('show-mobile-section');
-    document.getElementById('contactListClicked').style.display = 'block';
-    setupMobileBackButton(section);
-    setupMobileEditButton(idx);
-    document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
-    removeMobileEditDropdown();
-    showContactDetails(getSortedContacts()[idx], idx);
-}
-
-function setupMobileBackButton(section) {
-    let backBtn = document.getElementById('mobileBackBtn');
-    if (!backBtn) {
-        backBtn = document.createElement('button');
-        backBtn.className = 'mobile-back-btn';
-        backBtn.id = 'mobileBackBtn';
-        backBtn.innerHTML = '<img src="./assets/img/icons/content/help/back.png" alt="Back">';
-        backBtn.onclick = hideMobileContactDetails;
-        section.appendChild(backBtn);
-    }
-    backBtn.style.display = 'flex';
-}
-
-function setupMobileEditButton(idx) {
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (editBtn) {
-        editBtn.style.display = 'flex';
-        window._lastMobileEditIdx = idx;
+    if (formType == "edit") {
+        showEditForm(idx);
     }
 }
 
-function toggleMobileEditDropdown(idx) {
-    const dropdown = document.getElementById('mobileEditDropdown');
-    if (!dropdown) return;
-    dropdown.classList.contains('show') ? hideMobileEditDropdown(dropdown) : showMobileEditDropdown(dropdown, idx);
-}
-
-function hideMobileEditDropdown(dropdown) {
-    dropdown.classList.remove('show');
-}
-
-function showMobileEditDropdown(dropdown, idx) {
-    if (typeof getMobileEditDropdownTemplate === 'function') {
-        dropdown.innerHTML = getMobileEditDropdownTemplate(idx);
-    }
-    dropdown.classList.add('show');
-    setTimeout(() => document.addEventListener('click', removeMobileEditDropdown, { once: true }), 0);
-}
-
-function removeMobileEditDropdown() {
-    const dropdown = document.getElementById('mobileEditDropdown');
-    if (dropdown) dropdown.classList.remove('show');
-}
-
-
-function toggleContactDetails(idx, item) {
-    const details = document.getElementById('contactListClicked');
-    const sorted = getSortedContacts();
-    if (lastShownContactIdx === idx) {
-        details.style.display = 'none';
-        item.classList.remove('selected');
-        lastShownContactIdx = null;
-    } else {
-        document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('selected'));
-        item.classList.add('selected');
-        showContactDetails(sorted[idx], idx);
-        details.style.display = '';
-        lastShownContactIdx = idx;
-    }
-}
-
-function showContactDetails(contact, idx) {
-    const container = document.getElementById('contactListClicked');
-    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
-    const initials = getInitials(name);
-    const colorClass = colorMap[name] || 'contact-avatar-color10';
-    const contactForTemplate = { ...contact, name, initials };
-    container.innerHTML = getContactDetailsTemplate(contactForTemplate, colorClass, initials, idx);
-    container.classList.remove('active');
-    container.classList.add('contact-list-clicked');
-    setTimeout(() => container.classList.add('active'), 10);
-}
-
-
-/**
- * Shows the add contact form and its modal overlay.
- */
 function showForm() {
-  const form = document.getElementById('formContainer');
-  form.classList.add('show');
-  const overlay = document.getElementById('modalOverlay');
-  if (overlay) overlay.classList.add('show');
-  setDefaultAvatar(document.getElementById('formAvatar'));
-  setTimeout(() => document.addEventListener('click', closeFormOnOutsideClick), 0);
+    const form = document.getElementById('formContainer');
+    form.classList.add('show');
+    const overlay = document.getElementById('modalOverlay');
+    if (overlay) overlay.classList.add('show');
+    document.addEventListener('click', closeFormOnOutsideClick);
 }
 
 function hideForm() {
-  const form = document.getElementById('formContainer');
-  form.classList.remove('show');
-  const overlay = document.getElementById('modalOverlay');
-  if (overlay) overlay.classList.remove('show');
-  document.removeEventListener('click', closeFormOnOutsideClick);
+    const form = document.getElementById('formContainer');
+    form.classList.remove('show');
+    const overlay = document.getElementById('modalOverlay');
+    if (overlay) overlay.classList.remove('show');
+    document.removeEventListener('click', closeFormOnOutsideClick);
+    nameRef.value = '';
+    emailRef.value = '';
+    phoneRef.value = '';
 }
-
 
 function closeFormOnOutsideClick(e) {
     const formContainer = document.getElementById('formContainer');
-    if (formContainer.classList.contains('show') && !formContainer.contains(e.target)) hideForm();
+    const overlay = document.getElementById('modalOverlay');
+    if (formContainer.classList.contains('show') && overlay.contains(e.target)) hideForm();
 }
 
-function closeEditFormOnOutsideClick(e) {
-    const editFormContainer = document.getElementById('editFormContainer');
-    if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) hideEditForm();
+function showAddForm() {
+    setDefaultAvatar(document.getElementById('formAvatar'));
+    currentAvatarColor = getRandomColor();
+    addFormButtons.classList.remove('d-none');
+    editFormButtons.classList.add('d-none');
+    contactFormTitle.innerText = "Add contact";
+    contactFormSubtitle.classList.remove('d-none');
 }
 
-
-/**
- * Adds a new contact to the contacts array and updates the contact list.
- */
-function addToContacts() {
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const phone = document.getElementById('contactPhone').value.trim();
-    if (!name || !email || !phone) return;
-    const [firstName, ...rest] = name.split(' ');
-    const lastName = rest.join(' ');
-    const fullName = `${firstName} ${lastName}`.trim();
-    assignColorToContact(fullName);
-    contacts.push({ firstName, lastName, email, phone });
-    clearFormAndUpdate();
+function showEditForm(idx) {
+    let contactToEdit = sortedContacts[idx];
+    currentAvatarColor = contactToEdit.color;
+    document.getElementById('name').value = contactToEdit.name["first-name"] + " " + contactToEdit.name["last-name"];
+    document.getElementById('email').value = contactToEdit.email;
+    document.getElementById('phone').value = contactToEdit["phone-number"];
+    updateFormAvatar();
+    addFormButtons.classList.add('d-none');
+    editFormButtons.classList.remove('d-none');
+    contactFormTitle.innerText = "Edit contact";
+    contactFormSubtitle.classList.add('d-none');
+    editId = contactToEdit.id;
 }
 
-function assignColorToContact(fullName) {
-    if (!colorMap[fullName]) {
-        const usedColors = Object.values(colorMap);
-        let colorIdx = 1;
-        while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-        colorMap[fullName] = colorIdx > 10 ? 'contact-avatar-color' + (((Object.keys(colorMap).length - 1) % 10) + 1) : 'contact-avatar-color' + colorIdx;
+function setDefaultAvatar(avatar) {
+    for (let index = 0; index <= colors.length; index++) avatar.classList.remove(colors[index]);
+    avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
+}
+
+function updateFormAvatar() {
+    const name = document.getElementById("name").value.trim();
+    const avatar = document.getElementById("formAvatar");
+    if (!name) {
+        setDefaultAvatar(avatar);
+        return;
+    }
+    const colorClass = currentAvatarColor;
+    avatar.classList.add(colorClass);
+    avatar.textContent = getInitials(name);
+}
+
+function submitContactsForm(event) {
+    let submitterId = event.submitter.getAttribute('id');
+    switch (submitterId) {
+        case "create-contact-btn":
+            addContact();
+            break;
+        case "edit-contact-btn":
+            editContact();
+            break;
+        case "delete-contact-form-btn":
+            deleteContact(editId);
+            break;
     }
 }
 
-function clearFormAndUpdate() {
-    ['contactName', 'contactEmail', 'contactPhone'].forEach(id => document.getElementById(id).value = '');
-    setDefaultAvatar(document.getElementById('formAvatar'));
-    renderContacts();
-    hideForm();
-    showContactCreatedModal();
+async function addContact() {
+    if (!checkContactForm()) showError();
+    else if (!checkForContactDuplicate(emailRef.value)) showError();
+    else {
+        await postContact();
+        reloadContacts();
+        showContactCreatedModal();
+    }
 }
 
 function showContactCreatedModal() {
@@ -320,157 +123,109 @@ function showContactCreatedModal() {
     }, 2000);
 }
 
-function updateFormAvatar() {
-    const name = document.getElementById("contactName").value.trim();
-    const avatar = document.getElementById("formAvatar");
-    resetAvatarColors(avatar);
-    if (!name) {
-        setDefaultAvatar(avatar);
-        return;
+async function editContact() {
+    if (!checkContactForm()) showError();
+    else {
+        await putContact();
+        reloadContacts();
     }
-    const colorClass = getOrCreateColorClass(name);
-    avatar.classList.add(colorClass);
-    avatar.textContent = getInitials(name);
 }
 
-function getOrCreateColorClass(name) {
-    if (colorMap[name]) return colorMap[name];
-    const usedColors = Object.values(colorMap);
-    let colorIdx = 1;
-    while (usedColors.includes('contact-avatar-color' + colorIdx) && colorIdx <= 10) colorIdx++;
-    return colorIdx > 10 ? 'contact-avatar-color' + (((Object.keys(colorMap).length - 1) % 10) + 1) : 'contact-avatar-color' + colorIdx;
+function getIdToDelete(idx) {
+    let contactId = sortedContacts[idx].id;
+    deleteContact(contactId);
 }
 
-
-function resetAvatarColors(avatar) {
-    for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
+async function deleteContact(contactId) {
+    let path = "/contacts/" + contactId + "/";
+    await deleteData(path);
+    reloadContacts();
 }
 
-function setDefaultAvatar(avatar) {
-    for (let i = 1; i <= 10; i++) avatar.classList.remove('contact-avatar-color' + i);
-    avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
+async function postContact() {
+    let newContact = generateContact();
+    let contactId = await postData("/contacts/", newContact);
+    await addIdToObject(contactId, "/contacts/");
 }
 
-function getInitials(name) {
-    return name.split(" ").map(n => n[0].toUpperCase()).slice(0, 2).join("");
+async function putContact() {
+    let editedContact = generateContact();
+    editedContact["id"] = editId;
+    let path = "/contacts/" + editId + "/";
+    await putData(path, editedContact);
 }
 
-function cancelForm() {
-    ['contactName', 'contactEmail', 'contactPhone'].forEach(id => document.getElementById(id).value = '');
+async function reloadContacts() {
+    await getContactsArray();
     hideForm();
+    document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('selected'));
+    hideMobileContactDetails();
+    renderContacts();
 }
 
+function checkContactForm() {
+    nameIsValid = nameCheck(nameRef.value);
+    emailIsValid = emailCheck(emailRef.value);
+    phoneIsValid = phoneNumberCheck(phoneRef.value);
+    return nameIsValid && emailIsValid && phoneIsValid;
+}
 
 /**
- * Opens the edit contact modal and fills in the contact data.
- * @param {number} idx - Index of the contact to edit.
+ * Checks if a contact with the specified email already exists in the users data.
+ * @param {string} email - The email address to check for duplication.
+ * @returns {Promise<boolean>} - Resolves to true if a contact with the given email exists, otherwise false.
  */
-function editContact(sortedIdx) {
-    const sorted = getSortedContacts();
-    const contact = sorted[sortedIdx];
-    const originalIdx = contacts.findIndex(c => 
-        c.firstName === contact.firstName && c.lastName === contact.lastName && 
-        c.email === contact.email && c.phone === contact.phone
-    );
-    if (originalIdx !== -1) showEditForm(originalIdx);
-}
-
-function showEditForm(idx) {
-    const contact = contacts[idx];
-    const name = contact.name || `${contact.firstName || ''} ${contact.lastName || ''}`.trim();
-    document.getElementById('editContactName').value = name;
-    document.getElementById('editContactEmail').value = contact.email;
-    document.getElementById('editContactPhone').value = contact.phone;
-    updateEditFormAvatar();
-    showEditModal();
-    hideForm();
-    setTimeout(() => document.addEventListener('click', closeEditFormOnOutsideClick), 0);
-    window.editContactIdx = idx;
-}
-
-function showEditModal() {
-    document.getElementById('editFormContainer').classList.add('show');
-    const overlay = document.getElementById('editModalOverlay');
-    if (overlay) overlay.classList.add('show');
-}
-
-
-function hideEditForm() {
-    document.getElementById('editFormContainer').classList.remove('show');
-    const overlay = document.getElementById('editModalOverlay');
-    if (overlay) overlay.classList.remove('show');
-    document.removeEventListener('click', closeEditFormOnOutsideClick);
-}
-
-
-/**
- * Closes the edit contact modal if clicking outside the edit form container.
- * @param {MouseEvent} e - The click event.
- */
-function closeEditFormOnOutsideClick(e) {
-    const editFormContainer = document.getElementById('editFormContainer');
-    if (editFormContainer.classList.contains('show') && !editFormContainer.contains(e.target)) {
-        hideEditForm();
-    }
-}
-
-function updateEditFormAvatar() {
-    const name = document.getElementById('editContactName').value.trim();
-    const avatar = document.getElementById('editFormAvatar');
-    resetAvatarColors(avatar);
-    if (!name) {
-        avatar.classList.add('contact-avatar-color10');
-        avatar.innerHTML = '<img src="assets/img/icons/add-contact/person-avatar.svg" alt="Avatar">';
-        return;
-    }
-    avatar.classList.add(colorMap[name] || 'contact-avatar-color10');
-    avatar.textContent = getInitials(name);
-}
-
-function hideMobileContactDetails() {
-    document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
-    const section = document.querySelector('.contacts-section');
-    section.classList.remove('show-mobile-section');
-    section.style.display = '';
-    document.getElementById('contactListClicked').style.display = '';
-    hideMobileButtons();
-    document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
-}
-
-function hideMobileButtons() {
-    const backBtn = document.getElementById('mobileBackBtn');
-    const editBtn = document.getElementById('mobileEditBtn');
-    if (backBtn) backBtn.style.display = 'none';
-    if (editBtn) editBtn.style.display = 'none';
-}
-
-function showDesktopView() {
-    const section = document.querySelector('.contacts-section');
-    const sidebar = document.querySelector('.contact-sidebar');
-    const details = document.getElementById('contactListClicked');
-    if (section) section.classList.remove('show-mobile-section');
-    if (sidebar) sidebar.classList.remove('hide-mobile-sidebar');
-    if (details) details.style.display = '';
-}
-
-function showAddContactBtnMobile() {
-    const addBtn = document.querySelector('.add-contact-btn-mobile');
-    if (addBtn) addBtn.classList.remove('hide-mobile-edit');
-}
-
-function closeMobileEditDropdownIfOpen() {
-    if (typeof removeMobileEditDropdown === 'function') removeMobileEditDropdown();
-}
-
-function handleResponsiveCloseMobileSection() {
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 780) {
-            showDesktopView();
-            hideMobileButtons();
-            closeMobileEditDropdownIfOpen();
-            showAddContactBtnMobile();
-        }
+async function checkForContactDuplicate(email) {
+    let contacts = await loadData("/contacts/");
+    let contactKeyArray = Object.keys(contacts);
+    return contactKeyArray.some(contactKey => {
+        return contacts[contactKey].email == email;
     });
 }
 
-handleResponsiveCloseMobileSection();
+/**
+ * Generates a contact object with email, name, phone number, and color properties.
+ * @returns {Object} The generated contact object.
+ */
+function generateContact() {
+    return {
+        "email": emailRef.value,
+        "name": generateNameObject(nameRef.value),
+        "phone-number": phoneNumberForm(phoneRef.value),
+        "color": currentAvatarColor,
+    };
+}
+
+function showError() {
+    showInputError("name", nameIsValid);
+    showInputError("email", emailIsValid);
+    showInputError("phone", phoneIsValid);
+}
+
+function showInputError(inputRef, isValid) {
+    if (!isValid) {
+        switch (inputRef) {
+            case "name":
+                nameRef.classList.add('error');
+                break;
+            case "email":
+                emailRef.classList.add('error');
+                break;
+            case "phone":
+                phoneRef.classList.add('error');
+                break;
+        }
+    }
+}
+
+nameRef.addEventListener("input", () => {
+    nameRef.classList.remove('error');
+});
+
+emailRef.addEventListener("input", () => {
+    emailRef.classList.remove('error');
+});
+
+phoneRef.addEventListener("input", () => {
+    phoneRef.classList.remove('error');
+});

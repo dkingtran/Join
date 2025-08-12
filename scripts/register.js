@@ -120,7 +120,6 @@ function showInputError(inputRef, isValid) {
  * Displays error messages for the registration form fields by validating each input
  * (name, email, password, and password confirmation) and showing corresponding error styles.
  * Also makes the general error message visible.
- *
  * Assumes the existence of validation flags (nameIsValid, emailIsValid, passwordIsValid, passwordConIsValid)
  * and a reference to the error message element (errorMessageRef).
  */
