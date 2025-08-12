@@ -255,10 +255,14 @@ function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
     const collected = [];
     for (let i = 0; i < subtaskDivs.length; i++) {
-        collected.push(subtaskDivs[i].innerText.trim());
+        collected.push({
+            subtask: subtaskDivs[i].innerText.trim(), // Text
+            done: false                               // Status immer false am Anfang
+        });
     }
     return collected;
 }
+
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
