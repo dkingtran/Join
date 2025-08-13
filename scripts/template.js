@@ -1,10 +1,10 @@
 // Returns the mobile edit dropdown HTML template
 function getMobileEditDropdownTemplate(idx) {
     return `
-        <button class="edit-btn" onclick="editContact(${idx}); removeMobileEditDropdown(); event.stopPropagation();">
+        <button class="edit-btn" onclick="openContactForm('edit', ${idx}); removeMobileEditDropdown(); event.stopPropagation();">
             <img src="assets/img/icons/add-contact/edit.svg">
             Edit</button>
-        <button class="delete-btn" onclick="deleteContact(${idx}); removeMobileEditDropdown(); event.stopPropagation();">
+        <button class="delete-btn" onclick="getIdToDelete(${idx}); removeMobileEditDropdown(); event.stopPropagation();">
             <img src="assets/img/icons/add-contact/delete.svg">
             Delete</button>
     `;
@@ -24,7 +24,7 @@ function getContactListItemTemplate(contact, colorClass, initials, contactIndex)
         <div class="contact-item" data-index="${contactIndex}">
             <div class="contact-avatar ${colorClass}">${initials}</div>
             <div class="contact-item-content">
-                <div class="contact-name">${contact.name}</div>
+                <div class="contact-name">${contact.name["first-name"]} ${contact.name["last-name"]}</div>
                 <div class="contact-email">${contact.email}</div>
             </div>
         </div>
@@ -37,10 +37,10 @@ function getContactDetailsTemplate(contact, colorClass, initials, idx) {
             <div class="contact-details-top">
                 <div class="contact-avatar-clicked ${colorClass}">${initials}</div>
                 <div class="contact-name-edit-delete">
-                    <div class="contact-name-clicked">${contact.name}</div>
+                    <div class="contact-name-clicked">${contact.name["first-name"]} ${contact.name["last-name"]}</div>
                     <div class="contact-details-actions">
-                        <button class="edit-btn" onclick="editContact(${idx})"><img src="assets/img/icons/add-contact/edit.svg">Edit</button>
-                        <button class="delete-btn" onclick="deleteContact(${idx})"><img src="assets/img/icons/add-contact/delete.svg">Delete</button>
+                        <button class="edit-btn" onclick="openContactForm('edit', ${idx})"><img src="assets/img/icons/add-contact/edit.svg">Edit</button>
+                        <button class="delete-btn" onclick="getIdToDelete(${idx})"><img src="assets/img/icons/add-contact/delete.svg">Delete</button>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@ function getContactDetailsTemplate(contact, colorClass, initials, idx) {
                 </div>
                 <div class="contact-details-info-section">
                     <div class="contact-details-info-section-title">Phone</div>
-                    <div class="contact-details-info-phone">${contact.phone}</div>
+                    <div class="contact-details-info-phone">${contact["phone-number"]}</div>
                 </div>
             </div>
         </div>
