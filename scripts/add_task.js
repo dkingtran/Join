@@ -253,15 +253,17 @@ function confirmSubtaskInput() {
  */
 function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
-    const collected = [];
+    const collected = {};
     for (let i = 0; i < subtaskDivs.length; i++) {
-        collected.push({
-            subtask: subtaskDivs[i].innerText.trim(), // Text
-            done: false                               // Status immer false am Anfang
-        });
+        const id = "subtask_" + Date.now() + "_" + i; // eindeutiger Key
+        collected[id] = {
+            subtask: subtaskDivs[i].innerText.trim(),
+            done: false
+        };
     }
     return collected;
 }
+
 
 
 /**
