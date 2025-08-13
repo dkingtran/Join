@@ -4,7 +4,15 @@
  * @returns String with whitespaces removed.
  */
 function removeSpaces(string) {
-    return string.replace(/\s+/gm, '');
+    return string.replace(/\s/gm, '');
+}
+
+/**
+ * @param {string} string - The input string from which hyphens will be removed.
+ * @returns {string} The string with all hyphens removed.
+ */
+function removeHyphens(string) {
+    return string.replace(/-/gm, '');
 }
 
 /**
@@ -32,4 +40,13 @@ function debounce(cb, delay) {
         clearTimeout(timeout);
         timeout = setTimeout(() => cb(...args), delay);
     };
+
+function getInitials(name) {
+    let nameArray = name.split(" ");
+    let firstNameInitial = nameArray[0].toUpperCase().slice(0, 1);
+    let lastNameInitial = nameArray[nameArray.length - 1].toUpperCase().slice(0, 1);
+    if (nameArray.length == 1) {
+        return firstNameInitial;
+    }
+    return firstNameInitial + lastNameInitial;
 }
