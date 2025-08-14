@@ -34,6 +34,14 @@ function getRandomColor() {
     return colors[colorIndex];
 }
 
+function debounce(cb, delay) {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => cb(...args), delay);
+    };
+};
+
 function getInitials(name) {
     let nameArray = name.split(" ");
     let firstNameInitial = nameArray[0].toUpperCase().slice(0, 1);
