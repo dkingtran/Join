@@ -40,6 +40,7 @@ function debounce(cb, delay) {
         clearTimeout(timeout);
         timeout = setTimeout(() => cb(...args), delay);
     };
+};
 
 function getInitials(name) {
     let nameArray = name.split(" ");
