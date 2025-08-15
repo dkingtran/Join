@@ -53,18 +53,18 @@
 }
 
 .subtask-progress {
-  background-color: #f1f1f1;
-  border-radius: 8px;
-  height: 8px;
-  width: 60%;
-  overflow: hidden;
-  margin-bottom: 4px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    height: 8px;
+    width: 60%;
+    overflow: hidden;
+    margin-bottom: 4px;
 }
 
 .progress-bar {
-  height: 8px;
-  border-radius: 8px;
-  transition: width 0.3s ease;
+    height: 8px;
+    border-radius: 8px;
+    transition: width 0.3s ease;
 }
 
 .board-card-footer {
@@ -74,16 +74,47 @@
 }
 
 .priority-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .category-technical {
-  background-color: #1FD7C1;  
+    background-color: #1FD7C1;  
 }
 
 .category-default {
-  background-color: #d32f2f; /* Hellgrau */
-  color: #ffffff; /* Weiß */
+    background-color: #d32f2f; 
+    color: #ffffff; 
 }
+
+.assigned-user{
+    display: flex;
+    margin-left: 0;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0 !important;
+    margin-left: -6%;
+    font-size: 14px;
+}
+
+.avatar.contact-avatar-color1 { background-color: #FF7A00 !important;}
+.avatar.contact-avatar-color2 { background-color: #1FD7C1 !important;}
+.avatar.contact-avatar-color3 { background-color: #462F8A !important;}
+.avatar.contact-avatar-color4 { background-color: #FC71FF !important;}
+.avatar.contact-avatar-color5 { background-color: #4CD964 !important;}
+.avatar.contact-avatar-color6 { background-color: #AA96DA !important;}
+.avatar.contact-avatar-color7 { background-color: #34C759 !important; }
+.avatar.contact-avatar-color8 { background-color: #FF3B30 !important;}
+.avatar.contact-avatar-color9 { background-color: #5856D6 !important; }
+.avatar.contact-avatar-color10 { background-color: #C7C7CC !important; }
