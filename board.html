@@ -6,6 +6,7 @@
     <title>Join - Board</title>
     <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/board.css" />
+    <link rel="stylesheet" href="./styles/board-card.css" />
     <link rel="stylesheet" href="./styles/media-query-board.css">
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/media-query-add-task.css" />
@@ -20,6 +21,9 @@
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/firebase.js"></script>
+    <script src="./scripts/board-card.js" ></script>
+    <script src="./scripts/board-cards-templates.js"></script>
   </head>
   <body onload="loadTasksFromFirebase()">
     <header>
@@ -27,14 +31,14 @@
       <div class="header-content">
         <div class="header-inner">
           <div class="logo-mobile d_none">
-            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+            <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
           </div>
           <h1 class="header-title">Kanban Project Management Tool</h1>
           <div class="header-right">
             <div class="help-container" id="helpContainer">
-              <a href="../help.html" class="help-icon">
+              <a href="./help.html" class="help-icon">
                 <img
-                  src="../assets/img/icons/header-side-menu/help.png"
+                  src="./assets/img/icons/header-side-menu/help.png"
                   alt="Help Icon"
                 />
               </a>
@@ -65,26 +69,26 @@
     <aside class="side-menu background-side-menu">
       <div class="logo-section">
         <img
-          src="../assets/img/logo/logo-light.png"
+          src="./assets/img/logo/logo-light.png"
           alt="Logo"
           class="logo-side-menu-img"
         />
       </div>
 
       <div class="menu-section">
-        <a href="../summary.html" class="menu-item">
+        <a href="./summary.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/summary.svg"
+              src="./assets/img/icons/header-side-menu/summary.svg"
               alt=""
             />
           </span>
           <span>Summary</span>
         </a>
-        <a href="../add_task.html" class="menu-item">
+        <a href="./add_task.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/add-task.svg"
+              src="./assets/img/icons/header-side-menu/add-task.svg"
               alt=""
             />
           </span>
