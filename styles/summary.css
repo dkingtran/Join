@@ -32,12 +32,12 @@
     color: #29ABE2;
 }
 
-.header-profile{
+/*.header-profile{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
+}*/
 
 .profile-container{
     display: flex;
@@ -215,7 +215,7 @@
     font-size: 64px;
 }
 
-.menu-section span{
+/**.menu-section span{
     font-size: 16px;
     font-weight: 400;
     color: #FFFFFF;
@@ -225,7 +225,7 @@
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
-}
+}**/
 
 .hover-img {
     display: none;
