@@ -179,8 +179,8 @@ async function loadContactsIntoDropdown() {
 function prepareContactData(contact) {
     const name = contact.name;
     const initials = name["first-name"][0] + name["last-name"][0];
-    const colorClass = contact.color || ".bg-cccccc";
-    const hexColor = "#" + colorClass.replace(".bg-", "");
+    const colorClass = contact.color || "bg-cccccc";
+    const hexColor = "#" + colorClass.replace("bg-", "");
 
     return { initials, name, hexColor };
 }
@@ -253,12 +253,18 @@ function confirmSubtaskInput() {
  */
 function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
-    const collected = [];
+    const collected = {};
     for (let i = 0; i < subtaskDivs.length; i++) {
-        collected.push(subtaskDivs[i].innerText.trim());
+        const id = "subtask_" + Date.now() + "_" + i; // eindeutiger Key
+        collected[id] = {
+            subtask: subtaskDivs[i].innerText.trim(),
+            done: false
+        };
     }
     return collected;
 }
+
+
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
@@ -355,7 +361,7 @@ function showSuccessMessage() {
     }, 10);
     setTimeout(() => {
         messageBox.classList.remove('show');
-    }, 1000);
+    }, 3000);
     setTimeout(() => {
         messageBox.classList.add('hidden');
         window.location.href = "board.html"; // 🔁 Zielseite hier eintragen
@@ -368,4 +374,4 @@ function showSuccessMessage() {
 window.onload = () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
-};
+};  
