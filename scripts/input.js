@@ -11,6 +11,9 @@ const numbersRegex = /^[0-9]+$/i;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/i;
 const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/m;
 
+function removeSpaces(string) {
+    return string.replace(/\s+/gm, '');
+}
 
 /**
  * Validates a given name string based on specific regex patterns.
