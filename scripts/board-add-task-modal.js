@@ -7,7 +7,6 @@ function showAddTaskModal() {
 function closeAddTaskModal() {
     document.getElementById('addTaskModal').classList.remove('show');
     document.body.style.overflow = '';
-    document.getElementById('addTaskForm').reset();
 }
 
 function showAddTask() {
