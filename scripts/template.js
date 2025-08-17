@@ -35,7 +35,7 @@ function getContactDetailsTemplate(contact, colorClass, initials, idx) {
     return `
         <div class="contact-details">
             <div class="contact-details-top">
-                <div class="contact-avatar-clicked ${colorClass}">${initials}</div>
+                <div class="contact-avatar-clicked display-standard ${colorClass}">${initials}</div>
                 <div class="contact-name-edit-delete">
                     <div class="contact-name-clicked">${contact.name["first-name"]} ${contact.name["last-name"]}</div>
                     <div class="contact-details-actions">

@@ -129,8 +129,8 @@
 
 
                             <!-- Assigned -->
-                            <div class="assigned-to">
-                                <label class="font-bundle assigned-to">Assigned to</label>
+                            <div class="assigned-to-container">
+                                <label class="font-bundle"><p class="assigned-to">Assigned to</p></label>
                                 <div class="custom-dropdown w-full" onclick="handleDropdownClick(event)">
                                     <div class="dropdown-input max-w-440 border-radius-10px input-bundle flex align-center justify-between bg-white"
                                         onclick="toggleDropdown(event)">
@@ -158,7 +158,6 @@
 
                                         <option value="Technical Task">Technical Task</option>
                                         <option value="User Story">User Story</option>
-                                        <option value="Reminder Task">Reminder Task</option>
                                     </select>
                                     <span class="arrow p-16 " id="category-arrow">&#9662;</span>
                                 </div>
@@ -200,7 +199,7 @@
 
                     <div class="section-task-under">
                         <div class="star-required flex justify-start align-center w-full">
-                            <p class="required-task-text font-bundle"><sup class="star">*</sup>This fields is required
+                            <p class="required-task-text font-bundle"><sup class="star">*</sup>This field is required
                             </p>
                         </div>
                         <div class="btn-clear-task-container display-standard w-full">
@@ -304,11 +303,10 @@
     </aside>
 
     <script src="./scripts/firebase.js"></script>
-    <!--   <script src="./scripts/login-status.js"></script> -->
+  
     <script src="./scripts/add-task-templates.js"></script>
     <script src="./scripts/add_task_button.js"></script>
 
-    <!-- 🔄 input.js muss VOR add_task.js -->
     <script src="./scripts/input.js"></script>
     <script src="./scripts/add_task.js"></script>
 

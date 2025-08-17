@@ -27,6 +27,10 @@ body {
   font-size: 61px;
 }
 
+.title-task {
+  margin-bottom: 10px;
+}
+
 .add-task-section {
   align-items: flex-start;
   height: auto;
@@ -66,6 +70,7 @@ form {
 
 .date {
   min-width: 120px;
+  margin-bottom: 10px;
 }
 
 .btn-prio {
@@ -121,7 +126,9 @@ form {
 }
 
 .assigned-to {
-  width: 150px;
+ 
+  max-width: 150px;
+  margin-bottom: 10px;
 }
 
 .custom-dropdown {
@@ -184,6 +191,7 @@ form {
 }
 
 .avatar {
+  color: white;
   width: 42px;
   height: 42px;
   background: #2A3647;
@@ -246,11 +254,10 @@ form {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 6px;
+  /* padding: 6px; */
   margin-top: 8px;
   min-width: 335px;
   border-radius: 6px;
-  background-color: #f9f9f9;
 }
 
 .selected-contact {
@@ -284,7 +291,6 @@ form {
 }
 
 .subtask-input-box {
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -292,7 +298,8 @@ form {
 }
 
 .subtask-input-box input {
-  border: none;
+  border-color: transparent;
+
   height: auto;
 }
 
@@ -324,7 +331,9 @@ form {
 }
 
 .subtask-text-box {
-  max-width: 450px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 440px;
   min-width: 320px;
   padding-left: 20px;
   transition: background-color 0.1s;
@@ -337,11 +346,11 @@ form {
 
 .subtask-text-box:hover .icon-edit-subtask-box {
   display: flex;
+  background-color: rgb(127, 123, 123);
 }
 
 .subtask-entry {
   border: none;
-  width: 440px;
   max-width: 440px;
   display: flex;
   justify-content: space-between;
@@ -353,7 +362,7 @@ form {
   height: 32px;
   min-width: 340px;
   border-radius: 10px;
-  background-color: #e0dddd;
+
   display: flex;
   align-items: center;
 }
@@ -433,6 +442,10 @@ form {
 .star-required {
   max-width: 630px;
   min-width: 200px;
+}
+
+.required-task-text {
+  margin-top: 5px;
 }
 
 .message-box {
