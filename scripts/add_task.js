@@ -374,4 +374,4 @@ function showSuccessMessage() {
 window.onload = () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
-};
+};  
