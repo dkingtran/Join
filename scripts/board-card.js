@@ -114,10 +114,3 @@ function clearAllTaskLists() {
         if (column) column.innerHTML = "";
     });
 }
-
-function getInitials(fullName) {
-    const parts = fullName.trim().split(" ");
-    const firstInitial = parts[0]?.[0] || "";
-    const lastInitial = parts[1]?.[0] || "";
-    return (firstInitial + lastInitial).toUpperCase();
-}
