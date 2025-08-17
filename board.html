@@ -6,25 +6,40 @@
     <title>Join - Board</title>
     <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/board-card.css" />
+    <link rel="stylesheet" href="./styles/media-query-board.css">
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/media-query-add-task.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/media.css" />
+    <link rel="stylesheet" href="./styles/media-query-add-task.css" />
+    <link rel="stylesheet" href="./styles/add-task-template.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="./scripts/add-task-templates.js"></script>
+    <script src="./scripts/add_task.js"></script>
+    <script src="./scripts/side-menu.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/firebase.js"></script>
+    <script src="./scripts/board-card.js" ></script>
+    <script src="./scripts/board-cards-templates.js"></script>
+    <script src="./scripts/"></script>
   </head>
-  <body onload="updateHTML()">
+  <body onload="loadTasksFromFirebase()">
     <header>
       <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
           <div class="logo-mobile d_none">
-            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+            <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
           </div>
           <h1 class="header-title">Kanban Project Management Tool</h1>
           <div class="header-right">
             <div class="help-container" id="helpContainer">
-              <a href="../help.html" class="help-icon">
+              <a href="./help.html" class="help-icon">
                 <img
-                  src="../assets/img/icons/header-side-menu/help.png"
+                  src="./assets/img/icons/header-side-menu/help.png"
                   alt="Help Icon"
                 />
               </a>
@@ -55,41 +70,41 @@
     <aside class="side-menu background-side-menu">
       <div class="logo-section">
         <img
-          src="../assets/img/logo/logo-light.png"
+          src="./assets/img/logo/logo-light.png"
           alt="Logo"
           class="logo-side-menu-img"
         />
       </div>
 
       <div class="menu-section">
-        <a href="../summary.html" class="menu-item">
+        <a href="./summary.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/summary.svg"
+              src="./assets/img/icons/header-side-menu/summary.svg"
               alt=""
             />
           </span>
           <span>Summary</span>
         </a>
-        <a href="../board.html" class="menu-item active">
-          <span class="menu-icon">
-            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
-          </span>
-          <span>Board</span>
-        </a>
-        <a href="../add_task.html" class="menu-item">
+        <a href="./add_task.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/add-task.svg"
+              src="./assets/img/icons/header-side-menu/add-task.svg"
               alt=""
             />
           </span>
           <span>Add Task</span>
         </a>
-        <a href="../add_contact.html" class="menu-item">
+        <a href="./board.html" class="menu-item active">
+          <span class="menu-icon">
+            <img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
+          <span>Board</span>
+        </a>
+        <a href="./add_contact.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/contacts.svg"
+              src="./assets/img/icons/header-side-menu/contacts.svg"
               alt=""
             />
           </span>
@@ -107,26 +122,75 @@
       </div>
     </aside>
     <!--End of Side-menu--> 
-
     <main class="main-content">
-      <button id="addTaskButton" onclick="showAddTask()">+</button>
-      <button id="logoutButton" onclick="logout()">Logout</button>
-
-      <div
-        class="drag-area"
-        id="open"
-        ondrop="moveTo('open')"
-        ondragleave="removeHighlight('open')"
-        ondragover="allowDrop(event); highlight('open')"
-      ></div>
-      <div
-        class="drag-area"
-        id="closed"
-        ondrop="moveTo('closed')"
-        ondragleave="removeHighlight('closed')"
-        ondragover="allowDrop(event); highlight('closed')"
-      ></div>
+      <section>
+      <div class="header-board">
+        <div class="header-title-container">
+          <h1>Board</h1>
+        </div>
+        <div class="search-add-container">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="Find Task" />
+            <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+            <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+              <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+            </button>
+          </div>
+          <button class="add-task-button" id="addTaskButton" onclick="showAddTask()">Add Task
+            <img src="./assets/img/icons/board/add-task.svg" alt="">
+          </button>
+      </div>
+          <button class="plus-add-task-button" id="plusAddTaskButton" onclick="showAddTask()" style="display:none;" aria-label="Add Task">
+            <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />
+          </button>
+      </section>
+      <section>
+        <div class="drag-board">
+          <div class="board-column" id="open">
+            <div class="column-header">
+              <span>To do</span>
+              <button class="add-board-btn" onclick="addBoardTask('open')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="tasks-list" id="tasks-list-open"></div>
+          </div>
+          <div class="board-column" id="inprogress">
+            <div class="column-header">
+              <span>In progress</span>
+              <button class="add-board-btn" onclick="addBoardTask('inprogress')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="tasks-list" id="tasks-list-inprogress"></div>
+          </div>
+          <div class="board-column" id="awaitfeedback">
+            <div class="column-header">
+              <span>Await feedback</span>
+              <button class="add-board-btn" onclick="addBoardTask('awaitfeedback')">
+                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+              </button>
+            </div>
+            <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
+          </div>
+          <div class="board-column" id="done">
+            <div class="column-header">
+              <span>Done</span>
+            </div>
+            <!--rendered tasks -->
+            <div class="tasks-list" id="tasks-list-done"></div>
+          </div>
+        </div>
+      </section>
+      <section>
+            <!-- Modal für Add Task -->
+          <div id="addTaskModal" class="add-task-modal">
+            <div class="add-task-modal-content">
+            <button class="add-task-modal-close" onclick="closeAddTaskModal()">&times;</button>
+            <div class="add-task-modal-inner" id="addTaskModalInner"></div>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
-</html>
 </html>

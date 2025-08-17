@@ -1,70 +1,14 @@
-let todos = [{
-    'id': 0,
-    'title': 'Putzen',
-    'category': 'open'
-}, {
-    'id': 1,
-    'title': 'Kochen',
-    'category': 'open'
-}, {
-    'id': 2,
-    'title': 'Einkaufen',
-    'category': 'closed'
-}];
+let tasks = [];
 
-let currentDraggedElement;
+let displayedTasks = [];
 
-function updateHTML() {
-    let open = todos.filter(t => t['category'] == 'open');
-
-    document.getElementById('open').innerHTML = '';
-
-    for (let index = 0; index < open.length; index++) {
-        const element = open[index];
-        document.getElementById('open').innerHTML += generateTodoHTML(element);
-    }
-
-    let closed = todos.filter(t => t['category'] == 'closed');
-
-    document.getElementById('closed').innerHTML = '';
-
-    for (let index = 0; index < closed.length; index++) {
-        const element = closed[index];
-        document.getElementById('closed').innerHTML += generateTodoHTML(element);
-    }
+async function init() {
+    await getTasksArray();
 }
 
-function startDragging(id) {
-    currentDraggedElement = id;
-}
-
-function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
-}
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function moveTo(category) {
-    todos[currentDraggedElement]['category'] = category;
-    updateHTML();
-}
-
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-function toggleHelpDropdown() {
-    const dropdown = document.getElementById('helpDropdown');
-    dropdown.classList.toggle('show');
-}
-
-function toggleProfileDropdown() {
-    const dropdown = document.getElementById('profileDropdown');
-    dropdown.classList.toggle('show');
+async function getTasksArray() {
+    let contactObjects = await loadData("/tasks/");
+    Object.keys(contactObjects).forEach(key => {
+        tasks.push(contactObjects[key]);
+    });
 }

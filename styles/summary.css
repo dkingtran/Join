@@ -32,12 +32,12 @@
     color: #29ABE2;
 }
 
-.header-profile{
+/*.header-profile{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
+}*/
 
 .profile-container{
     display: flex;
@@ -123,6 +123,10 @@
     gap: 18px;
 }
 
+.display-todo h1 {
+    font-size: 64px;
+}
+
 .display-done {
     text-align: center;
     display: flex;
@@ -133,6 +137,10 @@
     width: 246px;
     height: 168px;
     gap: 18px;
+}
+
+.display-done h1 {
+    font-size: 64px;
 }
 
 .default-img {
@@ -162,6 +170,10 @@
     gap: 18px;
 }
 
+.display-urgency h1 {
+    font-size: 64px;
+}
+
 .urgency-pipe{
     width: 2px;
     height: 102px;
@@ -170,6 +182,10 @@
 
 .display-deadline{
     text-align: center;
+}
+
+#deadline {
+    font-size: 21px;
 }
 
 .task-subsection {
@@ -199,7 +215,7 @@
     font-size: 64px;
 }
 
-.menu-section span{
+/**.menu-section span{
     font-size: 16px;
     font-weight: 400;
     color: #FFFFFF;
@@ -209,7 +225,7 @@
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
-}
+}**/
 
 .hover-img {
     display: none;
@@ -240,189 +256,4 @@
 a{
     text-decoration: none;
     color: #000000;
-}
-
-@media (max-width: 1440px) {
-  .user {
-    margin-left: 86px;
-    width: 150px;
-    }
-
-    .greet-user {
-        font-size: 16px;
-        width: 150px;
-    }
-
-    .user-name {
-        font-size: 24px;
-        width: 150px;
-    }
-
-    .summary-section {
-        height: 500px;
-        margin-top: 40px;
-        margin-top: 130px;
-        margin-bottom: 20px;
-        margin-left: 380px;
-
-    }
-
-    .todo-subsection {
-        height: 140px;
-    }
-
-    .task-subsection {
-        height: 140px;
-    }
-}
-
-/*max-width: 1100px*/
-@media (max-width: 1180px) {
-
-    .user{
-        margin-left: 86px;
-    }
-    .summary-section{
-        margin-left: 380px;
-        margin-top: 100px;
-
-    }
-
-    .title-section {
-        margin-top: 150px;
-        margin-left: 380px;
-        margin-bottom: 92px;
-        flex-direction: column;
-        text-align: start;
-        align-items: flex-start;
-        gap: 0;
-    }
-
-    .title-section h1 {
-        font-size: 47px;
-    }
-
-    .title-section span {
-        font-size: 20px;
-    }
-
-    .summary-section{
-        margin-top: 30px;
-    }
-
-    .pipe {
-        display: none;
-    }
-}
-/*max-width: 650px*/
-@media (max-width: 1180px){
-
-    .summary-section .todo-subsection{
-        width: 430px;
-        justify-content: center;
-        gap: 30px;
-    }
-
-    .todo-responsive{
-        height: 120px;
-        width: 200px;
-        justify-content: center;
-    }
-
-    .urgency-subsection {
-        justify-content: center;
-        width: 430px;
-        height: 120px;
-    }
-
-    .task-subsection {
-        width: 430px;
-        height: 120px;
-        justify-content: center;
-        gap: 30px;
-    }
-
-    .task-subsection a{
-        height: 120px;
-    }
-
-
-}
-
-@media (max-width: 1000px){
-
-   /* .horizontal-pipe {
-    height: 3px;
-    width: 59px;
-    background-color: #29ABE2;
-    display: block;
-    }*/
-
-    .horizontal-pipe {
-        display: block;
-        height: 3px;
-        width: 59px;
-        background-color: #29ABE2; /* Temporär auffällig machen */
-        margin-top: 16px;
-         border-radius: 2px;
-    }
-
-    .user{
-        display: none;
-    }
-
-    .summary-section {
-        margin-bottom: 82px;
-        margin-left: 0;
-    }
-    .title-section {
-        margin-bottom: 55px;
-        width: 230px;
-        justify-content: flex-start;
-        margin-left: 2%;
-    }
-}
-
-@media (max-width: 480px){
-    .task-subsection{
-        width: 300px;
-    }
-
-    .urgency-subsection {
-        width: 300px;
-    }
-
-    .summary-section .todo-subsection {
-        width: 300px;
-    }
-
-    .responsive-todo-icon{
-        width: 40px;
-        height: 40px;
-    }
-
-    .reponsive-urgency-icon{
-        width: 50px;
-        height: 50px;
-    }
-    .display-deadline h1{
-        font-size: 24px;
-    }
-    .display-deadline span{
-        font-size: 16px;
-    }
-
-    .urgency-subsection{
-    gap: 30px;
-    }
-
-    .display-urgency{
-        gap: 5px;
-    }
-    .semi-bold {
-        font-size: xxx-large;
-    }
-    .in-progress span{
-        font-size: 16px;
-    }
 }

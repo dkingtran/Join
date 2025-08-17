@@ -1,0 +1,207 @@
+/* =========================
+   Kontakt-Details Template
+   ========================= */
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    align-items: flex-start;
+}
+
+.contact-details-top {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+    width: 100%;
+}
+
+.contact-avatar-clicked {
+    min-width: 120px;
+    min-height: 120px;
+    width: 120px;
+    height: 120px;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    font-size: 47px;
+    font-weight: 500;
+    box-shadow: 0px 0px 4px 0px #0000001a;
+}
+
+.contact-name-clicked {
+    font-size: 32px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.contact-details-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.delete-btn {
+    width: 62px;
+    height: 24px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.edit-btn {
+    width: 62px;
+    height: 24px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    color: #29abe2;
+    font-weight: 700;
+}
+
+.edit-btn:hover img,
+.delete-btn:hover img {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
+}
+
+/* Ensure button images are always inline and sized */
+.delete-btn img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.edit-btn img {
+    width: 18.28px;
+    height: 18.25px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.contact-details-info {
+    width: 100%;
+}
+
+.contact-details-info-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #2a3647;
+}
+
+.contact-details-info-section {
+    padding-top: 21px;
+}
+
+.contact-details-info-section-title {
+    font-weight: bold;
+    color: #2a3647;
+    margin-bottom: 15px;
+}
+
+.contact-details-info-email {
+    color: #007cee;
+    font-size: 16px;
+    word-break: break-all;
+}
+
+.contact-details-info-phone {
+    font-size: 16px;
+    color: #333;
+}
+
+/* --- Media Queries für .contacts-section --- */
+
+@media (max-width: 1300px) {
+    .contacts-section {
+        position: absolute;
+        top: 206px;
+        left: 700px;
+        z-index: 20;
+    }
+
+    .contacts-header {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 16px;
+    }
+
+    .contacts-header h2 {
+        order: 1;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contacts-section {
+        position: fixed;
+        top: 206px;
+        left: 440px;
+    }
+}
+
+@media (max-width: 780px) {
+    .contacts-section {
+        display: none !important;
+    }
+    
+    .contacts-section.show-mobile-section {
+        display: block !important;
+        background: #f4f7f7 !important;
+        position: fixed !important;
+        top: 128px;
+        left: 16px;
+        width: calc(100vw - 0px);
+        height: calc(100vh - 128px);
+        z-index: 100;
+    }
+
+    .contacts-header h1 {
+        font-size: 47px;
+        font-weight: 700;
+    }
+
+    .contacts-header h2 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .contacts-section {
+        display: none !important;
+    }
+    
+    .contact-divider {
+        width: 90vw;
+    }
+    
+    .contact-name-clicked {
+        font-size: 36px;
+        font-weight: 700;
+    }
+    
+    .contact-details-top {
+        gap: 20px;
+    }
+    
+    .contact-details-actions {
+        display: none;
+    }
+}

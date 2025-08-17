@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join Add Task</title>
-    <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/logo/logo-dark.png"
+    />
 
     <link rel="stylesheet" href="../styles/global.css" />
+
     <link rel="stylesheet" href="../styles/media-query-add-task.css">
+
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/media.css" />
-    <link rel="stylesheet" href="../styles/media-query-add-task.css">
+    <link rel="stylesheet" href="../styles/media-query-add-task.css" />
 
     <script src="../scripts/side-menu.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="header-content">
-            <div class="header-inner">
-                <div class="logo-mobile d_none">
-                    <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
-                </div>
-                <h1 class="header-title">Kanban Project Management Tool</h1>
-                <div class="header-right">
-                    <div class="help-container" id="helpContainer">
-                        <a href="../help.html" class="help-icon">
-                            <img src="../assets/img/icons/header-side-menu/help.png" alt="Help Icon" />
-                        </a>
-                    </div>
-                    <div class="profile-container" id="profileContainer">
-                        <button class="profile-btn" onclick="toggleProfileDropdown()" aria-label="Profile menu">
-
-                        </button>
-                        <div id="profileDropdown" class="profile-dropdown">
-                            <a href="../help.html" class="dropdown-item mobile-only d_none">Help</a>
-                            <a href="legal-notice.html" class="dropdown-item">Legal Notice</a>
-                            <a href="privacy-policy.html" class="dropdown-item">Privacy Policy</a>
-                            <a href="index.html" class="dropdown-item">Log out</a>
-                        </div>
-                    </div>
-                </div>
+      <div class="header-content">
+        <div class="header-inner">
+          <div class="logo-mobile d_none">
+            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+          </div>
+          <h1 class="header-title">Kanban Project Management Tool</h1>
+          <div class="header-right">
+            <div class="help-container" id="helpContainer">
+              <a href="../help.html" class="help-icon">
+                <img
+                  src="../assets/img/icons/header-side-menu/help.png"
+                  alt="Help Icon"
+                />
+              </a>
             </div>
+            <div class="profile-container" id="profileContainer">
+              <button
+                class="profile-btn"
+                onclick="toggleProfileDropdown()"
+                aria-label="Profile menu"
+              ></button>
+              <div id="profileDropdown" class="profile-dropdown">
+                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                  >Help</a
+                >
+                <a href="legal-notice.html" class="dropdown-item"
+                  >Legal Notice</a
+                >
+                <a href="privacy-policy.html" class="dropdown-item"
+                  >Privacy Policy</a
+                >
+                <a href="index.html" class="dropdown-item">Log out</a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </header>
 
-    <!-- Add Task section -->
+
     <div class="wrapper flex flex-column align-center w-full max-w-1200">
 
         <div class="main-container w-full flex flex-column max-w-1200">
@@ -222,53 +238,68 @@
                     d="M29.7756 2.7388L29.7756 23.1931C29.775 23.7957 29.5354 24.3734 29.1093 24.7995C28.6832 25.2256 28.1055 25.4652 27.5029 25.4658L22.9575 25.4658C22.3549 25.4652 21.7772 25.2256 21.3511 24.7995C20.925 24.3734 20.6854 23.7955 20.6848 23.1929L20.6848 2.73855C20.6854 2.13597 20.925 1.5585 21.3511 1.13242C21.7772 0.706334 22.3549 0.466697 22.9575 0.466094L27.5029 0.466094C28.1055 0.466696 28.6832 0.706334 29.1093 1.13242C29.5354 1.5585 29.775 2.13622 29.7756 2.7388ZM22.9575 23.1929L27.5029 23.1931L27.5029 2.7388L22.9575 2.73855L22.9575 23.1929Z"
                     fill="white" />
             </svg>
-
         </div>
+      </div>
     </div>
 
     <!-- End add Task section -->
 
     <!--Side-menu-->
     <aside class="side-menu background-side-menu">
-        <div class="logo-section">
-            <img src="../assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
-        </div>
 
-        <div class="menu-section">
-            <a href="../summary.html" class="menu-item">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/summary.svg" alt="" />
-                </span>
-                <span>Summary</span>
-            </a>
-            <a href="../board.html" class="menu-item ">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
-                </span>
-                <span>Board</span>
-            </a>
-            <a href="../add_task.html" class="menu-item active">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/add-task.svg" alt="" />
-                </span>
-                <span>Add Task</span>
-            </a>
-            <a href="../add_contact.html" class="menu-item">
-                <span class="menu-icon">
-                    <img src="../assets/img/icons/header-side-menu/contacts.svg" alt="" />
-                </span>
-                <span>Contacts</span>
-            </a>
-        </div>
+      <div class="logo-section">
+        <img
+          src="../assets/img/logo/logo-light.png"
+          alt="Logo"
+          class="logo-side-menu-img"
+        />
+      </div>
 
-        <div class="notice-side-menu">
-            <a href="../legal-notice.html" class="menu-item menu-bottom">
-                <span>Legal notice</span>
-            </a>
-            <a href="../privacy-policy.html" class="menu-item menu-bottom">
-                <span>Privacy Policy</span>
-            </a>
-        </div>
+      <div class="menu-section">
+        <a href="../summary.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/summary.svg"
+              alt=""
+            />
+          </span>
+          <span>Summary</span>
+        </a>
+        <a href="../add_task.html" class="menu-item active">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/add-task.svg"
+              alt=""
+            />
+          </span>
+          <span>Add Task</span>
+        </a>
+        <a href="../board.html" class="menu-item">
+          <span class="menu-icon">
+            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+          </span>
+          <span>Board</span>
+        </a>
+        <a href="../add_contact.html" class="menu-item">
+          <span class="menu-icon">
+            <img
+              src="../assets/img/icons/header-side-menu/contacts.svg"
+              alt=""
+            />
+          </span>
+          <span>Contacts</span>
+        </a>
+      </div>
+
+      <div class="notice-side-menu">
+        <a href="../legal-notice.html" class="menu-item menu-bottom">
+          <span>Legal notice</span>
+        </a>
+        <a href="../privacy-policy.html" class="menu-item menu-bottom">
+          <span>Privacy Policy</span>
+        </a>
+      </div>
+
     </aside>
 
     <script src="./scripts/firebase.js"></script>
@@ -279,8 +310,6 @@
     <script src="./scripts/input.js"></script>
     <script src="./scripts/add_task.js"></script>
 
-
-</body>
-
+  </body>
 </html>
 

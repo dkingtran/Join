@@ -2,16 +2,15 @@ let nameRef;
 let emailRef;
 let passwordRef;
 let passwordConRef;
+let phoneRef;
 
-const firstNameRegex = /^[a-z]+\s/gi;
-const lastNameRegex = /\s[a-z]+$/gi;
-const lettersRegex = /^[a-z]+$/gi;
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/gi;
-const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+const firstNameRegex = /^[a-z]+\s/i;
+const lastNameRegex = /\s[a-z]+$/i;
+const lettersRegex = /^[a-z]+$/i;
+const numbersRegex = /^[0-9]+$/i;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/i;
+const phoneNumberRegex = /^(\+[1-9]{2})?[0-9]+$/m;
 
-function removeSpaces(string) {
-    return string.replace(/\s+/gm, '');
-}
 
 /**
  * Validates a given name string based on specific regex patterns.
@@ -83,8 +82,8 @@ function generateNameObject(name) {
  */
 
 function dateCheck(date) {
-    if(removeSpaces(date) == "") return false;
-    let dateInput = new Date();
+    if (removeSpaces(date) == "") return false;
+    let dateInput = new Date(date);
     let dateNow = new Date();
     if (dateInput < dateNow) return false;
     else return true;
@@ -92,6 +91,24 @@ function dateCheck(date) {
 
 
 function titleCheck(title) {
-    if(removeSpaces(title) == "") return false;
+    if (removeSpaces(title) == "") return false;
     else return true;
+}
+
+function phoneNumberCheck(phoneNumber) {
+    if (removeSpaces(phoneNumber) == "") return false;
+    else if (!(phoneNumberRegex.test(clearPhoneNumber(phoneNumber)))) return false;
+    else return true;
+}
+
+function clearPhoneNumber(phoneNumber) {
+    return removeHyphens(removeSpaces(phoneNumber));
+}
+
+function phoneNumberForm(phoneNumber) {
+    let phoneNumberClear = clearPhoneNumber(phoneNumber);
+    if (phoneNumberClear.charAt(0) == "0") {
+        phoneNumberClear = phoneNumberClear.replace(/^0/, "+49");
+    }
+    return phoneNumberClear.slice(0, 3) + " " + phoneNumberClear.slice(3, 7) + " " + phoneNumberClear.slice(7);
 }
