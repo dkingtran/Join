@@ -1,0 +1,269 @@
+.big-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: 2px solid grey;
+    width: 100%;
+    max-width: 500px;
+    height: 931px;
+    border-radius: 30px;
+    padding: 48px 40px;
+    gap: 15px;
+}
+
+.title-content {
+    font-family: Inter, sans-serif;
+    font-weight: bold;
+    font-size: 61px;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+    overflow: auto;
+    width: 100%;
+    max-width: 100%;
+    height: 219px;
+}
+
+
+.icon-close-icon:hover {
+    width: 22px;
+    height: 14px;
+    background-color: rgb(232, 227, 227);
+    border-radius: 50px;
+}
+
+
+.category-x {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 36px;
+    /* kann bleiben, da klein */
+}
+
+.category-chois {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    width: 100%;
+    max-width: 208px;
+    height: 36px;
+    background-color: #1FD7C1;
+    border-radius: 8px;
+
+}
+
+.description-big-card {
+    line-height: 120%;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    margin-bottom: 20px;
+    max-width: 445px;
+    height: 24px;
+}
+
+.date-big-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 445px;
+    height: 24px;
+}
+
+.date-big-card-text {
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.date-info-big-card {
+    font-size: 20px;
+}
+
+.prio-big-card {
+    display: flex;
+    align-items: center;
+    gap: 43px;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    max-width: 445px;
+    height: 32px;
+}
+
+.assigned-big-card {
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    max-width: 445px;
+    height: auto;
+}
+
+.contacts-big-card {
+    margin-top: 20px;
+    margin-left: 30px;
+    gap: 40px;
+}
+
+.subtasks-big-card {
+    width: 100%;
+    max-width: 445px;
+
+    height: auto;
+}
+
+.subtask-text-big-card {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.subtask-value-content {
+    overlay: auto;
+    margin-left: 20px;
+}
+
+.checkbox-subtask-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.check-subtask-content {
+    display: flex;
+}
+
+.check-subtask-content {
+    margin-left: 25px;
+    gap: 40px;
+}
+
+.edit-delete-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: flex-end;
+}
+
+.edit-icon-text,
+.delete-icon-text {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.avatar-with-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.avatar {
+    font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-name {
+  font-size: 14px;
+  color: #333;
+}
+
+.checkbox-subtask-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.subtask-value-content {
+  font-size: 14px;
+  color: #333;
+}
+
+.delete-edit-big-card-content{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.delete-icon-big-card, .edit-pen-big-card{
+    display: flex;
+    align-items: center;
+}
+
+.delete-icon-big-card:hover,
+.edit-pen-big-card:hover {
+    color: #29ABE2; /* oder z.B. background-color: blue; */
+    cursor: pointer; /* optional, für besseren Hover-Effekt */
+}
+
+.delete-icon-big-card:hover svg path,
+.edit-pen-big-card:hover svg path {
+    fill: #29ABE2;
+}
+
+
+
+.bg-ff7a00 {
+	background-color: #ff7a00;
+}
+.bg-ff5eb3 {
+	background-color: #ff5eb3;
+}
+.bg-6e52ff {
+	background-color: #6e52ff;
+}
+.bg-9327ff {
+	background-color: #9327ff;
+}
+.bg-00bee8 {
+	background-color: #00bee8;
+}
+.bg-1fd7c1 {
+	background-color: #1fd7c1;
+}
+.bg-ff745e {
+	background-color: #ff745e;
+}
+.bg-ffa35e {
+	background-color: #ffa35e;
+}
+.bg-fc71ff {
+	background-color: #fc71ff;
+}
+.bg-ffc701 {
+	background-color: #ffc701;
+}
+.bg-0038ff {
+	background-color: #0038ff;
+}
+.bg-c3ff2b {
+	background-color: #c3ff2b;
+}
+.bg-ffe62b {
+	background-color: #ffe62b;
+}
+.bg-ff4646 {
+	background-color: #ff4646;
+}
+.bg-ffbb2b {
+	background-color: #ffbb2b;
+}
