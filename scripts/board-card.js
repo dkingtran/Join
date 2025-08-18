@@ -40,6 +40,11 @@ function renderAllTasks(tasksObject) {
         renderTaskToColumn(task, columnId);
         }
     }
+    
+    // Rufe die "No Tasks"-Rendering-Funktion auf
+    if (typeof renderWithNoTasksAreas === 'function') {
+        renderWithNoTasksAreas();
+    }
 }
 
 const statusToColumnId = {
