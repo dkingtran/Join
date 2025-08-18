@@ -146,17 +146,17 @@ function addTaskOverlayTemplate(){
                             <p class="font-bundle">Priority</p>
                             <div class="btn-prio flex justify-start max-w-440">
                                 <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
-                                        src="./urgent_icon.svg" alt="Urgent Icon">
+                                        src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
                                 </button>
                                 <button id="medium"
                                     class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
                                     Medium
-                                    <img id="medium-icon" src="./prio_medium_orange.svg"
+                                    <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
                                         alt="medium">
                                 </button>
 
                                 <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">Low <img
-                                        src="./low_Icon.svg" alt="Low Icon">
+                                        src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
                                 </button>
                             </div>
 
@@ -206,7 +206,7 @@ function addTaskOverlayTemplate(){
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
                                         placeholder="Add new subtask" readonly>
                                     <span id="open-subtask" class="icon plus">
-                                        <img src="./add.svg" alt="Plus Icon">
+                                        <img src="./assets/img/icons/add_task/add.svg" alt="Plus Icon">
                                     </span>
                                 </div>
 
@@ -216,11 +216,11 @@ function addTaskOverlayTemplate(){
                                         placeholder="Add new subtask">
                                     <div class="icon-subtask-container display-standard">
                                         <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
-                                            <img class="icon-task" src="./delete.svg"
+                                            <img class="icon-task" src="./assets/img/icons/add_task/delete.svg"
                                                 alt="Cancel Icon">
                                         </span>
                                         <span id="confirm-subtask" class="icon confirm" onclick="confirmSubtaskInput()">
-                                            <img class="icon-task" src="./check_noir.svg"
+                                            <img class="icon-task" src="./assets/img/icons/add_task/check_noir.svg"
                                                 alt="Confirm Icon">
                                         </span>
                                     </div>
@@ -250,7 +250,7 @@ function addTaskOverlayTemplate(){
                             </button>
                             <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
                                 type="submit">Create
-                                Task<img class="icon-task" src="./check.svg"
+                                Task<img class="icon-task" src="./assets/img/icons/add_task/check.svg"
                                     alt="Ok Icon"></button>
                         </div>
                     </div>
