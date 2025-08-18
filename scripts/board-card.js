@@ -67,10 +67,18 @@ function renderTaskToColumn(task, columnId) {
     const card = document.createElement("div");
     card.classList.add("board-card");
     card.innerHTML = cardRender(task, avatars, progressPercent, maxSubtasks, total, "#4589FF");
+    //Click für boardCard
+      // 🔹 Wichtig: ID an die Karte hängen
+    if (taskId) card.dataset.taskId = taskId;
+    else if (task && task.id) card.dataset.taskId = task.id; // Fallback, falls deine Tasks eine id haben
+
+    // 🔹 Klick bindet später die Big-Card-Öffnung
     card.addEventListener("click", () => {
-        console.log("Card geklickt:", task.title);
-        // deine Funktion
+        const id = card.dataset.taskId;
+        if (!id) return console.warn("Keine taskId an der Karte gefunden.");
+        openBigCard(id); // Funktion kommt in Schritt 2
     });
+
     container.appendChild(card);
 }
 
