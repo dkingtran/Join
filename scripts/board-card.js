@@ -28,19 +28,21 @@ async function loadTasksFromFirebase() {
         console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
         return;
     }
+    diagnoseTasksObject(tasks);   // 👈 Diagnose hier einfügen
     renderAllTasks(tasks);
 }
+
 
 function renderAllTasks(tasksObject) {
     clearAllTaskLists();
     for (const taskId in tasksObject) {
         const task = tasksObject[taskId];
         const columnId = getColumnIdByStatus(task.status);
-        if (columnId) {
-            renderTaskToColumn(task, columnId);
-        }
+        if (columnId) renderTaskToColumn(task, columnId, taskId);
     }
 }
+
+
 
 const statusToColumnId = {
     "to-do": "tasks-list-open",
@@ -58,29 +60,22 @@ function getColumnIdByStatus(statusObj) {
     }
     return null;
 }
-
-function renderTaskToColumn(task, columnId) {
+//neu
+function renderTaskToColumn(task, columnId, taskId) {
     const container = document.getElementById(columnId);
-    if (!container) return console.warn(`Spalte mit ID '${columnId}' nicht gefunden.`);
+    if (!container) return console.warn(`Spalte '${columnId}' nicht gefunden`);
+    if (!taskId) return console.warn("Keine taskId für Task:", task);
     const avatars = renderAssignedAvatars(task["assigned-to"]);
-    const { progressPercent, total, maxSubtasks } = getSubtaskProgress(task.subtasks);
+    const p = getSubtaskProgress(task.subtasks);
     const card = document.createElement("div");
     card.classList.add("board-card");
-    card.innerHTML = cardRender(task, avatars, progressPercent, maxSubtasks, total, "#4589FF");
-    //Click für boardCard
-      // 🔹 Wichtig: ID an die Karte hängen
-    if (taskId) card.dataset.taskId = taskId;
-    else if (task && task.id) card.dataset.taskId = task.id; // Fallback, falls deine Tasks eine id haben
-
-    // 🔹 Klick bindet später die Big-Card-Öffnung
-    card.addEventListener("click", () => {
-        const id = card.dataset.taskId;
-        if (!id) return console.warn("Keine taskId an der Karte gefunden.");
-        openBigCard(id); // Funktion kommt in Schritt 2
-    });
-
+    card.dataset.taskId = taskId;
+    card.innerHTML = cardRender(task, avatars, p.progressPercent, p.maxSubtasks, p.total, "#4589FF");
     container.appendChild(card);
+    attachOpenBigCard(card, taskId);
 }
+
+
 
 function renderAssignedAvatars(users = []) {
     return users.map(name => {
@@ -127,4 +122,16 @@ function clearAllTaskLists() {
     });
 }
 
+
+function diagnoseTasksObject(tasksObject) {
+    console.log("Array?", Array.isArray(tasksObject));
+    const keys = Object.keys(tasksObject || {});
+    console.log("Keys count:", keys.length);
+    console.log("First 5 keys:", keys.slice(0, 5));
+    if (keys.length) {
+        const k = keys[0];
+        console.log("Sample key:", k);
+        console.log("Sample value:", tasksObject[k]);
+    }
+}
 

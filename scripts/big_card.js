@@ -97,3 +97,69 @@ function editBigCard(){
 overlayAddTask = document.getElementById("add-task-overlay");
  overlayAddTask.classList.toggle('d-none');
 };
+
+// 
+async function openBigCard(taskId) {
+  const el = document.getElementById("big-card-list");
+  const [tasks, contacts] = await Promise.all([
+    loadData("tasks"),
+    loadData("contacts")
+  ]);
+  const t = tasks?.[taskId];
+  if (!t) return console.warn("Task nicht gefunden:", taskId);
+  renderBigCardIntoOverlay(t, taskId, contacts);
+  el.classList.remove("d-none");
+  document.body.style.overflow = "hidden";
+  document.addEventListener("keydown", escCloseBigCard);
+}
+
+
+function renderBigCardIntoOverlay(task, taskId, contacts) {
+  const el = document.getElementById("big-card-list");
+  const avatars = buildAvatarsHTML(task["assigned-to"] || [], contacts);
+  const subs = buildSubtasksHTML(task["subtasks"] || {}, taskId);
+  const cat = task["category"] || "";
+  const title = task["title"] || "";
+  const desc = task["description"] || "";
+  const due = task["due-date"] || "";
+  const prio = task["priority"] || "";
+  el.innerHTML = `<div class="backdrop" onclick="closeBigCard()"></div><div class="big-card-wrapper">${bigCardTemplate(taskId, cat, title, desc, due, prio, avatars, subs)}</div>`;
+  bindXCloseIcon();
+}
+
+function bindXCloseIcon() {
+  const icon = document.querySelector("#big-card-list .x-closing-icon");
+  if (!icon) return console.warn("x-closing-icon nicht gefunden");
+  icon.addEventListener("click", closeBigCard);
+}
+
+
+function closeBigCard() {
+  const el = document.getElementById("big-card-list");
+  if (!el) return;
+  el.innerHTML = "";                   // Inhalt leeren
+  el.classList.add("d-none");          // Overlay verstecken
+  document.body.style.overflow = "";   // Scroll wieder erlauben
+  document.removeEventListener("keydown", escCloseBigCard);
+  initRender();                        // Liste neu aufbauen
+}
+
+function escCloseBigCard(e) {
+  if (e.key === "Escape") closeBigCard();
+}
+
+function attachOpenBigCard(card, taskId) {
+  if (!card) return console.warn("attachOpenBigCard: card fehlt");
+  if (!taskId) return console.warn("attachOpenBigCard: taskId fehlt");
+  card.addEventListener("click", () => openBigCard(taskId));
+}
+
+
+function hideBigCardOverlayAtStart() {
+  const el = document.getElementById("big-card-list");
+  if (!el) return;
+  el.classList.add("d-none");
+  el.innerHTML = "";
+}
+
+

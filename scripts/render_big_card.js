@@ -13,7 +13,7 @@ function renderAllBigCards(tasksData, contactsData) {
   container.innerHTML = html;
 }
 
-// 🔹 Hilfsfunktionen
+// Hilfsfunktionen
 function getContainer(selector) {
   const el = document.querySelector(selector);
   if (!el) throw new Error(`${selector} nicht gefunden`);
@@ -73,7 +73,6 @@ function findContactColor(contactName, contactsData) {
   return null;
 }
 
-
 // Kürzen
 function buildSubtasksHTML(subtasks, taskId) {
   let subtasksHTML = "";
@@ -95,5 +94,6 @@ function renderAddTaskOverlay(){
       addTaskOverlay.innerHTML = addTaskOverlayTemplate();
 }
 
+
 renderAddTaskOverlay()
-initRender();
+

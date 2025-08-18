@@ -3,9 +3,10 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
     <div class="big-card-content" id="big-card-${id}">
       <div class="category-x">
        <div class="category-chois ${getCategoryClass(category)}" id="category-big-card-${id}">
-  ${category || ""}
-</div>
-        <div class="x-closing-icon"><!-- Icon --></div>
+         ${category || ""}
+              </div>
+       <div class="x-closing-icon" onclick="closeBigCard()">X</div>
+
       </div>
 
       <div class="title-content" id="title-big-card-${id}">${title || ""}</div>
