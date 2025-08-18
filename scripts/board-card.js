@@ -1,4 +1,4 @@
-const assignedColorMap = {}; 
+const assignedColorMap = {};
 let colorIndex = 0;
 
 const avatarColors = [
@@ -37,7 +37,7 @@ function renderAllTasks(tasksObject) {
         const task = tasksObject[taskId];
         const columnId = getColumnIdByStatus(task.status);
         if (columnId) {
-        renderTaskToColumn(task, columnId);
+            renderTaskToColumn(task, columnId);
         }
     }
 }
@@ -53,7 +53,7 @@ function getColumnIdByStatus(statusObj) {
     if (!statusObj || typeof statusObj !== "object") return null;
     for (const status in statusObj) {
         if (statusObj[status] === true && statusToColumnId[status]) {
-        return statusToColumnId[status];
+            return statusToColumnId[status];
         }
     }
     return null;
@@ -67,6 +67,10 @@ function renderTaskToColumn(task, columnId) {
     const card = document.createElement("div");
     card.classList.add("board-card");
     card.innerHTML = cardRender(task, avatars, progressPercent, maxSubtasks, total, "#4589FF");
+    card.addEventListener("click", () => {
+        console.log("Card geklickt:", task.title);
+        // deine Funktion
+    });
     container.appendChild(card);
 }
 
@@ -114,3 +118,5 @@ function clearAllTaskLists() {
         if (column) column.innerHTML = "";
     });
 }
+
+
