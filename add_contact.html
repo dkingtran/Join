@@ -133,7 +133,7 @@
         <button class="add-contact-btn-mobile" onclick="openContactForm()">
           <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
         </button>
-        <div class="contact-list" id="contactList">
+        <div class="contact-list" id="list-contact">
           <!-- Contacts will be rendered here -->
         </div>
       </div>
@@ -146,12 +146,12 @@
         <hr class="logo-divider" />
         <h2>Better with a team</h2>
       </div>
-      <div class="contact-list-clicked" id="contactListClicked">
+      <div class="contact-list-clicked" id="clicked-list-contact">
         <!-- Contacts will be rendered here -->
       </div>
       <button
         class="mobile-back-btn display-standard"
-        id="mobileBackBtn"
+        id="mobile-back-button"
         onclick="hideMobileContactDetails()"
         style="display: none"
       >
@@ -160,9 +160,9 @@
     </div>
 
     <!-- Modal Overlay for Add Contact -->
-    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-overlay" id="overlay-modal"></div>
     <!-- Form Container (hidden by default) -->
-    <div class="form-container" id="formContainer">
+    <div class="form-container" id="container-form">
       <button class="close-btn" onclick="hideForm()">
         <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
       </button>
@@ -174,7 +174,7 @@
           <hr class="form-divider" />
         </div>
       </div>
-      <div class="contact-avatar-clicked display-standard" id="formAvatar">
+      <div class="contact-avatar-clicked display-standard" id="form-avatar">
         <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
       </div>
       <div class="form-content">
@@ -243,13 +243,13 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div id="contactCreatedModal" class="contact-created-modal">
+    <div id="modal-contact-created" class="contact-created-modal">
       Contact successfully created
     </div>
 
     <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <button
-      id="mobileEditBtn"
+      id="mobile-edit-button"
       class="mobile-edit-btn display-standard"
       style="display: none"
       onclick="event.stopPropagation(); toggleMobileEditDropdown()"
@@ -258,7 +258,7 @@
     </button>
     <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <div
-      id="mobileEditDropdown"
+      id="dropdown-mobile-edit"
       class="mobile-edit-dropdown"
       style="display: flex"
     ></div>
