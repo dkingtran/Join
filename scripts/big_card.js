@@ -1,13 +1,3 @@
-function getInitials(name) {
-  const parts = name.trim().split(" ");
-  let initials = "";
-  for (let i = 0; i < parts.length && i < 2; i++) {
-    if (parts[i].length > 0) {
-      initials += parts[i][0].toUpperCase();
-    }
-  }
-  return initials;
-}
 
 // bigCards.js
 window.toggleSubtaskDone = function (el) {
