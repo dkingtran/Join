@@ -20,13 +20,15 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
         <span class="date-info-big-card" id="date-big-card-${id}">${due || ""}</span>
       </div>
 
-      <div class="prio-big-card">
-        Priority:
+
+      
+       <div class="prio-big-card">
+        <p class="subtitles-prio-big-card">Priority:</p>
         <span id="prio-big-card-${id}">${prio ? prio.charAt(0).toUpperCase() + prio.slice(1) : ""}</span>
         ${typeof getPriorityIcon === "function" ? getPriorityIcon(prio) : ""}
       </div>
 
-      Assigned to:
+      <p class="subtitles-assigned-big-card">Assigned to:</p>
       <div class="assigned-big-card">
         <div class="contacts-big-card">
           ${avatarsHTML}

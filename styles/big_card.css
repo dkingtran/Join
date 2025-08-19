@@ -34,6 +34,7 @@
     width: 100%;
     max-width: 100%;
     height: auto;
+    margin-bottom: 10px;
 }
 
 .icon-close-icon:hover {
@@ -82,6 +83,7 @@
     width: 100%;
     max-width: 445px;
     height: 24px;
+    margin-bottom: 15px;
 }
 
 .date-big-card-text {
@@ -103,6 +105,7 @@
     width: 100%;
     max-width: 445px;
     height: 32px;
+    margin: 0 0 10px 0;
 }
 
 .assigned-big-card {
@@ -129,6 +132,16 @@
     align-items: flex-start;
     flex-direction: column;
     height: auto;
+}
+
+.subtitles-prio-big-card{
+  
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.subtitles-assigned-big-card{
+    font-size: 20px;
 }
 
 .input-subtask-checkbox-big-card {
