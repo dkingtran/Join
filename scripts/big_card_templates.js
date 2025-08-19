@@ -85,6 +85,7 @@ function subtaskItemTemplate(taskId, subtaskId, subText, isDone) {
   return `
     <div class="checkbox-subtask-content">
       <input
+        class="input-subtask-checkbox-big-card"
         type="checkbox"
         id="subtask-${taskId}-${subtaskId}"
         data-task-id="${taskId}"

@@ -112,6 +112,7 @@
     gap: 40px;
 }
 
+
 .subtasks-big-card {
    min-width: 400px;
     max-width: 445px;
@@ -122,6 +123,12 @@
     height: auto;
 }
 
+.input-subtask-checkbox-big-card {
+    width: auto; /* statt 100% */
+    flex-shrink: 0; /* Checkbox behält ihre Größe */
+    margin-left: 20px;
+}
+
 .subtask-text-big-card {
     margin-bottom: 10px;
     font-size: 20px;
@@ -129,8 +136,6 @@
 }
 
 .subtask-value-content {
-    overlay: auto;
-    margin-left: 20px;
     font-size: 14px;
     color: #333;
 }
@@ -138,23 +143,13 @@
 .checkbox-subtask-content {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    gap: 8px;
+    align-items: center;   /* Checkbox und Text vertikal mittig */
+    justify-content: flex-start; /* Nicht auseinander schieben */
+    gap: 15px;              /* Abstand zwischen Checkbox und Text */
     margin-bottom: 4px;
-
     width: 100%;
- 
 }
 
-.check-subtask-content {
-    display: flex;
-}
-
-.check-subtask-content {
-    margin-left: 25px;
-    gap: 40px;
-}
 
 .edit-delete-section {
     width: 100%;
