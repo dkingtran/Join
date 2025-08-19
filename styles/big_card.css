@@ -1,15 +1,18 @@
 
 
 .big-card-content {
-    margin-left: 250px;
-    display: flex;
+    position: absolute;
+    left: 44%;
+    bottom: 2%;
+   display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: flex-start; 
+    background-color: white;
     border: 2px solid grey;
     width: 100%;
     max-width: 500px;
-    height: 931px;
+    height: 900px;
     border-radius: 30px;
     padding: 48px 40px;
     gap: 15px;
@@ -211,8 +214,8 @@
 
 .delete-icon-big-card:hover,
 .edit-pen-big-card:hover {
-    color: #29ABE2; /* oder z.B. background-color: blue; */
-    cursor: pointer; /* optional, für besseren Hover-Effekt */
+    color: #29ABE2; 
+    cursor: pointer; 
 }
 
 .delete-icon-big-card:hover svg path,
@@ -220,6 +223,9 @@
     fill: #29ABE2;
 }
 
+
+
+/* 
 
 
 .bg-ff7a00 {
@@ -267,3 +273,4 @@
 .bg-ffbb2b {
 	background-color: #ffbb2b;
 }
+ */

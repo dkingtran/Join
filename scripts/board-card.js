@@ -32,7 +32,6 @@ async function loadTasksFromFirebase() {
     renderAllTasks(tasks);
 }
 
-
 function renderAllTasks(tasksObject) {
     clearAllTaskLists();
     for (const taskId in tasksObject) {
@@ -41,8 +40,6 @@ function renderAllTasks(tasksObject) {
         if (columnId) renderTaskToColumn(task, columnId, taskId);
     }
 }
-
-
 
 const statusToColumnId = {
     "to-do": "tasks-list-open",
@@ -60,6 +57,7 @@ function getColumnIdByStatus(statusObj) {
     }
     return null;
 }
+
 //neu
 function renderTaskToColumn(task, columnId, taskId) {
     const container = document.getElementById(columnId);
@@ -74,8 +72,6 @@ function renderTaskToColumn(task, columnId, taskId) {
     container.appendChild(card);
     attachOpenBigCard(card, taskId);
 }
-
-
 
 function renderAssignedAvatars(users = []) {
     return users.map(name => {
@@ -121,7 +117,6 @@ function clearAllTaskLists() {
         if (column) column.innerHTML = "";
     });
 }
-
 
 function diagnoseTasksObject(tasksObject) {
     console.log("Array?", Array.isArray(tasksObject));
