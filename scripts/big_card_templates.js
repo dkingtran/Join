@@ -82,6 +82,9 @@ function avatarItemTemplate(initials, bgColor, fullName) {
 }
 
 function subtaskItemTemplate(taskId, subtaskId, subText, isDone) {
+  // Entfernt führende "•" und Leerzeichen
+  const cleanText = subText.replace(/^•\s*/, "");
+
   return `
     <div class="checkbox-subtask-content">
       <input
@@ -93,10 +96,11 @@ function subtaskItemTemplate(taskId, subtaskId, subText, isDone) {
         onchange="toggleSubtaskDone(this)"
         ${isDone ? "checked" : ""}
       >
-      <label for="subtask-${taskId}-${subtaskId}" class="subtask-value-content">${subText}</label>
+      <label for="subtask-${taskId}-${subtaskId}" class="subtask-value-content">${cleanText}</label>
     </div>
   `;
 }
+
 
 function addTaskOverlayTemplate(){
   return`
