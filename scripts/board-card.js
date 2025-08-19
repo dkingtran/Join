@@ -28,6 +28,10 @@ async function loadTasksFromFirebase() {
         console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
         return;
     }
+    
+    // Speichere Tasks global für Drag & Drop Zugriff
+    window.allTasks = tasks;
+    
     renderAllTasks(tasks);
 }
 
