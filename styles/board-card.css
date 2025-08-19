@@ -84,7 +84,7 @@
 }
 
 .category-default {
-    background-color: #d32f2f; 
+    background-color: #0038FF; 
     color: #ffffff; 
 }
 
@@ -106,6 +106,10 @@
     margin-right: 0 !important;
     margin-left: -6%;
     font-size: 14px;
+}
+
+.avatar.fallback-gray {
+    background-color: gray !important;
 }
 
 .avatar.contact-avatar-color1 { background-color: #FF7A00 !important;}

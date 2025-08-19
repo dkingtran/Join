@@ -1,6 +1,5 @@
-const assignedColorMap = {}; 
+/*const assignedColorMap = {}; 
 let colorIndex = 0;
-
 const avatarColors = [
     'contact-avatar-color1',
     'contact-avatar-color2',
@@ -12,17 +11,36 @@ const avatarColors = [
     'contact-avatar-color8',
     'contact-avatar-color9',
     'contact-avatar-color10'
-];
+];*/
 
-function getColorForName(name) {
+let contactsMap = {};
+
+/*function getColorForName(name) {
     if (!assignedColorMap[name]) {
         assignedColorMap[name] = avatarColors[colorIndex];
         colorIndex = (colorIndex + 1) % avatarColors.length;
     }
     return assignedColorMap[name];
+}*/
+
+async function loadContactsFromFirebase() {
+    const contactsData = await loadData("contacts");
+    if (contactsData && typeof contactsData === "object") {
+        for (const contactId in contactsData) {
+            const contact = contactsData[contactId];
+            const fullName = `${contact.name["first-name"]} ${contact.name["last-name"]}`.trim();
+            contactsMap[fullName] = {
+                color: contact.color, // e.g. "bg-9327ff"
+                initials: getInitials(fullName)
+            };
+        }
+    } else {
+        console.warn("Keine Kontakte geladen oder Daten ungültig.");
+    }
 }
 
 async function loadTasksFromFirebase() {
+    await loadContactsFromFirebase();
     const tasks = await loadData("tasks");
     if (!tasks || typeof tasks !== "object") {
         console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
@@ -70,10 +88,15 @@ function renderTaskToColumn(task, columnId) {
     container.appendChild(card);
 }
 
+function getContactByName(fullName) {
+    return contactsMap[fullName] || null;
+}
+
 function renderAssignedAvatars(users = []) {
     return users.map(name => {
+        const contact = getContactByName(name); 
         const initials = getInitials(name);
-        const colorClass = getColorForName(name);
+        const colorClass = contact?.color || "fallback-gray"; 
         return `<div class="avatar ${colorClass}">${initials}</div>`;
     }).join("");
 }
@@ -115,9 +138,3 @@ function clearAllTaskLists() {
     });
 }
 
-function getInitials(fullName) {
-    const parts = fullName.trim().split(" ");
-    const firstInitial = parts[0]?.[0] || "";
-    const lastInitial = parts[1]?.[0] || "";
-    return (firstInitial + lastInitial).toUpperCase();
-}
