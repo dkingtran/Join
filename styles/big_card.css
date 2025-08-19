@@ -112,7 +112,6 @@
     gap: 40px;
 }
 
-
 .subtasks-big-card {
    min-width: 400px;
     max-width: 445px;
@@ -124,8 +123,8 @@
 }
 
 .input-subtask-checkbox-big-card {
-    width: auto; /* statt 100% */
-    flex-shrink: 0; /* Checkbox behält ihre Größe */
+    width: auto; 
+    flex-shrink: 0; 
     margin-left: 20px;
 }
 
@@ -143,9 +142,9 @@
 .checkbox-subtask-content {
     display: flex;
     flex-direction: row;
-    align-items: center;   /* Checkbox und Text vertikal mittig */
-    justify-content: flex-start; /* Nicht auseinander schieben */
-    gap: 15px;              /* Abstand zwischen Checkbox und Text */
+    align-items: center;   
+    justify-content: flex-start; 
+    gap: 15px;             
     margin-bottom: 4px;
     width: 100%;
 }
