@@ -39,7 +39,7 @@ function validateDateInput() {
 }
 
 function checkTitleDateInput() {
-    const titleOk = validateTitleInput(); 
+    const titleOk = validateTitleInput();
     const dateOk = validateDateInput();
     return titleOk && dateOk;
 }
@@ -371,7 +371,7 @@ function showSuccessMessage() {
 /**
  * Closes the contact dropdown when the user clicks outside of it.
  */
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
-};  
+});

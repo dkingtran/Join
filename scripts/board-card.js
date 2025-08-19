@@ -137,4 +137,3 @@ function clearAllTaskLists() {
         if (column) column.innerHTML = "";
     });
 }
-
