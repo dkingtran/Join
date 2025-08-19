@@ -100,7 +100,7 @@ overlayAddTask = document.getElementById("add-task-overlay");
 
 // 
 async function openBigCard(taskId) {
-  const el = document.getElementById("big-card-list");
+  const overlay = document.getElementById("big-card-list");
   const [tasks, contacts] = await Promise.all([
     loadData("tasks"),
     loadData("contacts")
@@ -108,11 +108,15 @@ async function openBigCard(taskId) {
   const t = tasks?.[taskId];
   if (!t) return console.warn("Task nicht gefunden:", taskId);
   renderBigCardIntoOverlay(t, taskId, contacts);
-  el.classList.remove("d-none");
+  overlay.classList.remove("d-none");
   document.body.style.overflow = "hidden";
+  overlay.addEventListener("click", closeBigCard);
+  const card = overlay.querySelector(".big-card-content");
+  if (card) {
+    card.addEventListener("click", (e) => e.stopPropagation());
+  }
   document.addEventListener("keydown", escCloseBigCard);
 }
-
 
 function renderBigCardIntoOverlay(task, taskId, contacts) {
   const el = document.getElementById("big-card-list");
@@ -123,7 +127,7 @@ function renderBigCardIntoOverlay(task, taskId, contacts) {
   const desc = task["description"] || "";
   const due = task["due-date"] || "";
   const prio = task["priority"] || "";
-  el.innerHTML = `<div class="backdrop" onclick="closeBigCard()"></div><div class="big-card-wrapper">${bigCardTemplate(taskId, cat, title, desc, due, prio, avatars, subs)}</div>`;
+  el.innerHTML = `<div onclick="closeBigCard()">${bigCardTemplate(taskId, cat, title, desc, due, prio, avatars, subs)}</div>`;
   bindXCloseIcon();
 }
 
@@ -133,15 +137,15 @@ function bindXCloseIcon() {
   icon.addEventListener("click", closeBigCard);
 }
 
-
 function closeBigCard() {
-  const el = document.getElementById("big-card-list");
-  if (!el) return;
-  el.innerHTML = "";                   // Inhalt leeren
-  el.classList.add("d-none");          // Overlay verstecken
-  document.body.style.overflow = "";   // Scroll wieder erlauben
+  const overlay = document.getElementById("big-card-list");
+  if (!overlay) return;
+  overlay.innerHTML = '<div class="big-card-content"></div>';
+  overlay.classList.add("d-none");
+  document.body.style.overflow = "";
+  overlay.removeEventListener("click", closeBigCard);
   document.removeEventListener("keydown", escCloseBigCard);
-  initRender();                        // Liste neu aufbauen
+  initRender();
 }
 
 function escCloseBigCard(e) {
@@ -153,13 +157,3 @@ function attachOpenBigCard(card, taskId) {
   if (!taskId) return console.warn("attachOpenBigCard: taskId fehlt");
   card.addEventListener("click", () => openBigCard(taskId));
 }
-
-
-function hideBigCardOverlayAtStart() {
-  const el = document.getElementById("big-card-list");
-  if (!el) return;
-  el.classList.add("d-none");
-  el.innerHTML = "";
-}
-
-

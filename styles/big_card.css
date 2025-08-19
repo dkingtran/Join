@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(128, 128, 128, 0.257);
+    background-color: rgba(128, 123, 123, 0.113);
     z-index: 2000;
     display: flex;
     justify-content: center; /* Card horizontal zentrieren */
@@ -112,6 +112,7 @@
     max-width: 445px;
     height: 175px;
     overflow: auto;
+    margin-bottom: 15px;
 }
 
 .contacts-big-card {

@@ -26,8 +26,8 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
         ${typeof getPriorityIcon === "function" ? getPriorityIcon(prio) : ""}
       </div>
 
+      Assigned to:
       <div class="assigned-big-card">
-        Assigned to:
         <div class="contacts-big-card">
           ${avatarsHTML}
         </div>
