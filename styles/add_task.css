@@ -1,3 +1,7 @@
+* {
+  border: 1px solid red;
+}
+
 html,
 body {
   min-height: 100%;
@@ -12,13 +16,13 @@ body {
 
 .main-container {
   height: auto;
-  margin-left: 600px;
-  align-items: flex-start;
+  margin-left: 328px;
+  margin-top: 96px;
 }
 
 .title-section {
-  margin-top: 175px;
-  margin-left: 20px;
+  margin-left: 120px;
+  margin-top: 120px;
   justify-content: flex-start;
   margin-bottom: 30px;
 }
@@ -37,8 +41,7 @@ body {
 }
 
 form {
-  max-width: 1000px;
-  padding: 0 20px;
+  margin-left: 120px;
 }
 
 .add-task-container {
@@ -460,4 +463,49 @@ form {
 
 .d-none {
   display: none;
+}
+
+.error-container {
+  height: 25px;
+  width: 150px;
+}
+
+.error-text {
+  min-width: 250px;
+  width: 100%;
+  color: red;
+  font-size: 12px;
+  z-index: 3000;
+}
+
+.border-red {
+  border-color: red;
+}
+
+.task-message {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.task-message.show {
+  bottom: 40%;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.task-successful-info {
+  width: 100%;
+  width: 400px;
+  padding: 1.5rem;
+  background-color: #2A3647;
+  border-radius: 20px;
+  text-align: center;
 }
