@@ -112,7 +112,32 @@
     background-color: gray !important;
 }
 
-.avatar.contact-avatar-color1 { background-color: #FF7A00 !important;}
+.overflow-avatar {
+    position: relative;
+    cursor: default;
+}
+
+.custom-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2a3647;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 12px;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.overflow-avatar:hover .custom-tooltip {
+    display: block;
+}
+
+/*.avatar.contact-avatar-color1 { background-color: #FF7A00 !important;}
 .avatar.contact-avatar-color2 { background-color: #1FD7C1 !important;}
 .avatar.contact-avatar-color3 { background-color: #462F8A !important;}
 .avatar.contact-avatar-color4 { background-color: #FC71FF !important;}

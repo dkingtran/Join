@@ -93,20 +93,46 @@ function getContactByName(fullName) {
 }
 
 function renderAssignedAvatars(users = []) {
-    return users.map(name => {
-        const contact = getContactByName(name); 
-        const initials = getInitials(name);
-        const colorClass = contact?.color || "fallback-gray"; 
-        return `<div class="avatar ${colorClass}">${initials}</div>`;
-    }).join("");
+    const maxVisible = 3;
+    const visible = users.slice(0, maxVisible);
+    const hidden = users.slice(maxVisible);
+    const avatars = visible.map(renderSingleAvatar);
+    if (hidden.length > 0) {
+        avatars.push(renderOverflowAvatar(hidden));
+    }
+    return avatars.join("");
 }
 
-function getSubtaskProgress(subtasks = []) {
-    const list = Array.isArray(subtasks) ? subtasks : [];
-    const maxSubtasks = 2;
-    const total = Math.min(list.length, maxSubtasks);
-    const progressPercent = (total / maxSubtasks) * 100;
-    return { progressPercent, total, maxSubtasks };
+function renderSingleAvatar(name) {
+    const contact = getContactByName(name);
+    const initials = getInitials(name);
+    const color = contact?.color || "fallback-gray";
+    return `<div class="avatar ${color}" title="${name}">${initials}</div>`;
+}
+
+function renderOverflowAvatar(users) {
+    const tooltip = users.join(", ");
+    return `
+        <div class="avatar overflow-avatar">
+            +${users.length}
+            <div class="custom-tooltip">${tooltip}</div>
+        </div>
+    `;
+}
+
+function getSubtaskProgress(subtasks = {}) {
+    if (typeof subtasks !== "object" || Array.isArray(subtasks)) {
+        return { progressPercent: 0, total: 0, maxSubtasks: 0 };
+    }
+    const keys = Object.keys(subtasks);
+    const totalSubtasks = keys.length;
+    const doneCount = keys.filter(key => subtasks[key].done === true).length;
+    const progressPercent = totalSubtasks > 0 ? (doneCount / totalSubtasks) * 100 : 0;
+    return {
+        progressPercent,
+        total: doneCount,
+        maxSubtasks: totalSubtasks
+    };
 }
 
 function getCategoryClass(category) {
