@@ -236,6 +236,27 @@
 .edit-pen-big-card:hover svg path {
     fill: #29ABE2;
 }
+/* Big-Card Overlay (wie gehabt) */
+.overlay-big-card {
+  position: fixed;
+  inset: 0;
+  background: rgba(128,128,128,0.3);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Add-Task Overlay: höherer z-index */
+.overlay-add-task-big-card {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 2100; /* höher als big-card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

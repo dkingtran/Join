@@ -110,9 +110,7 @@ function addTaskOverlayTemplate(){
 
         <div class="main-container w-full flex flex-column max-w-1200">
             <div class="add-task-section w-full max-w-1200 p-20 flex flex-column">
-                <div class="title-section w-full max-w-1200 flex">
-                    <h1>Add Task</h1>
-                </div>
+             
                 <form id="form-element" class="w-full flex flex-column ">
                     <div class="add-task-container w-full flex">
                         <div class="section-task-left w-full max-w-50">

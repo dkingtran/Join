@@ -170,7 +170,6 @@ async function loadContactsIntoDropdown() {
         const contact = contacts[i];
         const prepared = prepareContactData(contact);
         renderContactToDropdown(prepared, list);
-        console.log(prepared);
     }
     setupCheckboxListener();
 }
