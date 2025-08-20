@@ -16,3 +16,5 @@ function showAddTask() {
 function addBoardTask(param) {
     showAddTaskModal();
 }
+
+
