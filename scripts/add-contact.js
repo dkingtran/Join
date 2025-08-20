@@ -61,6 +61,7 @@ function hideForm() {
     nameRef.value = '';
     emailRef.value = '';
     phoneRef.value = '';
+    setDefaultAvatar(document.getElementById('form-avatar'));
 }
 
 /**
@@ -86,7 +87,6 @@ function closeFormOnOutsideClick(e) {
  * - Updates the form title and subtitle for adding a contact mode.
  */
 function showAddForm() {
-    setDefaultAvatar(document.getElementById('form-avatar'));
     currentAvatarColor = getRandomColor();
     addFormButtons.classList.remove('d-none');
     editFormButtons.classList.add('d-none');
