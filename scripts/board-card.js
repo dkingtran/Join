@@ -1,4 +1,4 @@
-const assignedColorMap = {};
+const assignedColorMap = {}; 
 let colorIndex = 0;
 
 const avatarColors = [
@@ -28,7 +28,10 @@ async function loadTasksFromFirebase() {
         console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
         return;
     }
-    diagnoseTasksObject(tasks);   // 👈 Diagnose hier einfügen
+    
+    // Speichere Tasks global für Drag & Drop Zugriff
+    window.allTasks = tasks;
+    
     renderAllTasks(tasks);
 }
 
@@ -37,7 +40,14 @@ function renderAllTasks(tasksObject) {
     for (const taskId in tasksObject) {
         const task = tasksObject[taskId];
         const columnId = getColumnIdByStatus(task.status);
-        if (columnId) renderTaskToColumn(task, columnId, taskId);
+        if (columnId) {
+        renderTaskToColumn(task, columnId);
+        }
+    }
+    
+    // Rufe die "No Tasks"-Rendering-Funktion auf
+    if (typeof renderWithNoTasksAreas === 'function') {
+        renderWithNoTasksAreas();
     }
 }
 
@@ -52,25 +62,21 @@ function getColumnIdByStatus(statusObj) {
     if (!statusObj || typeof statusObj !== "object") return null;
     for (const status in statusObj) {
         if (statusObj[status] === true && statusToColumnId[status]) {
-            return statusToColumnId[status];
+        return statusToColumnId[status];
         }
     }
     return null;
 }
 
-//neu
-function renderTaskToColumn(task, columnId, taskId) {
+function renderTaskToColumn(task, columnId) {
     const container = document.getElementById(columnId);
-    if (!container) return console.warn(`Spalte '${columnId}' nicht gefunden`);
-    if (!taskId) return console.warn("Keine taskId für Task:", task);
+    if (!container) return console.warn(`Spalte mit ID '${columnId}' nicht gefunden.`);
     const avatars = renderAssignedAvatars(task["assigned-to"]);
-    const p = getSubtaskProgress(task.subtasks);
+    const { progressPercent, total, maxSubtasks } = getSubtaskProgress(task.subtasks);
     const card = document.createElement("div");
     card.classList.add("board-card");
-    card.dataset.taskId = taskId;
-    card.innerHTML = cardRender(task, avatars, p.progressPercent, p.maxSubtasks, p.total, "#4589FF");
+    card.innerHTML = cardRender(task, avatars, progressPercent, maxSubtasks, total, "#4589FF");
     container.appendChild(card);
-    attachOpenBigCard(card, taskId);
 }
 
 function renderAssignedAvatars(users = []) {
@@ -117,8 +123,3 @@ function clearAllTaskLists() {
         if (column) column.innerHTML = "";
     });
 }
-
-function diagnoseTasksObject(tasksObject) {
-    const keys = Object.keys(tasksObject || {});
-}
-
