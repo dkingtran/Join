@@ -1,5 +1,5 @@
 function toggleProfileDropdown() {
-    const dropdown = document.getElementById('profileDropdown');
+    const dropdown = document.getElementById('dropdown-profile');
     dropdown.classList.toggle('show');
 }
 
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Close dropdown when clicking outside
 function handleDocumentClick(event) {
-    const profileContainer = document.getElementById('profileContainer');
-    const profileDropdown = document.getElementById('profileDropdown');
+    const profileContainer = document.getElementById('container-profile');
+    const profileDropdown = document.getElementById('dropdown-profile');
     
     if (profileDropdown && profileContainer && !profileContainer.contains(event.target)) {
         profileDropdown.classList.remove('show');

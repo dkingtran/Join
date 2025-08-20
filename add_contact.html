@@ -29,43 +29,40 @@
       <div class="header-content">
         <div class="header-inner">
           <div class="logo-mobile d_none">
-            <img src="../assets/img/logo/logo-dark.png" alt="Logo" />
+            <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
           </div>
           <h1 class="header-title">Kanban Project Management Tool</h1>
           <div class="header-right">
-            <div class="help-container" id="helpContainer">
-              <a href="help.html" class="help-icon">
+            <div class="help-container" id="container-help">
+              <a href="./help.html" class="help-icon">
                 <img
-                  src="../assets/img/icons/header-side-menu/help.png"
+                  src="./assets/img/icons/header-side-menu/help.png"
                   alt="Help Icon"
                 />
               </a>
             </div>
-            <div class="profile-container" id="profileContainer">
+            <div class="profile-container" id="container-profile">
               <button
                 class="profile-btn"
                 onclick="toggleProfileDropdown()"
                 aria-label="Profile menu"
               >
-                SM
+                WM
               </button>
-              <div id="profileDropdown" class="profile-dropdown">
-                <a href="help.html" class="dropdown-item mobile-only d_none"
+              <div id="dropdown-profile" class="profile-dropdown">
+                <a href="../help.html" class="dropdown-item mobile-only d_none"
                   >Help</a
                 >
-                <a href="legal-notice.html" class="dropdown-item"
-                  >Legal Notice</a
-                >
-                <a href="privacy-policy.html" class="dropdown-item"
-                  >Privacy Policy</a
-                >
+                <a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
+                <a href="./privacy-policy.html" class="dropdown-item">Privacy Policy</a>
                 <a href="index.html" class="dropdown-item">Log out</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!--End of Header content-->
+    </header>
+    <!--End of Header content-->
     </header>
     <!--Side-menu-->
     <aside class="side-menu background-side-menu">
@@ -136,7 +133,7 @@
         <button class="add-contact-btn-mobile" onclick="openContactForm()">
           <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
         </button>
-        <div class="contact-list" id="contactList">
+        <div class="contact-list" id="list-contact">
           <!-- Contacts will be rendered here -->
         </div>
       </div>
@@ -149,12 +146,12 @@
         <hr class="logo-divider" />
         <h2>Better with a team</h2>
       </div>
-      <div class="contact-list-clicked" id="contactListClicked">
+      <div class="contact-list-clicked" id="clicked-list-contact">
         <!-- Contacts will be rendered here -->
       </div>
       <button
         class="mobile-back-btn display-standard"
-        id="mobileBackBtn"
+        id="mobile-back-button"
         onclick="hideMobileContactDetails()"
         style="display: none"
       >
@@ -163,9 +160,9 @@
     </div>
 
     <!-- Modal Overlay for Add Contact -->
-    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-overlay" id="overlay-modal"></div>
     <!-- Form Container (hidden by default) -->
-    <div class="form-container" id="formContainer">
+    <div class="form-container" id="container-form">
       <button class="close-btn" onclick="hideForm()">
         <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
       </button>
@@ -177,7 +174,7 @@
           <hr class="form-divider" />
         </div>
       </div>
-      <div class="contact-avatar-clicked display-standard" id="formAvatar">
+      <div class="contact-avatar-clicked display-standard" id="form-avatar">
         <img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
       </div>
       <div class="form-content">
@@ -246,13 +243,13 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div id="contactCreatedModal" class="contact-created-modal">
+    <div id="modal-contact-created" class="contact-created-modal">
       Contact successfully created
     </div>
 
     <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <button
-      id="mobileEditBtn"
+      id="mobile-edit-button"
       class="mobile-edit-btn display-standard"
       style="display: none"
       onclick="event.stopPropagation(); toggleMobileEditDropdown()"
@@ -261,7 +258,7 @@
     </button>
     <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <div
-      id="mobileEditDropdown"
+      id="dropdown-mobile-edit"
       class="mobile-edit-dropdown"
       style="display: flex"
     ></div>

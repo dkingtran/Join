@@ -25,17 +25,17 @@ function openContactForm(formType = "add", idx = "") {
 }
 
 function showForm() {
-    const form = document.getElementById('formContainer');
+    const form = document.getElementById('container-form');
     form.classList.add('show');
-    const overlay = document.getElementById('modalOverlay');
+    const overlay = document.getElementById('overlay-modal');
     if (overlay) overlay.classList.add('show');
     document.addEventListener('click', closeFormOnOutsideClick);
 }
 
 function hideForm() {
-    const form = document.getElementById('formContainer');
+    const form = document.getElementById('container-form');
     form.classList.remove('show');
-    const overlay = document.getElementById('modalOverlay');
+    const overlay = document.getElementById('overlay-modal');
     if (overlay) overlay.classList.remove('show');
     document.removeEventListener('click', closeFormOnOutsideClick);
     nameRef.value = '';
@@ -44,13 +44,13 @@ function hideForm() {
 }
 
 function closeFormOnOutsideClick(e) {
-    const formContainer = document.getElementById('formContainer');
-    const overlay = document.getElementById('modalOverlay');
+    const formContainer = document.getElementById('container-form');
+    const overlay = document.getElementById('overlay-modal');
     if (formContainer.classList.contains('show') && overlay.contains(e.target)) hideForm();
 }
 
 function showAddForm() {
-    setDefaultAvatar(document.getElementById('formAvatar'));
+    setDefaultAvatar(document.getElementById('form-avatar'));
     currentAvatarColor = getRandomColor();
     addFormButtons.classList.remove('d-none');
     editFormButtons.classList.add('d-none');
@@ -79,7 +79,7 @@ function setDefaultAvatar(avatar) {
 
 function updateFormAvatar() {
     const name = document.getElementById("name").value.trim();
-    const avatar = document.getElementById("formAvatar");
+    const avatar = document.getElementById("form-avatar");
     if (!name) {
         setDefaultAvatar(avatar);
         return;
@@ -115,7 +115,7 @@ async function addContact() {
 }
 
 function showContactCreatedModal() {
-    const modal = document.getElementById('contactCreatedModal');
+    const modal = document.getElementById('modal-contact-created');
     if (!modal) return;
     modal.classList.add('show');
     setTimeout(() => {

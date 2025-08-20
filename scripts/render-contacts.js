@@ -23,7 +23,7 @@ async function getContactsArray() {
  * Uses helper functions for sorting, grouping, and rendering.
  */
 function renderContacts() {
-    const contactList = document.getElementById('contactList');
+    const contactList = document.getElementById('list-contact');
     contactList.innerHTML = '';
     sortedContacts = [];
     sortedContacts = getSortedContacts();
@@ -82,16 +82,16 @@ function showMobileContactDetails(idx) {
     document.querySelector('.contact-sidebar').classList.add('hide-mobile-sidebar');
     const section = document.querySelector('.contacts-section');
     section.classList.add('show-mobile-section');
-    document.getElementById('contactListClicked').style.display = 'block';
-    document.getElementById('mobileBackBtn').style.display = 'flex';
-    document.getElementById('mobileEditBtn').style.display = 'flex';
+    document.getElementById('clicked-list-contact').style.display = 'block';
+    document.getElementById('mobile-back-button').style.display = 'flex';
+    document.getElementById('mobile-edit-button').style.display = 'flex';
     document.querySelector('.add-contact-btn-mobile').classList.add('hide-mobile-edit');
     showContactDetails(sortedContacts[idx], idx);
     lastShownContactIdx = idx;
 }
 
 function toggleMobileEditDropdown() {
-    const dropdown = document.getElementById('mobileEditDropdown');
+    const dropdown = document.getElementById('dropdown-mobile-edit');
     if (!dropdown) return;
     dropdown.classList.contains('show') ? hideMobileEditDropdown(dropdown) : showMobileEditDropdown(dropdown, lastShownContactIdx);
 }
@@ -106,7 +106,7 @@ function showMobileEditDropdown(dropdown, idx) {
 }
 
 document.addEventListener('click', e => {
-    const dropdown = document.getElementById('mobileEditDropdown');
+    const dropdown = document.getElementById('dropdown-mobile-edit');
     if (!dropdown.contains(e.target)) {
         if (dropdown) dropdown.classList.remove('show');
     }
@@ -114,7 +114,7 @@ document.addEventListener('click', e => {
 
 
 function toggleContactDetails(idx, item) {
-    const details = document.getElementById('contactListClicked');
+    const details = document.getElementById('clicked-list-contact');
     const sorted = getSortedContacts();
     if (lastShownContactIdx === idx) {
         details.innerHTML = '';
@@ -130,7 +130,7 @@ function toggleContactDetails(idx, item) {
 }
 
 function showContactDetails(contact, idx) {
-    const container = document.getElementById('contactListClicked');
+    const container = document.getElementById('clicked-list-contact');
     const initials = getInitials(contact.name["first-name"] + " " + contact.name["last-name"]);
     const colorClass = contact.color;
     container.innerHTML = getContactDetailsTemplate(contact, colorClass, initials, idx);
@@ -142,15 +142,15 @@ function hideMobileContactDetails() {
     document.querySelector('.contact-sidebar').classList.remove('hide-mobile-sidebar');
     const section = document.querySelector('.contacts-section');
     section.classList.remove('show-mobile-section');
-    document.getElementById('contactListClicked').innerHTML = '';
+    document.getElementById('clicked-list-contact').innerHTML = '';
     hideMobileButtons();
     document.querySelector('.add-contact-btn-mobile').classList.remove('hide-mobile-edit');
     lastShownContactIdx = null;
 }
 
 function hideMobileButtons() {
-    const backBtn = document.getElementById('mobileBackBtn');
-    const editBtn = document.getElementById('mobileEditBtn');
+    const backBtn = document.getElementById('mobile-back-button');
+    const editBtn = document.getElementById('mobile-edit-button');
     if (backBtn) backBtn.style.display = 'none';
     if (editBtn) editBtn.style.display = 'none';
 }
@@ -168,7 +168,7 @@ function showAddContactBtnMobile() {
 }
 
 function removeMobileEditDropdown() {
-    const dropdown = document.getElementById('mobileEditDropdown');
+    const dropdown = document.getElementById('dropdown-mobile-edit');
     dropdown.classList.remove('show');
 }
 
