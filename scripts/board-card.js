@@ -119,14 +119,8 @@ function clearAllTaskLists() {
 }
 
 function diagnoseTasksObject(tasksObject) {
-    console.log("Array?", Array.isArray(tasksObject));
     const keys = Object.keys(tasksObject || {});
-    console.log("Keys count:", keys.length);
-    console.log("First 5 keys:", keys.slice(0, 5));
-    if (keys.length) {
-        const k = keys[0];
-        console.log("Sample key:", k);
-        console.log("Sample value:", tasksObject[k]);
-    }
+
+   
 }
 
