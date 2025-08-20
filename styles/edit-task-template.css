@@ -5,10 +5,10 @@ body {
   padding: 0;
 }
 
-.wrapper {
+/* .wrapper {
   height: auto;
 }
-
+ */
 .main-container {
   height: auto;
   margin-left: 600px;
@@ -31,9 +31,12 @@ body {
 }
 
 .add-task-section {
+  max-width: 1080px;
+  border-radius: 30px;
+  background-color: white;
   max-height: calc(100vh - 1rem);
   align-items: flex-start;
-  height: auto;
+
 }
 
 form {
@@ -463,195 +466,3 @@ form {
   display: none;
 }
 
-/* 
-@media (max-width: 1160px) {
-  .star-required {
-    max-width: 480px !important;
-  }
-}
-
-@media (max-width: 634px) {
-
-  .add-task-modal-content .add-task-modal-inner {
-    width: 90vw;
-  }
-
-  .add-task-modal-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .add-task-modal .wrapper {
-      padding: 40px 50px !important;
-      width: 80vw;
-      margin: 0 !important;
-  }
-
-  .btn-addtask-create {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-  }
-
-  .btn-clear-task-container {
-    margin-left: auto !important;
-  }
-}
-
-@media (max-width: 580px) {
-  .add-task-modal .wrapper {
-    padding: 24px 30px !important;
-  }
-
-  .section-task-left p {
-    font-size: 16px;
-  }
-
-  .max-w-440 {
-    width: 80vw !important;
-    min-width: 288px !important;
-  }
-
-  .title-task input {
-    font-size: 16px;
-  }
-
-  .textarea-task {
-    font-size: 16px;
-  }
-
-  .date-task input {
-    font-size: 16px;
-  }
-
-  .section-task-right p {
-    font-size: 16px;
-  }
-
-  .assigned-to label {
-    font-size: 16px;
-  }
-
-  .section-task-right input {
-    font-size: 16px;
-  }
-
-  .select-container select {
-    font-size: 16px;
-  }
-
-  .section-task-under {
-    margin-top: 16px;
-  }
-
-  .star-required p {
-    font-size: 16px;
-  }
-
-  .btn-clear-task-container {
-    margin-left: auto !important;
-  }
-}
-
-@media (max-width: 561px) {
-  
-  .add-task-modal .wrapper {
-    padding: 24px 16px !important;
-  }
-
-  .btn-prio {
-    width: 80vw;
-  }
-
-  .btn-prio-bundle {
-    min-width: 96px;
-  }
-
-  .justify-start {
-    justify-content: space-around;
-  }
-
-  .section-task-under {
-    width: 80vw;
-  }
-
-  .star-required {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-  }
-
-  .dropdown-list {
-    width: 80vw !important;
-    min-width: 288px;
-  }
-
-  .task-successful-info {
-    min-width: 280px;
-    width: 70vw;
-    padding: 16px 16px;
-  }
-}
-
-@media (max-width: 485px) {
-
-  .btn-prio .font-bundle {
-    gap: 4px;
-  }
-
-  .add-task-modal-close {
-    right: 16px;
-  }
-
-  .btn-addtask-create {
-    max-width: 140px;
-  }
-
-  .btn-addtask-clear {
-    max-width: 100px;
-  }
-
-  #selectedContacts {
-    min-width: 288px;
-    width: 80vw;
-    background-color: transparent;
-  }
-}
-
-@media (max-width: 400px) {
-
-  .add-task-modal .wrapper {
-    padding: 24px 16px !important;
-  }
-
-  .btn-prio {
-    gap: 5px;
-  }
-}
-
-@media (max-width: 369px) {
-
-  .add-task-modal-content {
-    min-width: 300px !important;
-    width: 95vw !important;
-  }
-
-  .add-task-modal .wrapper {
-    padding: 24px 8px !important;
-  }
-}
-
-@media (max-width: 350px) {
-
-  .btn-prio button {
-    min-width: 88px;
-  }
-}
-
-@media (max-width: 330px) {
-  .btn-clear-task-container {
-      width: 90vw;
-  }
-} */

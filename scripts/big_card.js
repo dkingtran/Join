@@ -1,12 +1,15 @@
 let _currentTaskId = null; // merkt sich die zuletzt geöffnete Big Card
-// bigCards.js
+
+let taskFormMode = 'create';
+let currentTaskId = null;
+
+
 window.toggleSubtaskDone = function (el) {
   const taskId = el.getAttribute("data-task-id");
   const subId = el.getAttribute("data-subtask-id");
   const done = el.checked;
   patchSubtaskDone(taskId, subId, done).catch(() => { el.checked = !done; });
 };
-
 
 async function patchSubtaskDone(taskId, subtaskId, done) {
   const path = `tasks/${taskId}/subtasks/${subtaskId}.json`;
@@ -51,7 +54,6 @@ function getPriorityIcon(prio) {
   return "";
 }
 
-
 function getCategoryClass(category) {
   switch (category) {
     case "Technical Task":
@@ -82,9 +84,6 @@ async function deleteTaskFromFirebase(taskId) {
   if (!res.ok) throw new Error("DELETE failed: " + res.status);
 }
 
-/* =========================
-   Zustand / Utilities
-   ========================= */
 function escCloseBigCard(e) {
   if (e.key === 'Escape') closeBigCard();
 }
@@ -105,17 +104,14 @@ function editBigCard(taskId) {
   openAddTaskFromBigCard(taskId || _currentTaskId);
 }
 
-/* =========================
-   Big Card öffnen / rendern
-   ========================= */
 async function openBigCard(taskId) {
   const overlay = document.getElementById("big-card-list");
   const [tasks, contacts] = await Promise.all([
     loadData("tasks"),
-    loadData("contacts") ]);
+    loadData("contacts")]);
   const t = tasks?.[taskId];
   if (!t) return console.warn("Task nicht gefunden:", taskId);
-  _currentTaskId = taskId; 
+  _currentTaskId = taskId;
   renderBigCardIntoOverlay(t, taskId, contacts);
   overlay.classList.remove("d-none");
   document.body.style.overflow = "hidden";
@@ -126,7 +122,6 @@ async function openBigCard(taskId) {
   }
   document.addEventListener("keydown", escCloseBigCard);
 }
-
 
 function renderBigCardIntoOverlay(task, taskId, contacts) {
   const el = document.getElementById("big-card-list");
@@ -143,7 +138,7 @@ function renderBigCardIntoOverlay(task, taskId, contacts) {
     </div>
   `;
   bindXCloseIcon();
-  bindEditButton(taskId);
+  bindEditButton(taskId, task, contacts);
 }
 
 function bindXCloseIcon() {
@@ -152,18 +147,16 @@ function bindXCloseIcon() {
   icon.addEventListener("click", closeBigCard);
 }
 
-function bindEditButton(taskId) {
+function bindEditButton(taskId, taskData, contacts) {
   const btn = document.querySelector("#big-card-list .edit-button-big-card");
   if (!btn) return console.warn("Edit-Button nicht gefunden");
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();           
-    openAddTaskFromBigCard(taskId);   
+  const freshBtn = btn.cloneNode(true);
+  btn.parent
+  freshBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); 
   });
 }
 
-/* =========================
-   Wechsel zu Add-Task
-   ========================= */
 function openAddTaskFromBigCard(taskId) {
   const big = document.getElementById('big-card-list');
   const add = document.getElementById('add-task-overlay');
@@ -179,7 +172,6 @@ function openAddTaskFromBigCard(taskId) {
   document.addEventListener('keydown', escCloseAddTask);
 }
 
-
 function enableAddTaskOverlayCloseOnBackdrop() {
   const add = document.getElementById('add-task-overlay');
   if (!add) return;
@@ -190,9 +182,6 @@ function enableAddTaskOverlayCloseOnBackdrop() {
   });
 }
 
-/* =========================
-   Add-Task schließen -> zurück zur Big-Card
-   ========================= */
 function closeAddTaskOverlay() {
   const big = document.getElementById('big-card-list');
   const add = document.getElementById('add-task-overlay');
@@ -209,9 +198,7 @@ function closeAddTaskOverlay() {
   document.addEventListener('keydown', escCloseBigCard);
 }
 
-/* =========================
-   Big Card schließen (komplett)
-   ========================= */
+
 function closeBigCard() {
   const overlay = document.getElementById("big-card-list");
   if (!overlay) return;
@@ -223,9 +210,7 @@ function closeBigCard() {
   initRender();
 }
 
-/* =========================
-   Helper: Karten klickbar machen
-   ========================= */
+/*  Helper: Karten klickbar machen */
 function attachOpenBigCard(card, taskId) {
   if (!card) return console.warn("attachOpenBigCard: card fehlt");
   if (!taskId) return console.warn("attachOpenBigCard: taskId fehlt");

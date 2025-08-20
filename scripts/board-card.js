@@ -120,7 +120,5 @@ function clearAllTaskLists() {
 
 function diagnoseTasksObject(tasksObject) {
     const keys = Object.keys(tasksObject || {});
-
-   
 }
 
