@@ -41,6 +41,7 @@ function hideForm() {
     nameRef.value = '';
     emailRef.value = '';
     phoneRef.value = '';
+    setDefaultAvatar(document.getElementById('form-avatar'));
 }
 
 function closeFormOnOutsideClick(e) {
@@ -50,7 +51,6 @@ function closeFormOnOutsideClick(e) {
 }
 
 function showAddForm() {
-    setDefaultAvatar(document.getElementById('form-avatar'));
     currentAvatarColor = getRandomColor();
     addFormButtons.classList.remove('d-none');
     editFormButtons.classList.add('d-none');
