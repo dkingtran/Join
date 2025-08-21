@@ -116,4 +116,13 @@ function buildSubtasksHTML(taskId, subtasks) {
   }
   return html;
 }
-
+/**
+ * Close big Card
+ */
+function closeBigCard() {
+  const container = document.getElementById("big-card-container");
+  if (container) {
+    container.innerHTML = "";
+    container.classList.add("d-none");
+  }
+}
