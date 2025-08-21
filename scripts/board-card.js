@@ -22,18 +22,16 @@ function getColorForName(name) {
     return assignedColorMap[name];
 }
 
-
 async function loadTasksFromFirebase() {
-  await cacheContactsByName();   // <<< Kontakte zuerst laden
+  await cacheContactsByName();   // <<< NEU hinzugefügt allContactsByName gespeichert sind
   const tasks = await loadData("tasks");
   if (!tasks || typeof tasks !== "object") {
     console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
     return;
   }
-  allTasks = tasks;
+  allTasks = tasks;              // (window. habe ich weggelassen allTasks ist sowieso global, man braucht kein window)
   renderAllTasks(tasks);
 }
-
 
 
 /**

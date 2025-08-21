@@ -1,4 +1,28 @@
-let _currentTaskId = null; // merkt sich die zuletzt geöffnete Big Card
+let allContactsByName = {};
+
+/**
+ * Lädt alle Kontakte aus Firebase und speichert sie
+ * als Map mit vollem Namen → { fullName, initials, hexColor }.
+ */
+async function cacheContactsByName() {
+  const contactsData = await loadData('contacts');
+  if (!contactsData || typeof contactsData !== 'object') {
+    allContactsByName = {};
+    return;
+  }
+  const contactIds = Object.keys(contactsData);
+  allContactsByName = {};
+  for (let i = 0; i < contactIds.length; i++) {
+    const contact = contactsData[contactIds[i]] || {};
+    const name = contact.name || {};
+    const firstName = name['first-name'] || '';
+    const lastName = name['last-name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const initials = ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
+    const hexColor = '#' + String(contact.color || 'bg-cccccc').replace('bg-', '');
+    allContactsByName[fullName] = { fullName, initials, hexColor };
+  }
+}
 
 /**
  * Opens a big task card overlay with all task details.
@@ -18,56 +42,61 @@ function openBigTask(displayTaskId) {
   overlay.classList.remove('d-none');
 }
 
-
 /**
- * Builds HTML for assigned avatars using contact IDs resolved via allContacts.
- * @param {Object} task - Task object with "assigned-to" as contact ID array.
- * @returns {string} HTML string with avatars.
+ * Builds HTML for all assigned user avatars of a task using allContactsByName.
+ * @param {Object} task - The task object containing "assigned-to".
+ * @returns {string} HTML string with all avatars.
  */
 function buildAvatarsHTML(task) {
-  let html = '';
-  const ids = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
-  for (let i = 0; i < ids.length; i++) {
-    const id = ids[i];
-    const c = (typeof allContacts === 'object' && allContacts[id]) ? allContacts[id] : null;
-    const fullName = c ? c.fullName : String(id);
-    const initials = c ? c.initials : (getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase());
-    const hexColor = c ? c.hexColor : '#A8A8A8';
-    html += avatarItemTemplate(initials, hexColor, fullName);
+  let avatarsHTML = '';
+  const assignedUsers = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
+  for (let index = 0; index < assignedUsers.length; index++) {
+    const fullName = assignedUsers[index];
+    const contact = allContactsByName && allContactsByName[fullName] ? allContactsByName[fullName] : null;
+    const initials = contact ? contact.initials : (getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase());
+    const hexColor = contact ? contact.hexColor : '#A8A8A8';
+    avatarsHTML += avatarItemTemplate(initials, hexColor, fullName);
   }
-  return html;
+  return avatarsHTML;
 }
 
 /**
- * Builds HTML for the subtask checklist in the big card.
- * @param {Object} task - Task object containing optional `subtasks`.
- * @param {string} displayTaskId - ID used to namespace checkbox elements.
- * @returns {string} HTML string with all subtasks.
+ * Builds HTML for all subtasks (works with arrays and objects).
+ * @param {Object} task - Task object with `subtasks`.
+ * @param {string} displayTaskId - ID for checkbox namespacing.
+ * @returns {string} HTML string with subtasks.
  */
 function buildSubtasksHTML(task, displayTaskId) {
   let html = '';
-  const list = Array.isArray(task.subtasks) ? task.subtasks : [];
-  for (let index = 0; index < list.length; index++) {
-    const item = list[index];
-    const text = (item && item.text) ? item.text : String(item ?? '');
-    const done = !!(item && item.done);
-    html += subtaskItemTemplate(displayTaskId, index, text, done);
+  const list = task && task.subtasks ? Object.values(task.subtasks) : [];
+  for (let i = 0; i < list.length; i++) {
+    const sub = list[i] || {};
+    const txt = sub.subtask || sub.text || '';
+    const done = !!sub.done; // true or false
+    console.log(done);
+    html += subtaskItemTemplate(displayTaskId, i, txt, done);
   }
   return html;
 }
 
-/** Caches contacts keyed by full name for fast lookup in big card. */
+/** 
+ * Caches all contacts, keyed by full name, for fast avatar rendering in big card. 
+ */
+/** Caches contacts keyed by full name for big-card avatars. */
 async function cacheContactsByName() {
-  const data = await loadData('contacts');
-  if (!data || typeof data !== 'object') { allContactsByName = {}; return; }
-  const ids = Object.keys(data); allContactsByName = {};
-  for (let i = 0; i < ids.length; i++) {
-    const c = data[ids[i]] || {}, n = c.name || {};
-    const fn = n['first-name'] || '', ln = n['last-name'] || '';
-    const full = (fn + ' ' + ln).trim();
-    const ini = ((fn[0] || '') + (ln[0] || '')).toUpperCase();
-    const hex = '#' + String(c.color || 'bg-cccccc').replace('bg-', '');
-    allContactsByName[full] = { fullName: full, initials: ini, hexColor: hex };
+  const contactsData = await loadData('contacts');
+  if (!contactsData || typeof contactsData !== 'object') { allContactsByName = {}; return; }
+  const contactIds = Object.keys(contactsData); allContactsByName = {};
+  for (let i = 0; i < contactIds.length; i++) {
+    const contact = contactsData[contactIds[i]] || {};
+    const name = contact.name || {};
+    const firstName = name['first-name'] || '';
+    const lastName = name['last-name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const initials = ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
+    const hexColor = '#' + String(contact.color || 'bg-cccccc').replace('bg-', '');
+    allContactsByName[fullName] = { fullName, initials, hexColor };
   }
 }
+
 
