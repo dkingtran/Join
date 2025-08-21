@@ -1,8 +1,9 @@
 let allContactsByName = {};
 
 /**
- * Lädt alle Kontakte aus Firebase und speichert sie
- * als Map mit vollem Namen → { fullName, initials, hexColor }.
+ * Loads all contacts from Firebase and stores them in a map
+ * keyed by full name → { fullName, initials, hexColor }.
+ * This cache allows fast lookup when rendering avatars in the big card.
  */
 async function cacheContactsByName() {
   const contactsData = await loadData('contacts');
@@ -23,6 +24,7 @@ async function cacheContactsByName() {
     allContactsByName[fullName] = { fullName, initials, hexColor };
   }
 }
+
 
 /**
  * Opens a big task card overlay with all task details.
@@ -79,24 +81,5 @@ function buildSubtasksHTML(task, displayTaskId) {
   return html;
 }
 
-/** 
- * Caches all contacts, keyed by full name, for fast avatar rendering in big card. 
- */
-/** Caches contacts keyed by full name for big-card avatars. */
-async function cacheContactsByName() {
-  const contactsData = await loadData('contacts');
-  if (!contactsData || typeof contactsData !== 'object') { allContactsByName = {}; return; }
-  const contactIds = Object.keys(contactsData); allContactsByName = {};
-  for (let i = 0; i < contactIds.length; i++) {
-    const contact = contactsData[contactIds[i]] || {};
-    const name = contact.name || {};
-    const firstName = name['first-name'] || '';
-    const lastName = name['last-name'] || '';
-    const fullName = (firstName + ' ' + lastName).trim();
-    const initials = ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
-    const hexColor = '#' + String(contact.color || 'bg-cccccc').replace('bg-', '');
-    allContactsByName[fullName] = { fullName, initials, hexColor };
-  }
-}
 
 
