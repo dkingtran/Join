@@ -44,6 +44,8 @@ function renderAllTasks(tasksObject) {
         renderTaskToColumn(task, columnId);
         }
     }
+
+    console.log(tasksObject);
     
     // Rufe die "No Tasks"-Rendering-Funktion auf
     if (typeof renderWithNoTasksAreas === 'function') {
