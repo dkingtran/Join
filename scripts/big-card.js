@@ -20,19 +20,22 @@ function openBigTask(displayTaskId) {
 
 
 /**
- * Builds HTML for all assigned user avatars of a task.
- * @param {Object} task - The task object containing "assigned-to".
- * @returns {string} HTML string with all avatars.
+ * Builds HTML for assigned avatars using contact IDs resolved via allContacts.
+ * @param {Object} task - Task object with "assigned-to" as contact ID array.
+ * @returns {string} HTML string with avatars.
  */
 function buildAvatarsHTML(task) {
-  let avatarsHTML = '';
-  const assignedUsers = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
-  for (let index = 0; index < assignedUsers.length; index++) {
-    const fullName = assignedUsers[index];
-    const initials = getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase();
-    avatarsHTML += avatarItemTemplate(initials, '#A8A8A8', fullName);
+  let html = '';
+  const ids = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
+  for (let i = 0; i < ids.length; i++) {
+    const id = ids[i];
+    const c = (typeof allContacts === 'object' && allContacts[id]) ? allContacts[id] : null;
+    const fullName = c ? c.fullName : String(id);
+    const initials = c ? c.initials : (getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase());
+    const hexColor = c ? c.hexColor : '#A8A8A8';
+    html += avatarItemTemplate(initials, hexColor, fullName);
   }
-  return avatarsHTML;
+  return html;
 }
 
 /**
@@ -53,18 +56,18 @@ function buildSubtasksHTML(task, displayTaskId) {
   return html;
 }
 
-
-/** Loads contacts from Firebase into allContacts map for quick lookup. */
-async function cacheContacts() {
+/** Caches contacts keyed by full name for fast lookup in big card. */
+async function cacheContactsByName() {
   const data = await loadData('contacts');
-  if (!data || typeof data !== 'object') { allContacts = {}; return; }
-  const ids = Object.keys(data); allContacts = {};
+  if (!data || typeof data !== 'object') { allContactsByName = {}; return; }
+  const ids = Object.keys(data); allContactsByName = {};
   for (let i = 0; i < ids.length; i++) {
-    const id = ids[i], c = data[id] || {}, n = c.name || {};
+    const c = data[ids[i]] || {}, n = c.name || {};
     const fn = n['first-name'] || '', ln = n['last-name'] || '';
     const full = (fn + ' ' + ln).trim();
     const ini = ((fn[0] || '') + (ln[0] || '')).toUpperCase();
     const hex = '#' + String(c.color || 'bg-cccccc').replace('bg-', '');
-    allContacts[id] = { fullName: full, hexColor: hex, initials: ini };
+    allContactsByName[full] = { fullName: full, initials: ini, hexColor: hex };
   }
 }
+

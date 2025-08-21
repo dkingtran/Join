@@ -22,18 +22,18 @@ function getColorForName(name) {
     return assignedColorMap[name];
 }
 
+
 async function loadTasksFromFirebase() {
-    const tasks = await loadData("tasks");
-    if (!tasks || typeof tasks !== "object") {
-        console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
-        return;
-    }
-    
-    // Speichere Tasks global für Drag & Drop Zugriff
-    window.allTasks = tasks;
-    
-    renderAllTasks(tasks);
+  await cacheContactsByName();   // <<< Kontakte zuerst laden
+  const tasks = await loadData("tasks");
+  if (!tasks || typeof tasks !== "object") {
+    console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
+    return;
+  }
+  allTasks = tasks;
+  renderAllTasks(tasks);
 }
+
 
 
 /**
