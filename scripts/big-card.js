@@ -120,15 +120,31 @@ function buildSubtasksHTML(taskId, subtasks) {
  * Close big Card
  */
 function closeBigCard() {
-  const container = document.getElementById("big-card-container");
+  const container = document.getElementById("big-card-container")
   if (container) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
 }
-
+/**
+ * closed overlay when you click by side
+ */
 function closeBigCardOverlay(event) {
   if (event.target.id === "big-card-container") {
     closeBigCard();
+  }
+}
+
+/**
+ * Delete complete Task in Firebase
+ */
+async function deleteTaskBigCard(taskId) {
+  if (!confirm("You will Kill this Task? Real? Wow?")) return;
+  try {
+    await deleteData(`/tasks/${taskId}`);
+    closeBigCard();
+    await init(); // Board aktualisieren
+  } catch (err) {
+    console.error("Fehler beim Löschen:", err);
   }
 }
