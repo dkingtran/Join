@@ -35,13 +35,18 @@ async function loadTasksFromFirebase() {
     renderAllTasks(tasks);
 }
 
+
+/**
+ * Renders all tasks to their target columns.
+ * @param {Object} tasksObject - Map of taskId -> task object.
+ */
 function renderAllTasks(tasksObject) {
     clearAllTaskLists();
     for (const taskId in tasksObject) {
         const task = tasksObject[taskId];
         const columnId = getColumnIdByStatus(task.status);
         if (columnId) {
-        renderTaskToColumn(task, columnId);
+        renderTaskToColumn(taskId,task, columnId);
         }
     }
 
@@ -70,16 +75,23 @@ function getColumnIdByStatus(statusObj) {
     return null;
 }
 
-function renderTaskToColumn(task, columnId) {
-    const container = document.getElementById(columnId);
-    if (!container) return console.warn(`Spalte mit ID '${columnId}' nicht gefunden.`);
-    const avatars = renderAssignedAvatars(task["assigned-to"]);
-    const { progressPercent, total, maxSubtasks } = getSubtaskProgress(task.subtasks);
-    const card = document.createElement("div");
-    card.classList.add("board-card");
-    card.innerHTML = cardRender(task, avatars, progressPercent, maxSubtasks, total, "#4589FF");
-    container.appendChild(card);
+/**
+ * Renders a single task card into its column.
+ * @param {string} taskId - Display task ID to pass into the template.
+ * @param {Object} task - Task data object.
+ * @param {string} columnId - Target column element ID.
+ */
+function renderTaskToColumn(taskId, task, columnId) {
+  const container = document.getElementById(columnId);
+  if (!container) return console.warn(`Spalte mit ID '${columnId}' nicht gefunden.`);
+  const avatarsHTML = renderAssignedAvatars(task['assigned-to']);
+  const progress = getSubtaskProgress(task.subtasks);
+  const card = document.createElement('div');
+  card.classList.add('board-card');
+  card.innerHTML = cardRender(taskId, task, avatarsHTML, progress.progressPercent, progress.maxSubtasks, progress.total, '#4589FF');
+  container.appendChild(card);
 }
+
 
 function renderAssignedAvatars(users = []) {
     return users.map(name => {
