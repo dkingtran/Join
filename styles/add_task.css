@@ -1,6 +1,6 @@
-* {
+/* * {
   border: 1px solid red;
-}
+} */
 
 html,
 body {
@@ -125,7 +125,6 @@ form {
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row;
-  margin-bottom: 80px;
 }
 
 .assigned-to {
@@ -392,7 +391,6 @@ form {
 
 .btn-clear-task-container {
   gap: 10px;
-  max-width: 519px;
   justify-content: flex-end;
 }
 

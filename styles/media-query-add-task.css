@@ -1,6 +1,7 @@
 @media(max-width:1365px) {
   .main-container {
-    margin-left: 0;
+    margin-left: 20px;
+    margin-bottom: 96px;
   }
   
   .add-task-container {
@@ -23,9 +24,8 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    max-width: 399px;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 60px;
   }
 
   .section-task-under {
@@ -38,7 +38,7 @@
   }
 
   .title-section {
-    margin-top: 127px;
+    margin-top: 40px;
     margin-left: 0;
     width: 100%;
     max-width: 377px;
@@ -60,24 +60,38 @@
     font-size: 20px;
     color: white;
   }
-
-  .star-required {
-    max-width: 300px;
-  }
 }
 
-@media(max-width:768px) {
+@media (max-width: 1000px) {
+    .btn-clear-task-container {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      position: sticky;
+      z-index: 20;
+    }
 
-  .title-section {
-    margin-left: 190px;
-  }
-
-  .star-required {
-    max-width: 230px;
-  }
+    .main-container {
+      margin-left: 0;
+      margin-top: 96px;
+      margin-bottom: 80px;
+      padding: 16px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
 }
 
 @media(max-width:634px) {
+
+  #form-element {
+    width: 100%;
+  }
+
+  .add-task-section {
+    width: 100%;
+  }
+
   .title-section {
     margin-left: 0px;
     margin-bottom: 10px;
@@ -89,26 +103,7 @@
   }
 
   .add-task-container {
-    max-width: 0;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  form {
-    padding: 0;
-    margin-bottom: 110px;
-  }
-
-  .btn-clear-task-container {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 80px;
-    width: min(100vw, 1200px);
-    padding: 12px 20px;
-    background: #fff;
-    box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.08);
-    z-index: 1000;
+    width: 100%;
   }
 
   .section-task-under {
