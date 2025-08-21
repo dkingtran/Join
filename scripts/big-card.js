@@ -126,3 +126,9 @@ function closeBigCard() {
     container.classList.add("d-none");
   }
 }
+
+function closeBigCardOverlay(event) {
+  if (event.target.id === "big-card-container") {
+    closeBigCard();
+  }
+}
