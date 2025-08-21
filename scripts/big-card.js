@@ -1,85 +1,119 @@
-let allContactsByName = {};
-
 /**
- * Loads all contacts from Firebase and stores them in a map
- * keyed by full name → { fullName, initials, hexColor }.
- * This cache allows fast lookup when rendering avatars in the big card.
+ * Opens a big card overlay for the given Firebase task ID.
  */
-async function cacheContactsByName() {
-  const contactsData = await loadData('contacts');
-  if (!contactsData || typeof contactsData !== 'object') {
-    allContactsByName = {};
-    return;
-  }
-  const contactIds = Object.keys(contactsData);
-  allContactsByName = {};
-  for (let i = 0; i < contactIds.length; i++) {
-    const contact = contactsData[contactIds[i]] || {};
-    const name = contact.name || {};
-    const firstName = name['first-name'] || '';
-    const lastName = name['last-name'] || '';
-    const fullName = (firstName + ' ' + lastName).trim();
-    const initials = ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
-    const hexColor = '#' + String(contact.color || 'bg-cccccc').replace('bg-', '');
-    allContactsByName[fullName] = { fullName, initials, hexColor };
-  }
-}
-
-
-/**
- * Opens a big task card overlay with all task details.
- * @param {string} displayTaskId - Unique ID of the task to display.
- */
-function openBigTask(displayTaskId) {
-  const overlay = document.getElementById('big-card-container');
-  const tasks = window.allTasks || {};
-  const task = tasks[displayTaskId];
-  if (!overlay || !task) return;
+function openBigCard(taskId) {
+  const task = findTaskById(taskId);
+  if (!task) return;
   const avatarsHTML = buildAvatarsHTML(task);
-  const subtasksHTML = buildSubtasksHTML(task, displayTaskId);
-  overlay.innerHTML = bigCardTemplate(
-    displayTaskId, task.category, task.title, task.description,
-    task['due-date'], task.priority, avatarsHTML, subtasksHTML
+  const subtasks = normalizeSubtasks(task);
+  const subtasksHTML = buildSubtasksHTML(taskId, subtasks);
+  const bigCardHTML = bigCardTemplate(
+    taskId, task.category || "", task.title || "", task.description || "",
+    task["due-date"] || task.due || task.date || "", task.priority || "",
+    avatarsHTML, subtasksHTML
   );
-  overlay.classList.remove('d-none');
+  showBigCard(bigCardHTML);
 }
 
 /**
- * Builds HTML for all assigned user avatars of a task using allContactsByName.
- * @param {Object} task - The task object containing "assigned-to".
- * @returns {string} HTML string with all avatars.
+ * Finds a task in displayedTasks by its Firebase ID.
+ */
+function findTaskById(taskId) {
+  if (!Array.isArray(displayedTasks)) return null;
+  for (let i = 0; i < displayedTasks.length; i++) {
+    if (displayedTasks[i].id === taskId) return displayedTasks[i];
+  }
+  return null;
+}
+
+
+/**
+ * Shows the given big card HTML in the overlay container.
+ * Replaces old content and removes the "d-none" class.
+ */
+function showBigCard(bigCardHTML) {
+  const container = document.getElementById("big-card-container");
+  if (!container) return;
+  container.innerHTML = bigCardHTML;
+  container.classList.remove("d-none");
+  console.log("Container before:", container);
+
+}
+
+/**
+ * Builds avatar HTML with proper color conversion.
  */
 function buildAvatarsHTML(task) {
-  let avatarsHTML = '';
-  const assignedUsers = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
-  for (let index = 0; index < assignedUsers.length; index++) {
-    const fullName = assignedUsers[index];
-    const contact = allContactsByName && allContactsByName[fullName] ? allContactsByName[fullName] : null;
-    const initials = contact ? contact.initials : (getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase());
-    const hexColor = contact ? contact.hexColor : '#A8A8A8';
-    avatarsHTML += avatarItemTemplate(initials, hexColor, fullName);
-  }
-  return avatarsHTML;
-}
-
-/**
- * Builds HTML for all subtasks (works with arrays and objects).
- * @param {Object} task - Task object with `subtasks`.
- * @param {string} displayTaskId - ID for checkbox namespacing.
- * @returns {string} HTML string with subtasks.
- */
-function buildSubtasksHTML(task, displayTaskId) {
-  let html = '';
-  const list = task && task.subtasks ? Object.values(task.subtasks) : [];
-  for (let i = 0; i < list.length; i++) {
-    const sub = list[i] || {};
-    const txt = sub.subtask || sub.text || '';
-    const done = !!sub.done; // true or false
-    console.log(done);
-    html += subtaskItemTemplate(displayTaskId, i, txt, done);
+  const users = Array.isArray(task["assigned-to"]) ? task["assigned-to"] : [];
+  let html = "";
+  for (let i = 0; i < users.length; i++) {
+    const fullName = users[i];
+    const contact = contacts.find(c => {
+      const name = `${c.name["first-name"]} ${c.name["last-name"]}`;
+      return name === fullName;
+    });
+    let color = contact && contact.color
+      ? (contact.color.startsWith("bg-") ? "#" + contact.color.slice(3) : contact.color)
+      : "#B5C0D0";
+    html += avatarItemTemplate(getInitials(fullName), color, fullName);
   }
   return html;
 }
 
 
+/**
+ * Normalizes Firebase subtasks into array of {id, text, done}.
+ */
+/**
+ * Normalizes Firebase subtasks into array of {id, text, done}.
+ */
+function normalizeSubtasks(task) {
+  const list = [];
+  const subs = task.subtasks || {};
+  for (const key in subs) {
+    if (subs.hasOwnProperty(key)) {
+      const entry = subs[key];
+      const text = entry && typeof entry.subtask === "string"
+        ? entry.subtask
+        : "";
+      const done = entry && typeof entry.done === "boolean"
+        ? entry.done
+        : false;
+      list.push({ id: key, text: text, done: done });
+    }
+  }
+  return list;
+}
+
+/**
+ * Updates only the "done" state of a subtask in Firebase.
+ */
+async function toggleSubtaskDone(checkbox) {
+  const taskId = checkbox.dataset.taskId;
+  const subtaskId = checkbox.dataset.subtaskId;
+  const isDone = checkbox.checked;
+  try {
+    await putData(`/tasks/${taskId}/subtasks/${subtaskId}/done`, isDone);
+    console.log("Subtask state saved:", subtaskId, isDone);
+  } catch (err) {
+    console.error("Failed to save subtask:", err);
+  }
+}
+
+/**
+ * Builds HTML for all subtasks using the template.
+ */
+function buildSubtasksHTML(taskId, subtasks) {
+  let html = "";
+  for (let i = 0; i < subtasks.length; i++) {
+    const subtask = subtasks[i];
+    html += subtaskItemTemplate(
+      taskId,
+      subtask.id,
+      subtask.text,
+      subtask.done
+    );
+  }
+  return html;
+}
 

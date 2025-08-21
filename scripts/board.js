@@ -2,9 +2,11 @@ let tasks = [];
 let displayedTasks = [];
 let contacts = [];
 
+
 async function init() {
     await updateTasksArrays();
     await getContactsArray();
+    console.log(displayedTasks);
 }
 
 async function updateTasksArrays() {
@@ -12,7 +14,7 @@ async function updateTasksArrays() {
     displayedTasks = tasks;
 }
 
-async function getTasksArray() {
+/* async function getTasksArray() {
     tasks = [];
     let taskObjects = await loadData("/tasks/");
     if (!taskObjects) {
@@ -22,6 +24,20 @@ async function getTasksArray() {
     Object.keys(taskObjects).forEach(key => {
         tasks.push(taskObjects[key]);
     });
+} */
+
+async function getTasksArray() {
+  tasks = [];
+  const taskObjects = await loadData("/tasks/");
+  if (!taskObjects) {
+    console.warn("no tasks available.");
+    return;
+  }
+  for (const taskId in taskObjects) {
+    if (taskObjects.hasOwnProperty(taskId)) {
+      tasks.push({ id: taskId, ...taskObjects[taskId] });
+    }
+  }
 }
 
 /**
@@ -40,4 +56,7 @@ async function getContactsArray() {
     Object.keys(contactObjects).forEach(key => {
         contacts.push(contactObjects[key]);
     });
+     console.log("Contacts loaded:", contacts); // Debug
+
 }
+
