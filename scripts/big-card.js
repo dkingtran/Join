@@ -35,3 +35,20 @@ function buildAvatarsHTML(task) {
   return avatarsHTML;
 }
 
+/**
+ * Builds HTML for the subtask checklist in the big card.
+ * @param {Object} task - Task object containing optional `subtasks`.
+ * @param {string} displayTaskId - ID used to namespace checkbox elements.
+ * @returns {string} HTML string with all subtasks.
+ */
+function buildSubtasksHTML(task, displayTaskId) {
+  let html = '';
+  const list = Array.isArray(task.subtasks) ? task.subtasks : [];
+  for (let index = 0; index < list.length; index++) {
+    const item = list[index];
+    const text = (item && item.text) ? item.text : String(item ?? '');
+    const done = !!(item && item.done);
+    html += subtaskItemTemplate(displayTaskId, index, text, done);
+  }
+  return html;
+}
