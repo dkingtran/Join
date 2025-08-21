@@ -73,7 +73,6 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
   `;
 }
 
-
 function avatarItemTemplate(initials, bgColor, fullName) {
   return `
     <div class="avatar-with-name">

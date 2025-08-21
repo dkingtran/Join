@@ -1,45 +1,37 @@
 let _currentTaskId = null; // merkt sich die zuletzt geöffnete Big Card
 
-function getCategoryClass(category) {
-  switch (category) {
-    case "Technical Task":
-      return "category-technical";
-    case "User Story":
-      return "category-userstory";
-    default:
-      return "category-default";
+/**
+ * Opens a big task card overlay with all task details.
+ * @param {string} displayTaskId - Unique ID of the task to display.
+ */
+function openBigTask(displayTaskId) {
+  const overlay = document.getElementById('big-card-container');
+  const tasks = window.allTasks || {};
+  const task = tasks[displayTaskId];
+  if (!overlay || !task) return;
+  const avatarsHTML = buildAvatarsHTML(task);
+  const subtasksHTML = buildSubtasksHTML(task, displayTaskId);
+  overlay.innerHTML = bigCardTemplate(
+    displayTaskId, task.category, task.title, task.description,
+    task['due-date'], task.priority, avatarsHTML, subtasksHTML
+  );
+  overlay.classList.remove('d-none');
+}
+
+
+/**
+ * Builds HTML for all assigned user avatars of a task.
+ * @param {Object} task - The task object containing "assigned-to".
+ * @returns {string} HTML string with all avatars.
+ */
+function buildAvatarsHTML(task) {
+  let avatarsHTML = '';
+  const assignedUsers = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
+  for (let index = 0; index < assignedUsers.length; index++) {
+    const fullName = assignedUsers[index];
+    const initials = getInitials ? getInitials(fullName) : fullName.slice(0, 2).toUpperCase();
+    avatarsHTML += avatarItemTemplate(initials, '#A8A8A8', fullName);
   }
-}
-
-// Global, damit der inline-Handler sie findet
-window.deleteTaskBigCard = function (taskId) {
-  if (!taskId) return;
-  if (!confirm("Willst du diese Task wirklich löschen?")) return;
-  if (!confirm("Letzte Bestätigung: Diese Aktion kann nicht rückgängig gemacht werden.")) return;
-  deleteTaskFromFirebase(taskId)
-    .then(() => {
-      const card = document.getElementById(`big-card-${taskId}`);
-      if (card) card.remove();
-    })
-    .catch(() => alert("Löschen fehlgeschlagen. Bitte erneut versuchen."));
-};
-
-async function deleteTaskFromFirebase(taskId) {
-  const url = `${BASE_URL}tasks/${taskId}.json`;
-  const res = await fetch(url, { method: "DELETE" });
-  if (!res.ok) throw new Error("DELETE failed: " + res.status);
-}
-
-
-
-function closeBigCard() {
-  const overlay = document.getElementById("big-card-list");
-  if (!overlay) return;
-  overlay.innerHTML = '<div class="big-card-content"></div>';
-  overlay.classList.add("d-none");
-  overlay.removeEventListener("click", closeBigCard);
-  document.removeEventListener("keydown", escCloseBigCard);
-  document.body.style.overflow = "";
-  initRender();
+  return avatarsHTML;
 }
 
