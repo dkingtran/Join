@@ -23,16 +23,16 @@ function getColorForName(name) {
 }
 
 async function loadTasksFromFirebase() {
-  await cacheContactsByName();   // <<< NEU hinzugefügt allContactsByName gespeichert sind
-  const tasks = await loadData("tasks");
-  if (!tasks || typeof tasks !== "object") {
-    console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
-    return;
-  }
-  allTasks = tasks;              // (window. habe ich weggelassen allTasks ist sowieso global, man braucht kein window)
-  renderAllTasks(tasks);
+    const tasks = await loadData("tasks");
+    if (!tasks || typeof tasks !== "object") {
+        console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
+        return;
+    }
+    // Speichere Tasks global für Drag & Drop Zugriff
+    window.allTasks = tasks;
+    
+    renderAllTasks(tasks);
 }
-
 
 /**
  * Renders all tasks to their target columns.
@@ -47,8 +47,6 @@ function renderAllTasks(tasksObject) {
         renderTaskToColumn(taskId,task, columnId);
         }
     }
-
-    console.log(tasksObject);
     
     // Rufe die "No Tasks"-Rendering-Funktion auf
     if (typeof renderWithNoTasksAreas === 'function') {
