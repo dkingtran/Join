@@ -125,7 +125,6 @@ function setupCheckboxListener() {
 
 /**
  * Checks all currently selected (checked) fields,
- * updates the input field, and stores all selected values.
  */
 function createAvatar(initials, color) {
     const avatar = document.createElement("span");
@@ -171,7 +170,6 @@ async function loadContactsIntoDropdown() {
         const contact = contacts[i];
         const prepared = prepareContactData(contact);
         renderContactToDropdown(prepared, list);
-        console.log(prepared);
     }
     setupCheckboxListener();
 }
@@ -263,8 +261,6 @@ function collectSubtasksFromDOM() {
     }
     return collected;
 }
-
-
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
