@@ -3,9 +3,13 @@ let displayedTasks = [];
 let contacts = [];
 
 async function init() {
+    await updateTasksArrays();
+    await getContactsArray();
+}
+
+async function updateTasksArrays() {
     await getTasksArray();
     displayedTasks = tasks;
-    await getContactsArray();
 }
 
 async function getTasksArray() {
