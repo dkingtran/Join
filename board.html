@@ -20,21 +20,24 @@
   <link rel="stylesheet" href="./styles/media-query-add-task.css" />
   <link rel="stylesheet" href="./styles/edit-task-template.css" />
   <link rel="stylesheet" href="./styles/media-query-board.css" />
-  <script src="./scripts/render_big_card.js" defer></script>
   <script src="./scripts/add-task-templates.js"></script>
   <script src="./scripts/firebase.js"></script>
   <script src="./scripts/input.js"></script>
   <script src="./scripts/side-menu.js"></script>
   <script src="./scripts/board-add-task-modal.js"></script>
   <script src="./scripts/board.js"></script>
-  <script src="./scripts/board-card.js"></script>
+
+  <script src="./scripts/big-card-templates.js"></script>
   <script src="./scripts/board-cards-templates.js"></script>
+  <script src="./scripts/board-card.js"></script>
+  <script src="./scripts/big-card.js"></script>
+
+  <script src="./scripts/render_big_card.js" defer></script>
   <script src="./script.js"></script>
   <script src="./scripts/add_task.js" defer></script>
   <script src="./scripts/add_task_button.js" defer></script>
   <script src="./scripts/edit-add-task-template.js"></script>
-  <script src="./scripts/big-card-templates.js"></script>
-  <script src="./scripts/big-card.js"></script>
+
 </head>
 
 <body onload="loadTasksFromFirebase()">
@@ -338,16 +341,15 @@
     </section>
   </main>
 
- <div id="big-card-container" class="d-none overlay-big-card">
-  <div class="big-card-content"></div>
-</div>
+  <div id="big-card-container" class="d-none overlay-big-card">
+    <div class="big-card-content"></div>
+  </div>
 
-<div id="add-task-overlay" class="d-none overlay-add-task-big-card">
-  <div class="add-task-content"><!-- Dein Add-Task-Formular --></div>
-</div>
+  <div id="add-task-overlay" class="d-none overlay-add-task-big-card">
+    <div class="add-task-content"><!-- Dein Add-Task-Formular --></div>
+  </div>
 
 
 </body>
 
 </html>
-

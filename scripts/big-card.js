@@ -52,3 +52,19 @@ function buildSubtasksHTML(task, displayTaskId) {
   }
   return html;
 }
+
+
+/** Loads contacts from Firebase into allContacts map for quick lookup. */
+async function cacheContacts() {
+  const data = await loadData('contacts');
+  if (!data || typeof data !== 'object') { allContacts = {}; return; }
+  const ids = Object.keys(data); allContacts = {};
+  for (let i = 0; i < ids.length; i++) {
+    const id = ids[i], c = data[id] || {}, n = c.name || {};
+    const fn = n['first-name'] || '', ln = n['last-name'] || '';
+    const full = (fn + ' ' + ln).trim();
+    const ini = ((fn[0] || '') + (ln[0] || '')).toUpperCase();
+    const hex = '#' + String(c.color || 'bg-cccccc').replace('bg-', '');
+    allContacts[id] = { fullName: full, hexColor: hex, initials: ini };
+  }
+}
