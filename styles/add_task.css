@@ -96,21 +96,29 @@ form {
 }
 
 .active-green {
-  background-color: green;
+  background-color: #7AE229;
   color: white;
   box-shadow: none;
 }
 
+.active-green img {
+  filter: brightness(0) invert(1);
+}
+
 .active-yellow {
-  background-color: gold;
-  color: black;
+  background-color: #FFA800;
+  color: white;
   box-shadow: none;
 }
 
 .active-red {
-  background-color: red;
+  background-color: #FF3D00;
   color: white;
   box-shadow: none;
+}
+
+.active-red img {
+  filter: brightness(0) invert(1);
 }
 
 .priority-btn {
@@ -170,7 +178,6 @@ form {
 
 .dropdown-list {
   position: absolute;
-  min-width: 440px;
   top: 100%;
   left: 0;
   border-top: none;
