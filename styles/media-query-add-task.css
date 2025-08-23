@@ -58,9 +58,9 @@
   }
 
   .btn-clear-task-container {
-    position: sticky;
-    bottom: 0;
-    left: 0;
+    position: static;
+    bottom: unset;
+    left: unset;
     width: 100%;
     background: #F5F7F7;
     z-index: 100;
@@ -70,28 +70,26 @@
 }
 
 @media (max-width: 1000px) {
-    .main-container {
-      margin-left: 0;
-      margin-top: 96px;
-      margin-bottom: 80px;
-      padding: 16px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-    }
+  .main-container {
+    margin-left: 0;
+    margin-top: 96px;
+    margin-bottom: 80px;
+    padding: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-    .btn-clear-task-container {
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: #F5F7F7;
-      margin-top: 80px;
-      padding: 16px 0px 16px 16px;
-      display: flex;
-      justify-content: end;
-    }
+  .btn-clear-task-container {
+    position: sticky !important;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    background: #F5F7F7;
+    z-index: 100;
+    margin-top: 60px;
+    padding: 16px 0px 16px 16px;
+  }
 }
 
 @media(max-width:634px) {
@@ -162,12 +160,6 @@
     padding: 0;
   }
 
-  .btn-clear-task-container {
-    margin-left: 0;
-    display: flex;
-    justify-content: end;
-  }
-
   .subtask-entry {
     width: 100%;
     max-width: 440px;
@@ -182,7 +174,7 @@
 @media(max-width:368px) {
 
   .subtask-input-box {
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   .max-w-440 {
@@ -218,9 +210,9 @@
   }
 
   .dropdown-input input {
+    padding: 8px 8px 8px 0px;
     width: 206px;
   }
-
 
   .avatar {
     margin-right: 0;
@@ -237,6 +229,15 @@
   .section-task-under {
     max-width: 440px;
     min-width: 279px;
+  }
+
+  .add-subtask-input {
+    padding: 8px 8px 8px 0px;
+  }
+
+  .subtask-active {
+    display: flex;
+    justify-content: space-between;
   }
 
   .subtask-entry {
@@ -265,5 +266,13 @@
   .btn-addtask-create {
     height: 48px;
     width: 140px;
+  }
+
+  .icon-subtask-container {
+    gap: 8px;
+  }
+
+  .icon-task {
+    padding: 0;
   }
 }

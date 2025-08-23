@@ -90,7 +90,8 @@ form {
   min-width: 136px;
   height: 56px;
   padding: 16px 10px;
-  border-color: #d1d1d13f;
+  border: none;
+  box-shadow: 0px 0px 4px 0px #0000001A;
   background-color: white;
   cursor: pointer;
 }
@@ -146,7 +147,7 @@ form {
 .dropdown-input {
   border: 1px solid black;
   border-color: #d1d1d1;
-  padding: 23px;
+  padding: 16px;
   cursor: pointer;
   height: 48px;
   transition: border-color 0.1s;
@@ -218,6 +219,7 @@ form {
   color: black;
   padding: 0 21px;
   appearance: none;
+  cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
   padding-right: 2.5rem;
@@ -228,7 +230,7 @@ form {
 .select-container .arrow {
   position: absolute;
   top: 50%;
-  right: 6px;
+  right: 0;
   transform: translateY(-50%);
   color: #2A3647;
   pointer-events: none;
@@ -338,10 +340,9 @@ form {
 }
 
 .subtask-text-box {
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: visible; /* Sichtbarkeit für Icons */
   max-width: 440px;
-  min-width: 320px;
+  min-width: 260px;
   padding-left: 20px;
   transition: background-color 0.1s;
   height: 32px;
@@ -349,27 +350,45 @@ form {
   border-radius: 10px;
   display: flex;
   align-items: center;
+  position: relative; /* Für absolute Positionierung der Icons */
 }
 
-.subtask-text-box:hover .icon-edit-subtask-box {
+/* Icons immer innerhalb der Box anzeigen */
+.icon-edit-subtask-box {
+  display: none;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  z-index: 2;
+}
+
+/* Icons beim Hover und Focus sichtbar machen */
+.subtask-text-box:hover .icon-edit-subtask-box,
+.subtask-text-box:focus-within .icon-edit-subtask-box {
   display: flex;
-  background-color: rgb(127, 123, 123);
+  background: transparent;
 }
 
 .subtask-entry {
   border: none;
+  height: 32px;
   max-width: 440px;
   display: flex;
   justify-content: space-between;
   background-color: transparent;
 }
 
+.subtask-entry:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 
 .subtask-entry:hover {
   height: 32px;
   min-width: 340px;
-  border-radius: 10px;
-
   display: flex;
   align-items: center;
 }
@@ -391,7 +410,10 @@ form {
 }
 
 .border-bottom-blue {
-  min-width: 360px;
+  min-width: 266px;
+  width: 100%;
+  border-bottom: 1px solid #005DFF;
+  background: white;
 }
 
 .btn-clear-task-container {
@@ -431,6 +453,7 @@ form {
 .btn-addtask-create:hover {
   background: #29ABE2;
   transform: scale(1.01);
+  border: none;
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
 }
 
