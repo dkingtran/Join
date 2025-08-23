@@ -129,9 +129,8 @@ form {
 .section-task-under {
   margin-top: 48px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-direction: row;
+  position: absolute;
+  top: 880px;
 }
 
 .assigned-to {
@@ -397,7 +396,12 @@ form {
 
 .btn-clear-task-container {
   gap: 10px;
+  position: absolute;
+  display: flex;
   justify-content: flex-end;
+  align-items: center;
+  width: 1120px;
+  top: 920px;
 }
 
 .btn-addtask-clear {
