@@ -28,7 +28,15 @@
     font-family: inter;
     font-size: 16px;
     font-weight: 700;
-    height: 38px;
+    /*height: 66px;*/
+    height: auto;
+    line-height: 1.2;
+    max-height: 2.4em; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
 }
 
 .task-description{
@@ -36,14 +44,22 @@
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
-    height: 38px;
+    max-height: 62px;
+
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;           
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .subtask-counter {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
+    margin-top: -10px;
     gap: 5px;
 }
 
@@ -136,14 +152,3 @@
 .overflow-avatar:hover .custom-tooltip {
     display: block;
 }
-
-/*.avatar.contact-avatar-color1 { background-color: #FF7A00 !important;}
-.avatar.contact-avatar-color2 { background-color: #1FD7C1 !important;}
-.avatar.contact-avatar-color3 { background-color: #462F8A !important;}
-.avatar.contact-avatar-color4 { background-color: #FC71FF !important;}
-.avatar.contact-avatar-color5 { background-color: #4CD964 !important;}
-.avatar.contact-avatar-color6 { background-color: #AA96DA !important;}
-.avatar.contact-avatar-color7 { background-color: #34C759 !important; }
-.avatar.contact-avatar-color8 { background-color: #FF3B30 !important;}
-.avatar.contact-avatar-color9 { background-color: #5856D6 !important; }
-.avatar.contact-avatar-color10 { background-color: #C7C7CC !important; }

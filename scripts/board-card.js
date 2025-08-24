@@ -1,27 +1,4 @@
-/*const assignedColorMap = {}; 
-let colorIndex = 0;
-const avatarColors = [
-    'contact-avatar-color1',
-    'contact-avatar-color2',
-    'contact-avatar-color3',
-    'contact-avatar-color4',
-    'contact-avatar-color5',
-    'contact-avatar-color6',
-    'contact-avatar-color7',
-    'contact-avatar-color8',
-    'contact-avatar-color9',
-    'contact-avatar-color10'
-];*/
-
 let contactsMap = {};
-
-/*function getColorForName(name) {
-    if (!assignedColorMap[name]) {
-        assignedColorMap[name] = avatarColors[colorIndex];
-        colorIndex = (colorIndex + 1) % avatarColors.length;
-    }
-    return assignedColorMap[name];
-}*/
 
 async function loadContactsFromFirebase() {
     const contactsData = await loadData("contacts");
@@ -30,7 +7,7 @@ async function loadContactsFromFirebase() {
             const contact = contactsData[contactId];
             const fullName = `${contact.name["first-name"]} ${contact.name["last-name"]}`.trim();
             contactsMap[fullName] = {
-                color: contact.color, // e.g. "bg-9327ff"
+                color: contact.color, 
                 initials: getInitials(fullName)
             };
         }
