@@ -374,4 +374,41 @@ function showSuccessMessage() {
 document.addEventListener("DOMContentLoaded", () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
+
+    // Select-Arrow und Dropdown-Logik
+    const categorySelect = document.getElementById('task-category');
+    const categoryArrow = document.getElementById('category-arrow');
+    
+    if (categorySelect && categoryArrow) {
+        categorySelect.addEventListener('mousedown', () => {
+            if (categoryArrow.classList.contains('rotate')) {
+                setTimeout(() => closeSelectDropdown(categorySelect, categoryArrow), 0);
+            }
+        });
+        
+        categorySelect.addEventListener('focus', () => categoryArrow.classList.add('rotate'));
+        categorySelect.addEventListener('blur', () => categoryArrow.classList.remove('rotate'));
+    }
 });
+
+function toggleSelectDropdown() {
+    const select = document.getElementById('task-category');
+    const arrow = document.getElementById('category-arrow');
+    
+    if (arrow.classList.contains('rotate')) {
+        closeSelectDropdown(select, arrow);
+    } else {
+        openSelectDropdown(select, arrow);
+    }
+}
+
+function openSelectDropdown(select, arrow) {
+    select.focus();
+    select.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    arrow.classList.add('rotate');
+}
+
+function closeSelectDropdown(select, arrow) {
+    select.blur();
+    arrow.classList.remove('rotate');
+}
