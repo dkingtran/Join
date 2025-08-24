@@ -6,7 +6,6 @@ let contacts = [];
 async function init() {
     await updateTasksArrays();
     await getContactsArray();
-    console.log(displayedTasks);
 }
 
 async function updateTasksArrays() {
@@ -56,7 +55,5 @@ async function getContactsArray() {
     Object.keys(contactObjects).forEach(key => {
         contacts.push(contactObjects[key]);
     });
-     console.log("Contacts loaded:", contacts); // Debug
-
 }
 
