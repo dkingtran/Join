@@ -228,7 +228,7 @@
 
   .section-task-under {
     max-width: 440px;
-    min-width: 279px;
+    min-width: 266px;
   }
 
   .add-subtask-input {
@@ -241,7 +241,6 @@
   }
 
   .subtask-entry {
-
     max-width: 440px;
     min-width: 200px;
   }

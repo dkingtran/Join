@@ -166,14 +166,25 @@ form {
 }
 
 .arrow {
-  margin-left: 8px;
+  height: 21px;
+  width: 21px;
+  text-align: center;
   color: #2A3647;
   display: inline-block;
+}
+
+.arrow:hover {
+  border-radius: 50%;
+  background-color: #D1D1D1;
 }
 
 .arrow.rotate {
   transform: rotate(180deg);
   transition: transform 0.2s ease;
+}
+
+.select-container .arrow {
+  margin-right: 16px;
 }
 
 .dropdown-list {
@@ -265,7 +276,7 @@ form {
   gap: 6px;
   /* padding: 6px; */
   margin-top: 8px;
-  min-width: 335px;
+  min-width: 266px;
   border-radius: 6px;
 }
 
@@ -334,8 +345,7 @@ form {
 
 .output-subtask {
   max-width: 440px;
-  max-height: 70px;
-  min-width: 320px;
+  min-width: 260px;
   overflow: auto;
 }
 
@@ -347,7 +357,6 @@ form {
   transition: background-color 0.1s;
   height: 32px;
   margin-top: 10px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
   position: relative; /* Für absolute Positionierung der Icons */
@@ -362,6 +371,20 @@ form {
   transform: translateY(-50%);
   background: transparent;
   z-index: 2;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Divider-Style */
+.icon-divider {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+}
+.icon-divider svg {
+  display: block;
+  height: 24px;
+  width: 2px;
 }
 
 /* Icons beim Hover und Focus sichtbar machen */
@@ -374,10 +397,27 @@ form {
 .subtask-entry {
   border: none;
   height: 32px;
+  padding-left: 16px;
   max-width: 440px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start; /* <-- Text immer am Anfang */
   background-color: transparent;
+  position: relative;
+}
+
+.subtask-entry::before {
+  content: "•";
+  margin-right: 8px;
+  color: #2A3647;
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Beim Editieren (Input-Feld): Kein Stichpunkt */
+input.subtask-entry::before {
+  content: none;
 }
 
 .subtask-entry:focus {
@@ -385,12 +425,12 @@ form {
   box-shadow: none;
 }
 
-
 .subtask-entry:hover {
   height: 32px;
-  min-width: 340px;
+  min-width: 266px;
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* <-- Text immer am Anfang auch beim Hover */
 }
 
 .delete-subtask-input {
@@ -398,7 +438,21 @@ form {
 }
 
 .plus {
+  height: 24px;
+  width: 24px;
   font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.plus img {
+  height: 14px;
+  width: 14px;
+}
+
+.plus:hover {
+  border-radius: 50%;
+  background-color: #D1D1D1;
 }
 
 .input-second {
