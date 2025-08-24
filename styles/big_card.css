@@ -258,6 +258,10 @@
   align-items: center;
 }
 
+.x-closing-icon{
+   cursor: pointer;
+}
+
 
 
 /* 

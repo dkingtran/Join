@@ -116,6 +116,7 @@ function buildSubtasksHTML(taskId, subtasks) {
   }
   return html;
 }
+
 /**
  * Close big Card
  */
@@ -126,6 +127,7 @@ function closeBigCard() {
     container.classList.add("d-none");
   }
 }
+
 /**
  * closed overlay when you click by side
  */
@@ -146,5 +148,39 @@ async function deleteTaskBigCard(taskId) {
     await init(); // Board aktualisieren
   } catch (err) {
     console.error("Fehler beim Löschen:", err);
+  }
+}
+
+/**
+ * Updates the "done" status of a subtask in Firebase
+ * when its checkbox in the UI is toggled.
+ * @param {HTMLInputElement} checkboxElement - The checkbox element of the subtask.
+ */
+async function toggleSubtaskDone(checkboxElement) {
+  const taskId = checkboxElement.getAttribute("data-task-id");
+  const subtaskId = checkboxElement.getAttribute("data-subtask-id");
+  const isSubtaskDone = checkboxElement.checked;
+  const firebasePath = `tasks/${taskId}/subtasks/${subtaskId}/done`;
+  try {
+    await putData(firebasePath, isSubtaskDone);
+  } catch (error) {
+    console.error("Error updating subtask in Firebase:", error);
+  }
+}
+
+/**
+ * Applies the "done" states from Firebase to the subtask checkboxes
+ * inside a task detail view (Big Card).
+ * @param {string} taskId - The ID of the task.
+ * @param {Object} subtasksObj - The object containing all subtasks of the task.
+ */
+function applySubtaskDoneStates(taskId, subtasksObj) {
+  if (!subtasksObj) return;
+  const subtaskIds = Object.keys(subtasksObj);
+  for (let i = 0; i < subtaskIds.length; i++) {
+    const subtaskId = subtaskIds[i];
+    const isSubtaskDone = !!subtasksObj[subtaskId].done;
+    const checkbox = document.getElementById(`subtask-${taskId}-${subtaskId}`);
+    if (checkbox) checkbox.checked = isSubtaskDone;
   }
 }
