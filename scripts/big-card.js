@@ -2,6 +2,10 @@
  * Opens a big card overlay for the given Firebase task ID.
  */
 function openBigCard(taskId) {
+/*   if (dragged) {
+    e.preventDefault();
+    return;
+  } */
   const task = findTaskById(taskId);
   if (!task) return;
   const avatarsHTML = buildAvatarsHTML(task);
@@ -25,7 +29,6 @@ function findTaskById(taskId) {
   }
   return null;
 }
-
 
 /**
  * Shows the given big card HTML in the overlay container.
@@ -183,4 +186,20 @@ function applySubtaskDoneStates(taskId, subtasksObj) {
     const checkbox = document.getElementById(`subtask-${taskId}-${subtaskId}`);
     if (checkbox) checkbox.checked = isSubtaskDone;
   }
+}
+
+
+function openEditCard() {
+  const overlay = document.getElementById("edit-task-overlay");
+  overlay.classList.remove("d-none");
+
+  overlay.onclick = function (event) {
+    if (event.target === overlay) {
+      closeEditCard();
+    }
+  };
+}
+
+function closeEditCard() {
+  document.getElementById("edit-task-overlay").classList.add("d-none");
 }

@@ -32,7 +32,7 @@ async function loadTasksFromFirebase() {
     window.allTasks = tasks;
     
     renderAllTasks(tasks);
-}
+} 
 
 /**
  * Renders all tasks to their target columns.

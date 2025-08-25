@@ -7,13 +7,14 @@
     <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/colors.css">
     <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/big_card.css">
+    <link rel="stylesheet" href="./styles/big-card.css">
     <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/board-card.css" />
     <link rel="stylesheet" href="./styles/board-drag-and-drop.css">
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/side_menu.css" />
     <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/edit-task-template.css">
     <link rel="stylesheet" href="./styles/media.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/media-query-add-task.css" />
@@ -34,6 +35,7 @@
     <script src="./scripts/add_task.js" defer></script>
     <script src="./scripts/add_task_button.js" defer></script>
     <script src="./scripts/edit-add-task-template.js"></script>
+    <script src="./scripts/edit-add-task.js"></script>
   </head>
   <body onload="loadTasksFromFirebase(); init();">
     <header>
@@ -350,9 +352,12 @@
     <div class="big-card-content"></div>
   </div>
 
-  <div id="add-task-overlay" class="d-none overlay-add-task-big-card">
-    <div class="add-task-content"><!-- Dein Add-Task-Formular --></div>
+<div id="edit-task-overlay" class="d-none overlay-edit-task">
+  <div id="edit-task-content" class="edit-task-content-style">
+    <!-- Dein Add-Task-Formular -->
   </div>
+</div>
+
 
 
 </body>

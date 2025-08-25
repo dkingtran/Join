@@ -2,7 +2,6 @@ let tasks = [];
 let displayedTasks = [];
 let contacts = [];
 
-
 async function init() {
     await updateTasksArrays();
     await getContactsArray();

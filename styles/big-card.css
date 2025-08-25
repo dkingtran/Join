@@ -7,22 +7,21 @@
     background-color: rgba(128, 123, 123, 0.113);
     z-index: 2000;
     display: flex;
-    justify-content: center; /* Card horizontal zentrieren */
-    align-items: center;     /* Card vertikal zentrieren */
+    justify-content: center;
+    align-items: center;    
 }
 
 .big-card-content {
     background-color: white;
-    border: 2px solid grey;
     border-radius: 30px;
+    max-height: calc(100vh - 16px); 
+    overflow-x: hidden;
     padding: 48px 40px;
-    max-width: 500px;
+    max-width: 510px;
     width: 100%;
-    height: auto;
     gap: 15px;
-    z-index: 2001; /* optional, damit sie immer über dem Overlay ist */
+    z-index: 2001; 
 }
-
 
 .title-content {
     font-family: Inter, sans-serif;
@@ -236,8 +235,9 @@
 .edit-pen-big-card:hover svg path {
     fill: #29ABE2;
 }
-/* Big-Card Overlay (wie gehabt) */
-.overlay-big-card {
+
+
+/* .overlay-big-card {
   position: fixed;
   inset: 0;
   background: rgba(128,128,128,0.3);
@@ -245,18 +245,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-/* Add-Task Overlay: höherer z-index */
-.overlay-add-task-big-card {
+/*  .overlay-add-task-big-card {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.35);
-  z-index: 2100; /* höher als big-card */
+  z-index: 2100;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+}  */
 
 .x-closing-icon{
    cursor: pointer;

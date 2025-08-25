@@ -37,7 +37,7 @@ return `
 <div class="contact-item" onclick="toggleCheckboxContact(this)">
     <span class="avatar display-standard white-color" style="background-color: ${color};">${initials}</span>
     <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
-    <input type="checkbox" class="contact-checkbox" data-name="${name[" first-name"]} ${name["last-name"]}"
+    <input type="checkbox" class="contact-checkbox" data-name="${name["first-name"]} ${name["last-name"]}"
         data-initials="${initials}" onclick="toggleCheckboxContact(this); event.stopPropagation();">
 </div>
 `;
