@@ -187,10 +187,6 @@ form {
   transition: transform 0.2s ease;
 }
 
-.select-container .arrow {
-  margin-right: 16px;
-}
-
 .dropdown-list {
   position: absolute;
   top: 100%;
@@ -238,40 +234,42 @@ form {
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 2.5rem;
+  padding-right: 50px; /* Vergrößert um Arrow-Bereich zu erfassen */
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  z-index: 3; /* Über dem Arrow */
 }
 
 /* Arrow innerhalb der Leiste platzieren */
 .select-container .arrow {
   position: absolute;
   top: 50%;
-  right: 16px; /* Abstand zum rechten Rand */
+  right: 16px;
   margin: 0;
   color: #2A3647;
-  cursor: pointer;
+  cursor: pointer; /* Cursor bleibt pointer */
   height: 21px;
   width: 21px;
   text-align: center;
-  transition: background 0.2s, border-radius 0.2s, transform 0.2s;
+  transition: transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: auto;
+  pointer-events: none; /* Arrow nicht klickbar */
   background: transparent;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 3; /* Unter dem Select */
 }
 
 .select-container .arrow:hover {
   border-radius: 50%;
   background-color: #D1D1D1;
+  cursor: pointer; /* Explizit pointer setzen */
 }
 
 .select-container .arrow.rotate {
   transform: translateY(-50%) rotate(180deg);
-  transition: transform 0.2s ease;
 }
 
 .contact-name {
@@ -342,6 +340,7 @@ form {
   align-items: center;
   justify-content: space-between;
   background-color: white;
+      padding: 16px 14px;
 }
 
 .subtask-input-box input {
@@ -356,7 +355,7 @@ form {
 }
 
 .add-subtask-input {
-  padding: 0;
+  padding: 2px;
 }
 
 .icon-task {
@@ -373,7 +372,7 @@ form {
 .output-subtask {
   max-width: 440px;
   min-width: 260px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .subtask-text-box {
@@ -394,6 +393,7 @@ form {
   display: none;
   position: absolute;
   right: 8px;
+  padding-right: 6px;
   top: 50%;
   transform: translateY(-50%);
   background: transparent;
@@ -408,10 +408,30 @@ form {
   align-items: center;
   height: 24px;
 }
+
 .icon-divider svg {
   display: block;
   height: 24px;
   width: 2px;
+}
+
+/* Standard-Divider zwischen Edit und Delete */
+.icon-edit-subtask-box .icon-divider {
+  display: inline-flex;
+}
+
+/* Editing-Divider zwischen Delete und Confirm (standardmäßig versteckt) */
+.icon-edit-subtask-box .editing-divider {
+  display: none;
+}
+
+/* Beim Editieren: Standard-Divider verstecken, Editing-Divider zeigen */
+.icon-edit-subtask-box.editing .icon-divider {
+  display: none;
+}
+
+.icon-edit-subtask-box.editing .editing-divider {
+  display: inline-flex;
 }
 
 /* Icons beim Hover und Focus sichtbar machen */

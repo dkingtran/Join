@@ -289,6 +289,7 @@ function startEditSubtask(element) {
     const text = textElement.innerText;
     iconBox.querySelector(".edit-icon").classList.add("d-none");
     iconBox.querySelector(".confirm-icon").classList.remove("d-none");
+    iconBox.classList.add("editing"); // Editing-Klasse hinzufügen
     textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
@@ -302,6 +303,7 @@ function finishEditSubtask(iconElement) {
     inputElement.outerHTML = getReturnToDivTemplate(text);
     iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
     iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
+    iconBox.classList.remove("editing"); // Editing-Klasse entfernen
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
