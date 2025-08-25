@@ -156,7 +156,8 @@ async function openEditCardFor(taskId) {
   const task = findTaskById(taskId); if (!task) return;
   openEditCard();                 // Overlay zeigen
   showEditTaskBig();              // Template in Overlay
-  prefillEditForm(task);          // Title/Desc/Date/Prio
+  prefillEditForm(task);      
+  bindOverlayPrio();     // Title/Desc/Date/Prio
   await loadContactsIntoDropdownOverlay(); // Kontakte ins Overlay
   prefillAssignedFromTaskOverlay(task);    // Assigned (Checkboxen + Avatare)
   prefillSubtasksFromTaskOverlay(task);
@@ -295,4 +296,20 @@ function confirmSubtaskInputOverlay() {
   input.value = '';
   const active = root.querySelector('#subtask-active'); const init = root.querySelector('#subtask-initial');
   if (active) active.classList.add('d-none'); if (init) init.classList.remove('d-none');
+}
+
+
+/** Bindet Prio-Buttons im Overlay und toggelt die Farben */
+function bindOverlayPrio(){
+  const root=document.getElementById('edit-task-content'); if(!root) return;
+  const map=[['urgent','active-red'],['medium','active-yellow'],['low','active-green']];
+  for (let i=0;i<map.length;i++){
+    const btn=root.querySelector('#'+map[i][0]); if(!btn) continue;
+    btn.type='button';
+    btn.onclick=function(ev){
+      ev.preventDefault();
+      for(let j=0;j<map.length;j++){ const b=root.querySelector('#'+map[j][0]); if(b) b.classList.remove('active-red','active-yellow','active-green'); }
+      this.classList.add(map[i][1]);
+    };
+  }
 }

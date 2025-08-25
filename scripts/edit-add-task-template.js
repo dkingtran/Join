@@ -40,15 +40,15 @@ function editTasktemplateBig() {
         <div class="section-task-right w-full max-w-50">
           <p class="font-bundle">Priority</p>
           <div class="btn-prio flex justify-start max-w-440">
-            <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">
-              Urgent <img src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
-            </button>
-            <button id="medium" class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
-              Medium <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg" alt="medium">
-            </button>
-            <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">
-              Low <img src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
-            </button>
+           <button id="urgent"  type="button" class="font-bundle btn-prio-bundle border-radius-10px">
+  Urgent <img src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
+</button>
+<button id="medium"  type="button" class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
+  Medium <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg" alt="medium">
+</button>
+<button id="low"     type="button" class="font-bundle btn-prio-bundle border-radius-10px">
+  Low <img src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
+</button>
           </div>
 
          <!-- Assigned -->
