@@ -19,6 +19,10 @@
   min-width: 440px;
 }
 
+.max-w-445{
+  max-width: 445px;
+}
+
 .max-w-1200{
   max-width: 1200px;
 }
@@ -72,6 +76,10 @@
   font-size: 20px;
 }
 
+.font-weight-400{
+  font-weight: 400;
+}
+
 .input-base {
   border: 1px solid black;
   border-radius: 10px;
@@ -84,7 +92,6 @@
 }
 
 .input-bundle {
-
   width: 100%;
   max-width: 440px;
   height: 48px;
