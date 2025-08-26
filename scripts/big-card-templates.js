@@ -1,8 +1,8 @@
 function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML) {
 return `
-<div class="big-card-content" id="big-card-${id}">
-    <div class="category-x">
-        <div class="category-chois ${getCategoryClass(category)}" id="category-big-card-${id}">
+<div class="big-card-content w-full" id="big-card-${id}">
+    <div class="category-x flex align-center justify-between w-full">
+        <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}" id="category-big-card-${id}">
             ${category || ""}
         </div>
 
@@ -16,39 +16,39 @@ return `
 
     </div>
 
-    <div class="title-content" id="title-big-card-${id}">${title || ""}</div>
+    <div class="title-content w-full" id="title-big-card-${id}">${title || ""}</div>
 
-    <div class="description-big-card" id="description-big-card-${id}">
+    <div class="description-big-card w-full font-size-20" id="description-big-card-${id}">
         ${desc || ""}
     </div>
 
-    <div class="date-big-card">
+    <div class="date-big-card w-full flex align-center font-size-20">
         <p class="date-big-card-text">Due date:</p>
-        <span class="date-info-big-card" id="date-big-card-${id}">${due || ""}</span>
+        <span class="date-info-big-card font-size-20" id="date-big-card-${id}">${due || ""}</span>
     </div>
 
 
 
-    <div class="prio-big-card">
-        <p class="subtitles-prio-big-card">Priority:</p>
+    <div class="prio-big-card flex align-center font-size-20 w-full">
+        <p class="subtitles-prio-big-card font-size-20">Priority:</p>
         <span id="prio-big-card-${id}">${prio ? prio.charAt(0).toUpperCase() + prio.slice(1) : ""}</span>
         ${typeof getPriorityIcon === "function" ? getPriorityIcon(prio) : ""}
     </div>
 
-    <p class="subtitles-assigned-big-card">Assigned to:</p>
-    <div class="assigned-big-card">
+    <p class="subtitles-assigned-big-card font-size-20">Assigned to:</p>
+    <div class="assigned-big-card font-size-20 w-full">
         <div class="contacts-big-card">
             ${avatarsHTML}
         </div>
     </div>
 
-    <div class="subtasks-big-card">
-        <p class="subtask-text-big-card">Subtasks</p>
+    <div class="subtasks-big-card flex">
+        <p class="subtask-text-big-card font-size-20">Subtasks</p>
         ${subtasksHTML}
     </div>
 
-    <div class="delete-edit-big-card-content">
-        <div class="delete-icon-big-card" onclick="deleteTaskBigCard('${id}')">
+    <div class="delete-edit-big-card-content flex -w-full">
+        <div class="delete-icon-big-card flex align-center" onclick="deleteTaskBigCard('${id}')">
             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_75601_14777" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25"
                     height="24">
@@ -67,7 +67,7 @@ return `
             <path d="M1.14453 0V24" stroke="#A8A8A8" />
         </svg>
 
-     <div class="edit-pen-big-card" onclick="openEditCardFor('${id}')">
+     <div class="edit-pen-big-card flex align-center" onclick="openEditCardFor('${id}')">
   <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
       <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
@@ -86,8 +86,8 @@ return `
 
 function avatarItemTemplate(initials, bgColor, fullName) {
 return `
-<div class="avatar-with-name">
-    <div class="avatar" style="background-color:${bgColor};">${initials}</div>
+<div class="avatar-with-name flex align-center">
+    <div class="avatar white-color display-standard" style="background-color:${bgColor};">${initials}</div>
     <span class="avatar-name">${fullName}</span>
 </div>
 `;
@@ -97,7 +97,7 @@ function subtaskItemTemplate(taskId, subtaskId, subText, isDone) {
 const cleanText = subText.replace(/^•\s*/, "");
 
 return `
-<div class="checkbox-subtask-content">
+<div class="checkbox-subtask-content flex align-center w-full">
     <input class="input-subtask-checkbox-big-card" type="checkbox" id="subtask-${taskId}-${subtaskId}"
         data-task-id="${taskId}" data-subtask-id="${subtaskId}" onchange="toggleSubtaskDone(this)" ${isDone ? "checked"
         : "" }>

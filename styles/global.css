@@ -68,6 +68,10 @@
   font-weight: 400;
 }
 
+.font-size-20{
+  font-size: 20px;
+}
+
 .input-base {
   border: 1px solid black;
   border-radius: 10px;

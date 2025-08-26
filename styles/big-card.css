@@ -18,7 +18,6 @@
     overflow-x: hidden;
     padding: 48px 40px;
     max-width: 510px;
-    width: 100%;
     gap: 15px;
     z-index: 2001; 
 }
@@ -30,9 +29,7 @@
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: auto;
-    width: 100%;
     max-width: 100%;
-    height: auto;
     margin-bottom: 10px;
 }
 
@@ -44,20 +41,11 @@
 }
 
 .category-x {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
     height: 36px;
 }
 
 .category-chois {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 23px;
-    width: 100%;
     max-width: 208px;
     height: 36px;
     background-color: #1FD7C1;
@@ -67,50 +55,34 @@
 
 .description-big-card {
     line-height: 120%;
-    font-size: 20px;
     font-weight: 400;
-    width: 100%;
     margin-bottom: 20px;
     max-width: 445px;
     height: 24px;
 }
 
 .date-big-card {
-    display: flex;
-    align-items: center;
     gap: 25px;
-    width: 100%;
     max-width: 445px;
     height: 24px;
     margin-bottom: 15px;
 }
 
 .date-big-card-text {
-    font-size: 20px;
     font-weight: 400;
     color: #2A3647;
 }
 
-.date-info-big-card {
-    font-size: 20px;
-}
-
 .prio-big-card {
-    display: flex;
-    align-items: center;
     gap: 43px;
-    font-size: 20px;
     font-weight: 400;
-    width: 100%;
     max-width: 445px;
     height: 32px;
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
 .assigned-big-card {
-    font-size: 20px;
     font-weight: 400;
-    width: 100%;
     max-width: 445px;
     height: 175px;
     overflow: auto;
@@ -126,7 +98,6 @@
 .subtasks-big-card {
     min-width: 400px;
     max-width: 445px;
-    display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
@@ -134,14 +105,8 @@
 }
 
 .subtitles-prio-big-card{
-  
-    font-size: 20px;
     font-weight: 400;
-}
-
-.subtitles-assigned-big-card{
-    font-size: 20px;
-}
+} 
 
 .input-subtask-checkbox-big-card {
     width: auto;
@@ -151,7 +116,6 @@
 
 .subtask-text-big-card {
     margin-bottom: 10px;
-    font-size: 20px;
     font-weight: 400;
 }
 
@@ -162,9 +126,7 @@
 }
 
 .checkbox-subtask-content {
-    display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: flex-start;
     gap: 18px;
     margin-bottom: 4px;
@@ -172,24 +134,22 @@
 }
 
 
-.edit-delete-section {
+/* .edit-delete-section {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 30px;
     justify-content: flex-end;
 }
-
-.edit-icon-text,
+ */
+/* .edit-icon-text,
 .delete-icon-text {
     display: flex;
     gap: 5px;
     align-items: center;
-}
+} */
 
 .avatar-with-name {
-    display: flex;
-    align-items: center;
     gap: 8px;
     margin-bottom: 4px;
 }
@@ -199,11 +159,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    color: white;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .avatar-name {
@@ -212,19 +168,17 @@
 }
 
 .delete-edit-big-card-content {
-    display: flex;
-    width: 100%;
     justify-content: flex-end;
     gap: 8px;
     font-size: 16px;
 }
-
+/* 
 .delete-icon-big-card,
 .edit-pen-big-card {
     display: flex;
     align-items: center;
 }
-
+ */
 .delete-icon-big-card:hover,
 .edit-pen-big-card:hover {
     color: #29ABE2;
@@ -236,78 +190,7 @@
     fill: #29ABE2;
 }
 
-
-/* .overlay-big-card {
-  position: fixed;
-  inset: 0;
-  background: rgba(128,128,128,0.3);
-  z-index: 2000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/*  .overlay-add-task-big-card {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  z-index: 2100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}  */
-
 .x-closing-icon{
    cursor: pointer;
 }
 
-
-
-/* 
-
-.bg-ff7a00 {
-	background-color: #ff7a00;
-}
-.bg-ff5eb3 {
-	background-color: #ff5eb3;
-}
-.bg-6e52ff {
-	background-color: #6e52ff;
-}
-.bg-9327ff {
-	background-color: #9327ff;
-}
-.bg-00bee8 {
-	background-color: #00bee8;
-}
-.bg-1fd7c1 {
-	background-color: #1fd7c1;
-}
-.bg-ff745e {
-	background-color: #ff745e;
-}
-.bg-ffa35e {
-	background-color: #ffa35e;
-}
-.bg-fc71ff {
-	background-color: #fc71ff;
-}
-.bg-ffc701 {
-	background-color: #ffc701;
-}
-.bg-0038ff {
-	background-color: #0038ff;
-}
-.bg-c3ff2b {
-	background-color: #c3ff2b;
-}
-.bg-ffe62b {
-	background-color: #ffe62b;
-}
-.bg-ff4646 {
-	background-color: #ff4646;
-}
-.bg-ffbb2b {
-	background-color: #ffbb2b;
-}
- */
