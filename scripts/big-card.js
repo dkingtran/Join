@@ -20,15 +20,19 @@ function openBigCard(taskId) {
 }
 
 /**
- * Finds a task in displayedTasks by its Firebase ID.
+ * Finds a task in `displayedTasks` by its Firebase ID.
+ * @param {string} taskId
+ * @returns {Object|null}
  */
 function findTaskById(taskId) {
-  if (!Array.isArray(displayedTasks)) return null;
+  if (!Array.isArray(displayedTasks) || !taskId) return null;
   for (let i = 0; i < displayedTasks.length; i++) {
-    if (displayedTasks[i].id === taskId) return displayedTasks[i];
+    const t = displayedTasks[i];
+    if (t && t.id === taskId) return t;
   }
   return null;
 }
+
 
 /**
  * Shows the given big card HTML in the overlay container.
@@ -39,34 +43,28 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-  console.log("Container before:", container);
-
 }
 
 /**
- * Builds avatar HTML with proper color conversion.
+ * Builds avatar HTML for all users in task["assigned-to"].
+ * @param {Object} task
+ * @returns {string} HTML string of avatar items
  */
 function buildAvatarsHTML(task) {
   const users = Array.isArray(task["assigned-to"]) ? task["assigned-to"] : [];
   let html = "";
   for (let i = 0; i < users.length; i++) {
     const fullName = users[i];
-    const contact = contacts.find(c => {
-      const name = `${c.name["first-name"]} ${c.name["last-name"]}`;
-      return name === fullName;
-    });
-    let color = contact && contact.color
-      ? (contact.color.startsWith("bg-") ? "#" + contact.color.slice(3) : contact.color)
-      : "#B5C0D0";
+    const contact = contacts.find(c => `${c.name["first-name"]} ${c.name["last-name"]}` === fullName);
+    let color = "#B5C0D0";
+    if (contact && contact.color) {
+      color = contact.color.startsWith("bg-") ? `#${contact.color.slice(3)}` : contact.color;
+    }
     html += avatarItemTemplate(getInitials(fullName), color, fullName);
   }
   return html;
 }
 
-
-/**
- * Normalizes Firebase subtasks into array of {id, text, done}.
- */
 /**
  * Normalizes Firebase subtasks into array of {id, text, done}.
  */
@@ -89,7 +87,8 @@ function normalizeSubtasks(task) {
 }
 
 /**
- * Updates only the "done" state of a subtask in Firebase.
+ * Updates the "done" state of a subtask in Firebase.
+ * @param {HTMLInputElement} checkbox - The checkbox element of the subtask.
  */
 async function toggleSubtaskDone(checkbox) {
   const taskId = checkbox.dataset.taskId;
@@ -102,6 +101,7 @@ async function toggleSubtaskDone(checkbox) {
     console.error("Failed to save subtask:", err);
   }
 }
+
 
 /**
  * Builds HTML for all subtasks using the template.
@@ -132,13 +132,18 @@ function closeBigCard() {
 }
 
 /**
- * closed overlay when you click by side
+ * Closes the Big Card only when the backdrop itself is clicked.
+ * Ignores clicks inside the content. Safe if container or event is missing.
+ * @param {MouseEvent} e
  */
-function closeBigCardOverlay(event) {
-  if (event.target.id === "big-card-container") {
+function closeBigCardOverlay(e) {
+  const container = document.getElementById("big-card-container");
+  if (!container || !e) return;
+  if (e.target === container) {
     closeBigCard();
   }
 }
+
 
 /**
  * Delete complete Task in Firebase
@@ -155,29 +160,12 @@ async function deleteTaskBigCard(taskId) {
 }
 
 /**
- * Updates the "done" status of a subtask in Firebase
- * when its checkbox in the UI is toggled.
- * @param {HTMLInputElement} checkboxElement - The checkbox element of the subtask.
- */
-async function toggleSubtaskDone(checkboxElement) {
-  const taskId = checkboxElement.getAttribute("data-task-id");
-  const subtaskId = checkboxElement.getAttribute("data-subtask-id");
-  const isSubtaskDone = checkboxElement.checked;
-  const firebasePath = `tasks/${taskId}/subtasks/${subtaskId}/done`;
-  try {
-    await putData(firebasePath, isSubtaskDone);
-  } catch (error) {
-    console.error("Error updating subtask in Firebase:", error);
-  }
-}
-
-/**
  * Applies the "done" states from Firebase to the subtask checkboxes
  * inside a task detail view (Big Card).
  * @param {string} taskId - The ID of the task.
  * @param {Object} subtasksObj - The object containing all subtasks of the task.
  */
-function applySubtaskDoneStates(taskId, subtasksObj) {
+/* function applySubtaskDoneStates(taskId, subtasksObj) {
   if (!subtasksObj) return;
   const subtaskIds = Object.keys(subtasksObj);
   for (let i = 0; i < subtaskIds.length; i++) {
@@ -187,7 +175,7 @@ function applySubtaskDoneStates(taskId, subtasksObj) {
     if (checkbox) checkbox.checked = isSubtaskDone;
   }
 }
-
+ */
 
 function openEditCard() {
   const overlay = document.getElementById("edit-task-overlay");
