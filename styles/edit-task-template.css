@@ -4,12 +4,10 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-  /* Eltern braucht Bezug für den Footer */
   display: flex;
   flex-direction: column;
   height: calc(100vh - 16px);
 }
-
 
 .overlay-edit-task {
   position: fixed;
@@ -39,11 +37,6 @@ body.no-scroll {
   overflow: hidden;
 }
 
-.d-none {
-  display: none;
-}
-
-/* Css for edit big card */
 html,
 body {
   min-height: 100%;
@@ -267,7 +260,6 @@ form {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  /* padding: 6px; */
   margin-top: 8px;
   min-width: 335px;
   border-radius: 6px;
@@ -370,7 +362,6 @@ form {
   background-color: transparent;
 }
 
-
 .subtask-entry:hover {
   height: 32px;
   min-width: 340px;
@@ -405,7 +396,6 @@ form {
   min-height: 0;
   overflow: auto;
   padding-bottom: 104px;
-  /* Platz für Footer */
 }
 
 .edit-add-task-button-container {
@@ -439,6 +429,10 @@ form {
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 0.2s ease-in-out;
+}
+
+.d-none {
+  display: none;
 }
 
 /* for edit */

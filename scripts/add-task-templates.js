@@ -4,7 +4,6 @@
  * @param {string} id - The unique ID for the subtask (used in data-id).
  * @returns {string} HTML string for the subtask block.
  */
-
 function getSubtaskTemplate(text, id) {
     return `
 <div class="subtask-text-box flex justify-between" data-id="${id}">
@@ -30,10 +29,14 @@ function getSubtaskTemplate(text, id) {
  * @returns {string} HTML string for an editable input field.
  */
 function changeDivtoInputTemplate(text) {
-return `
-<input class="subtask-entry font-bundle border-bottom-blue" type="text" value="${text}"
-    onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }">
-`;
+  return `
+    <input 
+      class="subtask-entry font-bundle border-bottom-blue" 
+      type="text" 
+      value="${text}"
+      onkeydown="if(event.key==='Enter'){ finishEditSubtask(this); }"
+    >
+  `;
 }
 
 /**
@@ -42,12 +45,16 @@ return `
  * @returns {string} HTML string for the subtask in read mode.
  */
 function getReturnToDivTemplate(text) {
-return `
-<div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">
-    ${text}
-</div>
-`;
+  return `
+    <div 
+      class="subtask-entry font-bundle" 
+      onclick="startEditSubtask(this)"
+    >
+      ${text}
+    </div>
+  `;
 }
+
 
 /**
  * Returns the HTML template for rendering a contact item in the assign dropdown.
@@ -57,12 +64,24 @@ return `
  * @returns {string} HTML string for the contact dropdown entry.
  */
 function getAssignedNameTemplate(initials, name, color) {
-return `
-<div class="contact-item" onclick="toggleCheckboxContact(this)">
-    <span class="avatar display-standard white-color " style="background-color: ${color};">${initials}</span>
-    <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
-    <input type="checkbox" class="contact-checkbox" data-name="${name["first-name"]} ${name["last-name"]}"
-        data-initials="${initials}" onclick="toggleCheckboxContact(this); event.stopPropagation();">
-</div>
-`;
+  return `
+    <div class="contact-item" onclick="toggleCheckboxContact(this)">
+      <span 
+        class="avatar display-standard white-color" 
+        style="background-color: ${color};"
+      >
+        ${initials}
+      </span>
+      <span class="contact-name">
+        ${name["first-name"]} ${name["last-name"]}
+      </span>
+      <input 
+        type="checkbox" 
+        class="contact-checkbox" 
+        data-name="${name["first-name"]} ${name["last-name"]}"
+        data-initials="${initials}" 
+        onclick="toggleCheckboxContact(this); event.stopPropagation();"
+      >
+    </div>
+  `;
 }

@@ -1,8 +1,21 @@
+/**
+ * Returns the HTML template for rendering a big task card with all details.
+ * @param {string} id - Unique task ID.
+ * @param {string} category - Task category name.
+ * @param {string} title - Task title.
+ * @param {string} desc - Task description.
+ * @param {string} due - Due date string.
+ * @param {string} prio - Priority level.
+ * @param {string} avatarsHTML - Pre-rendered HTML for assigned avatars.
+ * @param {string} subtasksHTML - Pre-rendered HTML for subtasks list.
+ * @returns {string} Full HTML for the big card.
+ */
 function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML) {
 return `
 <div class="big-card-content w-full" id="big-card-${id}">
     <div class="category-x flex align-center justify-between w-full">
-        <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}" id="category-big-card-${id}">
+        <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}"
+            id="category-big-card-${id}">
             ${category || ""}
         </div>
 
@@ -67,41 +80,74 @@ return `
             <path d="M1.14453 0V24" stroke="#A8A8A8" />
         </svg>
 
-     <div class="edit-pen-big-card flex align-center" onclick="openEditCardFor('${id}')">
-  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-      <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
-    </mask>
-    <g mask="url(#mask0_75592_9969)">
-      <path d="M5.14453 19H6.54453L15.1695 10.375L13.7695 8.975L5.14453 17.6V19ZM19.4445 8.925L15.1945 4.725L16.5945 3.325C16.9779 2.94167 17.4487 2.75 18.007 2.75C18.5654 2.75 19.0362 2.94167 19.4195 3.325L20.8195 4.725C21.2029 5.10833 21.4029 5.57083 21.4195 6.1125C21.4362 6.65417 21.2529 7.11667 20.8695 7.5L19.4445 8.925ZM17.9945 10.4L7.39453 21H3.14453V16.75L13.7445 6.15L17.9945 10.4Z" fill="#2A3647"/>
-    </g>
-  </svg>
-  <p class="edit-text big-card">Edit</p>
-</div>
+        <div class="edit-pen-big-card flex align-center" onclick="openEditCardFor('${id}')">
+            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25"
+                    height="24">
+                    <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_75592_9969)">
+                    <path
+                        d="M5.14453 19H6.54453L15.1695 10.375L13.7695 8.975L5.14453 17.6V19ZM19.4445 8.925L15.1945 4.725L16.5945 3.325C16.9779 2.94167 17.4487 2.75 18.007 2.75C18.5654 2.75 19.0362 2.94167 19.4195 3.325L20.8195 4.725C21.2029 5.10833 21.4029 5.57083 21.4195 6.1125C21.4362 6.65417 21.2529 7.11667 20.8695 7.5L19.4445 8.925ZM17.9945 10.4L7.39453 21H3.14453V16.75L13.7445 6.15L17.9945 10.4Z"
+                        fill="#2A3647" />
+                </g>
+            </svg>
+            <p class="edit-text big-card">Edit</p>
+        </div>
 
     </div>
 </div>
 `;
 }
 
+/**
+ * Returns the HTML template for an avatar with initials and name.
+ * @param {string} initials - The user’s initials to display inside the avatar.
+ * @param {string} bgColor - The background color of the avatar circle.
+ * @param {string} fullName - The full name shown next to the avatar.
+ * @returns {string} HTML string for the avatar item.
+ */
 function avatarItemTemplate(initials, bgColor, fullName) {
-return `
-<div class="avatar-with-name flex align-center">
-    <div class="avatar white-color display-standard" style="background-color:${bgColor};">${initials}</div>
-    <span class="avatar-name">${fullName}</span>
-</div>
-`;
+  return `
+    <div class="avatar-with-name flex align-center">
+      <div 
+        class="avatar white-color display-standard" 
+        style="background-color:${bgColor};"
+      >
+        ${initials}
+      </div>
+      <span class="avatar-name">${fullName}</span>
+    </div>
+  `;
 }
 
+/**
+ * Returns the HTML template for a subtask checkbox item inside a big card.
+ * @param {string} taskId - The ID of the parent task.
+ * @param {string} subtaskId - The unique ID of the subtask.
+ * @param {string} subText - The text content of the subtask.
+ * @param {boolean} isDone - Whether the subtask is marked as completed.
+ * @returns {string} HTML string for the subtask item with checkbox.
+ */
 function subtaskItemTemplate(taskId, subtaskId, subText, isDone) {
-const cleanText = subText.replace(/^•\s*/, "");
-
-return `
-<div class="checkbox-subtask-content flex align-center w-full">
-    <input class="input-subtask-checkbox-big-card" type="checkbox" id="subtask-${taskId}-${subtaskId}"
-        data-task-id="${taskId}" data-subtask-id="${subtaskId}" onchange="toggleSubtaskDone(this)" ${isDone ? "checked"
-        : "" }>
-    <label for="subtask-${taskId}-${subtaskId}" class="subtask-value-content">${cleanText}</label>
-</div>
-`;
+  const cleanText = subText.replace(/^•\s*/, "");
+  return `
+    <div class="checkbox-subtask-content flex align-center w-full">
+      <input 
+        class="input-subtask-checkbox-big-card" 
+        type="checkbox" 
+        id="subtask-${taskId}-${subtaskId}"
+        data-task-id="${taskId}" 
+        data-subtask-id="${subtaskId}" 
+        onchange="toggleSubtaskDone(this)" 
+        ${isDone ? "checked" : ""}
+      >
+      <label 
+        for="subtask-${taskId}-${subtaskId}" 
+        class="subtask-value-content"
+      >
+        ${cleanText}
+      </label>
+    </div>
+  `;
 }

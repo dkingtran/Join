@@ -8,8 +8,12 @@ function openEditCard() {
   };
 }
 
-//=============
-/** Toggle dropdown inside overlay */
+/**
+ * Toggles the visibility of the contact dropdown inside the edit-task overlay.
+ * Also rotates the dropdown arrow to indicate state.
+ * @param {Event} event - The click event that triggered the toggle.
+ *                        Wird meist vom Dropdown-Button im Overlay übergeben.
+ */
 function toggleDropdownOverlay(event) {
   event.stopPropagation();
   const root = document.getElementById('edit-task-content'); if (!root) return;
@@ -19,7 +23,13 @@ function toggleDropdownOverlay(event) {
   if (arrow) arrow.classList.toggle('rotate', !vis);
 }
 
-/** Close dropdown when clicking outside (overlay-scoped) */
+/**
+ * Handles clicks inside the overlay to close the contact dropdown
+ * when the user clicks outside of the dropdown input or contact items.
+ * @param {Event} event - The click event within the overlay. 
+ *                        Nutzt `event.target` um zu prüfen, ob der Klick
+ *                        außerhalb der relevanten Dropdown-Elemente war.
+ */
 function handleDropdownClickOverlay(event) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const input = event.target.closest('.dropdown-input'); const item = event.target.closest('.contact-item');
@@ -29,7 +39,10 @@ function handleDropdownClickOverlay(event) {
   }
 }
 
-/** Checkbox toggle inside overlay */
+/**
+ * Toggles a contact checkbox and its active state in the overlay.
+ * @param {HTMLElement} el - Clicked element (checkbox or contact item).
+ */
 function toggleCheckboxContactOverlay(el) {
   const cont = el.classList.contains('contact-checkbox') ? el.closest('.contact-item') : el;
   const cb = cont.querySelector('.contact-checkbox'); if (!el.classList.contains('contact-checkbox')) cb.checked = !cb.checked;
@@ -51,20 +64,6 @@ function updateAssignedListOverlay() {
   window.assignedTo = sel;
 }
 
-
-
-/** Overlay version of contact item template (calls overlay handlers) */
-function getAssignedNameTemplateOverlay(initials, name, color) {
-  return `<div class="contact-item" onclick="toggleCheckboxContactOverlay(this)">
-    <span class="avatar display-standard white-color" style="background-color:${color};">${initials}</span>
-    <span class="contact-name">${name["first-name"]} ${name["last-name"]}</span>
-    <input type="checkbox" class="contact-checkbox"
-      data-name="${name["first-name"]} ${name["last-name"]}" data-initials="${initials}"
-      onclick="toggleCheckboxContactOverlay(this); event.stopPropagation();">
-  </div>`;
-}
-
-//==========
 /** Closes the overlay and re-enables body scroll */
 function closeEditCard() {
   const overlay = document.getElementById("edit-task-overlay");
@@ -90,24 +89,34 @@ async function loadContactsIntoDropdownOverlay() {
       getAssignedNameTemplateOverlay(p.initials, p.name, p.hexColor));
   }
 }
-/** Switches one subtask row in the EDIT overlay into input mode */
+
+/**
+ * Toggles the edit/confirm icons in a subtask row.
+ * @param {HTMLElement} box - The subtask row element containing the icons.
+ */
+function toggleSubtaskIcons(box) {
+  const icons = box.querySelector('.icon-edit-subtask-box');
+  if (!icons) return;
+  icons.querySelector('.edit-icon')?.classList.add('d-none');
+  icons.querySelector('.confirm-icon')?.classList.remove('d-none');
+}
+
+/**
+ * Switches a subtask row in the edit overlay into input mode.
+ * @param {HTMLElement} el - Clicked element inside the subtask row.
+ */
 function startEditSubtaskOverlay(el) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const box = el.closest('.subtask-text-box'); if (!box) return;
   const txtEl = box.querySelector('.subtask-entry');
   const txt = (txtEl?.textContent || '').replace(/^•\s*/, '').trim();
-  const icons = box.querySelector('.icon-edit-subtask-box');
-  if (icons) {
-    icons.querySelector('.edit-icon')?.classList.add('d-none');
-    icons.querySelector('.confirm-icon')?.classList.remove('d-none');
-  }
+  toggleSubtaskIcons(box);
   const input = document.createElement('input');
   input.type = 'text'; input.className = 'subtask-entry font-bundle border-bottom-blue'; input.value = txt;
-  input.onkeydown = function (e) { if (e.key === 'Enter') { finishEditSubtaskOverlay(this); } };
+  input.onkeydown = e => { if (e.key === 'Enter') finishEditSubtaskOverlay(input); };
   if (txtEl) txtEl.replaceWith(input);
 }
 window.startEditSubtaskOverlay = startEditSubtaskOverlay;
-
 
 /** Deletes one subtask row inside the EDIT overlay */
 function deleteSubtaskOverlay(el) {
@@ -117,7 +126,8 @@ function deleteSubtaskOverlay(el) {
 }
 window.deleteSubtaskOverlay = deleteSubtaskOverlay;
 
-/** Confirms edit: replace input with text and reset icons (EDIT overlay) */
+/** Finishes subtask edit in the overlay: replaces input with text and resets icons.  
+ * @param {HTMLElement} el - The edited input element or a child inside the subtask row. */
 function finishEditSubtaskOverlay(el) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const box = el.closest('.subtask-text-box'); if (!box) return;
@@ -131,7 +141,7 @@ function finishEditSubtaskOverlay(el) {
 }
 window.finishEditSubtaskOverlay = finishEditSubtaskOverlay;
 
-/** Collects all subtasks from the EDIT overlay into an object */
+/** Collects subtasks from the edit overlay into an object keyed by timestamp+index. */
 function collectSubtasksFromOverlay(root) {
   const result = {};
   const items = root.querySelectorAll('#subtask-output .subtask-entry');
@@ -143,15 +153,17 @@ function collectSubtasksFromOverlay(root) {
   return result;
 }
 
-/** Writes the EDIT overlay subtasks to Firebase */
+/** Collects subtasks from the edit overlay into an object with {subtask, done:false}.  
+ * @param {HTMLElement} root - Root element of the edit overlay.  
+ * @returns {Object} Subtask collection keyed by timestamp + index. */  
 async function updateSubtasksFromOverlay(taskId) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const payload = collectSubtasksFromOverlay(root); // nutzt deine Overlay-Collector-Funktion
   await putData(`/tasks/${taskId}/subtasks`, payload);
 }
 
-
-/** Opens overlay, renders edit form, loads contacts, then pre-fills */
+/** Opens the edit overlay for a task, renders the form, loads contacts and subtasks, then pre-fills fields.  
+ * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
   const task = findTaskById(taskId); if (!task) return;
   openEditCard();                 // Overlay zeigen
@@ -159,32 +171,49 @@ async function openEditCardFor(taskId) {
   prefillEditForm(task);      
   bindOverlayPrio();     // Title/Desc/Date/Prio
   await loadContactsIntoDropdownOverlay(); // Kontakte ins Overlay
-  prefillAssignedFromTaskOverlay(task);    // Assigned (Checkboxen + Avatare)
+  prefillAssignedFromTaskOverlay(task);  
   prefillSubtasksFromTaskOverlay(task);
-  attachEditFormSubmit(task.id); // <— hier hinzufügen
   bindEditOverlayButton(task.id);
 }
-
 window.openEditCardFor = openEditCardFor;
 
-//By Chat GPT
-/** Prefills the edit form inside #edit-task-content (no category) */
-function prefillEditForm(task) {
-  var root = document.getElementById('edit-task-content'); if (!root) return;
-  var t = root.querySelector('#title-task'); if (t) t.value = task.title || '';
-  var dsc = root.querySelector('#task-description'); if (dsc) dsc.value = task.description || '';
-  var d = task["due-date"] || task.due || task.date || ''; var di = root.querySelector('#task-date');
-  if (di) di.value = d ? String(d).slice(0, 10) : '';
-  var ids = ['urgent', 'medium', 'low'];
-  for (var i = 0; i < ids.length; i++) { var el = root.querySelector('#' + ids[i]); if (el) { el.classList.remove('active-red', 'active-yellow', 'active-green'); } }
-  var p = (task.priority || '').toLowerCase();
-  if (p === 'urgent') root.querySelector('#urgent')?.classList.add('active-red');
-  if (p === 'medium') root.querySelector('#medium')?.classList.add('active-yellow');
-  if (p === 'low') root.querySelector('#low')?.classList.add('active-green');
+/** Setzt Titel, Beschreibung und Datum im Edit-Overlay. */
+function prefillEditFormFields(root, task) {
+  const titleInput = root.querySelector('#title-task');
+  if (titleInput) titleInput.value = task.title || '';
+  const descInput = root.querySelector('#task-description');
+  if (descInput) descInput.value = task.description || '';
+  const due = task['due-date'] || task.due || task.date || '';
+  const dateInput = root.querySelector('#task-date');
+  if (dateInput) dateInput.value = due ? String(due).slice(0, 10) : '';
 }
 
 
-/** Prefills assigned contacts inside the overlay (checkboxes + avatars) */
+//By Chat GPT
+/** Setzt die Prio-Buttons im Edit-Overlay (reset + markieren). */
+function prefillEditFormPriority(root, task) {
+  const ids = ['urgent', 'medium', 'low'];
+  for (let i = 0; i < ids.length; i++) {
+    const btn = root.querySelector('#' + ids[i]);
+    if (btn) btn.classList.remove('active-red', 'active-yellow', 'active-green');
+  }
+  const pr = (task.priority || '').toLowerCase();
+  if (pr === 'urgent') root.querySelector('#urgent')?.classList.add('active-red');
+  if (pr === 'medium') root.querySelector('#medium')?.classList.add('active-yellow');
+  if (pr === 'low') root.querySelector('#low')?.classList.add('active-green');
+}
+
+/** Wrapper: befüllt alle Edit-Form-Felder im Overlay. */
+function prefillEditForm(task) {
+  const root = document.getElementById('edit-task-content');
+  if (!root) return;
+  prefillEditFormFields(root, task);
+  prefillEditFormPriority(root, task);
+}
+
+/** Prefills assigned contacts in the overlay by checking boxes and rendering avatars.  
+ * @param {Object} task - Task object with an `assigned-to` array of contact names. */
+
 function prefillAssignedFromTaskOverlay(task) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const wanted = Array.isArray(task['assigned-to']) ? task['assigned-to'] : [];
@@ -200,35 +229,9 @@ function prefillAssignedFromTaskOverlay(task) {
   }
 }
 
-
-/** Waits until .contact-item exists in overlay, then pre-fills assigned */
-function waitAndPrefillAssigned(task) {
-  const root = document.getElementById('edit-task-content'); let t = 0;
-  const h = setInterval(function () {
-    t++;
-    const items = root ? root.querySelectorAll('.contact-item') : null;
-    if (items && items.length) { clearInterval(h); prefillAssignedFromTask(task); }
-    if (t > 50) { clearInterval(h); } // Timeout ~5s
-  }, 100);
-}
-
-/** Wires the edit form submit to update Firebase (field-wise) */
-function attachEditFormSubmit(taskId) {
-  const root = document.getElementById('edit-task-content'); if (!root) return;
-  const form = root.querySelector('#form-element'); if (!form) return;
-  form.onsubmit = async function (e) {
-    e.preventDefault();
-    const d = collectEditFormData(root);
-    await putData(`/tasks/${taskId}/title`, d.title);
-    await putData(`/tasks/${taskId}/description`, d.description);
-    await putData(`/tasks/${taskId}/due-date`, d["due-date"]);
-    await putData(`/tasks/${taskId}/priority`, d.priority);
-    await putData(`/tasks/${taskId}/assigned-to`, d["assigned-to"]);
-    closeEditCard(); if (typeof init === 'function') await init();
-  };
-}
-
-/** Collects title/desc/date/priority/assigned from the overlay */
+/** Collects all form values from the edit overlay (title, description, due date, priority, assigned).  
+ * @param {HTMLElement} root - Root element of the edit overlay.  
+ * @returns {Object} Form data object with title, description, due-date, priority, and assigned-to array. */
 function collectEditFormData(root) {
   const title = root.querySelector('#title-task')?.value.trim() || '';
   const desc = root.querySelector('#task-description')?.value.trim() || '';
@@ -243,7 +246,8 @@ function collectEditFormData(root) {
   return { title, description: desc, "due-date": due, priority: pr, "assigned-to": names };
 }
 
-/** Binds the overlay OK button to the overlay form (scoped) */
+/** Binds the OK button in the edit overlay to submit the form and attach its handler.  
+ * @param {string} taskId - The Firebase ID of the task being edited. */
 function bindEditOverlayButton(taskId) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const form = root.querySelector('#form-element'); if (!form) return;
@@ -252,6 +256,9 @@ function bindEditOverlayButton(taskId) {
   bindEditOverlayFormSubmit(taskId); // Teil B (Submit-Handler) folgt
 }
 
+/** Attaches the submit handler to the edit overlay form.  
+ * Updates Firebase with form fields and subtasks, then closes the overlay.  
+ * @param {string} taskId - The Firebase ID of the task being updated. */
 function bindEditOverlayFormSubmit(taskId) {
   const root = document.getElementById('edit-task-content'); if (!root) return;
   const form = root.querySelector('#form-element'); if (!form) return;
@@ -265,14 +272,20 @@ function bindEditOverlayFormSubmit(taskId) {
   };
 }
 
-/** Renders existing subtasks of the task into the EDIT overlay list */
+/** Renders the task's existing subtasks into the edit overlay list.  
+ * @param {Object} task - Task object containing a `subtasks` map. */
 function prefillSubtasksFromTaskOverlay(task) {
-  var root = document.getElementById('edit-task-content'); if (!root) return;
-  var out = root.querySelector('#subtask-output'); if (!out) return; out.innerHTML = '';
-  var subs = (task && task.subtasks) ? task.subtasks : {}; var ids = Object.keys(subs);
-  for (var i = 0; i < ids.length; i++) {
-    var e = subs[ids[i]]; var txt = (e && e.subtask) || '';
-    out.insertAdjacentHTML('beforeend', getSubtaskTemplateOverlay(txt));
+  const root = document.getElementById('edit-task-content'); 
+  if (!root) return;
+  const output = root.querySelector('#subtask-output'); 
+  if (!output) return; 
+  output.innerHTML = '';
+  const subtasks = (task && task.subtasks) ? task.subtasks : {}; 
+  const subtaskIds = Object.keys(subtasks);
+  for (let i = 0; i < subtaskIds.length; i++) {
+    const subtask = subtasks[subtaskIds[i]]; 
+    const text = (subtask && subtask.subtask) || '';
+    output.insertAdjacentHTML('beforeend', getSubtaskTemplateOverlay(text));
   }
 }
 
@@ -298,8 +311,7 @@ function confirmSubtaskInputOverlay() {
   if (active) active.classList.add('d-none'); if (init) init.classList.remove('d-none');
 }
 
-
-/** Bindet Prio-Buttons im Overlay und toggelt die Farben */
+/** Binds priority buttons in the overlay and toggles the colors */
 function bindOverlayPrio(){
   const root=document.getElementById('edit-task-content'); if(!root) return;
   const map=[['urgent','active-red'],['medium','active-yellow'],['low','active-green']];

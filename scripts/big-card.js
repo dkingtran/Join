@@ -174,6 +174,10 @@ async function deleteTaskBigCard(taskId) {
 }
  */
 
+/**
+ * Opens the edit-task overlay and attaches a click handler
+ * to close it when clicking outside the content area.
+ */
 function openEditCard() {
   const overlay = document.getElementById("edit-task-overlay");
   overlay.classList.remove("d-none");
@@ -185,6 +189,9 @@ function openEditCard() {
   };
 }
 
+/**
+ * Closes the edit-task overlay.
+ */
 function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
