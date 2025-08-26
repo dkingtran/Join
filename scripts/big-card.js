@@ -33,7 +33,6 @@ function findTaskById(taskId) {
   return null;
 }
 
-
 /**
  * Shows the given big card HTML in the overlay container.
  * Replaces old content and removes the "d-none" class.
@@ -102,7 +101,6 @@ async function toggleSubtaskDone(checkbox) {
   }
 }
 
-
 /**
  * Builds HTML for all subtasks using the template.
  */
@@ -143,7 +141,6 @@ function closeBigCardOverlay(e) {
     closeBigCard();
   }
 }
-
 
 /**
  * Delete complete Task in Firebase
