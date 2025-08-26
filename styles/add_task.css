@@ -1,16 +1,12 @@
-/* * {
-  border: 1px solid red;
-} */
-
-html,
-body {
+/* ========== Layout & Container ========== */
+html, body {
   min-height: 100%;
   margin: 0;
   padding: 0;
 }
 
-.wrapper {
-  height: auto;
+.wrapper { 
+  height: auto; 
 }
 
 .main-container {
@@ -18,6 +14,20 @@ body {
   margin-left: 328px;
   margin-top: 96px;
   padding: 16px;
+}
+.add-task-container { 
+  max-width: 1102px; 
+  gap: 60px; 
+}
+
+.pipe { 
+  width: 2px; 
+  height: 424px; 
+  border: 1px solid #D1D1D1; 
+}
+
+form { 
+  margin-left: 120px; 
 }
 
 .title-section {
@@ -27,37 +37,41 @@ body {
   margin-bottom: 30px;
 }
 
-.title-section h1 {
-  font-size: 61px;
+
+.title-section h1 { 
+  
+  font-size: 61px; 
+
 }
 
-.title-task {
-  margin-bottom: 10px;
+
+.title-task { 
+  
+  margin-bottom: 10px; 
+
 }
 
-.add-task-section {
-  align-items: flex-start;
-  height: auto;
+
+.add-task-section { 
+  
+  align-items: flex-start; 
+  
+  height: auto; 
+
 }
 
-form {
-  margin-left: 120px;
+
+.section-task-under {
+  margin-top: 48px;
+  display: flex;
+  position: absolute;
+  top: 880px;
 }
 
-.add-task-container {
-  max-width: 1102px;
-  gap: 60px;
-}
-
-.pipe {
-  width: 2px;
-  height: 424px;
-  border: 1px solid #D1D1D1;
-}
-
-.input-title-task {
-  height: 48px;
-  padding-left: 21px;
+/* ========== Input Fields & Buttons ========== */
+.input-title-task { 
+  height: 48px; 
+  padding-left: 21px; 
 }
 
 .textarea-task {
@@ -67,24 +81,27 @@ form {
   margin: 10px 0 25px 0;
 }
 
-#task-date:valid {
-  color: #706b6b;
+
+
+#task-date:valid { 
+  color: #706b6b; 
 }
 
-.date {
-  min-width: 120px;
-  margin-bottom: 10px;
+.date { 
+  min-width: 120px; 
+  margin-bottom: 10px; 
 }
 
-.btn-prio {
-  gap: 15px;
-  margin: 10px 0 25px 0;
+.btn-prio { 
+  gap: 15px; 
+  margin: 10px 0 25px 0; 
 }
 
 .btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
+
 
 .btn-prio-bundle {
   max-width: 159px;
@@ -97,427 +114,38 @@ form {
   cursor: pointer;
 }
 
-.active-green {
-  background-color: #7AE229;
-  color: white;
-  box-shadow: none;
+.active-green { 
+  background-color: #7AE229; 
+  color: white; 
+  box-shadow: none; 
 }
 
-.active-green img {
-  filter: brightness(0) invert(1);
+.active-green img { 
+  filter: brightness(0) invert(1); 
 }
 
-.active-yellow {
-  background-color: #FFA800;
-  color: white;
-  box-shadow: none;
+.active-yellow { 
+  background-color: #FFA800; 
+  color: white; 
+  box-shadow: none; 
 }
 
-.active-red {
-  background-color: #FF3D00;
-  color: white;
-  box-shadow: none;
+.active-red { 
+  background-color: #FF3D00; 
+  color: white; 
+  box-shadow: none; 
 }
 
-.active-red img {
-  filter: brightness(0) invert(1);
+.active-red img { 
+  filter: brightness(0) invert(1); 
 }
 
-.priority-btn {
-  gap: 6px;
-  font-size: 21px;
-}
-
-.section-task-under {
-  margin-top: 48px;
-  display: flex;
-  position: absolute;
-  top: 880px;
-}
-
-.assigned-to {
- 
-  max-width: 150px;
-  margin-bottom: 10px;
-}
-
-.custom-dropdown {
-  position: relative;
-}
-
-.dropdown-input {
-  border: 1px solid black;
-  border-color: #d1d1d1;
-  padding: 16px;
-  cursor: pointer;
-  height: 48px;
-  transition: border-color 0.1s;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.dropdown-input:hover {
-  border-color: rgb(81, 78, 78);
-}
-
-.input-field {
-  border: none;
-}
-
-#searchInput::placeholder {
-  color: black;
-}
-
-.arrow {
-  height: 21px;
-  width: 21px;
-  text-align: center;
-  color: #2A3647;
-  display: inline-block;
-}
-
-.arrow:hover {
-  border-radius: 50%;
-  background-color: #D1D1D1;
-}
-
-.arrow.rotate {
-  transform: rotate(180deg);
-  transition: transform 0.2s ease;
-}
-
-.dropdown-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  border-top: none;
-  z-index: 10;
-  display: none;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.contact-item {
-  display: flex;
-  padding: 8px 10px;
-  cursor: pointer;
-  align-items: center;
-}
-
-.contact-item:hover {
-  background-color: #D1D1D1;
-}
-
-.avatar {
-  color: white;
-  width: 42px;
-  height: 42px;
-  background: #2A3647;
-  border-radius: 50%;
-  border: 2px solid white;
-  font-weight: 400;
-  font-size: 12px;
-  margin-right: 16px;
-}
-
-.select-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.select-container select {
-  color: black;
-  padding: 0 21px;
-  appearance: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 50px; /* Vergrößert um Arrow-Bereich zu erfassen */
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 3; /* Über dem Arrow */
-}
-
-/* Arrow innerhalb der Leiste platzieren */
-.select-container .arrow {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  margin: 0;
-  color: #2A3647;
-  cursor: pointer; /* Cursor bleibt pointer */
-  height: 21px;
-  width: 21px;
-  text-align: center;
-  transition: transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none; /* Arrow nicht klickbar */
-  background: transparent;
-  transform: translateY(-50%);
-  z-index: 3; /* Unter dem Select */
-}
-
-.select-container .arrow:hover {
-  border-radius: 50%;
-  background-color: #D1D1D1;
-  cursor: pointer; /* Explizit pointer setzen */
-}
-
-.select-container .arrow.rotate {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.contact-name {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.contact-checkbox {
-  margin-left: auto;
-}
-
-.contact-item input[type="checkbox"] {
-  transform: scale(1.2);
-}
-
-.contact-item.active {
-  color: white;
-  background-color: #2A3647;
-  border-radius: 6px;
-}
-
-.contact-item.active:hover {
-  background-color: #091931;
-}
-
-#selectedContacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  /* padding: 6px; */
-  margin-top: 8px;
-  min-width: 266px;
-  border-radius: 6px;
-}
-
-.selected-contact {
-  display: inline-flex;
-  align-items: center;
-  margin: 4px;
-  padding: 4px 8px;
-  background: #f2f2f2;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.selected-contact .avatar {
-  margin-right: 6px;
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  font-weight: bold;
-  color: white;
-}
-
-.category-text {
-  transition: border-color 0.1s;
-}
-
-.category-text:hover {
-  border-color: rgb(81, 78, 78);
-}
-
-.subtask-input-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-      padding: 16px 14px;
-}
-
-.subtask-input-box input {
-  border-color: transparent;
-
-  height: auto;
-}
-
-.subtask-input-box input:disabled {
-  color: #D1D1D1;
-  cursor: not-allowed;
-}
-
-.add-subtask-input {
-  padding: 2px;
-}
-
-.icon-task {
-  font-size: 24px;
-  color: #333;
-  cursor: pointer;
-  padding-left: 10px;
-}
-
-.subtask-input-box .icon-task.visible {
-  visibility: visible;
-}
-
-.output-subtask {
-  max-width: 440px;
-  min-width: 260px;
-  overflow: hidden;
-}
-
-.subtask-text-box {
-  overflow: visible; /* Sichtbarkeit für Icons */
-  max-width: 440px;
-  min-width: 260px;
-  padding-left: 20px;
-  transition: background-color 0.1s;
-  height: 32px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  position: relative; /* Für absolute Positionierung der Icons */
-}
-
-/* Icons immer innerhalb der Box anzeigen */
-.icon-edit-subtask-box {
-  display: none;
-  position: absolute;
-  right: 8px;
-  padding-right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  z-index: 2;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Divider-Style */
-.icon-divider {
-  display: inline-flex;
-  align-items: center;
-  height: 24px;
-}
-
-.icon-divider svg {
-  display: block;
-  height: 24px;
-  width: 2px;
-}
-
-/* Standard-Divider zwischen Edit und Delete */
-.icon-edit-subtask-box .icon-divider {
-  display: inline-flex;
-}
-
-/* Editing-Divider zwischen Delete und Confirm (standardmäßig versteckt) */
-.icon-edit-subtask-box .editing-divider {
-  display: none;
-}
-
-/* Beim Editieren: Standard-Divider verstecken, Editing-Divider zeigen */
-.icon-edit-subtask-box.editing .icon-divider {
-  display: none;
-}
-
-.icon-edit-subtask-box.editing .editing-divider {
-  display: inline-flex;
-}
-
-/* Icons beim Hover und Focus sichtbar machen */
-.subtask-text-box:hover .icon-edit-subtask-box,
-.subtask-text-box:focus-within .icon-edit-subtask-box {
-  display: flex;
-  background: transparent;
-}
-
-.subtask-entry {
-  border: none;
-  height: 32px;
-  padding-left: 16px;
-  max-width: 440px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* <-- Text immer am Anfang */
-  background-color: transparent;
-  position: relative;
-}
-
-.subtask-entry::before {
-  content: "•";
-  margin-right: 8px;
-  color: #2A3647;
-  font-size: 18px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-/* Beim Editieren (Input-Feld): Kein Stichpunkt */
-input.subtask-entry::before {
-  content: none;
-}
-
-.subtask-entry:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.subtask-entry:hover {
-  height: 32px;
-  min-width: 266px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* <-- Text immer am Anfang auch beim Hover */
-}
-
-.delete-subtask-input {
-  padding: 0;
-}
-
-.plus {
-  height: 24px;
-  width: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-}
-
-.plus img {
-  height: 14px;
-  width: 14px;
-}
-
-.plus:hover {
-  border-radius: 50%;
-  background-color: #D1D1D1;
-}
-
-.input-second {
-  width: 250px;
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.border-bottom-blue {
-  min-width: 266px;
-  width: 100%;
-  border-bottom: 1px solid #005DFF;
-  background: white;
+.priority-btn { 
+  gap: 6px; font-size: 21px; 
 }
 
 .btn-clear-task-container {
+
   gap: 10px;
   position: absolute;
   display: flex;
@@ -566,40 +194,18 @@ input.subtask-entry::before {
   transition: stroke 0.2s ease-in-out;
 }
 
-.btn-addtask-clear:hover .icon-close path {
-  stroke: #29ABE2;
+.btn-addtask-clear:hover .icon-close path { 
+  stroke: #29ABE2; 
 }
 
-.star {
-  color: red;
+/* ========== Error & Message Styles ========== */
+.d-none { 
+  display: none; 
 }
 
-.star-required {
-  max-width: 630px;
-  min-width: 200px;
-}
-
-.required-task-text {
-  margin-top: 5px;
-}
-
-.message-box {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #d4edda;
-  color: #155724;
-  font-weight: bold;
-  z-index: 200;
-}
-
-.d-none {
-  display: none;
-}
-
-.error-container {
-  height: 25px;
-  width: 150px;
+.error-container { 
+  height: 25px; 
+  width: 150px; 
 }
 
 .error-text {
@@ -610,8 +216,15 @@ input.subtask-entry::before {
   z-index: 3000;
 }
 
-.border-red {
-  border-color: red;
+.border-red { border-color: red; }
+.message-box {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  z-index: 200;
 }
 
 .task-message {
