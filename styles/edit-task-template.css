@@ -5,10 +5,10 @@ body {
   padding: 0;
 }
 
-.wrapper {
+/* .wrapper {
   height: auto;
 }
-
+ */
 .main-container {
   height: auto;
   margin-left: 600px;
@@ -31,8 +31,12 @@ body {
 }
 
 .add-task-section {
+  max-width: 1080px;
+  border-radius: 30px;
+  background-color: white;
+  max-height: calc(100vh - 1rem);
   align-items: flex-start;
-  height: auto;
+
 }
 
 form {
@@ -461,3 +465,4 @@ form {
 .d-none {
   display: none;
 }
+
