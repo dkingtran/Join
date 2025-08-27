@@ -10,7 +10,7 @@ function getSubtaskTemplate(text) {
       </svg>
     </span>
     <img class="icon-task delete-subtask-input" src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon" onclick="deleteSubtask(this)">
-    <span class="icon-divider editing-divider" style="display:none">
+    <span class="icon-divider editing-divider">
       <svg width="2" height="24" viewBox="0 0 2 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1.14453 0V24" stroke="#A8A8A8" />
       </svg>

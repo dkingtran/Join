@@ -130,7 +130,7 @@
   }
 
   .max-w-440 {
-    max-width: none;
+    max-width: 100%;
   }
 
   .btn-prio {
@@ -179,7 +179,7 @@
   }
 
   .max-w-440 {
-    min-width: 260px;
+    min-width: 274px;
   }
 
   .title-section {
@@ -259,6 +259,7 @@
   }
 
   .btn-addtask-clear {
+    gap: 8px;
     height: 48px;
     width: 100px;
   }
@@ -273,6 +274,6 @@
   }
 
   .icon-task {
-    padding: 0;
+    padding-left: 8px;
   }
 }
