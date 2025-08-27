@@ -1,3 +1,10 @@
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+} 
+
 body.no-scroll {
   overflow: hidden;
 }
@@ -24,10 +31,10 @@ body.no-scroll {
 
 .edit-task-content-style {
   display: flex;
-  width: 510px;
+  width: 472px;
   overflow-x: hidden;
   height: calc(100vh - 16px);
-  padding: 15px 24px;
+  padding: 15px 16px;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 30px;
@@ -37,14 +44,7 @@ body.no-scroll {
   overflow: hidden;
 }
 
-html,
-body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.title-task {
+/* .title-task {
   margin-bottom: 10px;
 }
 
@@ -56,9 +56,9 @@ form {
 .add-task-container {
   flex-direction: column;
   gap: 0px;
-}
+} */
 
-.input-title-task {
+/* .input-title-task {
   height: 48px;
   padding-left: 21px;
 }
@@ -72,9 +72,9 @@ form {
 
 #task-date:valid {
   color: #706b6b;
-}
+} */
 
-.date {
+/* .date {
   min-width: 120px;
   margin-bottom: 10px;
 }
@@ -120,9 +120,9 @@ form {
 .medium-btn {
   gap: 6px;
   font-size: 21px;
-}
+} */
 
-.section-task-under {
+/* .section-task-under {
   margin-top: 48px;
   display: flex;
   justify-content: space-between;
@@ -166,9 +166,9 @@ form {
   margin-left: 8px;
   color: #2A3647;
   display: inline-block;
-}
+} */
 
-.arrow.rotate {
+/* .arrow.rotate {
   transform: rotate(180deg);
   transition: transform 0.2s ease;
 }
@@ -223,8 +223,8 @@ form {
   width: 100%;
   box-sizing: border-box;
 }
-
-.select-container .arrow {
+ */
+/* .select-container .arrow {
   position: absolute;
   top: 50%;
   right: 6px;
@@ -289,9 +289,9 @@ form {
 
 .category-text {
   transition: border-color 0.1s;
-}
+} */
 
-.category-text:hover {
+/* .category-text:hover {
   border-color: rgb(81, 78, 78);
 }
 
@@ -306,9 +306,9 @@ form {
   border-color: transparent;
 
   height: auto;
-}
+} */
 
-.subtask-input-box input:disabled {
+/* .subtask-input-box input:disabled {
   color: #D1D1D1;
   cursor: not-allowed;
 }
@@ -333,9 +333,9 @@ form {
   max-height: 70px;
   min-width: 320px;
   overflow: auto;
-}
+} */
 
-.subtask-text-box {
+/* .subtask-text-box {
   overflow-x: hidden;
   overflow-y: hidden;
   max-width: 440px;
@@ -366,7 +366,6 @@ form {
   height: 32px;
   min-width: 340px;
   border-radius: 10px;
-
   display: flex;
   align-items: center;
 }
@@ -374,8 +373,8 @@ form {
 .delete-subtask-input {
   padding: 0;
 }
-
-.plus {
+ */
+/* .plus {
   font-weight: bold;
 }
 
@@ -389,16 +388,9 @@ form {
 
 .border-bottom-blue {
   min-width: 360px;
-}
+} */
 
-.form-scroll {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: auto;
-  padding-bottom: 104px;
-}
-
-.edit-add-task-button-container {
+/* .edit-add-task-button-container {
   position: absolute;
   left: 0;
   right: 0;
@@ -415,9 +407,9 @@ form {
   height: 56px;
   background: #2A3647;
   transition: all 0.2s ease-in-out;
-}
+} */
 
-.btn-addtask-create:hover {
+/* .btn-addtask-create:hover {
   background: #29ABE2;
   transform: scale(1.01);
   box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
@@ -429,10 +421,20 @@ form {
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 0.2s ease-in-out;
-}
+} */
+ 
 
 .d-none {
   display: none;
+}
+
+/* for edit */
+/* nur im Edit-Overlay anwenden */
+.form-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding-bottom: 25px;
 }
 
 /* for edit */
@@ -457,4 +459,20 @@ form {
 
 #edit-task-content .subtask-text-box:hover .icon-edit-subtask-box {
   opacity: 1; pointer-events: auto;        /* bei Hover sichtbar */
+}
+
+.add-task-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.edit-add-task-button-container{
+  display: flex;
+  justify-content: flex-end;
+ 
+}
+
+.btn-addtask-create{
+    max-width: 100px;
 }
