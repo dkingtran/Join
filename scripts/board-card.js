@@ -89,6 +89,7 @@ function getContactByName(fullName) {
 
 function getContactByName(fullName) {
     return contactsMap[fullName] || null;
+}
 
 function renderAssignedAvatars(users = []) {
     const maxVisible = 3;
