@@ -73,6 +73,7 @@
 .counter {
     font-family: inter;
     font-size: 12px;
+    margin-bottom: 15px;
 }
 
 .subtask-progress {
