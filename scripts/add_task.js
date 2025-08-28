@@ -210,7 +210,6 @@ document.addEventListener("click", function (event) {
     }
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
     setupCheckboxListener();
     loadContactsIntoDropdown();
@@ -247,7 +246,6 @@ function showSuccessMessage() {
     }, 1500);
 }
 
-
 // =====================
 // Utility
 // =====================
@@ -259,4 +257,41 @@ function rotateCategoryArrow(rotate) {
     }
 }
 
+// =====================
+// Category Dropdown (Select)
+// =====================
+
+function setupCategoryDropdown() {
+    const select = document.getElementById('task-category');
+    const arrow = document.getElementById('category-arrow');
+    if (!select || !arrow) return;
+    select.addEventListener('mousedown', () => {
+        if (arrow.classList.contains('rotate')) {
+            setTimeout(() => closeSelectDropdown(select, arrow), 0);
+        }
+    });
+    select.addEventListener('focus', () => arrow.classList.add('rotate'));
+    select.addEventListener('blur', () => arrow.classList.remove('rotate'));
+}
+
+function toggleSelectDropdown() {
+    const select = document.getElementById('task-category');
+    const arrow = document.getElementById('category-arrow');
+    if (arrow.classList.contains('rotate')) {
+        closeSelectDropdown(select, arrow);
+    } else {
+        openSelectDropdown(select, arrow);
+    }
+}
+
+
+function openSelectDropdown(select, arrow) {
+    select.focus();
+    select.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+}
+
+function closeSelectDropdown(select, arrow) {
+    select.blur();
+    arrow.classList.remove('rotate');
+}
 

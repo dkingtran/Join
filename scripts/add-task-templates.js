@@ -6,7 +6,7 @@
  * @returns {string} HTML string for the subtask block.
  */
 function getSubtaskTemplate(text) {
-  return 
+  return `
  <div class="subtask-text-box flex justify-between ">
   <div class="subtask-entry font-bundle" onclick="startEditSubtask(this)">${text}</div>
   <div class="icon-edit-subtask-box display-standard d-none">
@@ -25,7 +25,7 @@ function getSubtaskTemplate(text) {
     <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" alt="Confirm Icon" onclick="finishEditSubtask(this)">
   </div>
 </div>
- ;
+`;
 }
 
 /**
