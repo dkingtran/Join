@@ -35,15 +35,9 @@ function closeSelectDropdown(select, arrow) {
     arrow.classList.remove('rotate');
 }
 
-
 // =====================
 // Subtasks
 // =====================
-
-const initialBox = document.getElementById("subtask-initial");
-const activeBox = document.getElementById("subtask-active");
-const inputField = document.getElementById("subtask-input-second");
-
 /**
  * Displays the active subtask input field by hiding the initial field.
  */
