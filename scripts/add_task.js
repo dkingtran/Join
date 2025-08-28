@@ -1,3 +1,7 @@
+// =====================
+// Task Data & Validation
+// =====================
+
 let selectedPriority = "";
 let subtasksById = {};
 let subtask = [];
@@ -52,7 +56,10 @@ function checkTitleDateInput() {
     return titleOk && dateOk;
 }
 
-// Assigned
+// =====================
+// Assigned To Dropdown
+// =====================
+
 /**
  * Toggles the visibility of the contact dropdown using inline style.
  * @param {Event} event - The click event triggering the dropdown toggle.
@@ -78,16 +85,6 @@ function handleDropdownClick(event) {
     if (!clickedInsideInput && !clickedContactItem) {
         document.getElementById("contactList").style.display = "none";
         document.querySelector(".arrow").classList.remove("rotate");
-    }
-} 
-
-/** Rotates the category dropdown arrow based on the given state. 
- * @param {boolean} rotate - True to rotate, false to reset. 
- */
- function rotateCategoryArrow(rotate) {
-    const arrow = document.getElementById("category-arrow");
-    if (arrow) {
-        arrow.classList.toggle("rotate", rotate);
     }
 } 
 
@@ -193,108 +190,6 @@ function renderContactToDropdown({ initials, name, hexColor }, container) {
     container.innerHTML += getAssignedNameTemplate(initials, name, hexColor);
 }
 
-/** Displays the active subtask input field by hiding the initial field. */
-function showSubtaskInput() {
-    initialBox.classList.add("d-none");
-    activeBox.classList.remove("d-none");
-}
-
-/** Resets the subtask input to its initial state. */
-function cancelSubtaskInput() {
-    activeBox.classList.add("d-none");
-    initialBox.classList.remove("d-none");
-    inputField.value = "";
-}
-
-/**
- * Generates subtask HTML, displays it in the output box,
- * @param {string} text - The subtask text to add
- */
-function renderAndStoreSubtask(text) {
-    const id = "subtask_" + Date.now() + "_" + Math.floor(Math.random() * 1e6);
-    const outputBox = document.getElementById("subtask-output");
-    subtasksById[id] = { subtask: text, done: false };
-    outputBox.innerHTML += getSubtaskTemplate(text, id);
-}
-
-/**
- * Reads the current input value, trims whitespace, and returns it.
- * If the field is empty, shows an alert and returns null.
- * @returns {string|null}
- */
-function getTrimmedSubtaskInput() {
-    const inputField = document.getElementById("subtask-input-second");
-    const inputText = inputField.value.trim();
-    if (inputText === "") {
-        alert("Please enter a subtask.");
-        return null;
-    }
-    return inputText;
-}
-
-/**
- * Handles the subtask confirmation process:
- * validates input, updates UI, and resets the input.
- */
-function confirmSubtaskInput() {
-    const inputText = getTrimmedSubtaskInput();
-    if (!inputText) return;
-    renderAndStoreSubtask(inputText); 
-    cancelSubtaskInput();             
-}
-
-/** Collects all current subtasks from the DOM  */
-function collectSubtasksFromDOM() {
-    const subtaskDivs = document.querySelectorAll(".subtask-entry");
-    const collected = {};
-    for (let i = 0; i < subtaskDivs.length; i++) {
-        const id = "subtask_" + Date.now() + "_" + i; // eindeutiger Key
-        collected[id] = {
-            subtask: subtaskDivs[i].innerText.trim(),
-            done: false
-        };
-    }
-    return collected;
-}
-
-/** Deletes a specific subtask from the DOM and removes it from the subtask array.*/
-function deleteSubtask(element) {
-    const subtaskBox = element.closest(".subtask-text-box");
-    if (!subtaskBox) return;
-    const id = subtaskBox.dataset.id;   // ID aus data-id holen
-    delete subtasksById[id];            // Map-Eintrag löschen
-    subtaskBox.remove();                // DOM entfernen
-}
-
-
-/** Activates edit mode for the clicked subtask. */
-function startEditSubtask(element) {
-    const { box, textElement, iconBox } = getSubtaskParts(element);
-    const text = textElement.innerText;
-    iconBox.querySelector(".edit-icon").classList.add("d-none");
-    iconBox.querySelector(".confirm-icon").classList.remove("d-none");
-    textElement.outerHTML = changeDivtoInputTemplate(text);
-}
-
-/** Finishes the subtask editing. */
-function finishEditSubtask(iconElement) {
-    const { box, iconBox } = getSubtaskParts(iconElement);
-    const inputElement = box.querySelector("input.subtask-entry");
-    const text = inputElement.value.trim();
-    inputElement.outerHTML = getReturnToDivTemplate(text);
-    iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
-    iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
-    box.querySelector(".delete-icon")?.classList.remove("d-none");
-}
-
-/** Utility: Finds and returns relevant parts of a subtask block. */
-function getSubtaskParts(element) {
-    const box = element.closest(".subtask-text-box");
-    const iconBox = box.querySelector(".icon-edit-subtask-box");
-    const textElement = box.querySelector(".subtask-entry") || box.querySelector("input.subtask-entry");
-    return { box, iconBox, textElement };
-}
-
 /** Form submission event listener with validation and data posting. */
 document.getElementById("form-element").addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -315,7 +210,15 @@ document.addEventListener("click", function (event) {
     }
 });
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupCheckboxListener();
+    loadContactsIntoDropdown();
+    setupCategoryDropdown();
+});
+
 /** Resets the task form, clears subtasks/contacts, removes errors and restores default UI state. */
+
 function resetFormState() {
     document.getElementById("form-element").reset();
     document.getElementById("subtask-output").innerHTML = "";
@@ -344,8 +247,16 @@ function showSuccessMessage() {
     }, 1500);
 }
 
-/** Closes the contact dropdown when the user clicks outside of it. */
-document.addEventListener("DOMContentLoaded", () => {
-  /*   setupCheckboxListener(); */
-    loadContactsIntoDropdown();
-});
+
+// =====================
+// Utility
+// =====================
+
+function rotateCategoryArrow(rotate) {
+    const arrow = document.getElementById("category-arrow");
+    if (arrow) {
+        arrow.classList.toggle("rotate", rotate);
+    }
+}
+
+

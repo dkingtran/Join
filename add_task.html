@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../styles/media-query-add-task.css">
     <link rel="stylesheet" href="../styles/side_menu.css" />
     <link rel="stylesheet" href="../styles/add_task.css" />
+    <link rel="stylesheet" href="../styles/add-task-assigned-subtasks.css" />
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/media.css" />
     <link rel="stylesheet" href="../styles/media-query-add-task.css" />
@@ -64,12 +65,12 @@
 
     <div class="wrapper flex flex-column align-center w-full max-w-1200">
 
-        <div class="main-container w-full flex flex-column max-w-1200">
-            <div class="add-task-section w-full max-w-1200 p-20 flex flex-column">
-                <div class="title-section w-full max-w-1200 flex">
+        <div class="main-container flex flex-column">
+            <div class="add-task-section flex flex-column">
+                <div class="title-section max-w-1200 flex">
                     <h1>Add Task</h1>
                 </div>
-                <form id="form-element" class="w-full flex flex-column ">
+                <form id="form-element" class="flex flex-column ">
                     <div class="add-task-container w-full flex">
                         <div class="section-task-left w-full max-w-50">
 
@@ -108,18 +109,18 @@
 
                         <div class="section-task-right w-full max-w-50">
                             <p class="font-bundle">Priority</p>
-                            <div class="btn-prio flex justify-start max-w-440">
-                                <button id="urgent" class="font-bundle btn-prio-bundle border-radius-10px">Urgent <img
+                            <div class="btn-prio flex max-w-440">
+                                <button id="urgent" class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard">Urgent <img
                                         src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon">
                                 </button>
                                 <button id="medium"
-                                    class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
+                                    class="priority-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
                                     Medium
                                     <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
                                         alt="medium">
                                 </button>
 
-                                <button id="low" class="font-bundle btn-prio-bundle border-radius-10px">Low <img
+                                <button id="low" class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard">Low <img
                                         src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon">
                                 </button>
                             </div>
@@ -148,15 +149,14 @@
 
                                 <div class="select-container w-full max-w-440 black-color">
                                     <select class="font-bundle input-bundle max-w-440 category-text black-color"
-                                        name="category" id="task-category" onfocus="rotateCategoryArrow(true)"
-                                        onblur="rotateCategoryArrow(false)">
+                                        name="category" id="task-category">
 
                                         <option value="" disabled selected hidden>Select task category</option>
 
                                         <option value="Technical Task">Technical Task</option>
                                         <option value="User Story">User Story</option>
                                     </select>
-                                    <span class="arrow p-16 " id="category-arrow">&#9662;</span>
+                                    <span class="arrow" id="category-arrow" onclick="toggleSelectDropdown()">&#9662;</span>
                                 </div>
                             </div>
 
@@ -169,7 +169,7 @@
                                     onclick="showSubtaskInput()">
                                     <input class="add-subtask-input input-bundle font-bundle" type="text"
                                         placeholder="Add new subtask" readonly>
-                                    <span id="open-subtask" class="icon plus">
+                                    <span id="open-subtask" class="icon plus display-standard">
                                         <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon">
                                     </span>
                                 </div>
@@ -195,34 +195,33 @@
                     </div>
 
                     <div class="section-task-under">
-                        <div class="star-required flex justify-start align-center w-full">
-                            <p class="required-task-text font-bundle"><sup class="star">*</sup>This field is required
-                            </p>
-                        </div>
-                        <div class="btn-clear-task-container display-standard w-full">
-
-                            <button
-                                class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
-                                type="reset" onclick="resetFormState()">Clear
-                                <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
-                                        stroke="#2A3647" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
-                                type="submit">Create
-                                Task<img class="icon-task" src="assets/img/icons/add_task/check.svg"
-                                    alt="Ok Icon"></button>
-                        </div>
+                      <div class="star-required flex justify-start align-center w-full">
+                          <p class="required-task-text font-bundle"><sup class="star">*</sup>This field is required
+                          </p>
+                      </div>
                     </div>
                 </form>
+                        <div class="btn-clear-task-container">
+                          <button
+                              class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
+                              type="reset" onclick="resetFormState()">Clear
+                              <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                      d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
+                                      stroke="#2A3647" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                              </svg>
+                          </button>
+                          <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
+                              type="submit">Create
+                              Task<img class="icon-task" src="assets/img/icons/add_task/check.svg"
+                              alt="Ok Icon">
+                          </button>
+                      </div>
             </div>
         </div>
     </div>
-
     <div id="task-message" class="task-message hidden">
         <div class="task-successful-info">
             <p class="task-successful-info-text">Task successfully created!</p>
@@ -306,6 +305,7 @@
 
     <script src="./scripts/input.js"></script>
     <script src="./scripts/add_task.js"></script>
+    <script src="../scripts/add-task-category-subtasks.js"></script>
 
   </body>
 </html>
