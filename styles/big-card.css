@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .overlay-big-card {
     position: fixed;
     top: 0;
@@ -153,4 +157,9 @@
 
 .x-closing-icon {
     cursor: pointer;
+}
+
+.x-closing-icon:hover{
+    background-color: #3333333b;
+    border-radius: 30%;
 }

@@ -157,24 +157,6 @@ async function deleteTaskBigCard(taskId) {
 }
 
 /**
- * Applies the "done" states from Firebase to the subtask checkboxes
- * inside a task detail view (Big Card).
- * @param {string} taskId - The ID of the task.
- * @param {Object} subtasksObj - The object containing all subtasks of the task.
- */
-/* function applySubtaskDoneStates(taskId, subtasksObj) {
-  if (!subtasksObj) return;
-  const subtaskIds = Object.keys(subtasksObj);
-  for (let i = 0; i < subtaskIds.length; i++) {
-    const subtaskId = subtaskIds[i];
-    const isSubtaskDone = !!subtasksObj[subtaskId].done;
-    const checkbox = document.getElementById(`subtask-${taskId}-${subtaskId}`);
-    if (checkbox) checkbox.checked = isSubtaskDone;
-  }
-}
- */
-
-/**
  * Opens the edit-task overlay and attaches a click handler
  * to close it when clicking outside the content area.
  */
