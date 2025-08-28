@@ -1,54 +1,6 @@
-let contactsMap = {};
-
-async function loadContactsFromFirebase() {
-    const contactsData = await loadData("contacts");
-    if (contactsData && typeof contactsData === "object") {
-        for (const contactId in contactsData) {
-            const contact = contactsData[contactId];
-            const fullName = `${contact.name["first-name"]} ${contact.name["last-name"]}`.trim();
-            contactsMap[fullName] = {
-                color: contact.color, 
-                initials: getInitials(fullName)
-            };
-        }
-    } else {
-        console.warn("Keine Kontakte geladen oder Daten ungültig.");
-    }
-}
-
-async function loadTasksFromFirebase() {
-    await loadContactsFromFirebase();
-    const tasks = await loadData("tasks");
-    if (!tasks || typeof tasks !== "object") {
-        console.warn("Keine Aufgaben vorhanden oder Daten ungültig.");
-        return;
-    }
-    // Speichere Tasks global für Drag & Drop Zugriff
-    window.allTasks = tasks;
-    
-    renderAllTasks(tasks);
-}
-
 /**
- * Renders all tasks to their target columns.
- * @param {Object} tasksObject - Map of taskId -> task object.
+ * Maps task status to corresponding column element IDs.
  */
-function renderAllTasks(tasksObject) {
-    clearAllTaskLists();
-    for (const taskId in tasksObject) {
-        const task = tasksObject[taskId];
-        const columnId = getColumnIdByStatus(task.status);
-        if (columnId) {
-        renderTaskToColumn(taskId,task, columnId);
-        }
-    }
-    
-    // Rufe die "No Tasks"-Rendering-Funktion auf
-    if (typeof renderWithNoTasksAreas === 'function') {
-        renderWithNoTasksAreas();
-    }
-}
-
 const statusToColumnId = {
     "to-do": "tasks-list-open",
     "in-progress": "tasks-list-inprogress",
@@ -56,41 +8,30 @@ const statusToColumnId = {
     "done": "tasks-list-done"
 };
 
+/**
+ * Determines which column ID a task belongs to, based on its status.
+ */
 function getColumnIdByStatus(statusObj) {
     if (!statusObj || typeof statusObj !== "object") return null;
     for (const status in statusObj) {
         if (statusObj[status] === true && statusToColumnId[status]) {
-        return statusToColumnId[status];
+            return statusToColumnId[status];
         }
     }
     return null;
 }
 
 /**
- * Renders a single task card into its column.
- * @param {string} taskId - Display task ID to pass into the template.
- * @param {Object} task - Task data object.
- * @param {string} columnId - Target column element ID.
+ * Returns contact info (like color & initials) for a given full name.
  */
-function renderTaskToColumn(taskId, task, columnId) {
-  const container = document.getElementById(columnId);
-  if (!container) return console.warn(`Spalte mit ID '${columnId}' nicht gefunden.`);
-  const avatarsHTML = renderAssignedAvatars(task['assigned-to']);
-  const progress = getSubtaskProgress(task.subtasks);
-  const card = document.createElement('div');
-  card.classList.add('board-card');
-  card.innerHTML = cardRender(taskId, task, avatarsHTML, progress.progressPercent, progress.maxSubtasks, progress.total, '#4589FF');
-  container.appendChild(card);
-}
-
 function getContactByName(fullName) {
     return contactsMap[fullName] || null;
 }
 
-function getContactByName(fullName) {
-    return contactsMap[fullName] || null;
-}
-
+/**
+ * Renders the avatars of assigned users (up to 3).
+ * Extra users are grouped into a "+X" overflow avatar.
+ */
 function renderAssignedAvatars(users = []) {
     const maxVisible = 3;
     const visible = users.slice(0, maxVisible);
@@ -102,6 +43,9 @@ function renderAssignedAvatars(users = []) {
     return avatars.join("");
 }
 
+/**
+ * Renders a single user's avatar with initials and color.
+ */
 function renderSingleAvatar(name) {
     const contact = getContactByName(name);
     const initials = getInitials(name);
@@ -109,6 +53,9 @@ function renderSingleAvatar(name) {
     return `<div class="avatar ${color}" title="${name}">${initials}</div>`;
 }
 
+/**
+ * Renders the overflow avatar that shows how many users are hidden.
+ */
 function renderOverflowAvatar(users) {
     const tooltip = users.join(", ");
     return `
@@ -119,6 +66,10 @@ function renderOverflowAvatar(users) {
     `;
 }
 
+/**
+ * Calculates progress for subtasks.
+ * Returns % progress, completed count, and total.
+ */
 function getSubtaskProgress(subtasks = {}) {
     if (typeof subtasks !== "object" || Array.isArray(subtasks)) {
         return { progressPercent: 0, total: 0, maxSubtasks: 0 };
@@ -134,22 +85,34 @@ function getSubtaskProgress(subtasks = {}) {
     };
 }
 
+/**
+ * Returns the correct CSS class for the given category.
+ */
 function getCategoryClass(category) {
     if (!category) return "category-default";
     if (category.toLowerCase() === "technical task") {
         return "category-technical";
     }
+    if (category.toLowerCase() === "user story") {
+        return "category-userstory";
+    }
     return "category-default";
 }
 
+/**
+ * Returns the HTML icon for a given priority.
+ */
 function getPriorityIcon(priority) {
     if (!priority) return "";
     const validPriorities = ["low", "medium", "urgent"];
     const cleanPriority = priority.toLowerCase();
     if (!validPriorities.includes(cleanPriority)) return "";
-    return priorityRender(cleanPriority);
+    return priorityRender(cleanPriority); 
 }
 
+/**
+ * Clears all task columns before re-rendering cards.
+ */
 function clearAllTaskLists() {
     const columns = [
         "tasks-list-open",
@@ -161,4 +124,65 @@ function clearAllTaskLists() {
         const column = document.getElementById(id);
         if (column) column.innerHTML = "";
     });
+}
+
+/**
+ * Renders all tasks to their appropriate columns.
+ * @param {Object} tasksObject - Task ID mapped to task data.
+ */
+function renderAllTasks(tasksObject) {
+    clearAllTaskLists();
+    for (const taskId in tasksObject) {
+        const task = tasksObject[taskId];
+        const columnId = getColumnIdByStatus(task.status);
+        if (columnId) {
+            renderTaskToColumn(taskId, task, columnId);
+        }
+    }
+
+    // Optional: render placeholders if no tasks are present
+    if (typeof renderWithNoTasksAreas === 'function') {
+        renderWithNoTasksAreas();
+    }
+}
+
+/**
+ * Renders a single task card to the specified column.
+ */
+function renderTaskToColumn(taskId, task, columnId) {
+    const container = document.getElementById(columnId);
+    if (!container) return console.warn(`Column with ID '${columnId}' not found.`);
+    const avatarsHTML = renderAssignedAvatars(task['assigned-to']);
+    const progress = getSubtaskProgress(task.subtasks);
+    const card = document.createElement('div');
+    card.classList.add('board-card');
+    card.innerHTML = cardRender(taskId,task,avatarsHTML,progress.progressPercent,progress.maxSubtasks,progress.total,'#4589FF' );
+    container.appendChild(card);
+}
+
+/**
+ * Initializes the board view:
+ * - Loads tasks and contacts via init()
+ * - Builds contactsMap (name → color & initials)
+ * - Converts tasks array into object format
+ * - Renders all tasks
+ */
+async function initBoardView() {
+    await init();
+    window.contactsMap = {};
+    contacts.forEach(contact => {
+        const fullName = `${contact.name["first-name"]} ${contact.name["last-name"]}`.trim();
+        contactsMap[fullName] = {
+            color: contact.color,
+            initials: getInitials(fullName)
+        };
+    });
+
+    // Convert array to task object (taskId → task)
+    const tasksObject = {};
+    tasks.forEach(task => {
+        tasksObject[task.id] = task;
+    });
+
+    renderAllTasks(tasksObject);
 }
