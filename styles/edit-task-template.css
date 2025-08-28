@@ -1,0 +1,120 @@
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.add-task-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 16px);
+}
+
+.overlay-edit-task {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(128, 123, 123, 0.113);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-task-content-style {
+  display: flex;
+  width: 472px;
+  overflow-x: hidden;
+  height: calc(100vh - 16px);
+  padding: 15px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 0px 0px 6.4px 0px rgba(0, 0, 0, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+.d-none {
+  display: none;
+}
+
+/* for edit */
+/* nur im Edit-Overlay anwenden */
+.form-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding-bottom: 25px;
+}
+
+/* for edit */
+/* nur im Edit-Overlay anwenden */
+#edit-task-content #subtask-initial {
+  display: flex;
+  align-items: center;
+}
+
+#edit-task-content #subtask-initial .icon.plus {
+  margin-left: auto;
+  display: inline-flex;
+}
+
+/* muss NACH allen .subtask-input-box Regeln stehen */
+.d-none {
+  display: none !important;
+}
+
+/* nur im Edit-Overlay: Icons rechts erst bei Hover zeigen */
+#edit-task-content .subtask-text-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+#edit-task-content .icon-edit-subtask-box {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  /* standard: unsichtbar */
+  transition: opacity .15s ease-in-out;
+}
+
+#edit-task-content .subtask-text-box:hover .icon-edit-subtask-box {
+  opacity: 1;
+  pointer-events: auto;
+  /* bei Hover sichtbar */
+}
+
+.add-task-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.edit-add-task-button-container {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.btn-addtask-create {
+  max-width: 100px;
+}
+
+.output-subtask {
+  margin-top: 10px;
+  min-width: 420px;
+}
