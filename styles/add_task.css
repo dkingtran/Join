@@ -178,6 +178,7 @@ form {
   height: 56px;
   background: #2A3647;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btn-addtask-create:hover {
@@ -255,3 +256,4 @@ form {
   border-radius: 20px;
   text-align: center;
 }
+
