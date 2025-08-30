@@ -250,13 +250,11 @@
             </button>
             <div class="add-task-modal-inner" id="addTaskModalInner">
               <div
-                class="wrapper flex flex-column align-center w-full max-w-1200"
+                class="wrapper flex flex-column align-center w-full board-add-task-template-wrapper"
               >
-                <div class="main-container w-full flex flex-column max-w-1200">
-                  <div
-                    class="add-task-section w-full max-w-1200 p-20 flex flex-column"
-                  >
-                    <div class="title-section w-full max-w-1200 flex">
+                <div class="main-container w-full flex flex-column">
+                  <div class="add-task-section w-full p-20 flex flex-column">
+                    <div class="title-section w-full flex">
                       <h1>Add Task</h1>
                     </div>
                     <form id="form-element" class="w-full flex flex-column">
@@ -319,7 +317,7 @@
                           <div class="btn-prio flex justify-start max-w-440">
                             <button
                               id="urgent"
-                              class="font-bundle btn-prio-bundle border-radius-10px"
+                              class="priority-btn font-bundle btn-prio-bundle border-radius-10px"
                             >
                               Urgent
                               <img
@@ -329,7 +327,7 @@
                             </button>
                             <button
                               id="medium"
-                              class="medium-btn btn-prio-bundle border-radius-10px font-bundle display-standard"
+                              class="priority-btn btn-prio-bundle border-radius-10px font-bundle display-standard"
                             >
                               Medium
                               <img
@@ -340,7 +338,7 @@
                             </button>
                             <button
                               id="low"
-                              class="font-bundle btn-prio-bundle border-radius-10px"
+                              class="priority-btn font-bundle btn-prio-bundle border-radius-10px"
                             >
                               Low
                               <img
@@ -489,45 +487,45 @@
                           </p>
                         </div>
                       </div>
-                      <div
-                        class="btn-clear-task-container display-standard w-full"
-                      >
-                        <button
-                          class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
-                          type="reset"
-                          onclick="resetFormState()"
-                        >
-                          Clear
-                          <svg
-                            class="icon-close"
-                            width="13"
-                            height="14"
-                            viewBox="0 0 13 14"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
-                              stroke="#2A3647"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </button>
-                        <button
-                          class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
-                          type="submit"
-                        >
-                          Create Task
-                          <img
-                            class="icon-task"
-                            src="assets/img/icons/add_task/check.svg"
-                            alt="Ok Icon"
-                          />
-                        </button>
-                      </div>
                     </form>
+                    <div
+                      class="btn-clear-task-container display-standard w-full"
+                    >
+                      <button
+                        class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
+                        type="reset"
+                        onclick="resetFormState()"
+                      >
+                        Clear
+                        <svg
+                          class="icon-close"
+                          width="13"
+                          height="14"
+                          viewBox="0 0 13 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
+                            stroke="#2A3647"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
+                        type="submit"
+                      >
+                        Create Task
+                        <img
+                          class="icon-task"
+                          src="assets/img/icons/add_task/check.svg"
+                          alt="Ok Icon"
+                        />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
