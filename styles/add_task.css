@@ -177,6 +177,7 @@ form {
   max-width: 183px;
   height: 56px;
   background: #2A3647;
+  border: none;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
