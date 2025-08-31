@@ -33,7 +33,7 @@ body.no-scroll {
   display: flex;
   width: 472px;
   overflow-x: hidden;
-  height: calc(100vh - 16px);
+  max-height: calc(100vh - 16px);
   padding: 15px 16px;
   flex-direction: column;
   align-items: flex-start;
@@ -42,14 +42,13 @@ body.no-scroll {
   box-shadow: 0px 0px 6.4px 0px rgba(0, 0, 0, 0.16);
   position: relative;
   overflow: hidden;
+  margin: 0 10px;
 }
 
 .d-none {
   display: none;
 }
 
-/* for edit */
-/* nur im Edit-Overlay anwenden */
 .form-scroll {
   flex: 1 1 auto;
   min-height: 0;
@@ -57,8 +56,6 @@ body.no-scroll {
   padding-bottom: 25px;
 }
 
-/* for edit */
-/* nur im Edit-Overlay anwenden */
 #edit-task-content #subtask-initial {
   display: flex;
   align-items: center;
@@ -69,12 +66,10 @@ body.no-scroll {
   display: inline-flex;
 }
 
-/* muss NACH allen .subtask-input-box Regeln stehen */
 .d-none {
   display: none !important;
 }
 
-/* nur im Edit-Overlay: Icons rechts erst bei Hover zeigen */
 #edit-task-content .subtask-text-box {
   display: flex;
   align-items: center;
@@ -88,7 +83,6 @@ body.no-scroll {
   gap: 8px;
   opacity: 0;
   pointer-events: none;
-  /* standard: unsichtbar */
   transition: opacity .15s ease-in-out;
 }
 
@@ -107,14 +101,34 @@ body.no-scroll {
 .edit-add-task-button-container {
   display: flex;
   justify-content: flex-end;
-
 }
 
-.btn-addtask-create {
-  max-width: 100px;
+.btn-addtask-create-ok {
+    display: flex;
+    text-wrap: nowrap;
+    width: 168px;
+    max-width: 85px;
+    background-color: #2A3647;
+}
+
+@media(max-width:368px){
+  .btn-addtask-create-ok{
+    justify-content: center;
+  }
+}
+
+.btn-addtask-create-ok:hover {
+  background: #29ABE2;
+  transform: scale(1.01);
+  border: none;
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
 }
 
 .output-subtask {
   margin-top: 10px;
   min-width: 420px;
+  max-height: 200px;   
+  overflow-y: auto;  
+  overflow-x: hidden;  
 }
+

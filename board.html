@@ -277,7 +277,50 @@
                             </div>
                           </div>
                           <div id="selectedContacts" class="contact-selected flex"></div>
-                        </div>ncel Icon" />
+                        </div>
+
+                        <div class="category-task select-wrapper">
+                          <p class="font-bundle m-top">
+                            Category<span class="star">*</span>
+                          </p>
+
+                          <div class="select-container w-full max-w-440 black-color">
+                            <select class="font-bundle input-bundle max-w-440 category-text black-color" name="category"
+                              id="task-category">
+                              <option value="" disabled selected hidden>
+                                Select task category
+                              </option>
+
+                              <option value="Technical Task">
+                                Technical Task
+                              </option>
+                              <option value="User Story">User Story</option>
+                            </select>
+                            <span class="arrow" id="category-arrow" onclick="toggleSelectDropdown()">&#9662;</span>
+                          </div>
+                        </div>
+
+                        <div class="subtask-container">
+                          <p class="font-bundle m-top">Subtasks</p>
+
+                          <!-- Zustand 1 -->
+                          <div id="subtask-initial"
+                            class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
+                            onclick="showSubtaskInput()">
+                            <input class="add-subtask-input input-bundle font-bundle" type="text"
+                              placeholder="Add new subtask" readonly />
+                            <span id="open-subtask" class="icon plus display-standard">
+                              <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon" />
+                            </span>
+                          </div>
+
+                          <!-- Zustand 2 -->
+                          <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
+                            <input class="input-second font-bundle" type="text" id="subtask-input-second"
+                              placeholder="Add new subtask" />
+                            <div class="icon-subtask-container display-standard">
+                              <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
+                                <img class="icon-task" src="assets/img/icons/add_task/delete.svg" alt="Cancel Icon" />
                               </span>
                               <span id="confirm-subtask" class="icon confirm" onclick="confirmSubtaskInput()">
                                 <img class="icon-task" src="assets/img/icons/add_task/check_noir.svg"
@@ -370,46 +413,3 @@
 </body>
 
 </html>
-
-                        <div class="category-task select-wrapper">
-                          <p class="font-bundle m-top">
-                            Category<span class="star">*</span>
-                          </p>
-
-                          <div class="select-container w-full max-w-440 black-color">
-                            <select class="font-bundle input-bundle max-w-440 category-text black-color" name="category"
-                              id="task-category">
-                              <option value="" disabled selected hidden>
-                                Select task category
-                              </option>
-
-                              <option value="Technical Task">
-                                Technical Task
-                              </option>
-                              <option value="User Story">User Story</option>
-                            </select>
-                            <span class="arrow" id="category-arrow" onclick="toggleSelectDropdown()">&#9662;</span>
-                          </div>
-                        </div>
-
-                        <div class="subtask-container">
-                          <p class="font-bundle m-top">Subtasks</p>
-
-                          <!-- Zustand 1 -->
-                          <div id="subtask-initial"
-                            class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
-                            onclick="showSubtaskInput()">
-                            <input class="add-subtask-input input-bundle font-bundle" type="text"
-                              placeholder="Add new subtask" readonly />
-                            <span id="open-subtask" class="icon plus display-standard">
-                              <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon" />
-                            </span>
-                          </div>
-
-                          <!-- Zustand 2 -->
-                          <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
-                            <input class="input-second font-bundle" type="text" id="subtask-input-second"
-                              placeholder="Add new subtask" />
-                            <div class="icon-subtask-container display-standard">
-                              <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
-                                <img class="icon-task" src="assets/img/icons/add_task/delete.svg" alt="Ca

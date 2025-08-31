@@ -22,6 +22,11 @@ body {
     z-index: 2001;
 }
 
+@media(max-width:505px){
+    .big-card-content {
+   margin:0 10px;
+}
+}
 .title-content {
     font-family: Inter, sans-serif;
     font-weight: bold;
@@ -157,6 +162,7 @@ body {
 
 .x-closing-icon {
     cursor: pointer;
+    margin-left: 20px;
 }
 
 .x-closing-icon:hover{
