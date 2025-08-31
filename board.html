@@ -1,609 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join - Board</title>
-    <link
-      rel="icon"
-      href="../assets/img/logo/logo-dark.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="./styles/colors.css" />
-    <link rel="stylesheet" href="./styles/global.css" />
-    <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/big-card.css" />
-    <link rel="stylesheet" href="./styles/standard.css" />
-    <link rel="stylesheet" href="./styles/board-card.css" />
-    <link rel="stylesheet" href="./styles/board-drag-and-drop.css" />
-    <link rel="stylesheet" href="./styles/side_menu.css" />
-    <link rel="stylesheet" href="./styles/add_task.css" />
-    <link rel="stylesheet" href="./styles/add-task-assigned-subtasks.css" />
-    <link rel="stylesheet" href="./styles/edit-task-template.css" />
-    <link rel="stylesheet" href="./styles/media.css" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/media-query-add-task.css" />
-    <link rel="stylesheet" href="./styles/board-add-task-template.css" />
-    <link rel="stylesheet" href="./styles/media-query-board.css" />
-    <script src="./scripts/add-task-templates.js"></script>
-    <script src="./scripts/firebase.js"></script>
-    <script src="./scripts/input.js"></script>
-    <script src="./scripts/side-menu.js"></script>
-    <script src="./scripts/board-add-task-modal.js"></script>
-    <script src="./scripts/board.js"></script>
-    <script src="./scripts/big-card.js"></script>
-    <script src="./scripts/big-card-templates.js"></script>
-    <script src="./scripts/board-cards-templates.js"></script>
-    <script src="./scripts/board-card.js"></script>
 
-    <script src="./scripts/board-drag-and-drop.js"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/add_task.js" defer></script>
-    <script src="./scripts/add_task_button.js" defer></script>
-    <script src="./scripts/add-task-category-subtasks.js" defer></script>
-    <script src="./scripts/edit-add-task-template.js"></script>
-    <script src="./scripts/edit-add-task.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join - Board</title>
+  <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
+  <link rel="stylesheet" href="./styles/colors.css" />
+  <link rel="stylesheet" href="./styles/global.css" />
+  <link rel="stylesheet" href="./styles/board.css" />
+  <link rel="stylesheet" href="./styles/big-card.css" />
+  <link rel="stylesheet" href="./styles/standard.css" />
+  <link rel="stylesheet" href="./styles/board-card.css" />
+  <link rel="stylesheet" href="./styles/board-drag-and-drop.css" />
+  <link rel="stylesheet" href="./styles/side_menu.css" />
+  <link rel="stylesheet" href="./styles/add-task.css" />
+  <link rel="stylesheet" href="./styles/add-task-assigned-subtasks.css" />
+  <link rel="stylesheet" href="./styles/edit-task-template.css" />
+  <link rel="stylesheet" href="./styles/media.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./styles/media-query-add-task.css" />
+  <link rel="stylesheet" href="./styles/board-add-task-template.css" />
+  <link rel="stylesheet" href="./styles/media-query-board.css" />
+  <script src="./scripts/add-task-templates.js"></script>
+  <script src="./scripts/firebase.js"></script>
+  <script src="./scripts/input.js"></script>
+  <script src="./scripts/side-menu.js"></script>
+  <script src="./scripts/board-add-task-modal.js"></script>
+  <script src="./scripts/board.js"></script>
+  <script src="./scripts/big-card.js"></script>
+  <script src="./scripts/big-card-templates.js"></script>
+  <script src="./scripts/board-cards-templates.js"></script>
+  <script src="./scripts/board-card.js"></script>
 
-  <body onload="loadTasksFromFirebase(); init();">
-    <header>
-      <!--Header content-->
-      <div class="header-content">
-        <div class="header-inner">
-          <div class="logo-mobile d_none">
-            <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+  <script src="./scripts/board-drag-and-drop.js"></script>
+  <script src="./script.js"></script>
+  <script src="./scripts/add-task.js" defer></script>
+  <script src="./scripts/add-task-button.js" defer></script>
+  <script src="./scripts/add-task-category-subtasks.js" defer></script>
+  <script src="./scripts/edit-add-task-template.js"></script>
+  <script src="./scripts/edit-add-task.js"></script>
+</head>
+
+<body onload="loadTasksFromFirebase(); init();">
+  <header>
+    <!--Header content-->
+    <div class="header-content">
+      <div class="header-inner">
+        <div class="logo-mobile d_none">
+          <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+        </div>
+        <h1 class="header-title">Kanban Project Management Tool</h1>
+        <div class="header-right">
+          <div class="help-container" id="container-help">
+            <a href="./help.html" class="help-icon">
+              <img src="./assets/img/icons/header-side-menu/help.png" alt="Help Icon" />
+            </a>
           </div>
-          <h1 class="header-title">Kanban Project Management Tool</h1>
-          <div class="header-right">
-            <div class="help-container" id="container-help">
-              <a href="./help.html" class="help-icon">
-                <img
-                  src="./assets/img/icons/header-side-menu/help.png"
-                  alt="Help Icon"
-                />
-              </a>
-            </div>
-            <div class="profile-container" id="container-profile">
-              <button
-                class="profile-btn"
-                onclick="toggleProfileDropdown()"
-                aria-label="Profile menu"
-              >
-                WM
-              </button>
-              <div id="dropdown-profile" class="profile-dropdown">
-                <a href="./help.html" class="dropdown-item mobile-only d_none"
-                  >Help</a
-                >
-                <a href="./legal-notice.html" class="dropdown-item"
-                  >Legal Notice</a
-                >
-                <a href="./privacy-policy.html" class="dropdown-item"
-                  >Privacy Policy</a
-                >
-                <a href="index.html" class="dropdown-item">Log out</a>
-              </div>
+          <div class="profile-container" id="container-profile">
+            <button class="profile-btn" onclick="toggleProfileDropdown()" aria-label="Profile menu">
+              WM
+            </button>
+            <div id="dropdown-profile" class="profile-dropdown">
+              <a href="./help.html" class="dropdown-item mobile-only d_none">Help</a>
+              <a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
+              <a href="./privacy-policy.html" class="dropdown-item">Privacy Policy</a>
+              <a href="index.html" class="dropdown-item">Log out</a>
             </div>
           </div>
         </div>
       </div>
-    </header>
-    <!--End of Header content-->
-    <!--Side-menu-->
-    <aside class="side-menu background-side-menu">
-      <div class="logo-section">
-        <img
-          src="./assets/img/logo/logo-light.png"
-          alt="Logo"
-          class="logo-side-menu-img"
-        />
-      </div>
+    </div>
+  </header>
+  <!--End of Header content-->
+  <!--Side-menu-->
+  <aside class="side-menu background-side-menu">
+    <div class="logo-section">
+      <img src="./assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
+    </div>
 
-      <div class="menu-section">
-        <a href="./summary.html" class="menu-item">
-          <span class="menu-icon">
-            <img src="./assets/img/icons/header-side-menu/summary.svg" alt="" />
-          </span>
-          <span>Summary</span>
-        </a>
-        <a href="./add_task.html" class="menu-item">
-          <span class="menu-icon">
-            <img
-              src="./assets/img/icons/header-side-menu/add-task.svg"
-              alt=""
-            />
-          </span>
-          <span>Add Task</span>
-        </a>
-        <a href="./board.html" class="menu-item active">
-          <span class="menu-icon">
-            <img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
-          </span>
-          <span>Board</span>
-        </a>
-        <a href="./add_contact.html" class="menu-item">
-          <span class="menu-icon">
-            <img
-              src="./assets/img/icons/header-side-menu/contacts.svg"
-              alt=""
-            />
-          </span>
-          <span>Contacts</span>
-        </a>
-      </div>
+    <div class="menu-section">
+      <a href="./summary.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="./assets/img/icons/header-side-menu/summary.svg" alt="" />
+        </span>
+        <span>Summary</span>
+      </a>
+      <a href="./add-task.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="./assets/img/icons/header-side-menu/add-task.svg" alt="" />
+        </span>
+        <span>Add Task</span>
+      </a>
+      <a href="./board.html" class="menu-item active">
+        <span class="menu-icon">
+          <img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
+        </span>
+        <span>Board</span>
+      </a>
+      <a href="./add_contact.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="./assets/img/icons/header-side-menu/contacts.svg" alt="" />
+        </span>
+        <span>Contacts</span>
+      </a>
+    </div>
 
-      <div class="notice-side-menu">
-        <a href="./legal-notice.html" class="menu-item menu-bottom">
-          <span>Legal notice</span>
-        </a>
-        <a href="./privacy-policy.html" class="menu-item menu-bottom">
-          <span>Privacy Policy</span>
-        </a>
-      </div>
-    </aside>
-    <!--End of Side-menu-->
-    <main class="main-content">
-      <section>
-        <div class="header-board">
-          <div class="header-title-container">
-            <h1>Board</h1>
-          </div>
-          <div class="search-add-container">
-            <div class="search-input-wrapper">
-              <input type="text" id="searchInput" placeholder="Find Task" />
-              <img
-                class="search-divider"
-                src="./assets/img/icons/board/search-line.svg"
-                alt="|"
-              />
-              <button
-                type="button"
-                class="search-icon-btn"
-                onclick="onSearchClick()"
-              >
-                <img
-                  class="search-icon"
-                  src="./assets/img/icons/board/search.svg"
-                  alt="Search"
-                />
-              </button>
-            </div>
-            <button
-              class="add-task-button"
-              id="addTaskButton"
-              onclick="showAddTask()"
-            >
-              Add Task
-              <img src="./assets/img/icons/board/add-task.svg" alt="" />
+    <div class="notice-side-menu">
+      <a href="./legal-notice.html" class="menu-item menu-bottom">
+        <span>Legal notice</span>
+      </a>
+      <a href="./privacy-policy.html" class="menu-item menu-bottom">
+        <span>Privacy Policy</span>
+      </a>
+    </div>
+  </aside>
+  <!--End of Side-menu-->
+  <main class="main-content">
+    <section>
+      <div class="header-board">
+        <div class="header-title-container">
+          <h1>Board</h1>
+        </div>
+        <div class="search-add-container">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="Find Task" />
+            <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+            <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+              <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
             </button>
           </div>
-          <button
-            class="plus-add-task-button"
-            id="plusAddTaskButton"
-            onclick="showAddTask()"
-            style="display: none"
-            aria-label="Add Task"
-          >
-            <img
-              src="./assets/img/icons/board/plus-add-task-mobile.svg"
-              alt="Add Task"
-            />
+          <button class="add-task-button" id="addTaskButton" onclick="showAddTask()">
+            Add Task
+            <img src="./assets/img/icons/board/add-task.svg" alt="" />
           </button>
         </div>
-      </section>
-      <section>
-        <div class="drag-board">
-          <div class="board-column" id="open">
-            <div class="column-header">
-              <span>To do</span>
-              <button class="add-board-btn" onclick="addBoardTask('open')">
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-open"></div>
-          </div>
-          <div class="board-column" id="inprogress">
-            <div class="column-header">
-              <span>In progress</span>
-              <button
-                class="add-board-btn"
-                onclick="addBoardTask('inprogress')"
-              >
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-inprogress"></div>
-          </div>
-          <div class="board-column" id="awaitfeedback">
-            <div class="column-header">
-              <span>Await feedback</span>
-              <button
-                class="add-board-btn"
-                onclick="addBoardTask('awaitfeedback')"
-              >
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
-          </div>
-          <div class="board-column" id="done">
-            <div class="column-header">
-              <span>Done</span>
-            </div>
-            <!--rendered tasks -->
-            <div class="tasks-list" id="tasks-list-done"></div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <!-- Modal für Add Task -->
-        <div id="addTaskModal" class="add-task-modal">
-          <div class="add-task-modal-content">
-            <button
-              class="add-task-modal-close padding-0"
-              onclick="closeAddTaskModal()"
-            >
-              <img
-                src="./assets/img/icons/board/close.svg"
-                alt="close button add task modal"
-              />
+        <button class="plus-add-task-button" id="plusAddTaskButton" onclick="showAddTask()" style="display: none"
+          aria-label="Add Task">
+          <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />
+        </button>
+      </div>
+    </section>
+    <section>
+      <div class="drag-board">
+        <div class="board-column" id="open">
+          <div class="column-header">
+            <span>To do</span>
+            <button class="add-board-btn" onclick="addBoardTask('open')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
             </button>
-            <div class="add-task-modal-inner" id="addTaskModalInner">
-              <div
-                class="wrapper flex flex-column align-center w-full board-add-task-template-wrapper"
-              >
-                <div class="main-container w-full flex flex-column">
-                  <div class="add-task-section w-full p-20 flex flex-column">
-                    <div class="title-section w-full flex">
-                      <h1>Add Task</h1>
-                    </div>
-                    <form id="form-element" class="flex flex-column">
-                      <div class="add-task-container w-full flex">
-                        <div class="section-task-left w-full max-w-50">
-                          <div class="title-task">
-                            <p class="title-task font-bundle">
-                              Title<span class="star">*</span>
-                            </p>
-                            <label for="title-task" class="sr-only"></label>
-                            <input
-                              class="input-title-task font-bundle max-w-440 border-radius-10px input-bundle black-color"
-                              id="title-task"
-                              name="title"
-                              type="text"
-                              placeholder="Enter a title"
-                            />
-                            <div
-                              class="error-container"
-                              id="title-error-border"
-                            >
-                              <div class="error-text d-none">
-                                This fields is required
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="decription-class">
-                            <p class="font-bundle description-title">
-                              Description
-                            </p>
-                            <label for="description" class="sr-only"></label>
-                            <textarea
-                              class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
-                              name="description"
-                              id="task-description"
-                              placeholder="Enter a Description"
-                            ></textarea>
-                          </div>
-
-                          <div class="date-task">
-                            <p class="font-bundle w-full date">
-                              Du date <span class="star">*</span>
-                            </p>
-                            <label for="due-date" class="sr-only"></label>
-                            <input
-                              class="font-bundle date-input-task input-bundle max-w-440"
-                              id="task-date"
-                              name="dueDate"
-                              type="date"
-                            />
-                            <div class="error-container" id="date-error-border">
-                              <div id="error-info" class="error-text d-none">
-                                This fields is required or the date in the past
-                              </div>
+          </div>
+          <div class="tasks-list" id="tasks-list-open"></div>
+        </div>
+        <div class="board-column" id="inprogress">
+          <div class="column-header">
+            <span>In progress</span>
+            <button class="add-board-btn" onclick="addBoardTask('inprogress')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+            </button>
+          </div>
+          <div class="tasks-list" id="tasks-list-inprogress"></div>
+        </div>
+        <div class="board-column" id="awaitfeedback">
+          <div class="column-header">
+            <span>Await feedback</span>
+            <button class="add-board-btn" onclick="addBoardTask('awaitfeedback')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+            </button>
+          </div>
+          <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
+        </div>
+        <div class="board-column" id="done">
+          <div class="column-header">
+            <span>Done</span>
+          </div>
+          <!--rendered tasks -->
+          <div class="tasks-list" id="tasks-list-done"></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <!-- Modal für Add Task -->
+      <div id="addTaskModal" class="add-task-modal">
+        <div class="add-task-modal-content">
+          <button class="add-task-modal-close padding-0" onclick="closeAddTaskModal()">
+            <img src="./assets/img/icons/board/close.svg" alt="close button add task modal" />
+          </button>
+          <div class="add-task-modal-inner" id="addTaskModalInner">
+            <div class="wrapper flex flex-column align-center w-full board-add-task-template-wrapper">
+              <div class="main-container w-full flex flex-column">
+                <div class="add-task-section w-full p-20 flex flex-column">
+                  <div class="title-section w-full flex">
+                    <h1>Add Task</h1>
+                  </div>
+                  <form id="form-element" class="flex flex-column">
+                    <div class="add-task-container w-full flex">
+                      <div class="section-task-left w-full max-w-50">
+                        <div class="title-task">
+                          <p class="title-task font-bundle">
+                            Title<span class="star">*</span>
+                          </p>
+                          <label for="title-task" class="sr-only"></label>
+                          <input
+                            class="input-title-task font-bundle max-w-440 border-radius-10px input-bundle black-color"
+                            id="title-task" name="title" type="text" placeholder="Enter a title" />
+                          <div class="error-container" id="title-error-border">
+                            <div class="error-text d-none">
+                              This fields is required
                             </div>
                           </div>
                         </div>
 
-                        <div class="pipe"></div>
+                        <div class="decription-class">
+                          <p class="font-bundle description-title">
+                            Description
+                          </p>
+                          <label for="description" class="sr-only"></label>
+                          <textarea class="textarea-task font-bundle w-full max-w-440 border-radius-10px"
+                            name="description" id="task-description" placeholder="Enter a Description"></textarea>
+                        </div>
 
-                        <div class="section-task-right w-full max-w-50">
-                          <p class="font-bundle">Priority</p>
-                          <div class="btn-prio flex max-w-440">
-                            <button
-                              id="urgent"
-                              class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard"
-                            >
-                              Urgent
-                              <img
-                                src="./assets/img/icons/add_task/urgent_icon.svg"
-                                alt="Urgent Icon"
-                              />
-                            </button>
-                            <button
-                              id="medium"
-                              class="priority-btn btn-prio-bundle border-radius-10px font-bundle display-standard"
-                            >
-                              Medium
-                              <img
-                                id="medium-icon"
-                                src="./assets/img/icons/add_task/prio_medium_orange.svg"
-                                alt="medium"
-                              />
-                            </button>
-
-                            <button
-                              id="low"
-                              class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard"
-                            >
-                              Low
-                              <img
-                                src="./assets/img/icons/add_task/low_Icon.svg"
-                                alt="Low Icon"
-                              />
-                            </button>
-                          </div>
-
-                          <!-- Assigned -->
-                          <div class="assigned-to-container">
-                            <label class="font-bundle"
-                              ><p class="assigned-to">Assigned to</p></label
-                            >
-                            <div
-                              class="custom-dropdown w-full"
-                              onclick="handleDropdownClick(event)"
-                            >
-                              <div
-                                class="dropdown-input max-w-440 border-radius-10px input-bundle flex align-center justify-between bg-white"
-                                onclick="toggleDropdown(event)"
-                              >
-                                <input
-                                  class="font-bundle input-field"
-                                  type="text"
-                                  placeholder="Select contacts to assign"
-                                  id="searchInput"
-                                />
-                                <span class="arrow">&#9662;</span>
-                              </div>
-                              <div
-                                class="dropdown-list w-full bg-white"
-                                id="contactList"
-                              >
-                                <div
-                                  class="contact-item flex align-center justify-between border-radius-10px"
-                                ></div>
-                              </div>
-                            </div>
-                            <div
-                              id="selectedContacts"
-                              class="contact-selected flex"
-                            ></div>
-                          </div>
-
-                          <div class="category-task select-wrapper">
-                            <p class="font-bundle m-top">
-                              Category<span class="star">*</span>
-                            </p>
-
-                            <div
-                              class="select-container w-full max-w-440 black-color"
-                            >
-                              <select
-                                class="font-bundle input-bundle max-w-440 category-text black-color"
-                                name="category"
-                                id="task-category"
-                              >
-                                <option value="" disabled selected hidden>
-                                  Select task category
-                                </option>
-
-                                <option value="Technical Task">
-                                  Technical Task
-                                </option>
-                                <option value="User Story">User Story</option>
-                              </select>
-                              <span
-                                class="arrow"
-                                id="category-arrow"
-                                onclick="toggleSelectDropdown()"
-                                >&#9662;</span
-                              >
+                        <div class="date-task">
+                          <p class="font-bundle w-full date">
+                            Du date <span class="star">*</span>
+                          </p>
+                          <label for="due-date" class="sr-only"></label>
+                          <input class="font-bundle date-input-task input-bundle max-w-440" id="task-date"
+                            name="dueDate" type="date" />
+                          <div class="error-container" id="date-error-border">
+                            <div id="error-info" class="error-text d-none">
+                              This fields is required or the date in the past
                             </div>
                           </div>
+                        </div>
+                      </div>
 
-                          <div class="subtask-container">
-                            <p class="font-bundle m-top">Subtasks</p>
+                      <div class="pipe"></div>
 
-                            <!-- Zustand 1 -->
+                      <div class="section-task-right w-full max-w-50">
+                        <p class="font-bundle">Priority</p>
+                        <div class="btn-prio flex max-w-440">
+                          <button id="urgent"
+                            class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard">
+                            Urgent
+                            <img src="./assets/img/icons/add_task/urgent_icon.svg" alt="Urgent Icon" />
+                          </button>
+                          <button id="medium"
+                            class="priority-btn btn-prio-bundle border-radius-10px font-bundle display-standard">
+                            Medium
+                            <img id="medium-icon" src="./assets/img/icons/add_task/prio_medium_orange.svg"
+                              alt="medium" />
+                          </button>
+
+                          <button id="low"
+                            class="priority-btn font-bundle btn-prio-bundle border-radius-10px display-standard">
+                            Low
+                            <img src="./assets/img/icons/add_task/low_Icon.svg" alt="Low Icon" />
+                          </button>
+                        </div>
+
+                        <!-- Assigned -->
+                        <div class="assigned-to-container">
+                          <label class="font-bundle">
+                            <p class="assigned-to">Assigned to</p>
+                          </label>
+                          <div class="custom-dropdown w-full" onclick="handleDropdownClick(event)">
                             <div
-                              id="subtask-initial"
-                              class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
-                              onclick="showSubtaskInput()"
-                            >
-                              <input
-                                class="add-subtask-input input-bundle font-bundle"
-                                type="text"
-                                placeholder="Add new subtask"
-                                readonly
-                              />
-                              <span
-                                id="open-subtask"
-                                class="icon plus display-standard"
-                              >
-                                <img
-                                  src="assets/img/icons/add_task/add.svg"
-                                  alt="Plus Icon"
-                                />
+                              class="dropdown-input max-w-440 border-radius-10px input-bundle flex align-center justify-between bg-white"
+                              onclick="toggleDropdown(event)">
+                              <input class="font-bundle input-field" type="text" placeholder="Select contacts to assign"
+                                id="searchInput" />
+                              <span class="arrow">&#9662;</span>
+                            </div>
+                            <div class="dropdown-list w-full bg-white" id="contactList">
+                              <div class="contact-item flex align-center justify-between border-radius-10px"></div>
+                            </div>
+                          </div>
+                          <div id="selectedContacts" class="contact-selected flex"></div>
+                        </div>ncel Icon" />
+                              </span>
+                              <span id="confirm-subtask" class="icon confirm" onclick="confirmSubtaskInput()">
+                                <img class="icon-task" src="assets/img/icons/add_task/check_noir.svg"
+                                  alt="Confirm Icon" />
                               </span>
                             </div>
-
-                            <!-- Zustand 2 -->
-                            <div
-                              id="subtask-active"
-                              class="subtask-input-box input-bundle max-w-440 d-none"
-                            >
-                              <input
-                                class="input-second font-bundle"
-                                type="text"
-                                id="subtask-input-second"
-                                placeholder="Add new subtask"
-                              />
-                              <div
-                                class="icon-subtask-container display-standard"
-                              >
-                                <span
-                                  id="cancel-subtask"
-                                  class="icon cancel"
-                                  onclick="cancelSubtaskInput()"
-                                >
-                                  <img
-                                    class="icon-task"
-                                    src="assets/img/icons/add_task/delete.svg"
-                                    alt="Cancel Icon"
-                                  />
-                                </span>
-                                <span
-                                  id="confirm-subtask"
-                                  class="icon confirm"
-                                  onclick="confirmSubtaskInput()"
-                                >
-                                  <img
-                                    class="icon-task"
-                                    src="assets/img/icons/add_task/check_noir.svg"
-                                    alt="Confirm Icon"
-                                  />
-                                </span>
-                              </div>
-                            </div>
                           </div>
-                          <div id="subtask-output" class="output-subtask"></div>
                         </div>
+                        <div id="subtask-output" class="output-subtask"></div>
                       </div>
+                    </div>
 
-                      <div class="section-task-under">
-                        <div
-                          class="star-required flex justify-start align-center w-full"
-                        >
-                          <p class="required-task-text font-bundle">
-                            <sup class="star">*</sup>This field is required
-                          </p>
-                        </div>
+                    <div class="section-task-under">
+                      <div class="star-required flex justify-start align-center w-full">
+                        <p class="required-task-text font-bundle">
+                          <sup class="star">*</sup>This field is required
+                        </p>
                       </div>
-                      <div class="btn-clear-task-container">
-                        <button
-                          class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
-                          type="reset"
-                          onclick="resetFormState()"
-                        >
-                          Clear
-                          <svg
-                            class="icon-close"
-                            width="13"
-                            height="14"
-                            viewBox="0 0 13 14"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
-                              stroke="#2A3647"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </button>
-                        <button
-                          class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
-                          type="submit"
-                        >
-                          Create Task<img
-                            class="icon-task"
-                            src="assets/img/icons/add_task/check.svg"
-                            alt="Ok Icon"
-                          />
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                    <div class="btn-clear-task-container">
+                      <button
+                        class="btn-addtask-clear font-bundle display-standard w-full border-radius-10px p-16 bg-white"
+                        type="reset" onclick="resetFormState()">
+                        Clear
+                        <svg class="icon-close" width="13" height="14" viewBox="0 0 13 14" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M6.24959 6.99984L11.4926 12.2428M1.00659 12.2428L6.24959 6.99984L1.00659 12.2428ZM11.4926 1.75684L6.24859 6.99984L11.4926 1.75684ZM6.24859 6.99984L1.00659 1.75684L6.24859 6.99984Z"
+                            stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </button>
+                      <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color"
+                        type="submit">
+                        Create Task<img class="icon-task" src="assets/img/icons/add_task/check.svg" alt="Ok Icon" />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <div id="task-message" class="task-message hidden">
-                <div class="task-successful-info">
-                  <p class="task-successful-info-text">
-                    Task successfully created!
-                  </p>
-
-                  <svg
-                    width="30"
-                    height="26"
-                    viewBox="0 0 30 26"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M22.9575 2.73855L22.9575 23.1929C22.9569 23.7955 22.7173 24.3732 22.2912 24.7993C21.8651 25.2253 21.2874 25.465 20.6848 25.4656L16.1394 25.4656C15.5368 25.465 14.9591 25.2253 14.533 24.7993C14.1069 24.3732 13.8673 23.7955 13.8667 23.1929L13.8667 2.73855C13.8673 2.13597 14.1069 1.55825 14.533 1.13217C14.9591 0.706083 15.5368 0.466443 16.1394 0.465841L20.6848 0.46584C21.2874 0.466443 21.8651 0.706082 22.2912 1.13217C22.7173 1.55825 22.9569 2.13597 22.9575 2.73855ZM16.1394 23.1929L20.6848 23.1929L20.6848 2.73855L16.1394 2.73855L16.1394 23.1929ZM16.1394 2.73855L16.1394 23.1929C16.1388 23.7955 15.8992 24.3731 15.4731 24.7992C15.047 25.2253 14.4693 25.4649 13.8667 25.4655L9.32128 25.4655C8.71871 25.4649 8.14099 25.2253 7.7149 24.7992C7.28882 24.3731 7.04918 23.7954 7.04858 23.1928L7.04858 2.73852C7.04918 2.13595 7.28882 1.55823 7.7149 1.13214C8.14099 0.706058 8.71871 0.466423 9.32128 0.46582L13.8667 0.46582C14.4693 0.466422 15.047 0.706058 15.4731 1.13214C15.8992 1.55823 16.1388 2.13597 16.1394 2.73855ZM9.32128 23.1928L13.8667 23.1929L13.8667 2.73855L9.32128 2.73852L9.32128 23.1928ZM9.32128 2.73852L9.32128 23.1928C9.32068 23.7954 9.08104 24.3731 8.65496 24.7992C8.22887 25.2253 7.65115 25.4649 7.04858 25.4656L2.50317 25.4656C1.9006 25.4649 1.32288 25.2253 0.896793 24.7992C0.470708 24.3731 0.23107 23.7954 0.230469 23.1928L0.230468 2.73852C0.231069 2.13595 0.470707 1.55823 0.896792 1.13214C1.32288 0.706058 1.9006 0.466423 2.50317 0.46582L7.04858 0.46582C7.65115 0.466423 8.22887 0.706058 8.65496 1.13214C9.08104 1.55823 9.32068 2.13595 9.32128 2.73852ZM2.50317 23.1928L7.04858 23.1928L7.04858 2.73852L2.50317 2.73852L2.50317 23.1928Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M29.7756 2.7388L29.7756 23.1931C29.775 23.7957 29.5354 24.3734 29.1093 24.7995C28.6832 25.2256 28.1055 25.4652 27.5029 25.4658L22.9575 25.4658C22.3549 25.4652 21.7772 25.2256 21.3511 24.7995C20.925 24.3734 20.6854 23.7955 20.6848 23.1929L20.6848 2.73855C20.6854 2.13597 20.925 1.5585 21.3511 1.13242C21.7772 0.706334 22.3549 0.466697 22.9575 0.466094L27.5029 0.466094C28.1055 0.466696 28.6832 0.706334 29.1093 1.13242C29.5354 1.5585 29.775 2.13622 29.7756 2.7388ZM22.9575 23.1929L27.5029 23.1931L27.5029 2.7388L22.9575 2.73855L22.9575 23.1929Z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <!-- End add Task section -->
             </div>
+            <div id="task-message" class="task-message hidden">
+              <div class="task-successful-info">
+                <p class="task-successful-info-text">
+                  Task successfully created!
+                </p>
+
+                <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22.9575 2.73855L22.9575 23.1929C22.9569 23.7955 22.7173 24.3732 22.2912 24.7993C21.8651 25.2253 21.2874 25.465 20.6848 25.4656L16.1394 25.4656C15.5368 25.465 14.9591 25.2253 14.533 24.7993C14.1069 24.3732 13.8673 23.7955 13.8667 23.1929L13.8667 2.73855C13.8673 2.13597 14.1069 1.55825 14.533 1.13217C14.9591 0.706083 15.5368 0.466443 16.1394 0.465841L20.6848 0.46584C21.2874 0.466443 21.8651 0.706082 22.2912 1.13217C22.7173 1.55825 22.9569 2.13597 22.9575 2.73855ZM16.1394 23.1929L20.6848 23.1929L20.6848 2.73855L16.1394 2.73855L16.1394 23.1929ZM16.1394 2.73855L16.1394 23.1929C16.1388 23.7955 15.8992 24.3731 15.4731 24.7992C15.047 25.2253 14.4693 25.4649 13.8667 25.4655L9.32128 25.4655C8.71871 25.4649 8.14099 25.2253 7.7149 24.7992C7.28882 24.3731 7.04918 23.7954 7.04858 23.1928L7.04858 2.73852C7.04918 2.13595 7.28882 1.55823 7.7149 1.13214C8.14099 0.706058 8.71871 0.466423 9.32128 0.46582L13.8667 0.46582C14.4693 0.466422 15.047 0.706058 15.4731 1.13214C15.8992 1.55823 16.1388 2.13597 16.1394 2.73855ZM9.32128 23.1928L13.8667 23.1929L13.8667 2.73855L9.32128 2.73852L9.32128 23.1928ZM9.32128 2.73852L9.32128 23.1928C9.32068 23.7954 9.08104 24.3731 8.65496 24.7992C8.22887 25.2253 7.65115 25.4649 7.04858 25.4656L2.50317 25.4656C1.9006 25.4649 1.32288 25.2253 0.896793 24.7992C0.470708 24.3731 0.23107 23.7954 0.230469 23.1928L0.230468 2.73852C0.231069 2.13595 0.470707 1.55823 0.896792 1.13214C1.32288 0.706058 1.9006 0.466423 2.50317 0.46582L7.04858 0.46582C7.65115 0.466423 8.22887 0.706058 8.65496 1.13214C9.08104 1.55823 9.32068 2.13595 9.32128 2.73852ZM2.50317 23.1928L7.04858 23.1928L7.04858 2.73852L2.50317 2.73852L2.50317 23.1928Z"
+                    fill="white" />
+                  <path
+                    d="M29.7756 2.7388L29.7756 23.1931C29.775 23.7957 29.5354 24.3734 29.1093 24.7995C28.6832 25.2256 28.1055 25.4652 27.5029 25.4658L22.9575 25.4658C22.3549 25.4652 21.7772 25.2256 21.3511 24.7995C20.925 24.3734 20.6854 23.7955 20.6848 23.1929L20.6848 2.73855C20.6854 2.13597 20.925 1.5585 21.3511 1.13242C21.7772 0.706334 22.3549 0.466697 22.9575 0.466094L27.5029 0.466094C28.1055 0.466696 28.6832 0.706334 29.1093 1.13242C29.5354 1.5585 29.775 2.13622 29.7756 2.7388ZM22.9575 23.1929L27.5029 23.1931L27.5029 2.7388L22.9575 2.73855L22.9575 23.1929Z"
+                    fill="white" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- End add Task section -->
           </div>
         </div>
-      </section>
-      <section>
-        <div id="task-message" class="task-message hidden">
-          <div class="task-successful-info">
-            <p class="task-successful-info-text">Task added to board</p>
-            <svg
-              width="22"
-              height="26"
-              viewBox="0 0 30 26"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M22.9575 2.73855L22.9575 23.1929C22.9569 23.7955 22.7173 24.3732 22.2912 24.7993C21.8651 25.2253 21.2874 25.465 20.6848 25.4656L16.1394 25.4656C15.5368 25.465 14.9591 25.2253 14.533 24.7993C14.1069 24.3732 13.8673 23.7955 13.8667 23.1929L13.8667 2.73855C13.8673 2.13597 14.1069 1.55825 14.533 1.13217C14.9591 0.706083 15.5368 0.466443 16.1394 0.465841L20.6848 0.46584C21.2874 0.466443 21.8651 0.706082 22.2912 1.13217C22.7173 1.55825 22.9569 2.13597 22.9575 2.73855ZM16.1394 23.1929L20.6848 23.1929L20.6848 2.73855L16.1394 2.73855L16.1394 23.1929ZM16.1394 2.73855L16.1394 23.1929C16.1388 23.7955 15.8992 24.3731 15.4731 24.7992C15.047 25.2253 14.4693 25.4649 13.8667 25.4655L9.32128 25.4655C8.71871 25.4649 8.14099 25.2253 7.7149 24.7992C7.28882 24.3731 7.04918 23.7954 7.04858 23.1928L7.04858 2.73852C7.04918 2.13595 7.28882 1.55823 7.7149 1.13214C8.14099 0.706058 8.71871 0.466423 9.32128 0.46582L13.8667 0.46582C14.4693 0.466422 15.047 0.706058 15.4731 1.13214C15.8992 1.55823 16.1388 2.13597 16.1394 2.73855ZM9.32128 23.1928L13.8667 23.1929L13.8667 2.73855L9.32128 2.73852L9.32128 23.1928ZM9.32128 2.73852L9.32128 23.1928C9.32068 23.7954 9.08104 24.3731 8.65496 24.7992C8.22887 25.2253 7.65115 25.4649 7.04858 25.4656L2.50317 25.4656C1.9006 25.4649 1.32288 25.2253 0.896793 24.7992C0.470708 24.3731 0.23107 23.7954 0.230469 23.1928L0.230468 2.73852C0.231069 2.13595 0.470707 1.55823 0.896792 1.13214C1.32288 0.706058 1.9006 0.466423 2.50317 0.46582L7.04858 0.46582C7.65115 0.466423 8.22887 0.706058 8.65496 1.13214C9.08104 1.55823 9.32068 2.13595 9.32128 2.73852ZM2.50317 23.1928L7.04858 23.1928L7.04858 2.73852L2.50317 2.73852L2.50317 23.1928Z"
-                fill="white"
-              />
-              <path
-                d="M29.7756 2.7388L29.7756 23.1931C29.775 23.7957 29.5354 24.3734 29.1093 24.7995C28.6832 25.2256 28.1055 25.4652 27.5029 25.4658L22.9575 25.4658C22.3549 25.4652 21.7772 25.2256 21.3511 24.7995C20.925 24.3734 20.6854 23.7955 20.6848 23.1929L20.6848 2.73855C20.6854 2.13597 20.925 1.5585 21.3511 1.13242C21.7772 0.706334 22.3549 0.466697 22.9575 0.466094L27.5029 0.466094C28.1055 0.466696 28.6832 0.706334 29.1093 1.13242C29.5354 1.5585 29.775 2.13622 29.7756 2.7388ZM22.9575 23.1929L27.5029 23.1931L27.5029 2.7388L22.9575 2.73855L22.9575 23.1929Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <div
-      id="big-card-container"
-      class="d-none overlay-big-card w-full display-standard"
-      onclick="closeBigCardOverlay(event)"
-    >
-      <!--     <div class="big-card-content bg-white w-full"></div> -->
-    </div>
-
-    <div id="edit-task-overlay" class="d-none overlay-edit-task">
-      <div id="edit-task-content" class="edit-task-content-style">
-        <!-- Dein Add-Task-Formular -->
       </div>
+    </section>
+    <section>
+      <div id="task-message" class="task-message hidden">
+        <div class="task-successful-info">
+          <p class="task-successful-info-text">Task added to board</p>
+          <svg width="22" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M22.9575 2.73855L22.9575 23.1929C22.9569 23.7955 22.7173 24.3732 22.2912 24.7993C21.8651 25.2253 21.2874 25.465 20.6848 25.4656L16.1394 25.4656C15.5368 25.465 14.9591 25.2253 14.533 24.7993C14.1069 24.3732 13.8673 23.7955 13.8667 23.1929L13.8667 2.73855C13.8673 2.13597 14.1069 1.55825 14.533 1.13217C14.9591 0.706083 15.5368 0.466443 16.1394 0.465841L20.6848 0.46584C21.2874 0.466443 21.8651 0.706082 22.2912 1.13217C22.7173 1.55825 22.9569 2.13597 22.9575 2.73855ZM16.1394 23.1929L20.6848 23.1929L20.6848 2.73855L16.1394 2.73855L16.1394 23.1929ZM16.1394 2.73855L16.1394 23.1929C16.1388 23.7955 15.8992 24.3731 15.4731 24.7992C15.047 25.2253 14.4693 25.4649 13.8667 25.4655L9.32128 25.4655C8.71871 25.4649 8.14099 25.2253 7.7149 24.7992C7.28882 24.3731 7.04918 23.7954 7.04858 23.1928L7.04858 2.73852C7.04918 2.13595 7.28882 1.55823 7.7149 1.13214C8.14099 0.706058 8.71871 0.466423 9.32128 0.46582L13.8667 0.46582C14.4693 0.466422 15.047 0.706058 15.4731 1.13214C15.8992 1.55823 16.1388 2.13597 16.1394 2.73855ZM9.32128 23.1928L13.8667 23.1929L13.8667 2.73855L9.32128 2.73852L9.32128 23.1928ZM9.32128 2.73852L9.32128 23.1928C9.32068 23.7954 9.08104 24.3731 8.65496 24.7992C8.22887 25.2253 7.65115 25.4649 7.04858 25.4656L2.50317 25.4656C1.9006 25.4649 1.32288 25.2253 0.896793 24.7992C0.470708 24.3731 0.23107 23.7954 0.230469 23.1928L0.230468 2.73852C0.231069 2.13595 0.470707 1.55823 0.896792 1.13214C1.32288 0.706058 1.9006 0.466423 2.50317 0.46582L7.04858 0.46582C7.65115 0.466423 8.22887 0.706058 8.65496 1.13214C9.08104 1.55823 9.32068 2.13595 9.32128 2.73852ZM2.50317 23.1928L7.04858 23.1928L7.04858 2.73852L2.50317 2.73852L2.50317 23.1928Z"
+              fill="white" />
+            <path
+              d="M29.7756 2.7388L29.7756 23.1931C29.775 23.7957 29.5354 24.3734 29.1093 24.7995C28.6832 25.2256 28.1055 25.4652 27.5029 25.4658L22.9575 25.4658C22.3549 25.4652 21.7772 25.2256 21.3511 24.7995C20.925 24.3734 20.6854 23.7955 20.6848 23.1929L20.6848 2.73855C20.6854 2.13597 20.925 1.5585 21.3511 1.13242C21.7772 0.706334 22.3549 0.466697 22.9575 0.466094L27.5029 0.466094C28.1055 0.466696 28.6832 0.706334 29.1093 1.13242C29.5354 1.5585 29.775 2.13622 29.7756 2.7388ZM22.9575 23.1929L27.5029 23.1931L27.5029 2.7388L22.9575 2.73855L22.9575 23.1929Z"
+              fill="white" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="big-card-container" class="d-none overlay-big-card w-full display-standard"
+    onclick="closeBigCardOverlay(event)">
+
+  </div>
+
+  <div id="edit-task-overlay" class="d-none overlay-edit-task">
+    <div id="edit-task-content" class="edit-task-content-style">
+
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
+
+                        <div class="category-task select-wrapper">
+                          <p class="font-bundle m-top">
+                            Category<span class="star">*</span>
+                          </p>
+
+                          <div class="select-container w-full max-w-440 black-color">
+                            <select class="font-bundle input-bundle max-w-440 category-text black-color" name="category"
+                              id="task-category">
+                              <option value="" disabled selected hidden>
+                                Select task category
+                              </option>
+
+                              <option value="Technical Task">
+                                Technical Task
+                              </option>
+                              <option value="User Story">User Story</option>
+                            </select>
+                            <span class="arrow" id="category-arrow" onclick="toggleSelectDropdown()">&#9662;</span>
+                          </div>
+                        </div>
+
+                        <div class="subtask-container">
+                          <p class="font-bundle m-top">Subtasks</p>
+
+                          <!-- Zustand 1 -->
+                          <div id="subtask-initial"
+                            class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
+                            onclick="showSubtaskInput()">
+                            <input class="add-subtask-input input-bundle font-bundle" type="text"
+                              placeholder="Add new subtask" readonly />
+                            <span id="open-subtask" class="icon plus display-standard">
+                              <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon" />
+                            </span>
+                          </div>
+
+                          <!-- Zustand 2 -->
+                          <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
+                            <input class="input-second font-bundle" type="text" id="subtask-input-second"
+                              placeholder="Add new subtask" />
+                            <div class="icon-subtask-container display-standard">
+                              <span id="cancel-subtask" class="icon cancel" onclick="cancelSubtaskInput()">
+                                <img class="icon-task" src="assets/img/icons/add_task/delete.svg" alt="Ca

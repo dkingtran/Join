@@ -17,7 +17,7 @@ body {
     max-height: calc(100vh - 16px);
     overflow-x: hidden;
     padding: 48px 40px;
-    max-width: 510px;
+    max-width: 472px;
     gap: 15px;
     z-index: 2001;
 }

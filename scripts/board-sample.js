@@ -302,8 +302,8 @@ function showAddTaskModal() {
     const modal = document.getElementById('addTaskModal');
     const inner = document.getElementById('addTaskModalInner');
     modal.classList.add('show');
-    // Lade add_task.html und extrahiere NUR den .wrapper Inhalt
-    fetch('add_task.html')
+    // Lade add-task.html und extrahiere NUR den .wrapper Inhalt
+    fetch('add-task.html')
         .then(response => response.text())
         .then(html => {
             const temp = document.createElement('div');
