@@ -42,6 +42,7 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
+    document.body.style.overflow = "hidden"; // Hintergrund nicht mehr scrollbar
 }
 
 /**
@@ -127,6 +128,17 @@ function closeBigCard() {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
+
+  function closeBigCard() {
+  const container = document.getElementById("big-card-container")
+  if (container) {
+    container.innerHTML = "";
+    container.classList.add("d-none");
+  }
+
+  document.body.style.overflow = ""; // Scroll wieder erlauben
+}
+
 }
 
 /**
@@ -177,3 +189,5 @@ function openEditCard() {
 function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
+
+

@@ -238,7 +238,6 @@ function prefillEditForm(task) {
   prefillEditFormPriority(overlay, task);
 }
 
-
 /** Prefills assigned contacts in the overlay by checking boxes and rendering avatars.  
  * @param {Object} task - Task object with an `assigned-to` array of contact names. */
 function prefillAssignedFromTaskOverlay(task) {
