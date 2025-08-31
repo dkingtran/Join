@@ -42,7 +42,6 @@ function handleDropdownClickOverlay(event) {
   }
 }
 
-
 /**
  * Toggles a contact checkbox and its active state in the overlay.
  * @param {HTMLElement} clickedElement - Clicked element (checkbox or contact item).
@@ -83,6 +82,7 @@ function closeEditCard() {
   overlay.classList.add("d-none");
   document.body.classList.remove("no-scroll");
 }
+
 
 /** Inserts the edit-task template into the overlay */
 function showEditTaskBig() {
@@ -153,7 +153,6 @@ function deleteSubtaskOverlay(clickedElement) {
   if (!subtaskBox) return;
   subtaskBox.remove(); // entfernt die Subtask-Zeile aus der UI
 }
-window.deleteSubtaskOverlay = deleteSubtaskOverlay;
 
 /** Finishes subtask edit in the overlay: replaces input with text and resets icons.  
  * @param {HTMLElement} el - The edited input element or a child inside the subtask row. */

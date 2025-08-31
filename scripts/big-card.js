@@ -19,6 +19,7 @@ function openBigCard(taskId) {
   showBigCard(bigCardHTML);
 }
 
+
 /**
  * Finds a task in `displayedTasks` by its Firebase ID.
  * @param {string} taskId
@@ -122,24 +123,15 @@ function buildSubtasksHTML(taskId, subtasks) {
 /**
  * Close big Card
  */
-function closeBigCard() {
-  const container = document.getElementById("big-card-container")
-  if (container) {
-    container.innerHTML = "";
-    container.classList.add("d-none");
-  }
-
   function closeBigCard() {
   const container = document.getElementById("big-card-container")
   if (container) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
-
   document.body.style.overflow = ""; // Scroll wieder erlauben
 }
 
-}
 
 /**
  * Closes the Big Card only when the backdrop itself is clicked.

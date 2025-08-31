@@ -49,16 +49,27 @@ function validateDateInput() {
     return isValid;
 }
 
-/** Checks both title and date inputs for validity. @returns {boolean} True if both are valid. */
-function checkTitleDateInput() {
-    const titleOk = validateTitleInput();
-    const dateOk = validateDateInput();
-    return titleOk && dateOk;
+/** Validates the task category input and toggles error display. @returns {boolean} */
+function validateCategoryInput() {
+  const select  = document.getElementById('task-category');
+  const errorEl = document.querySelector('#category-error-border .error-text');
+  const wrapper = select ? select.closest('.select-container') : null;
+  const isValid = !!(select && select.value.trim() !== "");
+  if (select)  select.classList.toggle('border-red', !isValid);
+  if (wrapper) wrapper.classList.toggle('border-red', !isValid);
+  if (errorEl) errorEl.classList.toggle('d-none', isValid);
+
+  return isValid;
 }
 
-// =====================
-// Assigned To Dropdown
-// =====================
+/** Checks both title and date inputs for validity. @returns {boolean} True if both are valid. */
+function checkTitleDateInput() {
+  const titleOk    = validateTitleInput();
+  const dateOk     = validateDateInput();
+  const categoryOk = validateCategoryInput();
+  return titleOk && dateOk && categoryOk;
+}
+
 
 /**
  * Toggles the visibility of the contact dropdown using inline style.
@@ -126,7 +137,6 @@ function createAvatar(initials, color) {
     avatar.textContent = initials;
     return avatar;
 }
-
 
 /** 
  * Processes a checked contact by extracting its data, adding the name to the selection,

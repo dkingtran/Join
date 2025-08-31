@@ -209,3 +209,5 @@ function getAssignedNameTemplateOverlay(initials, name, color) {
     </div>
   `;
 }
+
+
