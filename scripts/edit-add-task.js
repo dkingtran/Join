@@ -12,12 +12,11 @@ function openEditCard() {
  * Toggles the visibility of the contact dropdown inside the edit-task overlay.
  * Also rotates the dropdown arrow to indicate state.
  * @param {Event} event - The click event that triggered the toggle.
- *                        Wird meist vom Dropdown-Button im Overlay übergeben.
  */
 function toggleDropdownOverlay(event) {
   event.stopPropagation();
   const overlay = document.getElementById('edit-task-content'); if (!overlay) return;
-  const contactList = overlay.querySelector('#contactList'); 
+  const contactList = overlay.querySelector('#contactList');
   const dropdownArrow = overlay.querySelector('.assigned-to-container .arrow');
   const isVisible = contactList && contactList.style.display === 'block';
   if (contactList) contactList.style.display = isVisible ? 'none' : 'block';
@@ -30,18 +29,17 @@ function toggleDropdownOverlay(event) {
  * @param {Event} event - The click event within the overlay. 
  */
 function handleDropdownClickOverlay(event) {
-  const overlay = document.getElementById('edit-task-content'); 
+  const overlay = document.getElementById('edit-task-content');
   if (!overlay) return;
-  const clickedInput = event.target.closest('.dropdown-input'); 
+  const clickedInput = event.target.closest('.dropdown-input');
   const clickedContact = event.target.closest('.contact-item');
   if (!clickedInput && !clickedContact) {
-    const contactList = overlay.querySelector('#contactList'); 
+    const contactList = overlay.querySelector('#contactList');
     const dropdownArrow = overlay.querySelector('.assigned-to-container .arrow');
-    if (contactList) contactList.style.display = 'none'; 
+    if (contactList) contactList.style.display = 'none';
     if (dropdownArrow) dropdownArrow.classList.remove('rotate');
   }
 }
-
 
 /**
  * Toggles a contact checkbox and its active state in the overlay.
@@ -153,7 +151,6 @@ function deleteSubtaskOverlay(clickedElement) {
   if (!subtaskBox) return;
   subtaskBox.remove(); // entfernt die Subtask-Zeile aus der UI
 }
-window.deleteSubtaskOverlay = deleteSubtaskOverlay;
 
 /** Finishes subtask edit in the overlay: replaces input with text and resets icons.  
  * @param {HTMLElement} el - The edited input element or a child inside the subtask row. */
@@ -196,11 +193,11 @@ async function updateSubtasksFromOverlay(taskId) {
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
   const task = findTaskById(taskId); if (!task) return;
-  openEditCard();                 // Overlay zeigen
-  showEditTaskBig();              // Template in Overlay
+  openEditCard();
+  showEditTaskBig();
   prefillEditForm(task);
-  bindOverlayPrio();     // Title/Desc/Date/Prio
-  await loadContactsIntoDropdownOverlay(); // Kontakte ins Overlay
+  bindOverlayPrio();
+  await loadContactsIntoDropdownOverlay();
   prefillAssignedFromTaskOverlay(task);
   prefillSubtasksFromTaskOverlay(task);
   bindEditOverlayButton(task.id);
@@ -237,7 +234,6 @@ function prefillEditForm(task) {
   prefillEditFormFields(overlay, task);
   prefillEditFormPriority(overlay, task);
 }
-
 
 /** Prefills assigned contacts in the overlay by checking boxes and rendering avatars.  
  * @param {Object} task - Task object with an `assigned-to` array of contact names. */
@@ -299,12 +295,16 @@ function bindEditOverlayFormSubmit(taskId) {
   formElement.onsubmit = async event => {
     event.preventDefault();
     const formData = collectEditFormData(overlay);
+    const subtasksPayload = collectSubtasksFromOverlay(overlay);
     const fieldNames = ['title', 'description', 'due-date', 'priority', 'assigned-to'];
     for (let i = 0; i < fieldNames.length; i++)
       await putData(`/tasks/${taskId}/${fieldNames[i]}`, formData[fieldNames[i]]);
-    await updateSubtasksFromOverlay(taskId);
+    await putData(`/tasks/${taskId}/subtasks`, subtasksPayload);
     closeEditCard();
-    if (typeof init === 'function') await init();
+    if (typeof updateTaskCache === 'function')
+      updateTaskCache(taskId, { ...formData, subtasks: subtasksPayload });
+    if (typeof renderBigCard === 'function')
+      renderBigCard(taskId, findTaskById(taskId));
   };
 }
 

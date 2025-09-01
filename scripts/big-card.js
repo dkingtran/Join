@@ -19,6 +19,7 @@ function openBigCard(taskId) {
   showBigCard(bigCardHTML);
 }
 
+
 /**
  * Finds a task in `displayedTasks` by its Firebase ID.
  * @param {string} taskId
@@ -42,6 +43,7 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
+    document.body.style.overflow = "hidden"; // Hintergrund nicht mehr scrollbar
 }
 
 /**
@@ -121,13 +123,15 @@ function buildSubtasksHTML(taskId, subtasks) {
 /**
  * Close big Card
  */
-function closeBigCard() {
+  function closeBigCard() {
   const container = document.getElementById("big-card-container")
   if (container) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
+  document.body.style.overflow = ""; // Scroll wieder erlauben
 }
+
 
 /**
  * Closes the Big Card only when the backdrop itself is clicked.
@@ -176,4 +180,33 @@ function openEditCard() {
  */
 function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
+}
+
+
+function updateTaskCache(taskId, updated) {
+  if (!updated || !Array.isArray(displayedTasks)) return;
+  for (let i = 0; i < displayedTasks.length; i++) {
+    const t = displayedTasks[i];
+    if (t && t.id === taskId) {
+      displayedTasks[i] = { id: taskId, ...t, ...updated };
+      return;
+    }
+  }
+}
+
+function renderBigCard(taskId, taskObj) {
+  if (!taskObj) return;
+  const avatarsHTML = buildAvatarsHTML(taskObj);
+  const subs = taskObj.subtasks ? normalizeSubtasks(taskObj) : [];
+  const bigCardHTML = bigCardTemplate(
+    taskId,
+    taskObj.category || "",
+    taskObj.title || "",
+    taskObj.description || "",
+    taskObj["due-date"] || taskObj.due || taskObj.date || "",
+    taskObj.priority || "",
+    avatarsHTML,
+    buildSubtasksHTML(taskId, subs)
+  );
+  showBigCard(bigCardHTML);
 }
