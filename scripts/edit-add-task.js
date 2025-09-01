@@ -12,7 +12,6 @@ function openEditCard() {
  * Toggles the visibility of the contact dropdown inside the edit-task overlay.
  * Also rotates the dropdown arrow to indicate state.
  * @param {Event} event - The click event that triggered the toggle.
- *                        Wird meist vom Dropdown-Button im Overlay übergeben.
  */
 function toggleDropdownOverlay(event) {
   event.stopPropagation();
@@ -82,7 +81,6 @@ function closeEditCard() {
   overlay.classList.add("d-none");
   document.body.classList.remove("no-scroll");
 }
-
 
 /** Inserts the edit-task template into the overlay */
 function showEditTaskBig() {
@@ -195,11 +193,11 @@ async function updateSubtasksFromOverlay(taskId) {
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
   const task = findTaskById(taskId); if (!task) return;
-  openEditCard();                 // Overlay zeigen
-  showEditTaskBig();              // Template in Overlay
+  openEditCard();               
+  showEditTaskBig();            
   prefillEditForm(task);
-  bindOverlayPrio();     // Title/Desc/Date/Prio
-  await loadContactsIntoDropdownOverlay(); // Kontakte ins Overlay
+  bindOverlayPrio();    
+  await loadContactsIntoDropdownOverlay(); 
   prefillAssignedFromTaskOverlay(task);
   prefillSubtasksFromTaskOverlay(task);
   bindEditOverlayButton(task.id);
@@ -306,7 +304,6 @@ function bindEditOverlayFormSubmit(taskId) {
     if (typeof refreshBigCard === 'function')
       refreshBigCard(taskId, { ...formData, subtasks: subtasksPayload });
   };
-
 }
 
 /** Renders the task's existing subtasks into the edit overlay list.  
