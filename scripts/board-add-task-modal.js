@@ -9,12 +9,7 @@ function closeAddTaskModal() {
     document.body.style.overflow = '';
 }
 
-function showAddTask() {
+function addTaskBoard(status) {
+    taskToAddStatus = status;
     showAddTaskModal();
 }
-
-function addBoardTask(param) {
-    showAddTaskModal();
-}
-
-

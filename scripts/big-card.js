@@ -2,10 +2,10 @@
  * Opens a big card overlay for the given Firebase task ID.
  */
 function openBigCard(taskId) {
-/*   if (dragged) {
+  if (dragged) {
     e.preventDefault();
     return;
-  } */
+  }
   const task = findTaskById(taskId);
   if (!task) return;
   const avatarsHTML = buildAvatarsHTML(task);
