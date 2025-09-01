@@ -35,9 +35,6 @@ function closeSelectDropdown(select, arrow) {
     arrow.classList.remove('rotate');
 }
 
-// =====================
-// Subtasks
-// =====================
 /**
  * Displays the active subtask input field by hiding the initial field.
  */
@@ -100,7 +97,7 @@ function collectSubtasksFromDOM() {
     const subtaskDivs = document.querySelectorAll(".subtask-entry");
     const collected = {};
     for (let i = 0; i < subtaskDivs.length; i++) {
-        const id = "subtask_" + Date.now() + "_" + i; // eindeutiger Key
+        const id = "subtask_" + Date.now() + "_" + i; 
         collected[id] = {
             subtask: subtaskDivs[i].innerText.trim(),
             done: false
@@ -124,10 +121,6 @@ function deleteSubtask(element) {
     }
 }
 
-// =====================
-// Subtask Edit Mode
-// =====================
-
 /**
  * Activates edit mode for the clicked subtask.
  */
@@ -136,7 +129,7 @@ function startEditSubtask(element) {
     const text = textElement.innerText;
     iconBox.querySelector(".edit-icon").classList.add("d-none");
     iconBox.querySelector(".confirm-icon").classList.remove("d-none");
-    iconBox.classList.add("editing"); // Editing-Klasse hinzufügen
+    iconBox.classList.add("editing"); 
     textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
@@ -150,7 +143,7 @@ function finishEditSubtask(iconElement) {
     inputElement.outerHTML = getReturnToDivTemplate(text);
     iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
     iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
-    iconBox.classList.remove("editing"); // Editing-Klasse entfernen
+    iconBox.classList.remove("editing");
     box.querySelector(".delete-icon")?.classList.remove("d-none");
 }
 
