@@ -66,10 +66,8 @@ function editTasktemplateBig() {
                             <p class="assigned-to">Assigned to</p>
                         </label>
 
-                        <!-- vorher: onclick="handleDropdownClick(event)" -->
                         <div class="custom-dropdown w-full" onclick="handleDropdownClickOverlay(event)">
 
-                            <!-- vorher: onclick="toggleDropdown(event)" -->
                             <div class="dropdown-input max-w-440 border-radius-10px input-bundle flex align-center justify-between bg-white"
                                 onclick="toggleDropdownOverlay(event)">
                                 <input class="font-bundle input-field" type="text"
@@ -118,11 +116,9 @@ function editTasktemplateBig() {
                 </div>
             </div>
         </div>
-
-
     </form>
     <div class="edit-add-task-button-container display-standard w-full">
-        <button class="btn-addtask-create font-bundle w-full border-radius-10px p-16 white-color" type="submit"
+        <button class="btn-addtask-create-ok font-bundle w-full border-radius-10px p-16 white-color" type="submit"
             form="form-element">
             OK <img class="icon-task" src="assets/img/icons/add_task/check.svg" alt="Check icon">
         </button>
@@ -213,3 +209,5 @@ function getAssignedNameTemplateOverlay(initials, name, color) {
     </div>
   `;
 }
+
+
