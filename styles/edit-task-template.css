@@ -53,7 +53,7 @@ body.no-scroll {
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
 }
 
 #edit-task-content #subtask-initial {
@@ -93,6 +93,7 @@ body.no-scroll {
 }
 
 .add-task-container {
+  gap: 0;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
@@ -111,12 +112,6 @@ body.no-scroll {
     background-color: #2A3647;
 }
 
-@media(max-width:368px){
-  .btn-addtask-create-ok{
-    justify-content: center;
-  }
-}
-
 .btn-addtask-create-ok:hover {
   background: #29ABE2;
   transform: scale(1.01);
@@ -127,8 +122,70 @@ body.no-scroll {
 .output-subtask {
   margin-top: 10px;
   min-width: 420px;
-  max-height: 200px;   
-  overflow-y: auto;  
-  overflow-x: hidden;  
+  max-height: 125px;   /* maximale Höhe */
+  overflow-y: auto;    /* Scrollbalken nur wenn nötig */
+  overflow-x: hidden;  /* horizontalen Scrollbalken verstecken */
+  border: 1px solid #ccc; /* optional, damit du die Box siehst */
+  border: none;
 }
+
+@media(max-width:1001px){
+  .edit-task-content-style
+ {
+  padding: 15px 8px;
+    overflow-x: hidden;
+    max-height: calc(86vh - 16px);
+    overflow:auto;
+}
+.textarea-task
+ {
+  height: 70px;
+    margin: 10px 0 10px 0;
+}
+.error-container
+ {
+    height: 0px;
+}
+
+.m-top
+ {
+    margin-top: 5px;
+}
+
+.output-subtask {
+    max-height: 88px;
+}
+}
+
+@media(max-width:500px){
+ .output-subtask {
+  min-width: 350px;
+}
+
+.edit-task-content-style {
+  padding: 15px 12px;
+  margin: 0 10px;
+}
+}
+
+@media(max-width:400px){
+ .output-subtask {
+  min-width: 200px;
+}
+}
+
+@media(max-width:368px){
+  .btn-addtask-create-ok{
+    justify-content: center;
+  }
+   .textarea-task-edit {
+        height: 60px;
+    }
+
+    .btn-prio
+ {
+    margin: 10px  10px ;
+}
+}
+
 

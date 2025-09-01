@@ -1,4 +1,3 @@
-
 .overlay-big-card {
     position: fixed;
     top: 0;
@@ -19,11 +18,6 @@
     z-index: 2001;
 }
 
-@media(max-width:505px){
-    .big-card-content {
-   margin:0 10px;
-}
-}
 .title-content {
     font-family: Inter, sans-serif;
     font-weight: bold;
@@ -81,7 +75,7 @@
 .assigned-big-card {
     height: 175px;
     overflow: auto;
-    margin-bottom: 15px;
+    margin: 15px 15px;
 }
 
 .contacts-big-card {
@@ -162,7 +156,34 @@
     margin-left: 20px;
 }
 
-.x-closing-icon:hover{
+.x-closing-icon:hover {
     background-color: #3333333b;
     border-radius: 30%;
+}
+
+@media(max-width:1000px) {
+    .big-card-content {
+       max-height: calc(82vh - 16px);
+    }
+    .title-content{
+        font-size: 60px;
+    }
+}
+
+@media(max-width:505px) {
+    .big-card-content {
+        margin: 0 10px;
+        padding: 30px 40px;
+       max-height: calc(85vh - 16px);
+    }
+
+    .delete-edit-big-card-content {
+        margin-top: 10px;
+    }
+}
+
+@media(max-width:400px) {
+  .title-content {
+    font-size: 36px;
+}
 }
