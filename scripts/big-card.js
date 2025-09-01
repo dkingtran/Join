@@ -182,27 +182,31 @@ function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
 
-function refreshBigCard(taskId, updated) {
-  if (!updated) return;
 
-  // lokalen Cache aktualisieren
-  if (Array.isArray(displayedTasks)) {
-    for (let i = 0; i < displayedTasks.length; i++) {
-      if (displayedTasks[i] && displayedTasks[i].id === taskId) {
-        displayedTasks[i] = { ...displayedTasks[i], ...updated, id: taskId };
-        break;
-      }
+function updateTaskCache(taskId, updated) {
+  if (!updated || !Array.isArray(displayedTasks)) return;
+  for (let i = 0; i < displayedTasks.length; i++) {
+    const t = displayedTasks[i];
+    if (t && t.id === taskId) {
+      displayedTasks[i] = { id: taskId, ...t, ...updated };
+      return;
     }
   }
+}
 
-  const t = findTaskById(taskId) || updated;
-  const avatarsHTML = buildAvatarsHTML(t);
-  const subs = t.subtasks ? normalizeSubtasks(t) : [];
+function renderBigCard(taskId, taskObj) {
+  if (!taskObj) return;
+  const avatarsHTML = buildAvatarsHTML(taskObj);
+  const subs = taskObj.subtasks ? normalizeSubtasks(taskObj) : [];
   const bigCardHTML = bigCardTemplate(
     taskId,
-    t.category || "", t.title || "", t.description || "",
-    t["due-date"] || t.due || t.date || "", t.priority || "",
-    avatarsHTML, buildSubtasksHTML(taskId, subs)
+    taskObj.category || "",
+    taskObj.title || "",
+    taskObj.description || "",
+    taskObj["due-date"] || taskObj.due || taskObj.date || "",
+    taskObj.priority || "",
+    avatarsHTML,
+    buildSubtasksHTML(taskId, subs)
   );
   showBigCard(bigCardHTML);
 }

@@ -193,11 +193,11 @@ async function updateSubtasksFromOverlay(taskId) {
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
   const task = findTaskById(taskId); if (!task) return;
-  openEditCard();               
-  showEditTaskBig();            
+  openEditCard();
+  showEditTaskBig();
   prefillEditForm(task);
-  bindOverlayPrio();    
-  await loadContactsIntoDropdownOverlay(); 
+  bindOverlayPrio();
+  await loadContactsIntoDropdownOverlay();
   prefillAssignedFromTaskOverlay(task);
   prefillSubtasksFromTaskOverlay(task);
   bindEditOverlayButton(task.id);
@@ -301,8 +301,10 @@ function bindEditOverlayFormSubmit(taskId) {
       await putData(`/tasks/${taskId}/${fieldNames[i]}`, formData[fieldNames[i]]);
     await putData(`/tasks/${taskId}/subtasks`, subtasksPayload);
     closeEditCard();
-    if (typeof refreshBigCard === 'function')
-      refreshBigCard(taskId, { ...formData, subtasks: subtasksPayload });
+    if (typeof updateTaskCache === 'function')
+      updateTaskCache(taskId, { ...formData, subtasks: subtasksPayload });
+    if (typeof renderBigCard === 'function')
+      renderBigCard(taskId, findTaskById(taskId));
   };
 }
 
