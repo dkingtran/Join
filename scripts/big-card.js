@@ -182,4 +182,27 @@ function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
 
+function refreshBigCard(taskId, updated) {
+  if (!updated) return;
 
+  // lokalen Cache aktualisieren
+  if (Array.isArray(displayedTasks)) {
+    for (let i = 0; i < displayedTasks.length; i++) {
+      if (displayedTasks[i] && displayedTasks[i].id === taskId) {
+        displayedTasks[i] = { ...displayedTasks[i], ...updated, id: taskId };
+        break;
+      }
+    }
+  }
+
+  const t = findTaskById(taskId) || updated;
+  const avatarsHTML = buildAvatarsHTML(t);
+  const subs = t.subtasks ? normalizeSubtasks(t) : [];
+  const bigCardHTML = bigCardTemplate(
+    taskId,
+    t.category || "", t.title || "", t.description || "",
+    t["due-date"] || t.due || t.date || "", t.priority || "",
+    avatarsHTML, buildSubtasksHTML(taskId, subs)
+  );
+  showBigCard(bigCardHTML);
+}

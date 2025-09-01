@@ -17,7 +17,7 @@ function openEditCard() {
 function toggleDropdownOverlay(event) {
   event.stopPropagation();
   const overlay = document.getElementById('edit-task-content'); if (!overlay) return;
-  const contactList = overlay.querySelector('#contactList'); 
+  const contactList = overlay.querySelector('#contactList');
   const dropdownArrow = overlay.querySelector('.assigned-to-container .arrow');
   const isVisible = contactList && contactList.style.display === 'block';
   if (contactList) contactList.style.display = isVisible ? 'none' : 'block';
@@ -30,14 +30,14 @@ function toggleDropdownOverlay(event) {
  * @param {Event} event - The click event within the overlay. 
  */
 function handleDropdownClickOverlay(event) {
-  const overlay = document.getElementById('edit-task-content'); 
+  const overlay = document.getElementById('edit-task-content');
   if (!overlay) return;
-  const clickedInput = event.target.closest('.dropdown-input'); 
+  const clickedInput = event.target.closest('.dropdown-input');
   const clickedContact = event.target.closest('.contact-item');
   if (!clickedInput && !clickedContact) {
-    const contactList = overlay.querySelector('#contactList'); 
+    const contactList = overlay.querySelector('#contactList');
     const dropdownArrow = overlay.querySelector('.assigned-to-container .arrow');
-    if (contactList) contactList.style.display = 'none'; 
+    if (contactList) contactList.style.display = 'none';
     if (dropdownArrow) dropdownArrow.classList.remove('rotate');
   }
 }
@@ -297,13 +297,16 @@ function bindEditOverlayFormSubmit(taskId) {
   formElement.onsubmit = async event => {
     event.preventDefault();
     const formData = collectEditFormData(overlay);
+    const subtasksPayload = collectSubtasksFromOverlay(overlay);
     const fieldNames = ['title', 'description', 'due-date', 'priority', 'assigned-to'];
     for (let i = 0; i < fieldNames.length; i++)
       await putData(`/tasks/${taskId}/${fieldNames[i]}`, formData[fieldNames[i]]);
-    await updateSubtasksFromOverlay(taskId);
+    await putData(`/tasks/${taskId}/subtasks`, subtasksPayload);
     closeEditCard();
-    if (typeof init === 'function') await init();
+    if (typeof refreshBigCard === 'function')
+      refreshBigCard(taskId, { ...formData, subtasks: subtasksPayload });
   };
+
 }
 
 /** Renders the task's existing subtasks into the edit overlay list.  
