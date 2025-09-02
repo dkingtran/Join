@@ -45,10 +45,6 @@ body.no-scroll {
   margin: 0 10px;
 }
 
-.d-none {
-  display: none;
-}
-
 .form-scroll {
   flex: 1 1 auto;
   min-height: 0;
@@ -66,9 +62,9 @@ body.no-scroll {
   display: inline-flex;
 }
 
-.d-none {
+/* .d-none {
   display: none !important;
-}
+} */
 
 #edit-task-content .subtask-text-box {
   display: flex;
@@ -89,7 +85,6 @@ body.no-scroll {
 #edit-task-content .subtask-text-box:hover .icon-edit-subtask-box {
   opacity: 1;
   pointer-events: auto;
-  /* bei Hover sichtbar */
 }
 
 .add-task-container {
@@ -122,11 +117,15 @@ body.no-scroll {
 .output-subtask {
   margin-top: 10px;
   min-width: 420px;
-  max-height: 125px;   /* maximale Höhe */
-  overflow-y: auto;    /* Scrollbalken nur wenn nötig */
-  overflow-x: hidden;  /* horizontalen Scrollbalken verstecken */
-  border: 1px solid #ccc; /* optional, damit du die Box siehst */
+  max-height: 125px;  
+  overflow-y: auto;   
+  overflow-x: hidden; 
+  border: 1px solid #ccc; 
   border: none;
+}
+
+.d-none {
+  display: none;
 }
 
 @media(max-width:1001px){

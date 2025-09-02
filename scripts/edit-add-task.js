@@ -350,20 +350,28 @@ function confirmSubtaskInputOverlay() {
 }
 
 /** Binds priority buttons in the overlay and toggles the colors */
+function updateOverlayPrioIcon(root, isActive) {
+  if (!root) return;
+  setMediumIcon(isActive, root);
+}
+/** Binds priority buttons in the edit overlay and updates the medium icon */
 function bindOverlayPrio() {
   const overlay = document.getElementById('edit-task-content');
   if (!overlay) return;
-  const urgentButton = overlay.querySelector('#urgent');
-  const mediumButton = overlay.querySelector('#medium');
-  const lowButton = overlay.querySelector('#low');
-  function resetPriority() {
-    urgentButton?.classList.remove('active-red', 'active-yellow', 'active-green');
-    mediumButton?.classList.remove('active-red', 'active-yellow', 'active-green');
-    lowButton?.classList.remove('active-red', 'active-yellow', 'active-green');
+  const urgent = overlay.querySelector('#urgent');
+  const medium = overlay.querySelector('#medium');
+  const low = overlay.querySelector('#low');
+
+  /** Removes all active priority classes from the overlay buttons */
+
+  function reset() {
+    [urgent, medium, low].forEach(btn =>
+      btn?.classList.remove('active-red','active-yellow','active-green'));
   }
-  if (urgentButton) urgentButton.onclick = event => { event.preventDefault(); resetPriority(); urgentButton.classList.add('active-red'); };
-  if (mediumButton) mediumButton.onclick = event => { event.preventDefault(); resetPriority(); mediumButton.classList.add('active-yellow'); };
-  if (lowButton) lowButton.onclick = event => { event.preventDefault(); resetPriority(); lowButton.classList.add('active-green'); };
+  
+  urgent.onclick = e => {e.preventDefault();reset();urgent.classList.add('active-red');updateOverlayPrioIcon(overlay,false);};
+  medium.onclick = e => {e.preventDefault();reset();medium.classList.add('active-yellow');updateOverlayPrioIcon(overlay,true);};
+  low.onclick    = e => {e.preventDefault();reset();low.classList.add('active-green');updateOverlayPrioIcon(overlay,false);};
 }
 
 window.startEditSubtaskOverlay = startEditSubtaskOverlay;
