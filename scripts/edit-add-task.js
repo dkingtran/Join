@@ -354,7 +354,7 @@ function updateOverlayPrioIcon(root, isActive) {
   if (!root) return;
   setMediumIcon(isActive, root);
 }
-
+/** Binds priority buttons in the edit overlay and updates the medium icon */
 function bindOverlayPrio() {
   const overlay = document.getElementById('edit-task-content');
   if (!overlay) return;
@@ -362,16 +362,17 @@ function bindOverlayPrio() {
   const medium = overlay.querySelector('#medium');
   const low = overlay.querySelector('#low');
 
+  /** Removes all active priority classes from the overlay buttons */
+
   function reset() {
     [urgent, medium, low].forEach(btn =>
       btn?.classList.remove('active-red','active-yellow','active-green'));
   }
-
+  
   urgent.onclick = e => {e.preventDefault();reset();urgent.classList.add('active-red');updateOverlayPrioIcon(overlay,false);};
   medium.onclick = e => {e.preventDefault();reset();medium.classList.add('active-yellow');updateOverlayPrioIcon(overlay,true);};
   low.onclick    = e => {e.preventDefault();reset();low.classList.add('active-green');updateOverlayPrioIcon(overlay,false);};
 }
-
 
 window.startEditSubtaskOverlay = startEditSubtaskOverlay;
 window.deleteSubtaskOverlay = deleteSubtaskOverlay;
