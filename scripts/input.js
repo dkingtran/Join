@@ -85,13 +85,14 @@ function generateNameObject(name) {
  */
 
 function dateCheck(date) {
-    if (removeSpaces(date) == "") return false;
+    if (removeSpaces(date) === "") return false;
     let dateInput = new Date(date);
     let dateNow = new Date();
-    if (dateInput < dateNow) return false;
-    else return true;
+    if (isNaN(dateInput.getTime())) return false;
+    dateInput.setHours(0,0,0,0);
+    dateNow.setHours(0,0,0,0);
+    return dateInput >= dateNow; 
 }
-
 
 function titleCheck(title) {
     if (removeSpaces(title) == "") return false;

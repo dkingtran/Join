@@ -1,0 +1,268 @@
+/* ========== Layout & Container ========== */
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper { 
+  height: auto; 
+}
+
+.main-container {
+  height: auto;
+  margin-left: 328px;
+  margin-top: 96px;
+  padding: 16px;
+}
+.add-task-container { 
+  max-width: 1102px; 
+  gap: 60px; 
+}
+
+.pipe { 
+  width: 2px; 
+  height: 424px; 
+  border: 1px solid #D1D1D1; 
+}
+
+form { 
+  margin-left: 120px; 
+}
+
+.title-section {
+  margin-left: 120px;
+  margin-top: 120px;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+
+.title-section h1 { 
+  
+  font-size: 61px; 
+
+}
+
+
+.title-task { 
+  
+  margin-bottom: 10px; 
+
+}
+
+
+.add-task-section { 
+  
+  align-items: flex-start; 
+  
+  height: auto; 
+
+}
+
+
+.section-task-under {
+  margin-top: 48px;
+  display: flex;
+  position: absolute;
+  top: 880px;
+}
+
+/* ========== Input Fields & Buttons ========== */
+.input-title-task { 
+  height: 48px; 
+  padding-left: 21px; 
+}
+
+.textarea-task {
+  border-color: #d1d1d1;
+  height: 120px;
+  padding: 18px 21px;
+  margin: 10px 0 25px 0;
+}
+
+
+
+#task-date:valid { 
+  color: #706b6b; 
+}
+
+.date { 
+  min-width: 120px; 
+  margin-bottom: 10px; 
+}
+
+.btn-prio { 
+  gap: 15px; 
+  margin: 10px 0 25px 0; 
+}
+
+.btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+
+.btn-prio-bundle {
+  max-width: 159px;
+  min-width: 136px;
+  height: 56px;
+  padding: 16px 10px;
+  border: none;
+  box-shadow: 0px 0px 4px 0px #0000001A;
+  background-color: white;
+  cursor: pointer;
+}
+
+.active-green { 
+  background-color: #7AE229; 
+  color: white; 
+  box-shadow: none; 
+}
+
+.active-green img { 
+  filter: brightness(0) invert(1); 
+}
+
+.active-yellow { 
+  background-color: #FFA800; 
+  color: white; 
+  box-shadow: none; 
+}
+
+.active-red { 
+  background-color: #FF3D00; 
+  color: white; 
+  box-shadow: none; 
+}
+
+.active-red img { 
+  filter: brightness(0) invert(1); 
+}
+
+.priority-btn { 
+  gap: 6px; font-size: 21px; 
+}
+
+.btn-clear-task-container {
+
+  gap: 10px;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 1000px;
+  top: 920px;
+}
+
+.btn-addtask-clear {
+  gap: 8px;
+  max-width: 110px;
+  height: 56px;
+  border: 1px solid #2A3647;
+  background-color:#F5F7F7;;
+  color: #2A3647;
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
+}
+
+.btn-addtask-clear:hover {
+  border-color: #29ABE2;
+  color: #29ABE2;
+  transform: scale(1.01);
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-addtask-create {
+  max-width: 183px;
+  height: 56px;
+  background: #2A3647;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-addtask-create:hover {
+  background: #29ABE2;
+  transform: scale(1.01);
+  border: none;
+  box-shadow: 0 6px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+.icon-close path {
+  stroke: #2A3647;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s ease-in-out;
+}
+
+.btn-addtask-clear:hover .icon-close path { 
+  stroke: #29ABE2; 
+}
+
+/* ========== Error & Message Styles ========== */
+.d-none { 
+  display: none; 
+}
+
+.error-container { 
+  height: 25px; 
+  width: 150px; 
+}
+
+.error-text {
+  min-width: 250px;
+  width: 100%;
+  color: red;
+  font-size: 12px;
+  z-index: 3000;
+}
+
+.border-red { border-color: red; }
+.message-box {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  z-index: 200;
+}
+
+.task-message {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  gap: 8px;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+  color: white;
+  visibility: hidden;
+}
+
+.task-message.show {
+  bottom: 40%;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.task-successful-info {
+  width: 100%;
+  width: 320px;
+  padding: 1.5rem;
+  font-size: 18px;
+  background-color: #2A3647;
+  border-radius: 20px;
+  gap: 16px;
+  text-wrap: nowrap;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
