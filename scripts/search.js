@@ -4,6 +4,7 @@ document.getElementById('search').addEventListener("input", debounce(handleSearc
 function handleSearch(event) {
     const value = event.target.value.toLowerCase();
     if (value == "") {
+        displayedTasks = tasks;
         renderTasks();
         return;
     }
@@ -16,7 +17,7 @@ function handleSearch(event) {
 }
 
 function filterTasks(value) {
-    return displayedTasks = tasks.filter(task => {
+    return tasks.filter(task => {
         let taskTitle = task.title.toLowerCase();
         let taskDescription = task.description.toLowerCase();
         return (
