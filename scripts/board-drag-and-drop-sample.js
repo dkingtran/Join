@@ -84,6 +84,7 @@ function handleDragEnd(e) {
         .querySelectorAll(".placeholder")
         .forEach((ph) => ph.remove());
     updateEmptyMessages();
+    addDragEventsToCards();
 }
 
 function handleDragOver(e) {
