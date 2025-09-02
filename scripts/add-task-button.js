@@ -33,13 +33,12 @@ function activateButton(button, colorClass) {
  * Switches the icon of the medium priority button.
  * @param {boolean} active - true = use active icon, false = use default icon
  */
-function setMediumIcon(active) {
-    const icon = document.getElementById("medium-icon");
-    if (active) {
-        icon.src = "./assets/img/icons/add_task/medium_vector.svg";
-    } else {
-        icon.src = "./assets/img/icons/add_task/prio_medium_orange.svg";
-    }
+function setMediumIcon(active, root = document) {
+    const icon = root.querySelector("#medium-icon");
+    if (!icon) return;
+    icon.src = active
+        ? "./assets/img/icons/add_task/medium_vector.svg"
+        : "./assets/img/icons/add_task/prio_medium_orange.svg";
 }
 
 /**
