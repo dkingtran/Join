@@ -180,7 +180,7 @@ async function initBoardView() {
 
     // Convert array to task object (taskId → task)
     const tasksObject = {};
-    tasks.forEach(task => {
+    displayedTasks.forEach(task => {
         tasksObject[task.id] = task;
     });
 
