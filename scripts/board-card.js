@@ -107,7 +107,7 @@ function getPriorityIcon(priority) {
     const validPriorities = ["low", "medium", "urgent"];
     const cleanPriority = priority.toLowerCase();
     if (!validPriorities.includes(cleanPriority)) return "";
-    return priorityRender(cleanPriority); 
+    return priorityRender(cleanPriority);
 }
 
 /**
@@ -130,34 +130,27 @@ function clearAllTaskLists() {
  * Renders all tasks to their appropriate columns.
  * @param {Object} tasksObject - Task ID mapped to task data.
  */
-function renderAllTasks(tasksObject) {
+function renderAllTasks() {
     clearAllTaskLists();
-    for (const taskId in tasksObject) {
-        const task = tasksObject[taskId];
-        const columnId = getColumnIdByStatus(task.status);
+    displayedTasks.forEach((task, displayedTasksId) => {
+        let tasksId = tasks.indexOf(task);
+        let columnId = getColumnIdByStatus(task.status);
         if (columnId) {
-            renderTaskToColumn(taskId, task, columnId);
+            renderTaskToColumn(tasksId, displayedTasksId, task, columnId);
         }
-    }
-
-    // Optional: render placeholders if no tasks are present
-    if (typeof renderWithNoTasksAreas === 'function') {
-        renderWithNoTasksAreas();
-    }
+    });
+    renderWithNoTasksAreas();
 }
 
 /**
  * Renders a single task card to the specified column.
  */
-function renderTaskToColumn(taskId, task, columnId) {
+function renderTaskToColumn(taskId, displayedTasksId, task, columnId) {
     const container = document.getElementById(columnId);
     if (!container) return console.warn(`Column with ID '${columnId}' not found.`);
     const avatarsHTML = renderAssignedAvatars(task['assigned-to']);
     const progress = getSubtaskProgress(task.subtasks);
-    const card = document.createElement('div');
-    card.classList.add('board-card');
-    card.innerHTML = cardRender(taskId,task,avatarsHTML,progress.progressPercent,progress.maxSubtasks,progress.total,'#4589FF' );
-    container.appendChild(card);
+    container.innerHTML += cardRender(taskId, displayedTasksId, task, avatarsHTML, progress);
 }
 
 /**
@@ -177,12 +170,5 @@ async function initBoardView() {
             initials: getInitials(fullName)
         };
     });
-
-    // Convert array to task object (taskId → task)
-    const tasksObject = {};
-    displayedTasks.forEach(task => {
-        tasksObject[task.id] = task;
-    });
-
-    renderAllTasks(tasksObject);
+    renderAllTasks();
 }

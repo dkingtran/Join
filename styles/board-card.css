@@ -90,6 +90,7 @@
     height: 8px;
     border-radius: 8px;
     transition: width 0.3s ease;
+    background-color: #4589FF;
 }
 
 .board-card-footer {
