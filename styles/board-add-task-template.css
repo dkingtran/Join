@@ -154,6 +154,7 @@
 
 #selectedContacts {
   background-color: transparent;
+  margin-left: 26px;/* By Andi */
 }
 
 .category-task p {
