@@ -11,8 +11,8 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
+/*   display: flex; */
+/*   flex-direction: column; */
   height: calc(100vh - 16px);
 }
 
@@ -26,7 +26,7 @@ body.no-scroll {
   z-index: 2000;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .edit-task-content-style {
@@ -122,6 +122,14 @@ body.no-scroll {
   overflow-x: hidden; 
   border: 1px solid #ccc; 
   border: none;
+} 
+
+.contact-item {
+    display: flex;
+    padding: 8px 26px;
+    margin-left: 2px;
+    cursor: pointer;
+    align-items: center;
 }
 
 .d-none {
