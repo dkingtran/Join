@@ -11,8 +11,8 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
+/*   display: flex; */
+/*   flex-direction: column; */
   height: calc(100vh - 16px);
 }
 
