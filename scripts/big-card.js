@@ -195,3 +195,4 @@ function renderBigCard(taskId, taskObj) {
   );
   showBigCard(bigCardHTML);
 }
+
