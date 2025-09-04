@@ -8,6 +8,10 @@ const DRAG_THRESHOLD = 10; // Minimum pixels to move before considering it a dra
 // Global variable for other scripts to check drag state
 window.dragged = null;
 
+// Add global variables to track original position
+let originalTasksList = null;
+let originalIndex = -1;
+
 // === Board Rendering ===
 /**
  * Updates empty messages for task lists by checking if lists are empty and adding/removing messages accordingly.
@@ -93,6 +97,9 @@ function initializeDragState(e) {
     const rect = draggedEl.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
+    // Capture original position
+    originalTasksList = draggedEl.parentElement;
+    originalIndex = Array.from(originalTasksList.children).indexOf(draggedEl);
 }
 
 /**
@@ -154,9 +161,9 @@ function addPlaceholderToList(tasksList) {
  * @param {number} pageX - The x-coordinate on the page.
  * @param {number} pageY - The y-coordinate on the page.
  */
-function moveAt(pageX, pageY) {
-    draggedEl.style.left = pageX - offsetX + 'px';
-    draggedEl.style.top = pageY - offsetY + 'px';
+function moveAt(clientX, clientY) {
+    draggedEl.style.left = clientX - offsetX + 'px';
+    draggedEl.style.top = clientY - offsetY + 'px';
 }
 
 /**
@@ -191,7 +198,7 @@ function shouldStartDrag(e) {
  */
 function handleDragMovement(e) {
     e.preventDefault(); // Verhindert Standard-Textauswahl
-    moveAt(e.pageX, e.pageY);
+    moveAt(e.clientX, e.clientY);
     resetDropZones();
     highlightActiveDropZone(e);
 }
@@ -256,7 +263,7 @@ function setDragStyles(e) {
     draggedEl.style.pointerEvents = 'none';
     window.dragged = draggedEl; // Set global dragged element
     document.body.appendChild(draggedEl);
-    moveAt(e.pageX, e.pageY);
+    moveAt(e.clientX, e.clientY);
 }
 
 /**
@@ -300,6 +307,16 @@ function repositionDraggedElement() {
     const activePlaceholder = document.querySelector('.tasks-list.drop-zone-active .placeholder');
     if (activePlaceholder) {
         activePlaceholder.parentNode.insertBefore(draggedEl, activePlaceholder);
+    } else {
+        // Restore to original position if no active drop zone
+        if (originalTasksList && originalIndex >= 0) {
+            const children = Array.from(originalTasksList.children);
+            if (originalIndex < children.length) {
+                originalTasksList.insertBefore(draggedEl, children[originalIndex]);
+            } else {
+                originalTasksList.appendChild(draggedEl);
+            }
+        }
     }
 }
 
@@ -324,12 +341,16 @@ function updateTaskData() {
     draggedEl.style.zIndex = '';
     draggedEl.style.pointerEvents = '';
     window.dragged = null; // Reset global dragged state
-    let newCol = draggedEl.closest('.board-column').dataset.columnIndex;
-    moveTaskToCategory(
-        displayedTasks[draggedEl.dataset.displayedidIndex],
-        categories[newCol],
-        draggedEl
-    );
+    // Only update if repositioned to a new column
+    const currentColumn = draggedEl.closest('.board-column');
+    if (currentColumn && currentColumn !== originalTasksList.closest('.board-column')) {
+        let newCol = currentColumn.dataset.columnIndex;
+        moveTaskToCategory(
+            displayedTasks[draggedEl.dataset.displayedidIndex],
+            categories[newCol],
+            draggedEl
+        );
+    }
     updateEmptyMessages();
     addDragEventsToCards();
 }
