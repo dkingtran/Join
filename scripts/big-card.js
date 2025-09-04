@@ -29,7 +29,7 @@ function findTaskById(taskId) {
   if (!Array.isArray(displayedTasks) || !taskId) return null;
   for (let i = 0; i < displayedTasks.length; i++) {
     const t = displayedTasks[i];
-    if (t && t.id === taskId) return t;
+    if (t) return t;
   }
   return null;
 }
