@@ -197,7 +197,8 @@ async function updateSubtasksFromOverlay(taskId) {
 /** Opens the edit overlay for a task, renders the form, loads contacts and subtasks, then pre-fills fields.  
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
-  const task = findTaskById(taskId); if (!task) return;
+  const task = displayedTasks[taskId];
+  if (!task) return;
   openEditCard();
   showEditTaskBig();
   prefillEditForm(task);
@@ -304,8 +305,8 @@ function bindEditOverlayFormSubmit(taskId) {
     await Promise.all(fields.map(n => putData(`/tasks/${taskId}/${n}`, formData[n])));
     await putData(`/tasks/${taskId}/subtasks`, subtasksPayload);
     closeEditCard();
-    updateTaskCache?.(taskId, { ...formData, subtasks: subtasksPayload });
-    renderBigCard?.(taskId, findTaskById(taskId));
+    updateTaskCache(taskId, { ...formData, subtasks: subtasksPayload });
+    renderBigCard(taskId, displayedTasks[taskId]);
   };
 }
 
@@ -368,12 +369,12 @@ function bindOverlayPrio() {
 
   function reset() {
     [urgent, medium, low].forEach(btn =>
-      btn?.classList.remove('active-red','active-yellow','active-green'));
+      btn?.classList.remove('active-red', 'active-yellow', 'active-green'));
   }
-  
-  urgent.onclick = e => {e.preventDefault();reset();urgent.classList.add('active-red');updateOverlayPrioIcon(overlay,false);};
-  medium.onclick = e => {e.preventDefault();reset();medium.classList.add('active-yellow');updateOverlayPrioIcon(overlay,true);};
-  low.onclick    = e => {e.preventDefault();reset();low.classList.add('active-green');updateOverlayPrioIcon(overlay,false);};
+
+  urgent.onclick = e => { e.preventDefault(); reset(); urgent.classList.add('active-red'); updateOverlayPrioIcon(overlay, false); };
+  medium.onclick = e => { e.preventDefault(); reset(); medium.classList.add('active-yellow'); updateOverlayPrioIcon(overlay, true); };
+  low.onclick = e => { e.preventDefault(); reset(); low.classList.add('active-green'); updateOverlayPrioIcon(overlay, false); };
 }
 
 window.startEditSubtaskOverlay = startEditSubtaskOverlay;

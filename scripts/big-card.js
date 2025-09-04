@@ -6,7 +6,7 @@ function openBigCard(taskId) {
     e.preventDefault();
     return;
   }
-  const task = findTaskById(taskId);
+  const task = displayedTasks[taskId];
   if (!task) return;
   const avatarsHTML = buildAvatarsHTML(task);
   const subtasks = normalizeSubtasks(task);
@@ -17,21 +17,6 @@ function openBigCard(taskId) {
     avatarsHTML, subtasksHTML
   );
   showBigCard(bigCardHTML);
-}
-
-
-/**
- * Finds a task in `displayedTasks` by its Firebase ID.
- * @param {string} taskId
- * @returns {Object|null}
- */
-function findTaskById(taskId) {
-  if (!Array.isArray(displayedTasks) || !taskId) return null;
-  for (let i = 0; i < displayedTasks.length; i++) {
-    const t = displayedTasks[i];
-    if (t && t.id === taskId) return t;
-  }
-  return null;
 }
 
 /**
