@@ -67,7 +67,7 @@ function handleDragStart(e) {
     dragged = true;
     currentDraggedTask = {
         element: e.target,
-        taskData: displayedTasks[e.target.dataset.displayedidIndex],
+        taskData: displayedTasks[e.target.dataset.displayedTasksId],
         sourceColumn: fromCol.dataset.columnIndex
     };
     e.target.classList.add('dragging');
@@ -106,10 +106,10 @@ function handleDrop(e) {
     if (!currentDraggedTask) return;
     let dropZone = e.target;
     let targetColumn = dropZone.closest('.board-column');
-    let targetColumnId = targetColumn.dataset.index;
+    let targetColumnId = targetColumn.dataset.columnIndex;
     if (!isValidDropZone(dropZone)) return;
     // Update task status in Firebase
-    moveTaskToCategory(currentDraggedTask.taskData, categories[targetColumnId], e.target);
+    moveTaskToCategory(currentDraggedTask.taskData, categories[targetColumnId], currentDraggedTask.element);
 }
 
 function isValidDropZone(dropZoneElement) {
@@ -144,6 +144,7 @@ async function moveTaskToCategory(taskData, newStatus, taskElement) {
     tasks[tasksId] = taskData;
     displayedTasks[displayedTasksId] = taskData;
     updateTaskInFirebase(taskData);
+    renderAllTasks();
 }
 
 function updateTask(taskData, newStatus) {

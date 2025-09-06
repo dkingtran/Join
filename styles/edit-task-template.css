@@ -11,8 +11,8 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
+/*   display: flex; */
+/*   flex-direction: column; */
   height: calc(100vh - 16px);
 }
 
@@ -26,7 +26,7 @@ body.no-scroll {
   z-index: 2000;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .edit-task-content-style {
@@ -43,10 +43,6 @@ body.no-scroll {
   position: relative;
   overflow: hidden;
   margin: 0 10px;
-}
-
-.d-none {
-  display: none;
 }
 
 .form-scroll {
@@ -66,9 +62,9 @@ body.no-scroll {
   display: inline-flex;
 }
 
-.d-none {
+/* .d-none {
   display: none !important;
-}
+} */
 
 #edit-task-content .subtask-text-box {
   display: flex;
@@ -89,7 +85,6 @@ body.no-scroll {
 #edit-task-content .subtask-text-box:hover .icon-edit-subtask-box {
   opacity: 1;
   pointer-events: auto;
-  /* bei Hover sichtbar */
 }
 
 .add-task-container {
@@ -122,11 +117,23 @@ body.no-scroll {
 .output-subtask {
   margin-top: 10px;
   min-width: 420px;
-  max-height: 125px;   /* maximale Höhe */
-  overflow-y: auto;    /* Scrollbalken nur wenn nötig */
-  overflow-x: hidden;  /* horizontalen Scrollbalken verstecken */
-  border: 1px solid #ccc; /* optional, damit du die Box siehst */
+  max-height: 125px;  
+  overflow-y: auto;   
+  overflow-x: hidden; 
+  border: 1px solid #ccc; 
   border: none;
+} 
+
+.contact-item {
+    display: flex;
+    padding: 8px 26px;
+    margin-left: 2px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.d-none {
+  display: none;
 }
 
 @media(max-width:1001px){
