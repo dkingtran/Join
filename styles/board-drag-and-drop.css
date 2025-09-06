@@ -1,7 +1,56 @@
 /* Drag & Drop Styles */
+/* Using onmouse events */
 .valid-drop-zone {
     background-color: transparent !important;
-    border: 1px dashed #A8A8A8 !important; 
+    border: 1px dashed #A8A8A8 !important;
+    border-radius: 24px;
+}
+
+.board-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    position: relative;
+}
+
+.board-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.board-card.dragging {
+    opacity: 1 !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    transform: rotate(5deg);
+    cursor: grabbing;
+    z-index: 1000;
+    position: absolute;
+    width: 252px;
+    pointer-events: none;
+}
+
+.drag-over {
+    background-color: #E7E7E7 !important;
+}
+
+.placeholder {
+    width: 252px;
+    height: 263px;
+    border: 1px dashed grey;
+    border-radius: 10px;
+    justify-self: center;
+    margin: 0 auto;
+}
+
+.placeholder:hover {
+    background-color: #E7E7E7 !important;
+}
+
+/* Drag & Drop Styles */
+/* Using ondrag events */
+
+/* .valid-drop-zone {
+    background-color: transparent !important;
+    border: 1px dashed #A8A8A8 !important;
     border-radius: 24px;
 }
 
@@ -26,10 +75,10 @@
 }
 
 .placeholder {
-	width: 252px;
-	height: 263px;
-	border: 1px dashed grey;
-	border-radius: 10px;
-	justify-self: center;
-	margin: 0 auto;
-}
+    width: 252px;
+    height: 263px;
+    border: 1px dashed grey;
+    border-radius: 10px;
+    justify-self: center;
+    margin: 0 auto;
+} */
