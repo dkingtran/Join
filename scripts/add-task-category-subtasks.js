@@ -93,18 +93,26 @@ function confirmSubtaskInput() {
 /**
  * Collects all current subtasks from the DOM.
  */
+
+/////// zu lang
 function collectSubtasksFromDOM() {
-    const subtaskDivs = document.querySelectorAll(".subtask-entry");
-    const collected = {};
-    for (let i = 0; i < subtaskDivs.length; i++) {
-        const id = "subtask_" + Date.now() + "_" + i; 
-        collected[id] = {
-            subtask: subtaskDivs[i].innerText.trim(),
-            done: false
-        };
-    }
-    return collected;
+  const container = document.getElementById('subtask-output');
+  if (!container) return {};
+  const nodes = container.querySelectorAll('.subtask-entry');
+  const collected = {};
+  let seq = 0;
+  const ts = Date.now();
+  for (let i = 0; i < nodes.length; i++) {
+    const el   = nodes[i];
+    const raw  = (el.value !== undefined ? el.value : el.textContent).trim();
+    if (!raw) continue;                         
+    const text = raw.replace(/^•\s*/, '');     
+    const id   = el.dataset.subtaskId || `subtask_${ts}_${seq++}`;
+    collected[id] = { subtask: text, done: false };
+  }
+  return collected;
 }
+
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
