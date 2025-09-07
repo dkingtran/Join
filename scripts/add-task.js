@@ -26,7 +26,7 @@ function getTaskData() {
         "assigned-to": assignedTo,
         category: $('task-category'),
         subtasks: collectSubtasksFromDOM(),
-        status: { done: false, feedback: false, "in-progress": false, "to-do": true }
+        status: getTaskStatus(taskToAddStatus)
     };
 }
 
