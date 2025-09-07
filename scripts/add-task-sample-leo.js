@@ -30,17 +30,7 @@ function getTaskData() {
     };
 }
 
-function getTaskStatus(status) {
-    let newStatus = {};
-    Object.values(categories).forEach((stat) => {
-        if (stat == status) {
-            newStatus[stat] = true;
-        } else {
-            newStatus[stat] = false;
-        }
-    });
-    return newStatus;
-}
+
 
 /** Validates the task title input and toggles error display. @returns {boolean} True if valid. */
 function validateTitleInput() {

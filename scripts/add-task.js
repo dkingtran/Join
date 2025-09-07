@@ -6,6 +6,7 @@ let selectedPriority = "";
 let subtasksById = {};
 let subtask = [];
 let assignedTo = [];
+let taskToAddStatus = "to-do";
 
 const initialBox = document.getElementById("subtask-initial");
 const activeBox = document.getElementById("subtask-active");
@@ -24,9 +25,21 @@ function getTaskData() {
         priority: selectedPriority,
         "assigned-to": assignedTo,
         category: $('task-category'),
-        subtasks: subtasksById, //new
-        status: { done: false, feedback: false, "in-progress": false, "to-do": true }
+        subtasks: subtasksById, 
+        status: getTaskStatus(taskToAddStatus)
     };
+}
+
+function getTaskStatus(status) {
+    let newStatus = {};
+    Object.values(categories).forEach((stat) => {
+        if (stat == status) {
+            newStatus[stat] = true;
+        } else {
+            newStatus[stat] = false;
+        }
+    });
+    return newStatus;
 }
 
 /** Validates the task title input and toggles error display. @returns {boolean} True if valid. */

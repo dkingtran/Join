@@ -10,9 +10,9 @@ function openBigCard(taskId) {
   if (!task) return;
   const avatarsHTML = buildAvatarsHTML(task);
   const subtasks = normalizeSubtasks(task);
-  const subtasksHTML = buildSubtasksHTML(taskId, subtasks);
+  const subtasksHTML = buildSubtasksHTML(task.id, subtasks);
   const bigCardHTML = bigCardTemplate(
-    taskId, task.category || "", task.title || "", task.description || "",
+    task.id, task.category || "", task.title || "", task.description || "",
     task["due-date"] || task.due || task.date || "", task.priority || "",
     avatarsHTML, subtasksHTML
   );
