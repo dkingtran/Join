@@ -71,7 +71,6 @@ function handleDragStart(e) {
         sourceColumn: fromCol.dataset.columnIndex
     };
     e.target.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
     highlightAllowedDropZones();
 }
 
