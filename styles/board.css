@@ -59,7 +59,11 @@
 	position: relative;
 	max-width: 500px;
 	flex: 70%;
-	min-width: 0;
+}
+
+.search-empty-message {
+	font-size: 18px;
+	color: red;
 }
 
 .search-input-wrapper img {

@@ -1,18 +1,19 @@
 
-document.getElementById('search').addEventListener("input", debounce(handleSearch, 250));
+document.getElementById('searchInput').addEventListener("input", debounce(handleSearch, 250));
 
 function handleSearch(event) {
     const value = event.target.value.toLowerCase();
     if (value == "") {
         displayedTasks = tasks;
-        renderTasks();
+        renderAllTasks();
         return;
     }
     displayedTasks = filterTasks(value);
     if (displayedTasks.length == 0) {
-        searchNotFound();
+        renderAllTasks();
+        // searchNotFound();
     } else {
-        renderTasks();
+        renderAllTasks();
     }
 }
 
