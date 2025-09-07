@@ -25,8 +25,8 @@ function getTaskData() {
         priority: selectedPriority,
         "assigned-to": assignedTo,
         category: $('task-category'),
-        subtasks: subtasksById, 
-        status: getTaskStatus(taskToAddStatus)
+        subtasks: collectSubtasksFromDOM(),
+        status: { done: false, feedback: false, "in-progress": false, "to-do": true }
     };
 }
 
@@ -64,23 +64,23 @@ function validateDateInput() {
 
 /** Validates the task category input and toggles error display. @returns {boolean} */
 function validateCategoryInput() {
-  const select  = document.getElementById('task-category');
-  const errorEl = document.querySelector('#category-error-border .error-text');
-  const wrapper = select ? select.closest('.select-container') : null;
-  const isValid = !!(select && select.value.trim() !== "");
-  if (select)  select.classList.toggle('border-red', !isValid);
-  if (wrapper) wrapper.classList.toggle('border-red', !isValid);
-  if (errorEl) errorEl.classList.toggle('d-none', isValid);
+    const select = document.getElementById('task-category');
+    const errorEl = document.querySelector('#category-error-border .error-text');
+    const wrapper = select ? select.closest('.select-container') : null;
+    const isValid = !!(select && select.value.trim() !== "");
+    if (select) select.classList.toggle('border-red', !isValid);
+    if (wrapper) wrapper.classList.toggle('border-red', !isValid);
+    if (errorEl) errorEl.classList.toggle('d-none', isValid);
 
-  return isValid;
+    return isValid;
 }
 
 /** Checks both title and date inputs for validity. @returns {boolean} True if both are valid. */
 function checkTitleDateInput() {
-  const titleOk    = validateTitleInput();
-  const dateOk     = validateDateInput();
-  const categoryOk = validateCategoryInput();
-  return titleOk && dateOk && categoryOk;
+    const titleOk = validateTitleInput();
+    const dateOk = validateDateInput();
+    const categoryOk = validateCategoryInput();
+    return titleOk && dateOk && categoryOk;
 }
 
 
@@ -102,15 +102,15 @@ function handleDropdownClick(event) {
     const clickedInsideInput = event.target.closest(".dropdown-input");
     const clickedContactItem = event.target.closest(".contact-item");
     checkClickOutside(clickedInsideInput, clickedContactItem);
-} 
+}
 
 /** Closes the contact dropdown if the click happened outside input and contact items. */
- function checkClickOutside(clickedInsideInput, clickedContactItem) {
+function checkClickOutside(clickedInsideInput, clickedContactItem) {
     if (!clickedInsideInput && !clickedContactItem) {
         document.getElementById("contactList").style.display = "none";
         document.querySelector(".arrow").classList.remove("rotate");
     }
-} 
+}
 
 /**
  * Toggles the state of a checkbox within a container.
@@ -245,7 +245,8 @@ function resetFormState() {
     document.getElementById("form-element").reset();
     document.getElementById("subtask-output").innerHTML = "";
     document.getElementById("selectedContacts").innerHTML = "";
-    subtask = {};
+    subtask = [];
+
     document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
     document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
     document.querySelectorAll(".contact-item.active").forEach(el => el.classList.remove("active"));

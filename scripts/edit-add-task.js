@@ -166,7 +166,7 @@ function finishEditSubtaskOverlay(clickedElement) {
   const newText = (inputField.value || '').trim();
   const textDiv = document.createElement('div');
   textDiv.className = 'subtask-entry font-bundle';
-  textDiv.textContent = '•' + newText;
+/*   textDiv.textContent = '•' + newText; */
   textDiv.onclick = function () { startEditSubtaskOverlay(this); };
   inputField.replaceWith(textDiv);
   const iconBox = subtaskBox.querySelector('.icon-edit-subtask-box');
