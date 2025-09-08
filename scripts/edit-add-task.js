@@ -214,7 +214,6 @@ async function openEditCardFor(taskId) {
   bindEditOverlayButton(task.id);
 }
 
-
 /** Prefills the edit overlay form with the task's title, description, and due date. */
 function prefillEditFormFields(root, task) {
   const titleInput = root.querySelector('#title-task');

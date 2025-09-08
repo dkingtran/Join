@@ -195,7 +195,7 @@ function renderBigCard(taskId, taskObj) {
   );
   showBigCard(bigCardHTML);
 }
-
+/* 
 window.openEditCardFor = function (taskId) {
   let task = null;
   if (Array.isArray(displayedTasks)) {
@@ -209,3 +209,4 @@ window.openEditCardFor = function (taskId) {
     try { populateEditForm(task); } catch (e) { console.error("populateEditForm error:", e); }
   }
 };
+ */
