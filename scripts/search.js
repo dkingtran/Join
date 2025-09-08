@@ -3,6 +3,7 @@ document.getElementById('searchInput').addEventListener("input", debounce(handle
 
 function handleSearch(event) {
     const value = event.target.value.toLowerCase();
+    document.getElementById('search-empty-message').classList.add('d-none');
     if (value == "") {
         displayedTasks = tasks;
         renderAllTasks();
@@ -11,7 +12,7 @@ function handleSearch(event) {
     displayedTasks = filterTasks(value);
     if (displayedTasks.length == 0) {
         renderAllTasks();
-        // searchNotFound();
+        document.getElementById('search-empty-message').classList.remove('d-none');
     } else {
         renderAllTasks();
     }

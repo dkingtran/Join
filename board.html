@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join - Board</title>
   <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
+  <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/colors.css" />
   <link rel="stylesheet" href="./styles/global.css" />
   <link rel="stylesheet" href="./styles/board.css" />
   <link rel="stylesheet" href="./styles/big-card.css" />
-  <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/board-card.css" />
   <link rel="stylesheet" href="./styles/board-drag-and-drop.css" />
   <link rel="stylesheet" href="./styles/side_menu.css" />
@@ -105,103 +106,74 @@
         <span>Contacts</span>
       </a>
     </div>
-      <div class="notice-side-menu">
-        <a href="./legal-notice.html" class="menu-item menu-bottom">
-          <span>Legal notice</span>
-        </a>
-        <a href="./privacy-policy.html" class="menu-item menu-bottom">
-          <span>Privacy Policy</span>
-        </a>
-      </div>
-    </aside>
-    <!--End of Side-menu-->
-    <main class="main-content">
-      <section>
-        <div class="header-board">
-          <div class="header-title-container">
-            <h1>Board</h1>
-          </div>
+    <div class="notice-side-menu">
+      <a href="./legal-notice.html" class="menu-item menu-bottom">
+        <span>Legal notice</span>
+      </a>
+      <a href="./privacy-policy.html" class="menu-item menu-bottom">
+        <span>Privacy Policy</span>
+      </a>
+    </div>
+  </aside>
+  <!--End of Side-menu-->
+  <main class="main-content">
+    <section>
+      <div class="header-board">
+        <div class="header-title-container">
+          <h1>Board</h1>
+        </div>
           <div class="search-add-container">
             <div class="search-input-wrapper">
               <input type="text" id="searchInput" placeholder="Find Task" />
-              <img
-                class="search-divider"
-                src="./assets/img/icons/board/search-line.svg"
-                alt="|"
-              />
-              <button
-                type="button"
-                class="search-icon-btn"
-                onclick="onSearchClick()"
-              >
-                <img
-                  class="search-icon"
-                  src="./assets/img/icons/board/search.svg"
-                  alt="Search"
-                />
+              <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+              <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+                <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
               </button>
+              <span class="search-empty-message d-none" id="search-empty-message">No tasks found!</span>
             </div>
-            <button
-              class="add-task-button"
-              id="addTaskButton"
-              onclick="addTaskBoard('to-do')"
-            >
+            <button class="add-task-button" id="addTaskButton" onclick="addTaskBoard('to-do')">
               Add Task
               <img src="./assets/img/icons/board/add-task.svg" alt="" />
             </button>
           </div>
-          <button
-            class="plus-add-task-button"
-            id="plusAddTaskButton"
-            onclick="addTaskBoard('to-do')"
-            style="display: none"
-            aria-label="Add Task"
-          >
-            <img
-              src="./assets/img/icons/board/plus-add-task-mobile.svg"
-              alt="Add Task"
-            />
-          </button>
+        <button class="plus-add-task-button" id="plusAddTaskButton" onclick="addTaskBoard('to-do')"
+          style="display: none" aria-label="Add Task">
+          <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />
+        </button>
+      </div>
+    </section>
+    <section>
+      <div class="drag-board">
+        <div class="board-column" id="open" data-column-index="0">
+          <div class="column-header">
+            <span>To do</span>
+            <button class="add-board-btn" onclick="addTaskBoard('to-do')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+            </button>
+          </div>
+          <div class="tasks-list" id="tasks-list-open"></div>
         </div>
-      </section>
-      <section>
-        <div class="drag-board">
-          <div class="board-column" id="open" data-column-index="0">
-            <div class="column-header">
-              <span>To do</span>
-              <button class="add-board-btn" onclick="addTaskBoard('to-do')">
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-open"></div>
+        <div class="board-column" id="inprogress" data-column-index="1">
+          <div class="column-header">
+            <span>In progress</span>
+            <button class="add-board-btn" onclick="addTaskBoard('in-progress')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+            </button>
           </div>
-          <div class="board-column" id="inprogress" data-column-index="1">
-            <div class="column-header">
-              <span>In progress</span>
-              <button
-                class="add-board-btn"
-                onclick="addTaskBoard('in-progress')"
-              >
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-inprogress" ></div>
+          <div class="tasks-list" id="tasks-list-inprogress"></div>
+        </div>
+        <div class="board-column" id="awaitfeedback" data-column-index="2">
+          <div class="column-header">
+            <span>Await feedback</span>
+            <button class="add-board-btn" onclick="addTaskBoard('feedback')">
+              <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
+            </button>
           </div>
-          <div class="board-column" id="awaitfeedback" data-column-index="2">
-            <div class="column-header">
-              <span>Await feedback</span>
-              <button
-                class="add-board-btn"
-                onclick="addTaskBoard('feedback')"
-              >
-                <img src="./assets/img/icons/board/add-board.svg" alt="Add" />
-              </button>
-            </div>
-            <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
-          </div>
-          <div class="board-column" id="done" data-column-index="3">
-            <div class="column-header">
-              <span>Done</span>
+          <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
+        </div>
+        <div class="board-column" id="done" data-column-index="3">
+          <div class="column-header">
+            <span>Done</span>
           </div>
           <!--rendered tasks -->
           <div class="tasks-list" id="tasks-list-done"></div>
@@ -245,7 +217,8 @@
                             Description
                           </p>
                           <label for="description" class="sr-only"></label>
-                          <textarea class="textarea-task textarea-task-edit font-bundle w-full max-w-440 border-radius-10px"
+                          <textarea
+                            class="textarea-task textarea-task-edit font-bundle w-full max-w-440 border-radius-10px"
                             name="description" id="task-description" placeholder="Enter a Description"></textarea>
                         </div>
 
@@ -260,10 +233,7 @@
                             <div id="error-info" class="error-text d-none">
                               This fields is required or the date in the past
                             </div>
-                            <div
-                              class="error-container"
-                              id="category-error-border"
-                            >
+                            <div class="error-container" id="category-error-border">
                               <div class="error-text d-none">
                                 Please select a category
                               </div>

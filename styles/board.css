@@ -48,11 +48,9 @@
 .search-add-container {
 	display: flex;
 	align-items: center;
+	flex: 50%;
 	gap: 32px;
 	position: relative;
-	margin-left: 0;
-	flex: 50%;
-	justify-content: flex-start;
 }
 
 .search-input-wrapper {
@@ -62,6 +60,11 @@
 }
 
 .search-empty-message {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	padding-left: 4px;
+	padding-top: 8px;
 	font-size: 18px;
 	color: red;
 }
