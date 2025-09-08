@@ -196,14 +196,3 @@ function renderBigCard(taskId, taskObj) {
   showBigCard(bigCardHTML);
 }
 
-// Macht den Edit-Button robust: Array/Map-Support + Overlay immer öffnen
-window.openEditCardFor = function (taskId) {
-  if (!taskId) return;
-  var dt = window.displayedTasks, task = null, i = 0;
-  if (Array.isArray(dt)) { for (i = 0; i < dt.length; i++) if (dt[i] && dt[i].id === taskId) { task = dt[i]; break; } }
-  else if (dt && dt[taskId]) { task = dt[taskId]; }
-  if (typeof window.openEditCard === "function") window.openEditCard();
-  window.currentEditingTaskId = taskId;
-  try { if (task && typeof window.populateEditForm === "function") window.populateEditForm(task); }
-  catch (e) { console.error("populateEditForm error:", e); }
-};
