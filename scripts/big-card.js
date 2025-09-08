@@ -196,3 +196,16 @@ function renderBigCard(taskId, taskObj) {
   showBigCard(bigCardHTML);
 }
 
+window.openEditCardFor = function (taskId) {
+  let task = null;
+  if (Array.isArray(displayedTasks)) {
+    task = displayedTasks.find(t => t && t.id === taskId);
+  } else if (displayedTasks && displayedTasks[taskId]) {
+    task = displayedTasks[taskId];
+  }
+  window.currentEditingTaskId = taskId;
+  if (typeof openEditCard === "function") openEditCard();
+  if (task && typeof populateEditForm === "function") {
+    try { populateEditForm(task); } catch (e) { console.error("populateEditForm error:", e); }
+  }
+};

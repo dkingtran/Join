@@ -197,7 +197,12 @@ async function updateSubtasksFromOverlay(taskId) {
 /** Opens the edit overlay for a task, renders the form, loads contacts and subtasks, then pre-fills fields.  
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
-  const task = displayedTasks[taskId];
+  let task = null;
+  if (Array.isArray(displayedTasks)) {
+    task = displayedTasks.find(t => t && t.id === taskId);
+  } else if (displayedTasks && displayedTasks[taskId]) {
+    task = displayedTasks[taskId];
+  }
   if (!task) return;
   openEditCard();
   showEditTaskBig();
@@ -208,6 +213,7 @@ async function openEditCardFor(taskId) {
   prefillSubtasksFromTaskOverlay(task);
   bindEditOverlayButton(task.id);
 }
+
 
 /** Prefills the edit overlay form with the task's title, description, and due date. */
 function prefillEditFormFields(root, task) {
