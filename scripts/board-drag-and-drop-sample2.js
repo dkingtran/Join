@@ -1,7 +1,7 @@
 let draggedEl = null;
 let placeholder = null;
 let offsetX = 0, offsetY = 0;
-let isDragging = false;
+let dragged = false;
 let startX = 0, startY = 0;
 const DRAG_THRESHOLD = 10; // Minimum pixels to move before considering it a drag
 
@@ -84,7 +84,7 @@ function onMouseDown(e) {
 function initializeDragState(e) {
     startX = e.clientX;
     startY = e.clientY;
-    isDragging = false;
+    dragged = false;
     const rect = draggedEl.getBoundingClientRect();
     offsetX = startX - rect.left;
     offsetY = startY - rect.top;
@@ -163,10 +163,10 @@ function moveAt(clientX, clientY) {
 function onMouseMove(e) {
     if (!draggedEl) return;
     if (shouldStartDrag(e)) {
-        isDragging = true;
+        dragged = true;
         startDrag(e);
     }
-    if (isDragging) {
+    if (dragged) {
         handleDragMovement(e);
     }
 }
@@ -179,7 +179,7 @@ function onMouseMove(e) {
 function shouldStartDrag(e) {
     const deltaX = Math.abs(e.clientX - startX);
     const deltaY = Math.abs(e.clientY - startY);
-    return !isDragging && (deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD);
+    return !dragged && (deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD);
 }
 
 /**
@@ -187,7 +187,7 @@ function shouldStartDrag(e) {
  * @param {MouseEvent} e - The mouse move event.
  */
 function handleDragMovement(e) {
-    e.preventDefault(); // Verhindert Standard-Textauswahl
+    e.preventDefault(); 
     moveAt(e.clientX, e.clientY);
     resetDropZones();
     highlightActiveDropZone(e);
@@ -258,16 +258,17 @@ function setDragStyles(e) {
  */
 function onMouseUp(e) {
     document.removeEventListener('mousemove', onMouseMove);
-    if (isDragging) {
+    document.removeEventListener('mouseup', onMouseUp);
+    if (dragged) {
         enableTextSelection();
         updateTaskData(e);
-    }
-    resetDrag();
+        resetDrag();
+    } 
 }
 
 function resetDrag() {
     draggedEl = null;
-    isDragging = false;
+    dragged = false;
     originalTasksList = null;
     renderAllTasks();
     updateEmptyMessages();
