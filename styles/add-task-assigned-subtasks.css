@@ -231,6 +231,7 @@
 
 .add-subtask-input {
     padding: 2px;
+    outline:none;
 }
 
 .icon-task {
@@ -376,6 +377,7 @@ input.subtask-entry::before {
     width: 250px;
     border: none;
     outline: none;
+    padding-left:2px;
     background: transparent;
     box-shadow: none;
 }

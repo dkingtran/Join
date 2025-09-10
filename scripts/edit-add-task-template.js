@@ -129,20 +129,24 @@ function editTasktemplateBig() {
   }
 
 /** Returns one subtask row HTML for the EDIT overlay (uses overlay handlers) */
-function getSubtaskTemplateOverlay(text) {
-  const cleanText = (text || '').replace(/^•\s*/, '');
+function getSubtaskTemplateOverlay(text, id, done) {
+  const clean = (text || '').replace(/^•\s*/, '');
+  const _id = id || `subtask_${Date.now()}`, _done = !!done;
   return `
-    <div class="subtask-text-box flex justify-between ">
-      <div class="subtask-entry font-bundle" onclick="startEditSubtaskOverlay(this)">•${cleanText}</div>
+    <div class="subtask-text-box flex justify-between" 
+         data-subtask-id="${_id}" data-done="${_done}">
+      <input type="checkbox" class="subtask-checkbox" ${_done ? 'checked' : ''} style="display:none">
+      <div class="subtask-entry font-bundle" onclick="startEditSubtaskOverlay(this)">${clean}</div>
       <div class="icon-edit-subtask-box display-standard">
-        <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" alt="Edit Icon" onclick="startEditSubtaskOverlay(this)">
-        <svg width="2" height="24" viewBox="0 0 2 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.14453 0V24" stroke="#A8A8A8"/></svg>
-        <img class="icon-task delete-subtask-input" src="assets/img/icons/add_task/delete.svg" alt="Delete Icon" onclick="deleteSubtaskOverlay(this)">
-        <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" alt="Confirm Icon" onclick="finishEditSubtaskOverlay(this)">
+        <img class="icon-task edit-icon" src="assets/img/icons/add_task/Property1=edit.svg" onclick="startEditSubtaskOverlay(this)">
+        <svg width="2" height="24" viewBox="0 0 2 24"><path d="M1.14453 0V24" stroke="#A8A8A8"/></svg>
+        <img class="icon-task delete-subtask-input" src="assets/img/icons/add_task/delete.svg" onclick="deleteSubtaskOverlay(this)">
+        <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" onclick="finishEditSubtaskOverlay(this)">
       </div>
-    </div>
-  `;
+    </div>`;
 }
+
+
 
 /**
  * Returns the HTML template for a subtask input field (edit mode).

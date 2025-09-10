@@ -77,12 +77,13 @@ function normalizeSubtasks(task) {
  * @param {HTMLInputElement} checkbox - The checkbox element of the subtask.
  */
 async function toggleSubtaskDone(checkbox) {
-  const taskId = checkbox.dataset.taskId;
-  const subtaskId = checkbox.dataset.subtaskId;
-  const isDone = checkbox.checked;
+  const taskId = checkbox.dataset.taskId, subId = checkbox.dataset.subtaskId, isDone = checkbox.checked;
   try {
-    await putData(`/tasks/${taskId}/subtasks/${subtaskId}/done`, isDone);
-    console.log("Subtask state saved:", subtaskId, isDone);
+    await putData(`/tasks/${taskId}/subtasks/${subId}/done`, isDone);
+    const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
+    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; // Cache sync
+    renderAllTasks();                 // Mini-Cards progress sofort updaten
+    if (t) renderBigCard(taskId, t);  // Big Card progress sofort updaten
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }
@@ -135,15 +136,19 @@ function closeBigCardOverlay(e) {
  * Delete complete Task in Firebase
  */
 async function deleteTaskBigCard(taskId) {
-  if (!confirm("You will Kill this Task? Real? Wow?")) return;
+  if (!confirm("Delete this task?")) return;
   try {
     await deleteData(`/tasks/${taskId}`);
+    if (Array.isArray(displayedTasks))
+      displayedTasks = displayedTasks.filter(t => t?.id !== taskId);
+    else if (displayedTasks && displayedTasks[taskId]) delete displayedTasks[taskId];
     closeBigCard();
-    await init(); // Board aktualisieren
+    renderAllTasks(); // Mini-Cards sofort neu
   } catch (err) {
-    console.error("Fehler beim Löschen:", err);
+    console.error("Failed to delete task:", err);
   }
 }
+
 
 /**
  * Opens the edit-task overlay and attaches a click handler
@@ -195,3 +200,18 @@ function renderBigCard(taskId, taskObj) {
   );
   showBigCard(bigCardHTML);
 }
+/* 
+window.openEditCardFor = function (taskId) {
+  let task = null;
+  if (Array.isArray(displayedTasks)) {
+    task = displayedTasks.find(t => t && t.id === taskId);
+  } else if (displayedTasks && displayedTasks[taskId]) {
+    task = displayedTasks[taskId];
+  }
+  window.currentEditingTaskId = taskId;
+  if (typeof openEditCard === "function") openEditCard();
+  if (task && typeof populateEditForm === "function") {
+    try { populateEditForm(task); } catch (e) { console.error("populateEditForm error:", e); }
+  }
+};
+ */
