@@ -188,8 +188,6 @@ function collectSubtasksFromOverlay(overlay) {
   return out;
 }
 
-
-
 /** Collects subtasks from the edit overlay into an object with {subtask, done:false}.  
  * @param {HTMLElement} root - Root element of the edit overlay.  
  * @returns {Object} Subtask collection keyed by timestamp + index. */
@@ -304,21 +302,20 @@ function bindEditOverlayButton(taskId) {
 /** Updates Firebase with form fields and subtasks, then closes the overlay.  
  * @param {string} taskId - The Firebase ID of the task being updated. */
 function bindEditOverlayFormSubmit(taskId) {
-  const overlay = getOverlayRoot();
-  const formElement = overlay?.querySelector('#form-element');
-  if (!formElement) return;
-  formElement.onsubmit = async e => {
+  const overlay = getOverlayRoot(), form = overlay?.querySelector('#form-element'); if (!form) return;
+  form.onsubmit = async e => {
     e.preventDefault();
-    const formData = collectEditFormData();
-    const subtasksPayload = collectSubtasksFromOverlay(overlay);
+    const data = collectEditFormData(overlay), subs = collectSubtasksFromOverlay(overlay);
     const fields = ['title','description','due-date','priority','assigned-to'];
-    await Promise.all(fields.map(n => putData(`/tasks/${taskId}/${n}`, formData[n])));
-    await putData(`/tasks/${taskId}/subtasks`, subtasksPayload);
+    await Promise.all(fields.map(n => putData(`/tasks/${taskId}/${n}`, data[n])));
+    await putData(`/tasks/${taskId}/subtasks`, subs);
+    updateTaskCache(taskId, { ...data, subtasks: subs });
     closeEditCard();
-    updateTaskCache(taskId, { ...formData, subtasks: subtasksPayload });
-    renderBigCard(taskId, displayedTasks[taskId]);
+    const t = Array.isArray(displayedTasks) ? displayedTasks.find(x=>x?.id===taskId) : displayedTasks[taskId];
+    renderBigCard(taskId, t || { id: taskId, ...data, subtasks: subs });
   };
 }
+
 
 /** Renders the task's existing subtasks into the edit overlay list.  
  * @param {Object} task - Task object containing a `subtasks` map. */
