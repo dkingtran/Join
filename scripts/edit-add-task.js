@@ -166,7 +166,7 @@ function finishEditSubtaskOverlay(clickedElement) {
   const newText = (inputField.value || '').trim();
   const textDiv = document.createElement('div');
   textDiv.className = 'subtask-entry font-bundle';
-/*   textDiv.textContent = '•' + newText; */
+  textDiv.textContent = '•' + newText; 
   textDiv.onclick = function () { startEditSubtaskOverlay(this); };
   inputField.replaceWith(textDiv);
   const iconBox = subtaskBox.querySelector('.icon-edit-subtask-box');
@@ -175,15 +175,20 @@ function finishEditSubtaskOverlay(clickedElement) {
 
 /** Collects subtasks from the edit overlay into an object keyed by timestamp+index. */
 function collectSubtasksFromOverlay(overlay) {
-  const subtasks = {};
-  const subtaskEntries = overlay.querySelectorAll('#subtask-output .subtask-entry');
-  for (let i = 0; i < subtaskEntries.length; i++) {
-    const entryText = (subtaskEntries[i].textContent || '').replace(/^•\s*/, '').trim();
-    const subtaskId = 'subtask_' + Date.now() + '_' + i;
-    subtasks[subtaskId] = { subtask: entryText, done: false };
+  const out = {}, rows = overlay.querySelectorAll('#subtask-output .subtask-text-box'), ts = Date.now();
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i], id = row.dataset.subtaskId || `subtask_${ts}_${i}`;
+    const text = (row.querySelector('.subtask-entry')?.textContent || '').replace(/^•\s*/, '').trim();
+    const cb = row.querySelector('.subtask-checkbox');
+    const done = cb ? cb.checked : row.dataset.done === 'true';
+    row.dataset.subtaskId = id;
+    row.dataset.done = String(done);
+    out[id] = { subtask: text, done: done };
   }
-  return subtasks;
+  return out;
 }
+
+
 
 /** Collects subtasks from the edit overlay into an object with {subtask, done:false}.  
  * @param {HTMLElement} root - Root element of the edit overlay.  
@@ -325,9 +330,14 @@ function prefillSubtasksFromTaskOverlay(task) {
   const subtasks = task?.subtasks || {};
   const subtaskIds = Object.keys(subtasks);
   for (let i = 0; i < subtaskIds.length; i++) {
-    const subtaskData = subtasks[subtaskIds[i]];
-    const subtaskText = subtaskData?.subtask || '';
-    subtaskOutput.insertAdjacentHTML('beforeend', getSubtaskTemplateOverlay(subtaskText));
+    const id = subtaskIds[i];
+    const data = subtasks[id] || {};
+    const text = data.subtask || '';
+    const done = !!data.done;
+    subtaskOutput.insertAdjacentHTML(
+      'beforeend',
+      getSubtaskTemplateOverlay(text, id, done) // <-- Template muss 3 Parameter verarbeiten
+    );
   }
 }
 
