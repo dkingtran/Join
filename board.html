@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join - Board</title>
   <link rel="icon" href="../assets/img/logo/logo-dark.png" type="image/x-icon" />
+  <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/colors.css" />
   <link rel="stylesheet" href="./styles/global.css" />
   <link rel="stylesheet" href="./styles/board.css" />
   <link rel="stylesheet" href="./styles/big-card.css" />
-  <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/board-card.css" />
   <link rel="stylesheet" href="./styles/board-drag-and-drop.css" />
   <link rel="stylesheet" href="./styles/side_menu.css" />
@@ -40,6 +40,7 @@
 <!--   <script src="./scripts/add-task-sample-leo.js" defer></script> -->
   <script src="./scripts/add-task-button.js" defer></script>
   <script src="./scripts/add-task-category-subtasks.js" defer></script>
+  <script src="./scripts/search.js" defer></script>
   <script src="./scripts/edit-add-task-template.js"></script>
   <script src="./scripts/edit-add-task.js"></script>
 
@@ -123,19 +124,20 @@
         <div class="header-title-container">
           <h1>Board</h1>
         </div>
-        <div class="search-add-container">
-          <div class="search-input-wrapper">
-            <input type="text" id="searchInput" placeholder="Find Task" />
-            <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
-            <button type="button" class="search-icon-btn" onclick="onSearchClick()">
-              <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+          <div class="search-add-container">
+            <div class="search-input-wrapper">
+              <input type="text" id="searchInput" placeholder="Find Task" />
+              <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+              <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+                <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
+              </button>
+              <span class="search-empty-message d-none" id="search-empty-message">No tasks found!</span>
+            </div>
+            <button class="add-task-button" id="addTaskButton" onclick="addTaskBoard('to-do')">
+              Add Task
+              <img src="./assets/img/icons/board/add-task.svg" alt="" />
             </button>
           </div>
-          <button class="add-task-button" id="addTaskButton" onclick="addTaskBoard('to-do')">
-            Add Task
-            <img src="./assets/img/icons/board/add-task.svg" alt="" />
-          </button>
-        </div>
         <button class="plus-add-task-button" id="plusAddTaskButton" onclick="addTaskBoard('to-do')"
           style="display: none" aria-label="Add Task">
           <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />

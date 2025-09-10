@@ -1,18 +1,20 @@
 
-document.getElementById('search').addEventListener("input", debounce(handleSearch, 250));
+document.getElementById('searchInput').addEventListener("input", debounce(handleSearch, 250));
 
 function handleSearch(event) {
     const value = event.target.value.toLowerCase();
+    document.getElementById('search-empty-message').classList.add('d-none');
     if (value == "") {
         displayedTasks = tasks;
-        renderTasks();
+        renderAllTasks();
         return;
     }
     displayedTasks = filterTasks(value);
     if (displayedTasks.length == 0) {
-        searchNotFound();
+        renderAllTasks();
+        document.getElementById('search-empty-message').classList.remove('d-none');
     } else {
-        renderTasks();
+        renderAllTasks();
     }
 }
 
