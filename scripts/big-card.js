@@ -28,7 +28,7 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-    document.body.style.overflow = "hidden"; // Hintergrund nicht mehr scrollbar
+    document.body.style.overflow = "hidden"; 
 }
 
 /**
@@ -81,9 +81,9 @@ async function toggleSubtaskDone(checkbox) {
   try {
     await putData(`/tasks/${taskId}/subtasks/${subId}/done`, isDone);
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
-    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; // Cache sync
-    renderAllTasks();                 // Mini-Cards progress sofort updaten
-    if (t) renderBigCard(taskId, t);  // Big Card progress sofort updaten
+    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; 
+    renderAllTasks();                
+    if (t) renderBigCard(taskId, t);  
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }

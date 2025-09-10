@@ -11,8 +11,6 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-/*   display: flex; */
-/*   flex-direction: column; */
   height: calc(100vh - 16px);
 }
 
@@ -128,7 +126,7 @@ body.no-scroll {
     cursor: pointer;
     align-items: center;
 }
-
+/* èberpruefen */
  .d-none {
   display: none !important;
 } 
