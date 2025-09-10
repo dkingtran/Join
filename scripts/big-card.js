@@ -77,12 +77,13 @@ function normalizeSubtasks(task) {
  * @param {HTMLInputElement} checkbox - The checkbox element of the subtask.
  */
 async function toggleSubtaskDone(checkbox) {
-  const taskId = checkbox.dataset.taskId;
-  const subtaskId = checkbox.dataset.subtaskId;
-  const isDone = checkbox.checked;
+  const taskId = checkbox.dataset.taskId, subId = checkbox.dataset.subtaskId, isDone = checkbox.checked;
   try {
-    await putData(`/tasks/${taskId}/subtasks/${subtaskId}/done`, isDone);
-    console.log("Subtask state saved:", subtaskId, isDone);
+    await putData(`/tasks/${taskId}/subtasks/${subId}/done`, isDone);
+    const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
+    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; // Cache sync
+    renderAllTasks();                 // Mini-Cards progress sofort updaten
+    if (t) renderBigCard(taskId, t);  // Big Card progress sofort updaten
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }

@@ -306,15 +306,17 @@ function bindEditOverlayFormSubmit(taskId) {
   form.onsubmit = async e => {
     e.preventDefault();
     const data = collectEditFormData(overlay), subs = collectSubtasksFromOverlay(overlay);
-    const fields = ['title','description','due-date','priority','assigned-to'];
-    await Promise.all(fields.map(n => putData(`/tasks/${taskId}/${n}`, data[n])));
+    const f = ['title','description','due-date','priority','assigned-to'];
+    await Promise.all(f.map(n => putData(`/tasks/${taskId}/${n}`, data[n])));
     await putData(`/tasks/${taskId}/subtasks`, subs);
     updateTaskCache(taskId, { ...data, subtasks: subs });
+    renderAllTasks(); // Mini-Cards sofort aktualisieren
     closeEditCard();
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x=>x?.id===taskId) : displayedTasks[taskId];
     renderBigCard(taskId, t || { id: taskId, ...data, subtasks: subs });
   };
 }
+
 
 
 /** Renders the task's existing subtasks into the edit overlay list.  
