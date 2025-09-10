@@ -5,12 +5,8 @@ let isDragging = false;
 let startX = 0, startY = 0;
 const DRAG_THRESHOLD = 10; // Minimum pixels to move before considering it a drag
 
-// Global variable for other scripts to check drag state
-window.dragged = null;
-
 // Add global variables to track original position
 let originalTasksList = null;
-let originalIndex = -1;
 
 // === Board Rendering ===
 /**
@@ -66,11 +62,7 @@ function renderWithNoTasksAreas() {
  */
 function addDragEventsToCards() {
     document.querySelectorAll('.board-card').forEach(card => {
-        // Nur einmal anhängen
-        if (!card.dataset.dragEventsAttached) {
-            card.addEventListener('mousedown', onMouseDown);
-            card.dataset.dragEventsAttached = "true";
-        }
+        card.addEventListener('mousedown', onMouseDown);
     });
 }
 
@@ -93,13 +85,11 @@ function initializeDragState(e) {
     startX = e.clientX;
     startY = e.clientY;
     isDragging = false;
-    window.dragged = null; // Reset dragged state
     const rect = draggedEl.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
+    offsetX = startX - rect.left;
+    offsetY = startY - rect.top;
     // Capture original position
     originalTasksList = draggedEl.parentElement;
-    originalIndex = Array.from(originalTasksList.children).indexOf(draggedEl);
 }
 
 /**
@@ -129,7 +119,7 @@ function createPlaceholdersInAdjacentZones() {
  */
 function createPlaceholderIfAdjacent(column, currentColumnIndex) {
     const columnIndex = parseInt(column.dataset.columnIndex);
-    if (Math.abs(columnIndex - currentColumnIndex) <= 1) {
+    if (Math.abs(columnIndex - currentColumnIndex) == 1) {
         const tasksList = column.querySelector('.tasks-list');
         if (tasksList) {
             addPlaceholderToList(tasksList);
@@ -222,11 +212,9 @@ function highlightActiveDropZone(e) {
     const elBelow = document.elementFromPoint(e.clientX, e.clientY);
     const tasksList = elBelow?.closest('.tasks-list');
     if (tasksList && tasksList.querySelector('.placeholder')) {
-        tasksList.classList.add('drop-zone-active');
         const activePlaceholder = tasksList.querySelector('.placeholder');
         if (activePlaceholder) {
             activePlaceholder.style.opacity = '1';
-            tasksList.appendChild(activePlaceholder);
         }
     }
 }
@@ -261,8 +249,6 @@ function setDragStyles(e) {
     draggedEl.style.position = 'fixed';
     draggedEl.style.zIndex = '1000';
     draggedEl.style.pointerEvents = 'none';
-    window.dragged = draggedEl; // Set global dragged element
-    document.body.appendChild(draggedEl);
     moveAt(e.clientX, e.clientY);
 }
 
@@ -273,21 +259,19 @@ function setDragStyles(e) {
 function onMouseUp(e) {
     document.removeEventListener('mousemove', onMouseMove);
     if (isDragging) {
-        completeDrag();
+        enableTextSelection();
+        updateTaskData(e);
     }
-    // Reset
-    draggedEl = null;
-    isDragging = false;
+    resetDrag();
 }
 
-/**
- * Completes the drag operation by repositioning the element, cleaning up placeholders, and updating data.
- */
-function completeDrag() {
-    enableTextSelection();
-    repositionDraggedElement();
-    cleanupPlaceholders();
-    updateTaskData();
+function resetDrag() {
+    draggedEl = null;
+    isDragging = false;
+    originalTasksList = null;
+    renderAllTasks();
+    updateEmptyMessages();
+    addDragEventsToCards();
 }
 
 /**
@@ -301,26 +285,6 @@ function enableTextSelection() {
 }
 
 /**
- * Repositions the dragged element based on the active placeholder.
- */
-function repositionDraggedElement() {
-    const activePlaceholder = document.querySelector('.tasks-list.drop-zone-active .placeholder');
-    if (activePlaceholder) {
-        activePlaceholder.parentNode.insertBefore(draggedEl, activePlaceholder);
-    } else {
-        // Restore to original position if no active drop zone
-        if (originalTasksList && originalIndex >= 0) {
-            const children = Array.from(originalTasksList.children);
-            if (originalIndex < children.length) {
-                originalTasksList.insertBefore(draggedEl, children[originalIndex]);
-            } else {
-                originalTasksList.appendChild(draggedEl);
-            }
-        }
-    }
-}
-
-/**
  * Removes all placeholders and drop zone highlights.
  */
 function cleanupPlaceholders() {
@@ -330,29 +294,41 @@ function cleanupPlaceholders() {
     });
 }
 
-/**
- * Resets the styles of the dragged element and updates task data.
- */
-function updateTaskData() {
+function cleardraggedEl() {
     draggedEl.classList.remove('dragging');
     draggedEl.style.position = '';
     draggedEl.style.left = '';
     draggedEl.style.top = '';
     draggedEl.style.zIndex = '';
     draggedEl.style.pointerEvents = '';
-    window.dragged = null; // Reset global dragged state
-    // Only update if repositioned to a new column
-    const currentColumn = draggedEl.closest('.board-column');
-    if (currentColumn && currentColumn !== originalTasksList.closest('.board-column')) {
-        let newCol = currentColumn.dataset.columnIndex;
+}
+
+/**
+ * Resets the styles of the dragged element and updates task data.
+ */
+function updateTaskData(e) {
+    cleardraggedEl();
+    let fromColumn = originalTasksList.closest('.board-column');
+    let dropZone = e.target;
+    let targetColumn = dropZone.closest('.board-column');
+    if (isValidDropZone(dropZone, fromColumn) && fromColumn !== targetColumn) {
+        let targetColumnId = targetColumn.dataset.columnIndex;
         moveTaskToCategory(
-            displayedTasks[draggedEl.dataset.displayedidIndex],
-            categories[newCol],
+            displayedTasks[draggedEl.dataset.displayedTasksId],
+            categories[targetColumnId],
             draggedEl
         );
     }
-    updateEmptyMessages();
-    addDragEventsToCards();
+}
+
+function isValidDropZone(dropZoneElement, fromCol) {
+    if (!draggedEl) return false;
+    if (!fromCol || !dropZoneElement) return false;
+    if (!dropZoneElement.classList.contains('placeholder')) return false;
+    let targetColumn = dropZoneElement.closest('.board-column');
+    let targetColumnId = targetColumn.dataset.columnIndex;
+    let sourceIndex = fromCol.dataset.columnIndex;
+    return Math.abs(sourceIndex - targetColumnId) === 1;
 }
 
 // === Task Management ===
@@ -385,20 +361,6 @@ function updateTask(taskData, newStatus) {
             taskData.status[stat] = false;
         }
     });
-}
-
-/**
- * Updates the task data in Firebase by sending a PUT request.
- * @param {Object} taskData - The task data to update in Firebase.
- * @returns {Promise<void>} Resolves when the update is complete.
- */
-async function updateTaskInFirebase(taskData) {
-    try {
-        let path = "/tasks/" + taskData.id + "/";
-        await putData(path, taskData);
-    } catch (e) {
-        console.error("Put Task to Firebase:", e);
-    }
 }
 
 /**
