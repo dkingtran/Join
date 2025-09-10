@@ -63,10 +63,6 @@ body.no-scroll {
   align-items: center;
 }
 
-/* .d-none {
-  display: none !important;
-} */
-
 #edit-task-content .subtask-text-box {
   display: flex;
   align-items: center;
@@ -133,9 +129,9 @@ body.no-scroll {
     align-items: center;
 }
 
-.d-none {
-  display: none;
-}
+ .d-none {
+  display: none !important;
+} 
 
 @media(max-width:1001px){
   .edit-task-content-style
