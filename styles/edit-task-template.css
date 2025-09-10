@@ -60,6 +60,7 @@ body.no-scroll {
 #edit-task-content #subtask-initial .icon.plus {
   margin-left: auto;
   display: inline-flex;
+  align-items: center;
 }
 
 /* .d-none {

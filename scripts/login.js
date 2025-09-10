@@ -13,8 +13,9 @@ async function login() {
   let users = await loadData("/users/");
   let user = findUser(users);
   if (user) {
-    activateLogin(user);
-    window.location.href = "./index.html";
+    let username = user.name["first-name"] + " " + user.name["last-name"];
+    activateLogin(username);
+    window.location.href = "./summary.html";
   } else {
     displayLoginError();
   }
@@ -32,13 +33,21 @@ function displayLoginError() {
 }
 
 /**
+ * logs into Join as a guest.
+ */
+function guestLogin() {
+  activateLogin("Guest");
+  window.location.href = "./summary.html";
+}
+
+/**
  * Finds and returns a user object from the provided array that matches the email and password input values.
  * @param {Array<Object>} users - The array of user objects to search through.
  * @returns {Object|undefined} The matched user object if found; otherwise, undefined.
  */
 function findUser(users) {
   let userKeyArray = Object.keys(users);
-  let userId =  userKeyArray.find(userKey => {
+  let userId = userKeyArray.find(userKey => {
     return users[userKey] &&
       users[userKey].email === emailRef.value &&
       users[userKey].password == passwordRef.value;
@@ -52,7 +61,16 @@ function findUser(users) {
  * @param {Object} user - The user object containing user information.
  * @param {string} user.name - The name of the user to be stored.
  */
-function activateLogin(user) {
+function activateLogin(username) {
   localStorage.setItem("loggedIn", true);
-  localStorage.setItem("name", JSON.stringify(user.name));
+  localStorage.setItem("name", JSON.stringify(username));
+}
+
+/**
+ * logs out user and redirects to login.
+ */
+function logout() {
+  localStorage.setItem("loggedIn", false);
+  localStorage.removeItem("name");
+  window.location.href = "./index.html";
 }

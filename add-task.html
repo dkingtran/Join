@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../styles/add-task-assigned-subtasks.css" />
   <link rel="stylesheet" href="../styles/standard.css" />
   <link rel="stylesheet" href="../styles/media.css" />
- <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-add-task.css">
+  <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-add-task.css">
 
   <script src="../scripts/side-menu.js"></script>
 </head>
@@ -74,8 +74,8 @@
               <div class="decription-class">
                 <p class="font-bundle description-title">Description</p>
                 <label for="description" class="sr-only"></label>
-                <textarea class="textarea-task textarea-task-edit font-bundle w-full max-w-440 border-radius-10px" name="description"
-                  id="task-description" placeholder="Enter a Description"></textarea>
+                <textarea class="textarea-task textarea-task-edit font-bundle w-full max-w-440 border-radius-10px"
+                  name="description" id="task-description" placeholder="Enter a Description"></textarea>
               </div>
 
               <div class="date-task">
@@ -167,7 +167,7 @@
                   class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
                   onclick="showSubtaskInput()">
                   <input class="add-subtask-input input-bundle font-bundle" type="text" placeholder="Add new subtask"
-                    readonly />
+                    readonly>
                   <span id="open-subtask" class="icon plus display-standard">
                     <img src="assets/img/icons/add_task/add.svg" alt="Plus Icon" />
                   </span>
@@ -276,7 +276,7 @@
       </a>
     </div>
   </aside>
-
+  <script src="./script.js"></script>
   <script src="./scripts/firebase.js"></script>
 
   <script src="./scripts/add-task-templates.js"></script>
