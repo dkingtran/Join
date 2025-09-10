@@ -54,20 +54,27 @@
     border-radius: 24px;
 }
 
-.board-card[draggable="true"] {
-    cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.board-card[draggable="true"]:hover {
+ .board-card:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+} 
+
+.dragged-card-clone {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transform: rotate(5deg) !important;
 }
 
-.board-card.dragging {
-    opacity: 0.5;
-    transform: rotate(5deg);
+.dragging {
     cursor: grabbing;
+    transform: rotate(5deg) !important;
+}
+
+.hide {
+    transition: transform 0.01s;
+    transform: translateX(-9999px) !important;
 }
 
 .drag-over {

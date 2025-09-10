@@ -68,15 +68,18 @@ function handleDragStart(e) {
     currentDraggedTask = {
         element: e.target,
         taskData: displayedTasks[e.target.dataset.displayedTasksId],
-        sourceColumn: fromCol.dataset.columnIndex
     };
     e.target.classList.add('dragging');
     e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => {
+        e.target.classList.add('hide');
+    }, 0.1)
     highlightAllowedDropZones();
 }
 
 function handleDragEnd(e) {
     e.target.classList.remove('dragging');
+    e.target.classList.remove('hide');
     currentDraggedTask = null;
     fromCol = '';
     setTimeout(() => (dragged = false), 0);
