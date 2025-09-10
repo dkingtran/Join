@@ -1,5 +1,4 @@
-/* Drag & Drop Styles */
-/* Using onmouse events */
+
 .valid-drop-zone {
     background-color: transparent !important;
     border: 1px dashed #A8A8A8 !important;
@@ -38,54 +37,8 @@
     border: 1px dashed grey;
     border-radius: 10px;
     justify-self: center;
-    margin: 0 auto;
 }
 
 .placeholder:hover {
     background-color: #E7E7E7 !important;
 }
-
-/* Drag & Drop Styles */
-/* Using ondrag events */
-
-/* .valid-drop-zone {
-    background-color: transparent !important;
-    border: 1px dashed #A8A8A8 !important;
-    border-radius: 24px;
-}
-
- .board-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-} 
-
-.dragged-card-clone {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    transform: rotate(5deg) !important;
-}
-
-.dragging {
-    cursor: grabbing;
-    transform: rotate(5deg) !important;
-}
-
-.hide {
-    transition: transform 0.01s;
-    transform: translateX(-9999px) !important;
-}
-
-.drag-over {
-    background-color: #E7E7E7 !important;
-}
-
-.placeholder {
-    width: 252px;
-    height: 263px;
-    border: 1px dashed grey;
-    border-radius: 10px;
-    justify-self: center;
-    margin: 0 auto;
-} */
