@@ -139,7 +139,7 @@ function renderAllTasks() {
             renderTaskToColumn(tasksId, displayedTasksId, task, columnId);
         }
     });
-    renderWithNoTasksAreas();
+    checkColumnsAddEvents();
 }
 
 /**

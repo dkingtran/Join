@@ -267,6 +267,7 @@
 	box-sizing: border-box;
 	position: relative;
 	min-height: 300px; /* optional: für bessere Optik */
+	min-width: 252px;
 }
 
 .column-header {

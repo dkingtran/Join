@@ -69,7 +69,7 @@ function getSwitchDropdownTemplate(buttonsHTML) {
 	</div>`;
 }
 
-function getArrowUpBtnTemplate(columnIndex, targetCard) {
+function getArrowUpBtnTemplate(columnIndex) {
 	return /* HTML */ `<button
 		class="switch-dropdown-btn"
 		onclick="switchColumn(event, ${columnIndex})">
@@ -78,7 +78,7 @@ function getArrowUpBtnTemplate(columnIndex, targetCard) {
 	</button>`;
 }
 
-function getArrowDownBtnTemplate(columnIndex, targetCard) {
+function getArrowDownBtnTemplate(columnIndex) {
 	return /* HTML */ `<button
 		class="switch-dropdown-btn"
 		onclick="switchColumn(event, ${columnIndex})">
