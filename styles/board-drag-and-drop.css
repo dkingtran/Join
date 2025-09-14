@@ -38,7 +38,7 @@
 	border-radius: 5px;
 	height: 20px;
 	width: 20px;
-    user-select: none;
+	user-select: none;
 }
 
 .swap-icon:hover {
@@ -95,5 +95,11 @@
 @media (min-width: 1001px) {
 	.swap-icon {
 		display: none;
+	}
+}
+
+@media (max-width: 360px) {
+	.switch-dropdown {
+		right: calc(36px - 70px);
 	}
 }
