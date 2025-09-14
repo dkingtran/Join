@@ -75,7 +75,7 @@ function getSwitchButtons(validColumnIdxArr) {
     if (!validColumnIdxArr) return;
     if (validColumnIdxArr.length == 1) {
         let singleColumnIndex = validColumnIdxArr[0];
-        if (singleColumnIndex == 0) {
+        if (singleColumnIndex == 1) {
             return getArrowDownBtnTemplate(singleColumnIndex);
         } else {
             return getArrowUpBtnTemplate(singleColumnIndex);
@@ -102,7 +102,18 @@ function switchColumn(event, columnIndex) {
         taskElement
     );
     renderAllTasks();
-    updateEmptyMessages();
-    addDragEventsToCards();
-    addSwitchEventsToCards();
+}
+
+window.addEventListener('resize', checkDragSwitchEvents);
+
+/**
+ * Removes the 'mousedown' event listener from all elements with the class 'board-card'
+ * when the window's inner width is less than or equal to 1000 pixels.
+ */
+function checkDragSwitchEvents() {
+    if (window.innerWidth <= 1000) {
+        document.querySelectorAll('.board-card').forEach(card => {
+            card.removeEventListener('mousedown', onMouseDown);
+        });
+    }
 }
