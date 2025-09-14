@@ -115,9 +115,8 @@ function buildSubtasksHTML(taskId, subtasks) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
-  document.body.style.overflow = ""; // Scroll wieder erlauben
+  document.body.style.overflow = ""; 
 }
-
 
 /**
  * Closes the Big Card only when the backdrop itself is clicked.
@@ -148,7 +147,6 @@ async function deleteTaskBigCard(taskId) {
     console.error("Failed to delete task:", err);
   }
 }
-
 
 /**
  * Opens the edit-task overlay and attaches a click handler
@@ -200,18 +198,3 @@ function renderBigCard(taskId, taskObj) {
   );
   showBigCard(bigCardHTML);
 }
-/* 
-window.openEditCardFor = function (taskId) {
-  let task = null;
-  if (Array.isArray(displayedTasks)) {
-    task = displayedTasks.find(t => t && t.id === taskId);
-  } else if (displayedTasks && displayedTasks[taskId]) {
-    task = displayedTasks[taskId];
-  }
-  window.currentEditingTaskId = taskId;
-  if (typeof openEditCard === "function") openEditCard();
-  if (task && typeof populateEditForm === "function") {
-    try { populateEditForm(task); } catch (e) { console.error("populateEditForm error:", e); }
-  }
-};
- */
