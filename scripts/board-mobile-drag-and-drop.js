@@ -115,5 +115,9 @@ function checkDragSwitchEvents() {
         document.querySelectorAll('.board-card').forEach(card => {
             card.removeEventListener('mousedown', onMouseDown);
         });
+    } else {
+        document.querySelectorAll('.board-card').forEach(card => {
+            card.addEventListener('mousedown', onMouseDown);
+        });
     }
 }
