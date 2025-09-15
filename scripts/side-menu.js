@@ -3,25 +3,10 @@ function toggleProfileDropdown() {
     dropdown.classList.toggle('show');
 }
 
-// Function to generate user initials from full name
-function generateInitials(fullName) {
-    if (!fullName) return 'G'; // Default for 'User'
-    
-    const nameParts = fullName.trim().split(' ');
-    if (nameParts.length === 1) {
-        return nameParts[0].charAt(0).toUpperCase();
-    }
-    
-    // Take first letter of first name and first letter of last name
-    const firstInitial = nameParts[0].charAt(0);
-    const lastInitial = nameParts[nameParts.length - 1].charAt(0);
-    return (firstInitial + lastInitial).toUpperCase();
-}
-
 // Function to update profile button with user initials
-function updateProfileInitials(userName = 'Guest') {
+function updateProfileInitials(userName) {
     const profileBtns = document.querySelectorAll('.profile-btn');
-    const initials = generateInitials(userName);
+    const initials = getInitials(userName);
     
     profileBtns.forEach(btn => {
         btn.textContent = initials;
@@ -36,10 +21,10 @@ function updateProfileInitials(userName = 'Guest') {
 }
 
 // Initialize profile initials when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // You can replace this with actual user data from your authentication system
-    const currentUser = 'Guest'; // This should come from your user session/login data
+document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = JSON.parse(localStorage.getItem('name'));
     updateProfileInitials(currentUser);
+    document.getElementById('logout-btn').addEventListener('click', logout);
 });
 
 // Close dropdown when clicking outside
@@ -63,3 +48,12 @@ function initDesktopHover() {
 
 // Call on window resize to handle responsive behavior
 window.addEventListener('resize', initDesktopHover);
+
+/**
+ * logs out user and redirects to login.
+ */
+function logout() {
+  localStorage.setItem("loggedIn", false);
+  localStorage.removeItem("name");
+  window.location.href = "./index.html";
+}
