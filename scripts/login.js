@@ -75,15 +75,24 @@ function logout() {
   window.location.href = "./index.html";
 }
 
+/**
+ * Updates the UI with the user's initials and display name
+ * based on the current login state stored in localStorage.
+ */
 function showUserStatus() {
   let isLoggedIn = localStorage.getItem("loggedIn") === "true";
   let name = localStorage.getItem("name");
-
   let { initials, displayName } = checkLogAndGetInitials(isLoggedIn, name);
   document.querySelector(".profile-btn").textContent = initials;
   document.getElementById("userName").textContent = displayName;
 }
 
+/**
+ * Determines the initials and display name for a user.
+ * @param {boolean} isLoggedIn - Whether the user is logged in.
+ * @param {string|null} name - The stored user name (JSON string) or null.
+ * @returns {{initials: string, displayName: string}} The initials and display name.
+ */
 function checkLogAndGetInitials(isLoggedIn, name) {
   if (isLoggedIn && name) {
     name = JSON.parse(name);
@@ -98,6 +107,7 @@ function checkLogAndGetInitials(isLoggedIn, name) {
     };
   }
 }
+
 
 
 
