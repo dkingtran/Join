@@ -74,3 +74,31 @@ function logout() {
   localStorage.removeItem("name");
   window.location.href = "./index.html";
 }
+
+function showUserStatus() {
+  let isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  let name = localStorage.getItem("name");
+
+  let { initials, displayName } = checkLogAndGetInitials(isLoggedIn, name);
+  document.querySelector(".profile-btn").textContent = initials;
+  document.getElementById("userName").textContent = displayName;
+}
+
+function checkLogAndGetInitials(isLoggedIn, name) {
+  if (isLoggedIn && name) {
+    name = JSON.parse(name);
+    return {
+      initials: getInitials(name),
+      displayName: name
+    };
+  } else {
+    return {
+      initials: "G",
+      displayName: "GUEST"
+    };
+  }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', showUserStatus)
