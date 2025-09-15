@@ -65,12 +65,3 @@ function activateLogin(username) {
   localStorage.setItem("loggedIn", true);
   localStorage.setItem("name", JSON.stringify(username));
 }
-
-/**
- * logs out user and redirects to login.
- */
-function logout() {
-  localStorage.setItem("loggedIn", false);
-  localStorage.removeItem("name");
-  window.location.href = "./index.html";
-}
