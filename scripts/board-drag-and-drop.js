@@ -1,245 +1,383 @@
-const categories = [
-    { key: 'to-do', id: 'open', label: 'To do', columnId: 'tasks-list-open' },
-    { key: 'in-progress', id: 'inprogress', label: 'In progress', columnId: 'tasks-list-inprogress' },
-    { key: 'feedback', id: 'awaitfeedback', label: 'Await feedback', columnId: 'tasks-list-awaitfeedback' },
-    { key: 'done', id: 'done', label: 'Done', columnId: 'tasks-list-done' }
-];
-
-let currentDraggedTask = null;
+let draggedEl = null;
+let placeholder = null;
+let offsetX = 0, offsetY = 0;
 let dragged = false;
+let startX = 0, startY = 0;
+const DRAG_THRESHOLD = 10; // Minimum pixels to move before considering it a drag
 
-// ===================================
-// BOARD RENDERING FUNCTIONS
-// ===================================
+// Add global variables to track original position
+let originalTasksList = null;
 
+// === Board Rendering ===
+/**
+ * Updates empty messages for task lists by checking if lists are empty and adding/removing messages accordingly.
+ */
 function updateEmptyMessages() {
     document.querySelectorAll(".tasks-list").forEach((list) => {
-        const tasks = Array.from(list.children).filter((c) =>
-            c.classList.contains("board-card")
-        );
-        let msg = list.querySelector(".empty-msg");
-        if (tasks.length === 0) {
-            if (!msg) {
-                let header = list.parentElement.querySelector(".column-header");
-                let headerText = (header ? header.textContent : "");
-                list.innerHTML = getKanbanEmptyMessage(headerText);
-            } else msg.style.display = '';
+        checkAndHandleEmptyList(list);
+    });
+}
+
+/**
+ * Checks if a task list is empty and handles adding or removing the empty message.
+ * @param {HTMLElement} list - The tasks list element.
+ */
+function checkAndHandleEmptyList(list) {
+    const tasks = Array.from(list.children).filter((c) =>
+        c.classList.contains("board-card")
+    );
+    let msg = list.querySelector(".empty-msg");
+    if (tasks.length === 0) {
+        if (!msg) {
+            addEmptyMessage(list);
         } else {
-            if (msg) msg.remove();
+            msg.style.display = '';
+        }
+    } else {
+        if (msg) msg.remove();
+    }
+}
+
+/**
+ * Adds an empty message to the list based on the column header.
+ * @param {HTMLElement} list - The tasks list element.
+ */
+function addEmptyMessage(list) {
+    let header = list.parentElement.querySelector(".column-header");
+    let headerText = (header ? header.textContent : "");
+    list.innerHTML = getKanbanEmptyMessage(headerText);
+}
+
+/**
+ * Adds messages to empty columns and adds drag or switch events to every card.
+ */
+function checkColumnsAddEvents() {
+    updateEmptyMessages();
+    addDragEventsToCards();
+    addSwitchEventsToCards();
+    checkDragSwitchEvents();
+}
+
+// === Drag Setup ===
+/**
+ * Adds mouse down event listeners to board cards for drag functionality, ensuring events are attached only once.
+ */
+function addDragEventsToCards() {
+    document.querySelectorAll('.board-card').forEach(card => {
+        card.addEventListener('mousedown', onMouseDown);
+    });
+}
+
+/**
+ * Handles the mouse down event on a board card, initializing drag state and event listeners.
+ * @param {MouseEvent} e - The mouse down event.
+ */
+function onMouseDown(e) {
+    draggedEl = e.target.closest('.board-card');
+    if (!draggedEl) return;
+    initializeDragState(e);
+    setupDragEvents();
+}
+
+/**
+ * Initializes the drag state with start position and offsets.
+ * @param {MouseEvent} e - The mouse down event.
+ */
+function initializeDragState(e) {
+    startX = e.clientX;
+    startY = e.clientY;
+    dragged = false;
+    const rect = draggedEl.getBoundingClientRect();
+    offsetX = startX - rect.left;
+    offsetY = startY - rect.top;
+    // Capture original position
+    originalTasksList = draggedEl.parentElement;
+}
+
+/**
+ * Sets up event listeners for mouse move and mouse up.
+ */
+function setupDragEvents() {
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp, { once: true });
+}
+
+// === Placeholder Management ===
+/**
+ * Creates placeholder elements in the current and adjacent board columns for drop zones.
+ */
+function createPlaceholdersInAdjacentZones() {
+    const currentColumn = draggedEl.closest('.board-column');
+    const currentColumnIndex = parseInt(currentColumn.dataset.columnIndex);
+    document.querySelectorAll('.board-column').forEach((column) => {
+        createPlaceholderIfAdjacent(column, currentColumnIndex);
+    });
+}
+
+/**
+ * Creates a placeholder in a column if it is adjacent to the current column.
+ * @param {HTMLElement} column - The board column element.
+ * @param {number} currentColumnIndex - The index of the current column.
+ */
+function createPlaceholderIfAdjacent(column, currentColumnIndex) {
+    const columnIndex = parseInt(column.dataset.columnIndex);
+    if (Math.abs(columnIndex - currentColumnIndex) == 1) {
+        const tasksList = column.querySelector('.tasks-list');
+        if (tasksList) {
+            addPlaceholderToList(tasksList);
+        }
+    }
+}
+
+/**
+ * Adds a placeholder element to the tasks list.
+ * @param {HTMLElement} tasksList - The tasks list element.
+ */
+function addPlaceholderToList(tasksList) {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'placeholder';
+    placeholder.style.opacity = '0.9';
+    tasksList.appendChild(placeholder);
+
+    // Hide "No Tasks..." message if the list is empty
+    const tasks = Array.from(tasksList.children).filter(c => c.classList.contains("board-card"));
+    if (tasks.length === 0) {
+        const msg = tasksList.querySelector(".empty-msg");
+        if (msg) msg.style.display = 'none';
+    }
+}
+
+// === Drag Movement ===
+/**
+ * Moves the dragged element to the specified page coordinates, accounting for offset.
+ * @param {number} pageX - The x-coordinate on the page.
+ * @param {number} pageY - The y-coordinate on the page.
+ */
+function moveAt(clientX, clientY) {
+    draggedEl.style.left = clientX - offsetX + 'px';
+    draggedEl.style.top = clientY - offsetY + 'px';
+}
+
+/**
+ * Handles the mouse move event, checking for drag threshold and updating drag state or highlighting drop zones.
+ * @param {MouseEvent} e - The mouse move event.
+ */
+function onMouseMove(e) {
+    if (!draggedEl) return;
+    if (shouldStartDrag(e)) {
+        dragged = true;
+        startDrag(e);
+    }
+    if (dragged) {
+        handleDragMovement(e);
+    }
+}
+
+/**
+ * Checks if the mouse movement exceeds the drag threshold.
+ * @param {MouseEvent} e - The mouse move event.
+ * @returns {boolean} True if drag should start.
+ */
+function shouldStartDrag(e) {
+    const deltaX = Math.abs(e.clientX - startX);
+    const deltaY = Math.abs(e.clientY - startY);
+    return !dragged && (deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD);
+}
+
+/**
+ * Handles the drag movement, preventing default behavior and updating drop zones.
+ * @param {MouseEvent} e - The mouse move event.
+ */
+function handleDragMovement(e) {
+    e.preventDefault(); 
+    moveAt(e.clientX, e.clientY);
+    resetDropZones();
+    highlightActiveDropZone(e);
+}
+
+/**
+ * Resets all drop zones by removing active classes and adjusting placeholder opacity.
+ */
+function resetDropZones() {
+    document.querySelectorAll('.tasks-list').forEach(list => {
+        list.classList.remove('drop-zone-active');
+        const placeholders = list.querySelectorAll('.placeholder');
+        placeholders.forEach(p => p.style.opacity = '0.5');
+    });
+}
+
+/**
+ * Highlights the active drop zone based on the mouse position.
+ * @param {MouseEvent} e - The mouse move event.
+ */
+function highlightActiveDropZone(e) {
+    const elBelow = document.elementFromPoint(e.clientX, e.clientY);
+    const tasksList = elBelow?.closest('.tasks-list');
+    if (tasksList && tasksList.querySelector('.placeholder')) {
+        const activePlaceholder = tasksList.querySelector('.placeholder');
+        if (activePlaceholder) {
+            activePlaceholder.style.opacity = '1';
+        }
+    }
+}
+
+// === Drag Lifecycle ===
+/**
+ * Starts the drag operation by setting styles, creating placeholders, and moving the element.
+ * @param {MouseEvent} e - The mouse event that triggered the drag start.
+ */
+function startDrag(e) {
+    disableTextSelection();
+    createPlaceholdersInAdjacentZones();
+    setDragStyles(e);
+}
+
+/**
+ * Disables text selection on the document body.
+ */
+function disableTextSelection() {
+    document.body.style.userSelect = 'none';
+    document.body.style.mozUserSelect = 'none';
+    document.body.style.msUserSelect = 'none';
+}
+
+/**
+ * Sets the styles for the dragged element and moves it.
+ * @param {MouseEvent} e - The mouse event.
+ */
+function setDragStyles(e) {
+    draggedEl.classList.add('dragging');
+    draggedEl.style.position = 'fixed';
+    draggedEl.style.zIndex = '1000';
+    draggedEl.style.pointerEvents = 'none';
+    moveAt(e.clientX, e.clientY);
+}
+
+/**
+ * Handles the mouse up event, completing the drag if active or allowing click events.
+ * @param {MouseEvent} e - The mouse up event.
+ */
+function onMouseUp(e) {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    if (dragged) {
+        enableTextSelection();
+        updateTaskData(e);
+        resetDrag();
+    } 
+}
+
+function resetDrag() {
+    draggedEl = null;
+    dragged = false;
+    originalTasksList = null;
+    renderAllTasks();
+}
+
+/**
+ * Re-enables text selection on the document body.
+ */
+function enableTextSelection() {
+    document.body.style.userSelect = '';
+    document.body.style.mozUserSelect = '';
+    document.body.style.msUserSelect = '';
+}
+
+/**
+ * Removes all placeholders and drop zone highlights.
+ */
+function cleanupPlaceholders() {
+    document.querySelectorAll('.placeholder').forEach(p => p.remove());
+    document.querySelectorAll('.tasks-list').forEach(list => {
+        list.classList.remove('drop-zone-active');
+    });
+}
+
+function cleardraggedEl() {
+    draggedEl.classList.remove('dragging');
+    draggedEl.style.position = '';
+    draggedEl.style.left = '';
+    draggedEl.style.top = '';
+    draggedEl.style.zIndex = '';
+    draggedEl.style.pointerEvents = '';
+}
+
+/**
+ * Resets the styles of the dragged element and updates task data.
+ */
+function updateTaskData(e) {
+    cleardraggedEl();
+    let fromColumn = originalTasksList.closest('.board-column');
+    let dropZone = e.target;
+    let targetColumn = dropZone.closest('.board-column');
+    if (isValidDropZone(dropZone, fromColumn) && fromColumn !== targetColumn) {
+        let targetColumnId = targetColumn.dataset.columnIndex;
+        moveTaskToCategory(
+            categories[targetColumnId],
+            draggedEl
+        );
+    }
+}
+
+/**
+ * Determines if a given drop zone element is a valid target for a drag-and-drop operation.
+ *
+ * @param {HTMLElement} dropZoneElement - The element representing the potential drop zone.
+ * @param {HTMLElement} fromColumn - The column element from which the item is being dragged.
+ * @returns {boolean} True if the drop zone is valid; otherwise, false.
+ */
+function isValidDropZone(dropZoneElement, fromColumn) {
+    if (!draggedEl) return false;
+    if (!fromColumn || !dropZoneElement) return false;
+    if (!dropZoneElement.classList.contains('placeholder')) return false;
+    let targetColumn = dropZoneElement.closest('.board-column');
+    let targetColumnId = targetColumn.dataset.columnIndex;
+    let sourceIndex = fromColumn.dataset.columnIndex;
+    return Math.abs(sourceIndex - targetColumnId) === 1;
+}
+
+// === Task Management ===
+/**
+ * Moves a task to a new category, updates local data, and syncs with Firebase.
+ * @param {Object} taskData - The data of the task to move.
+ * @param {string} newStatus - The new status/category for the task.
+ * @param {HTMLElement} taskElement - The DOM element of the task.
+ */
+async function moveTaskToCategory(newStatus, taskElement) {
+    let tasksId = taskElement.dataset.tasksId;
+    let displayedTasksId = taskElement.dataset.displayedTasksId;
+    let taskData = displayedTasks[displayedTasksId];
+    updateTask(taskData, newStatus);
+    tasks[tasksId] = taskData;
+    displayedTasks[displayedTasksId] = taskData;
+    updateTaskInFirebase(taskData);
+}
+
+/**
+ * Updates the status of a task by setting the new status to true and others to false.
+ * @param {Object} taskData - The task data object with status properties.
+ * @param {string} newStatus - The new status to set as active.
+ */
+function updateTask(taskData, newStatus) {
+    Object.values(categories).forEach((stat) => {
+        if (stat == newStatus) {
+            taskData.status[stat] = true;
+        } else {
+            taskData.status[stat] = false;
         }
     });
 }
 
 /**
- * Renders "No tasks" areas for each category column if there are no tasks present.
- * For each category, it removes all existing drag areas (including previous "No tasks" divs),
- * checks if there are any task cards, and if none are found, inserts a "No tasks" area.
- *
- * Assumes the existence of a global `categories` array with objects containing `columnId` and `label` properties,
- * and an `insertNoTasksArea` function to add the "No tasks" area to the DOM.
+ * Updates the task data in Firebase by sending a PUT request.
+ * @param {Object} taskData - The task data to update in Firebase.
+ * @returns {Promise<void>} Resolves when the update is complete.
  */
-function renderWithNoTasksAreas() {
-    updateEmptyMessages();
-
-    // Add Drag & Drop events to all task cards
-    addDragEventsToCards();
-}
-
-// ===================================
-// DRAG & DROP FUNCTIONS
-// ===================================
-
-function addDragEventsToCards() {
-    document.querySelectorAll('.board-card').forEach(card => {
-        card.draggable = true;
-        card.addEventListener('dragstart', handleDragStart);
-        card.addEventListener('dragend', handleDragEnd);
-    });
-
-    // Add drop events to all lists
-    categories.forEach(cat => {
-        const list = document.getElementById(cat.columnId);
-        if (list) {
-            list.addEventListener('dragover', handleDragOver);
-            list.addEventListener('drop', handleDrop);
-            list.addEventListener('dragleave', handleDragLeave);
-        }
-    });
-}
-
-function handleDragStart(e) {
-    dragged = true;
-    currentDraggedTask = {
-        element: e.target,
-        taskData: getTaskDataFromCard(e.target),
-        // taskData: getTaskDataFromCard(e.target.dataset.displayedidIndex), #for when rendering is changed
-        sourceColumn: e.target.parentElement.id
-    };
-
-    e.target.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-
-    // Highlight allowed drop zones
-    // highlightAllowedDropZones();
-    highlightAllowedDropZones2();
-}
-
-function handleDragEnd(e) {
-    e.target.classList.remove('dragging');
-    // removeAllHighlights();
-    currentDraggedTask = null;
-    setTimeout(() => (dragged = false), 0);
-    document
-        .querySelectorAll(".placeholder")
-        .forEach((ph) => ph.remove());
-    updateEmptyMessages();
-}
-
-function handleDragOver(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-
-    const dropZone = e.currentTarget;
-    if (isValidDropZone(dropZone)) {
-        dropZone.classList.add('drag-over');
-    }
-}
-
-function handleDragLeave(e) {
-    e.currentTarget.classList.remove('drag-over');
-}
-
-function handleDrop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('drag-over');
-
-    if (!currentDraggedTask) return;
-
-    const targetColumnId = e.currentTarget.id || e.currentTarget.parentElement.id;
-    const targetCategory = getCategoryByColumnId(targetColumnId);
-
-    if (!targetCategory || !isValidDropZone(e.currentTarget)) return;
-
-    // Update task status in Firebase
-    moveTaskToCategory(currentDraggedTask.taskData, targetCategory.key);
-}
-
-function getTaskDataFromCard(cardElement) {
-    // Extract task data from the card (will be extended when tasks have IDs)
-    const title = cardElement.querySelector('.task-title')?.textContent || 'Unknown Task';
-
-    // Find task in the loaded data based on title (temporary until IDs are available)
-    const taskData = findTaskByTitle(title);
-
-    return taskData || { title: title };
-}
-
-function findTaskByTitle(title) {
-    // Search in the globally loaded tasks (from loadTasksFromFirebase)
-    if (typeof title === 'string') {
-        for (const taskId in window.allTasks) {
-            const task = window.allTasks[taskId];
-            if (task.title === title) {
-                return {...task, id: taskId};
-            }
-        }
-    }
-    return null;
-}
-
-function getCategoryByColumnId(columnId) {
-    return categories.find(cat =>
-        cat.columnId === columnId ||
-        columnId.includes(cat.id)
-    );
-}
-
-function isValidDropZone(element) {
-    if (!currentDraggedTask) return false;
-
-    const sourceCategory = getCategoryByColumnId(currentDraggedTask.sourceColumn);
-    const targetColumnId = element.id || element.parentElement.id;
-    const targetCategory = getCategoryByColumnId(targetColumnId);
-
-    if (!sourceCategory || !targetCategory) return false;
-
-    // Only allow adjacent categories
-    const sourceIndex = categories.indexOf(sourceCategory);
-    const targetIndex = categories.indexOf(targetCategory);
-
-    return Math.abs(sourceIndex - targetIndex) === 1;
-}
-
-function highlightAllowedDropZones() {
-    if (!currentDraggedTask) return;
-
-    const sourceCategory = getCategoryByColumnId(currentDraggedTask.sourceColumn);
-    if (!sourceCategory) return;
-
-    const sourceIndex = categories.indexOf(sourceCategory);
-
-    // Highlight adjacent categories
-    [sourceIndex - 1, sourceIndex + 1].forEach(index => {
-        if (index >= 0 && index < categories.length) {
-            const category = categories[index];
-            const list = document.getElementById(category.columnId);
-            if (list) {
-                list.classList.add('valid-drop-zone');
-            }
-        }
-    });
-}
-
-function highlightAllowedDropZones2() {
-    let fromCol = currentDraggedTask.element.closest(".board-column");
-    let fromIdx = parseInt(fromCol.dataset.index);
-    document.querySelectorAll(".board-column").forEach((col, idx) => {
-        if (Math.abs(idx - fromIdx) === 1) {
-            let list = col.querySelector(".tasks-list");
-            if (!list.querySelector(".placeholder")) {
-                list.innerHTML += getTaskPlaceholderTemplate();
-            }
-            let msg = list.querySelector(".empty-msg");
-            if (msg) msg.style.display = "none";
-        }
-    });
-}
-
-function removeAllHighlights() {
-    document.querySelectorAll('.valid-drop-zone, .drag-over').forEach(el => {
-        el.classList.remove('valid-drop-zone', 'drag-over');
-    });
-}
-
-async function moveTaskToCategory(taskData, newCategoryKey) {
-    if (!taskData) return;
-
+async function updateTaskInFirebase(taskData) {
     try {
-        // Update task status
-        const updatedTask = {
-            ...taskData,
-            status: {
-                [newCategoryKey]: true
-            }
-        };
-
-        // Save to Firebase (if task ID is present)
-        if (taskData.id) {
-            await putData(`tasks/${taskData.id}`, updatedTask);
-        }
-
-        // Update UI
-        if (typeof loadTasksFromFirebase === 'function') {
-            loadTasksFromFirebase();
-        }
-
-    } catch (error) {
-        console.error('Error moving task:', error);
+        let path = "/tasks/" + taskData.id + "/";
+        await putData(path, taskData);
+    } catch (e) {
+        console.error("Put Task to Firebase:", e);
     }
 }
-
-// Initialize Drag & Drop when DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
-    // Wait until tasks are loaded, then initialize Drag & Drop
-    setTimeout(addDragEventsToCards, 1000);
-});

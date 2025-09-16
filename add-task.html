@@ -14,9 +14,10 @@
   <link rel="stylesheet" href="../styles/standard.css" />
   <link rel="stylesheet" href="../styles/media.css" />
   <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-add-task.css">
-
-  <script src="../scripts/side-menu.js"></script>
-
+  <script src="./script.js"></script>
+  <script src="./scripts/firebase.js"></script>
+  <script src="./scripts/input.js"></script>
+  <script src="./scripts/side-menu.js"></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
               <a href="./help.html" class="dropdown-item mobile-only d_none">Help</a>
               <a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
               <a href="./privacy-policy.html" class="dropdown-item">Privacy Policy</a>
-              <a href="index.html" class="dropdown-item">Log out</a>
+              <a id="logout-btn" class="dropdown-item">Log out</a>
             </div>
           </div>
         </div>
@@ -275,13 +276,8 @@
       </a>
     </div>
   </aside>
-  <script src="./script.js"></script>
-  <script src="./scripts/firebase.js"></script>
-
   <script src="./scripts/add-task-templates.js"></script>
   <script src="./scripts/add-task-button.js"></script>
-
-  <script src="./scripts/input.js"></script>
   <script src="./scripts/add-task.js"></script>
   <script src="./scripts/add-task-category-subtasks.js"></script>
 </body>
