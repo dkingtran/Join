@@ -126,10 +126,6 @@ body.no-scroll {
     cursor: pointer;
     align-items: center;
 }
-/* èberpruefen */
- .d-none {
-  display: none !important;
-} 
 
 @media(max-width:1001px){
   .edit-task-content-style

@@ -90,3 +90,20 @@ async function updateSummary() {
 
 // Ensure the summary is updated when the page loads
 window.onload = updateSummary;
+
+/**
+ * Updates the #userName element with the logged-in user's name.
+ * - Reads login state and name from localStorage.
+ * - If both are valid, parses and displays the stored name.
+ * - Otherwise logs an error and sets a fallback message.
+ */
+function showUserName() {
+  const localStorageName = localStorage.getItem("name");
+  if (localStorageName) {
+    document.getElementById("userName").textContent = JSON.parse(localStorageName);
+  } else {
+    console.error("Kein gültiger Name im Login gefunden!");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", showUserName);
