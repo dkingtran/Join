@@ -11,8 +11,6 @@ body.no-scroll {
 
 .add-task-section {
   position: relative;
-/*   display: flex; */
-/*   flex-direction: column; */
   height: calc(100vh - 16px);
 }
 
@@ -62,10 +60,6 @@ body.no-scroll {
   display: inline-flex;
   align-items: center;
 }
-
-/* .d-none {
-  display: none !important;
-} */
 
 #edit-task-content .subtask-text-box {
   display: flex;
@@ -132,10 +126,10 @@ body.no-scroll {
     cursor: pointer;
     align-items: center;
 }
-
-.d-none {
-  display: none;
-}
+/* èberpruefen */
+ .d-none {
+  display: none !important;
+} 
 
 @media(max-width:1001px){
   .edit-task-content-style

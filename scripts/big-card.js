@@ -28,7 +28,7 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-    document.body.style.overflow = "hidden"; // Hintergrund nicht mehr scrollbar
+    document.body.style.overflow = "hidden"; 
 }
 
 /**
@@ -81,9 +81,9 @@ async function toggleSubtaskDone(checkbox) {
   try {
     await putData(`/tasks/${taskId}/subtasks/${subId}/done`, isDone);
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
-    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; // Cache sync
-    renderAllTasks();                 // Mini-Cards progress sofort updaten
-    if (t) renderBigCard(taskId, t);  // Big Card progress sofort updaten
+    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; 
+    renderAllTasks();                
+    if (t) renderBigCard(taskId, t);  
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }
@@ -115,9 +115,8 @@ function buildSubtasksHTML(taskId, subtasks) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
-  document.body.style.overflow = ""; // Scroll wieder erlauben
+  document.body.style.overflow = ""; 
 }
-
 
 /**
  * Closes the Big Card only when the backdrop itself is clicked.
@@ -148,7 +147,6 @@ async function deleteTaskBigCard(taskId) {
     console.error("Failed to delete task:", err);
   }
 }
-
 
 /**
  * Opens the edit-task overlay and attaches a click handler
@@ -200,18 +198,3 @@ function renderBigCard(taskId, taskObj) {
   );
   showBigCard(bigCardHTML);
 }
-/* 
-window.openEditCardFor = function (taskId) {
-  let task = null;
-  if (Array.isArray(displayedTasks)) {
-    task = displayedTasks.find(t => t && t.id === taskId);
-  } else if (displayedTasks && displayedTasks[taskId]) {
-    task = displayedTasks[taskId];
-  }
-  window.currentEditingTaskId = taskId;
-  if (typeof openEditCard === "function") openEditCard();
-  if (task && typeof populateEditForm === "function") {
-    try { populateEditForm(task); } catch (e) { console.error("populateEditForm error:", e); }
-  }
-};
- */
