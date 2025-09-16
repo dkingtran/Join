@@ -75,4 +75,4 @@ function logout() {
   window.location.href = "./index.html";
 }
 
-document.addEventListener('DOMContentLoaded', showUserStatus)
+/* document.addEventListener('DOMContentLoaded', showUserStatus) */
