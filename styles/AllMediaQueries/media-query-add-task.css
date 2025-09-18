@@ -3,7 +3,7 @@
     margin-left: 20px;
     margin-bottom: 96px;
   }
-  
+
   .add-task-container {
     gap: 10px;
     flex-wrap: wrap;
@@ -139,7 +139,7 @@
   }
 }
 
-@media(max-width:485px) {
+@media(max-width:510px) {
   .max-w-440 {
     min-width: 320px;
   }

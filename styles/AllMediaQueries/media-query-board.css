@@ -15,8 +15,8 @@
 
 @media (max-width: 1365px) {
 	.add-task-modal-content {
-		width: auto;
 		height: 85vh;
+		width: 640px;
 	}
 
 	.section-task-left {
@@ -132,8 +132,10 @@
 		gap: 12px;
 		width: 100%;
 		min-width: 0;
-		scrollbar-width: none; /* Firefox */
-		-ms-overflow-style: none; /* IE 10+ */
+		scrollbar-width: none;
+		/* Firefox */
+		-ms-overflow-style: none;
+		/* IE 10+ */
 	}
 
 	.tasks-list::-webkit-scrollbar {
