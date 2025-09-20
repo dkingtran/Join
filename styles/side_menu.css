@@ -110,9 +110,9 @@
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.125s ease-in-out, 
-                opacity 0.125s ease-in-out, 
-                visibility 0.125s ease-in-out;
+    transition: transform 0.125s ease-in-out,
+        opacity 0.125s ease-in-out,
+        visibility 0.125s ease-in-out;
 }
 
 .profile-dropdown.show {
@@ -150,6 +150,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .dropdown-item:hover {
@@ -424,7 +425,7 @@
         text-overflow: ellipsis;
         border-radius: 16px;
     }
-    
+
     .help-container {
         display: none;
     }
@@ -437,11 +438,11 @@
 
 /* Small mobile styles */
 @media (max-width: 490px) {
-    
+
     .header-content {
-            height: 80px;
-        }
-    
+        height: 80px;
+    }
+
     .header-inner {
         padding-left: 16px;
         padding-right: 16px;
@@ -578,4 +579,3 @@
         line-height: 1.1;
     }
 }
-
