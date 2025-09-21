@@ -25,7 +25,6 @@
   </head>
   <body onload="init()">
     <header>
-      <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
           <div class="logo-mobile d_none">
@@ -60,8 +59,6 @@
         </div>
       </div>
     </header>
-    <!--End of Header content-->
-    <!--Side-menu-->
     <aside class="side-menu background-side-menu">
       <div class="logo-section">
         <img
@@ -117,7 +114,6 @@
       </div>
     </aside>
 
-    <!-- Contact Sidebar -->
     <div class="contact-sidebar">
       <div class="contact-sidebar-inner">
         <button
@@ -131,12 +127,10 @@
           <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
         </button>
         <div class="contact-list" id="list-contact">
-          <!-- Contacts will be rendered here -->
         </div>
       </div>
     </div>
 
-    <!--Contacts Section -->
     <div class="contacts-section">
       <div class="contacts-header">
         <h1>Contacts</h1>
@@ -144,7 +138,6 @@
         <h2>Better with a team</h2>
       </div>
       <div class="contact-list-clicked" id="clicked-list-contact">
-        <!-- Contacts will be rendered here -->
       </div>
       <button
         class="mobile-back-btn display-standard"
@@ -156,9 +149,7 @@
       </button>
     </div>
 
-    <!-- Modal Overlay for Add Contact -->
     <div class="modal-overlay" id="overlay-modal"></div>
-    <!-- Form Container (hidden by default) -->
     <div class="form-container" id="container-form">
       <button class="close-btn" onclick="hideForm()">
         <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
@@ -239,12 +230,10 @@
       </div>
     </div>
 
-    <!-- Confirmation Modal -->
     <div id="modal-contact-created" class="contact-created-modal">
       Contact successfully created
     </div>
 
-    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <button
       id="mobile-edit-button"
       class="mobile-edit-btn display-standard"
@@ -253,7 +242,6 @@
     >
       <img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit" />
     </button>
-    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <div
       id="dropdown-mobile-edit"
       class="mobile-edit-dropdown"

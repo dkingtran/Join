@@ -1,4 +1,3 @@
-/* Header styles */
 .header-content {
     height: 96px;
     background-color: #ffffff;
@@ -234,7 +233,6 @@
 
 }
 
-/* Shared menu styles */
 .menu-item:hover {
     background-color: #2A3D59;
 }
@@ -280,7 +278,6 @@
 }
 
 
-/* Mobile hover styles - applies to both breakpoints */
 @media (max-width: 1000px) {
     .menu-item:hover {
         background-color: #2A3D59;
@@ -303,7 +300,6 @@
 
 }
 
-/* Mobile styles */
 @media (max-width: 1280px) {
     .logo-section {
         margin-bottom: 48px;
@@ -388,7 +384,6 @@
         display: none;
     }
 
-    /* Show notice menu for login-only pages in mobile */
     .notice-side-menu {
         display: flex;
         flex-direction: row;
@@ -436,7 +431,6 @@
     }
 }
 
-/* Small mobile styles */
 @media (max-width: 490px) {
 
     .header-content {
