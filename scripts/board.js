@@ -12,18 +12,6 @@ async function updateTasksArrays() {
     displayedTasks = tasks;
 }
 
-/* async function getTasksArray() {
-    tasks = [];
-    let taskObjects = await loadData("/tasks/");
-    if (!taskObjects) {
-        console.warn("no tasks available.");
-        return;
-    }
-    Object.keys(taskObjects).forEach(key => {
-        tasks.push(taskObjects[key]);
-    });
-} */
-
 async function getTasksArray() {
   tasks = [];
   const taskObjects = await loadData("/tasks/");
