@@ -80,7 +80,7 @@
   background: #fff;
   border-radius: 30px;
   box-shadow: 0px 0px 4px 0px #00000029;
-  min-width: 340px;
+  min-width: 300px;
   min-height: 200px;
   max-width: 95vw;
   max-height: 80vh;
@@ -120,6 +120,10 @@
   margin-right: 0;
 }
 
+.add-task-container {
+  gap: 60px;
+}
+
 .add-task-section {
   padding: 0;
   height: auto;
@@ -154,7 +158,8 @@
 
 #selectedContacts {
   background-color: transparent;
-  margin-left: 26px;/* By Andi */
+  margin-left: 26px;
+  /* By Andi */
 }
 
 .category-task p {
@@ -172,12 +177,10 @@
 .btn-clear-task-container {
   display: flex;
   align-items: center;
-  justify-content: end;
   position: unset;
-  width: 80vw;
   min-width: 150px !important;
   max-width: 440px;
-  margin-left: auto !important;
+  margin-left: auto;
   bottom: 24px;
   right: 24px;
   z-index: 20;
@@ -188,6 +191,8 @@
   text-wrap: nowrap;
   width: 168px !important;
   max-width: 183px !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-addtask-create img {
@@ -197,6 +202,10 @@
 
 .add-subtask-input {
   padding-left: 2px;
+}
+
+.star-required {
+  max-width: none;
 }
 
 .task-message {
@@ -228,4 +237,92 @@
 }
 
 @media (max-width: 1365px) {
+  .btn-clear-task-container {
+    position: sticky;
+    bottom: 24px;
+    margin-left: 0;
+  }
+
+  .main-container {
+    margin-bottom: 0;
+  }
+
+  .add-task-modal-content {
+    height: 85vh;
+  }
+
+  .add-task-modal-content input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .add-task-modal-content textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .add-task-modal-content .dropdown-input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .add-task-modal-content .btn-prio {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+    justify-content: space-between;
+  }
+
+  .add-task-modal-content .select-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .select-container select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .add-task-modal-content .subtask-input-box {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .subtask-text-box {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .output-subtask {
+    width: 100%;
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .btn-clear-task-container {
+    max-width: 100%;
+    min-width: 260px;
+  }
+
+  .btn-prio {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 510px) {
+  .add-task-modal-content .btn-prio {
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 330px) {
+  .priority-btn {
+    gap: 4px;
+  }
 }
