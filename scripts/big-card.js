@@ -182,6 +182,12 @@ function updateTaskCache(taskId, updated) {
   }
 }
 
+/**
+ * Renders a detailed "big card" view for a given task.
+ * @param {string|number} taskId - Unique identifier of the task.
+ * @param {Object} taskObj - Task object containing all task details.
+ * @returns {void}
+ */
 function renderBigCard(taskId, taskObj) {
   if (!taskObj) return;
   const avatarsHTML = buildAvatarsHTML(taskObj);
