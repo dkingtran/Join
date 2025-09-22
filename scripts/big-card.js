@@ -28,7 +28,16 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-    document.body.style.overflow = "hidden"; 
+
+  // die Big Card auswählen
+  const card = container.querySelector(".big-card-content");
+
+  // kleines Delay, damit CSS-Transition greift
+  requestAnimationFrame(() => {
+    card.classList.add("show");
+  });
+
+  document.body.style.overflow = "hidden";
 }
 
 /**
