@@ -45,7 +45,6 @@ async function updateTasksArrays() {
     displayedTasks = tasks;
 }
 
-
 /**
  * Loads all tasks from Firebase and stores them in the global `tasks` array.
  * - Adds the task `id` to each task object for tracking.
@@ -53,6 +52,7 @@ async function updateTasksArrays() {
  * @async
  * @function
  */
+
 async function getTasksArray() {
   tasks = [];
   const taskObjects = await loadData("/tasks/");
