@@ -304,7 +304,7 @@ function bindEditOverlayFormSubmit(taskId) {
     await Promise.all(f.map(n => putData(`/tasks/${taskId}/${n}`, data[n])));
     await putData(`/tasks/${taskId}/subtasks`, subs);
     updateTaskCache(taskId, { ...data, subtasks: subs });
-    renderAllTasks(); // Mini-Cards sofort aktualisieren
+    renderAllTasks(); 
     closeEditCard();
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x=>x?.id===taskId) : displayedTasks[taskId];
     renderBigCard(taskId, t || { id: taskId, ...data, subtasks: subs });
