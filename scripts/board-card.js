@@ -1,5 +1,6 @@
 /**
- * Maps task status to corresponding column element IDs.
+ * Maps task statuses to their corresponding DOM column element IDs.
+ * @type {Object.<string, string>}
  */
 const statusToColumnId = {
     "to-do": "tasks-list-open",
@@ -8,8 +9,11 @@ const statusToColumnId = {
     "done": "tasks-list-done"
 };
 
+
 /**
- * Determines which column ID a task belongs to, based on its status.
+ * Determines the column ID for a task based on its status object.
+ * @param {Object} statusObj - The task status object (e.g., { "in-progress": true }).
+ * @returns {string|null} The matching column ID or null if not found.
  */
 function getColumnIdByStatus(statusObj) {
     if (!statusObj || typeof statusObj !== "object") return null;
@@ -21,16 +25,22 @@ function getColumnIdByStatus(statusObj) {
     return null;
 }
 
+
 /**
- * Returns contact info (like color & initials) for a given full name.
+ * Retrieves contact information (color and initials) for a given full name.
+ * @param {string} fullName - The full name of the contact.
+ * @returns {Object|null} An object containing color and initials or null if not found.
  */
 function getContactByName(fullName) {
     return contactsMap[fullName] || null;
 }
 
+
 /**
- * Renders the avatars of assigned users (up to 3).
- * Extra users are grouped into a "+X" overflow avatar.
+ * Renders avatars for assigned users (up to 3).
+ * Additional users are grouped into an overflow avatar (e.g., "+2").
+ * @param {string[]} [users=[]] - List of user full names.
+ * @returns {string} HTML string of rendered avatars.
  */
 function renderAssignedAvatars(users = []) {
     const maxVisible = 3;
@@ -43,8 +53,11 @@ function renderAssignedAvatars(users = []) {
     return avatars.join("");
 }
 
+
 /**
- * Renders a single user's avatar with initials and color.
+ * Renders a single avatar with initials and background color.
+ * @param {string} name - Full name of the user.
+ * @returns {string} HTML string of the avatar element.
  */
 function renderSingleAvatar(name) {
     const contact = getContactByName(name);
@@ -53,8 +66,12 @@ function renderSingleAvatar(name) {
     return `<div class="avatar ${color}" title="${name}">${initials}</div>`;
 }
 
+
 /**
- * Renders the overflow avatar that shows how many users are hidden.
+ * Renders an overflow avatar showing "+X" for hidden users.
+ * Displays a tooltip with all hidden user names.
+ * @param {string[]} users - List of hidden user full names.
+ * @returns {string} HTML string of the overflow avatar.
  */
 function renderOverflowAvatar(users) {
     const tooltip = users.join(", ");
@@ -66,9 +83,11 @@ function renderOverflowAvatar(users) {
     `;
 }
 
+
 /**
  * Calculates progress for subtasks.
- * Returns % progress, completed count, and total.
+ * @param {Object} [subtasks={}] - Subtask objects keyed by name or ID.
+ * @returns {{progressPercent: number, total: number, maxSubtasks: number}} Progress data.
  */
 function getSubtaskProgress(subtasks = {}) {
     if (typeof subtasks !== "object" || Array.isArray(subtasks)) {
@@ -85,8 +104,11 @@ function getSubtaskProgress(subtasks = {}) {
     };
 }
 
+
 /**
- * Returns the correct CSS class for the given category.
+ * Returns a CSS class based on the task category.
+ * @param {string} category - The category name.
+ * @returns {string} The corresponding CSS class.
  */
 function getCategoryClass(category) {
     if (!category) return "category-default";
@@ -99,8 +121,11 @@ function getCategoryClass(category) {
     return "category-default";
 }
 
+
 /**
- * Returns the HTML icon for a given priority.
+ * Returns the HTML icon for the given priority level.
+ * @param {string} priority - Priority level ("low", "medium", "urgent").
+ * @returns {string} HTML string for the priority icon.
  */
 function getPriorityIcon(priority) {
     if (!priority) return "";
@@ -109,6 +134,7 @@ function getPriorityIcon(priority) {
     if (!validPriorities.includes(cleanPriority)) return "";
     return priorityRender(cleanPriority);
 }
+
 
 /**
  * Clears all task columns before re-rendering cards.
@@ -126,6 +152,7 @@ function clearAllTaskLists() {
     });
 }
 
+
 /**
  * Renders all tasks to their appropriate columns.
  * @param {Object} tasksObject - Task ID mapped to task data.
@@ -142,8 +169,13 @@ function renderAllTasks() {
     checkColumnsAddEvents();
 }
 
+
 /**
- * Renders a single task card to the specified column.
+ * Renders a single task card to its corresponding column.
+ * @param {number} taskId - The index of the task in the main tasks array.
+ * @param {number} displayedTasksId - The index in the filtered/displayed task list.
+ * @param {Object} task - The task data object.
+ * @param {string} columnId - The ID of the column to render into.
  */
 function renderTaskToColumn(taskId, displayedTasksId, task, columnId) {
     const container = document.getElementById(columnId);
@@ -153,12 +185,14 @@ function renderTaskToColumn(taskId, displayedTasksId, task, columnId) {
     container.innerHTML += cardRender(taskId, displayedTasksId, task, avatarsHTML, progress);
 }
 
+
 /**
  * Initializes the board view:
  * - Loads tasks and contacts via init()
  * - Builds contactsMap (name → color & initials)
  * - Converts tasks array into object format
  * - Renders all tasks
+ * @async
  */
 async function initBoardView() {
     await init();

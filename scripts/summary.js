@@ -1,4 +1,9 @@
-// Load tasks from Firebase and return them as an array
+/**
+ * Loads tasks from Firebase and returns them as an array.
+ * @async
+ * @function
+ * @returns {Promise<Object[]>} A promise that resolves to an array of task objects, or an empty array if none found.
+ */
 async function loadTasks() {
     const data = await loadData("tasks");
     if (!data) return [];
@@ -8,7 +13,12 @@ async function loadTasks() {
     return Object.values(data);
 }
 
-// Determine the status of a single task using switch
+
+/**
+ * Determines the status of a single task based on its `status` field.
+ * @param {Object} task - The task object to evaluate.
+ * @returns {string} The task status ("todo", "in-progress", "feedback", "done", or "unknown").
+ */
 function getTaskStatus(task) {
     if (!task || !task.status) return "unknown";
     switch (true) {
@@ -20,7 +30,13 @@ function getTaskStatus(task) {
     }
 }
 
-// Count how many tasks have a specific status
+
+/**
+ * Counts how many tasks have a specific status.
+ * @param {Object[]} tasks - An array of task objects.
+ * @param {string} status - The status to count ("todo", "in-progress", "feedback", or "done").
+ * @returns {number} The number of tasks with the specified status.
+ */
 function countTasksByStatus(tasks, status) {
     let count = 0;
     for (let i = 0; i < tasks.length; i++) {
@@ -32,7 +48,12 @@ function countTasksByStatus(tasks, status) {
     return count;
 }
 
-// Count how many tasks are marked as "urgent"
+
+/**
+ * Counts how many tasks are marked as "urgent".
+ * @param {Object[]} tasks - An array of task objects.
+ * @returns {number} The number of urgent tasks.
+ */
 function countUrgentTasks(tasks) {
     let count = 0;
     for (let i = 0; i < tasks.length; i++) {
@@ -43,8 +64,12 @@ function countUrgentTasks(tasks) {
     return count;
 }
 
-// Find the earliest due date among tasks marked as "urgent"
-// Returns the date string or null if no urgent tasks are found
+
+/**
+ * Finds the earliest due date among tasks marked as "urgent".
+ * @param {Object[]} tasks - An array of task objects.
+ * @returns {string|null} The earliest due date (in YYYY-MM-DD format) or null if no urgent tasks found.
+ */
 function findEarliestUrgentDate(tasks) {
     var earliest = null;
     for (var i = 0; i < tasks.length; i++) {
@@ -59,6 +84,11 @@ function findEarliestUrgentDate(tasks) {
     return earliest["due-date"];
 }
 
+
+/**
+ * Returns a greeting message based on the current time of day.
+ * @returns {string} A greeting string like "Good morning,", "Good afternoon," or "Good evening,".
+ */
 function getGreeting() {
     const hour = new Date().getHours();
     if (hour < 12) return "Good morning,";
@@ -66,7 +96,12 @@ function getGreeting() {
     return "Good evening,";
 }
 
-// Replace the text content of a DOM element by ID
+
+/**
+ * Replaces the text content of a DOM element by its ID.
+ * @param {string} id - The ID of the DOM element.
+ * @param {string|number} value - The value to set as the element's text content.
+ */
 function updateDOM(id, value) {
     const element = document.getElementById(id);
     if (element) {
@@ -74,7 +109,12 @@ function updateDOM(id, value) {
     }
 }
 
-// Load task summary and update all related counters and values in the DOM
+
+/**
+ * Loads task data and updates all related summary counters and elements in the DOM.
+ * @async
+ * @function
+ */
 async function updateSummary() {
     const tasks = await loadTasks();
     updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
@@ -88,14 +128,14 @@ async function updateSummary() {
     document.getElementById("greetUser").innerText = getGreeting();
 }
 
-// Ensure the summary is updated when the page loads
+
+// Ensures the summary is updated when the page is loaded
 window.onload = updateSummary;
 
+
 /**
- * Updates the #userName element with the logged-in user's name.
- * - Reads login state and name from localStorage.
- * - If both are valid, parses and displays the stored name.
- * - Otherwise logs an error and sets a fallback message.
+ * Updates the #userName DOM element with the currently logged-in user's name.
+ * Reads the name from localStorage. If not found, logs an error.
  */
 function showUserName() {
   const localStorageName = localStorage.getItem("name");
@@ -106,4 +146,6 @@ function showUserName() {
   }
 }
 
+
+// Run showUserName after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", showUserName);
