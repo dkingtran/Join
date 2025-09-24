@@ -53,8 +53,13 @@ function cardRender(
 }
 
 
+/**
+ * Returns the HTML for a priority icon based on the given priority name.
+ * @param {string} cleanPriority - Lowercase priority name ("low", "medium", or "urgent").
+ * @returns {string} HTML string for the corresponding priority icon.
+ */
 function priorityRender(cleanPriority) {
-	return `
+	return /* HTML */ `
         <img src="./assets/img/icons/priority-icons/${cleanPriority}.png" 
                 alt="${cleanPriority} priority" 
                 class="priority-icon" />
@@ -62,6 +67,12 @@ function priorityRender(cleanPriority) {
 
 }
 
+
+/**
+ * Generates the HTML for a dropdown menu used to move a task to another status column.
+ * @param {string} buttonsHTML - The HTML string containing switch buttons.
+ * @returns {string} HTML string for the dropdown container.
+ */
 function getSwitchDropdownTemplate(buttonsHTML) {
 	return /* HTML */ ` <div class="switch-dropdown">
 		<p>Move To</p>
@@ -69,6 +80,12 @@ function getSwitchDropdownTemplate(buttonsHTML) {
 	</div>`;
 }
 
+
+/**
+ * Creates a button element to move a task **upward** in the board columns.
+ * @param {number} columnIndex - Index of the column to move to.
+ * @returns {string} HTML string of the upward switch button.
+ */
 function getArrowUpBtnTemplate(columnIndex) {
 	return /* HTML */ `<button
 		class="switch-dropdown-btn"
@@ -78,6 +95,12 @@ function getArrowUpBtnTemplate(columnIndex) {
 	</button>`;
 }
 
+
+/**
+ * Creates a button element to move a task **downward** in the board columns.
+ * @param {number} columnIndex - Index of the column to move to.
+ * @returns {string} HTML string of the downward switch button.
+ */
 function getArrowDownBtnTemplate(columnIndex) {
 	return /* HTML */ `<button
 		class="switch-dropdown-btn"
@@ -87,4 +110,12 @@ function getArrowDownBtnTemplate(columnIndex) {
 			alt="arrow downward" />
 		${shortStatus[columnIndex]}
 	</button>`;
+}
+
+function getKanbanEmptyMessage(headerText) {
+	return /* HTML */ ` <div class="empty-msg">No tasks ${headerText}</div>`;
+}
+
+function getTaskPlaceholderTemplate() {
+	return /* HMTL */ `<div class="placeholder"></div>`;
 }

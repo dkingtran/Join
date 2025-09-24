@@ -19,13 +19,12 @@
     <script src="./scripts/db.js"></script>
     <script src="./scripts/firebase.js"></script>
     <script src="./scripts/side-menu.js"></script>
-    <script src="./scripts/template.js"></script>
+    <script src="./templates/contacts-template.js"></script>
     <script src="./scripts/add-contact.js" defer></script>
     <script src="./scripts/render-contacts.js"></script>
   </head>
   <body onload="init()">
     <header>
-      <!--Header content-->
       <div class="header-content">
         <div class="header-inner">
           <div class="logo-mobile d_none">
@@ -48,7 +47,7 @@
                 aria-label="Profile menu"
               ></button>
               <div id="dropdown-profile" class="profile-dropdown">
-                <a href="../help.html" class="dropdown-item mobile-only d_none"
+                <a href="./help.html" class="dropdown-item mobile-only d_none"
                   >Help</a
                 >
                 <a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
@@ -60,12 +59,10 @@
         </div>
       </div>
     </header>
-    <!--End of Header content-->
-    <!--Side-menu-->
     <aside class="side-menu background-side-menu">
       <div class="logo-section">
         <img
-          src="../assets/img/logo/logo-light.png"
+          src="./assets/img/logo/logo-light.png"
           alt="Logo"
           class="logo-side-menu-img"
         />
@@ -75,31 +72,31 @@
         <a href="../summary.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/summary.svg"
+              src="./assets/img/icons/header-side-menu/summary.svg"
               alt=""
             />
           </span>
           <span>Summary</span>
         </a>
-        <a href="../add-task.html" class="menu-item">
+        <a href="./add-task.html" class="menu-item">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/add-task.svg"
+              src="./assets/img/icons/header-side-menu/add-task.svg"
               alt=""
             />
           </span>
           <span>Add Task</span>
         </a>
-        <a href="../board.html" class="menu-item">
+        <a href="./board.html" class="menu-item">
           <span class="menu-icon">
-            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+            <img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
           </span>
           <span>Board</span>
         </a>
-        <a href="../add_contact.html" class="menu-item active">
+        <a href="./add_contact.html" class="menu-item active">
           <span class="menu-icon">
             <img
-              src="../assets/img/icons/header-side-menu/contacts.svg"
+              src="./assets/img/icons/header-side-menu/contacts.svg"
               alt=""
             />
           </span>
@@ -108,16 +105,15 @@
       </div>
 
       <div class="notice-side-menu">
-        <a href="../legal-notice.html" class="menu-item menu-bottom">
+        <a href="./legal-notice.html" class="menu-item menu-bottom">
           <span>Legal notice</span>
         </a>
-        <a href="../privacy-policy.html" class="menu-item menu-bottom">
+        <a href="./privacy-policy.html" class="menu-item menu-bottom">
           <span>Privacy Policy</span>
         </a>
       </div>
     </aside>
 
-    <!-- Contact Sidebar -->
     <div class="contact-sidebar">
       <div class="contact-sidebar-inner">
         <button
@@ -131,12 +127,10 @@
           <img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
         </button>
         <div class="contact-list" id="list-contact">
-          <!-- Contacts will be rendered here -->
         </div>
       </div>
     </div>
 
-    <!--Contacts Section -->
     <div class="contacts-section">
       <div class="contacts-header">
         <h1>Contacts</h1>
@@ -144,7 +138,6 @@
         <h2>Better with a team</h2>
       </div>
       <div class="contact-list-clicked" id="clicked-list-contact">
-        <!-- Contacts will be rendered here -->
       </div>
       <button
         class="mobile-back-btn display-standard"
@@ -156,9 +149,7 @@
       </button>
     </div>
 
-    <!-- Modal Overlay for Add Contact -->
     <div class="modal-overlay" id="overlay-modal"></div>
-    <!-- Form Container (hidden by default) -->
     <div class="form-container" id="container-form">
       <button class="close-btn" onclick="hideForm()">
         <img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
@@ -239,12 +230,10 @@
       </div>
     </div>
 
-    <!-- Confirmation Modal -->
     <div id="modal-contact-created" class="contact-created-modal">
       Contact successfully created
     </div>
 
-    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <button
       id="mobile-edit-button"
       class="mobile-edit-btn display-standard"
@@ -253,7 +242,6 @@
     >
       <img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit" />
     </button>
-    <!-- Mobile Edit Dropdown (hidden by default, shown via JS) -->
     <div
       id="dropdown-mobile-edit"
       class="mobile-edit-dropdown"
