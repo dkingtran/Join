@@ -146,8 +146,6 @@ function getSubtaskTemplateOverlay(text, id, done) {
     </div>`;
 }
 
-
-
 /**
  * Returns the HTML template for a subtask input field (edit mode).
  * Pressing Enter confirms the edit via finishEditSubtask().

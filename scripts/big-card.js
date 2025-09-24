@@ -28,7 +28,11 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-    document.body.style.overflow = "hidden"; 
+  const card = container.querySelector(".big-card-content");
+  requestAnimationFrame(() => {
+    card.classList.add("show");
+  });
+  document.body.style.overflow = "hidden";
 }
 
 /**
@@ -170,7 +174,6 @@ function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
 
-
 function updateTaskCache(taskId, updated) {
   if (!updated || !Array.isArray(displayedTasks)) return;
   for (let i = 0; i < displayedTasks.length; i++) {
@@ -182,6 +185,12 @@ function updateTaskCache(taskId, updated) {
   }
 }
 
+/**
+ * Renders a detailed "big card" view for a given task.
+ * @param {string|number} taskId - Unique identifier of the task.
+ * @param {Object} taskObj - Task object containing all task details.
+ * @returns {void}
+ */
 function renderBigCard(taskId, taskObj) {
   if (!taskObj) return;
   const avatarsHTML = buildAvatarsHTML(taskObj);

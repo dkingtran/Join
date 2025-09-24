@@ -11,7 +11,7 @@
  * @returns {string} Full HTML for the big card.
  */
 function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML) {
-return `
+  return `
 <div class="big-card-content w-full" id="big-card-${id}">
     <div class="category-x flex align-center justify-between w-full">
         <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}"
@@ -39,8 +39,6 @@ return `
         <p class="date-big-card-text font-weight-400">Due date:</p>
         <span class="date-info-big-card font-size-20" id="date-big-card-${id}">${due || ""}</span>
     </div>
-
-
 
     <div class="prio-big-card flex align-center font-size-20 w-full font-weight-400 max-w-445">
         <p class="subtitles-prio-big-card font-size-20 font-weight-400">Priority:</p>

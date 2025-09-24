@@ -59,7 +59,7 @@ function cardRender(
  * @returns {string} HTML string for the corresponding priority icon.
  */
 function priorityRender(cleanPriority) {
-	return `
+	return /* HTML */ `
         <img src="./assets/img/icons/priority-icons/${cleanPriority}.png" 
                 alt="${cleanPriority} priority" 
                 class="priority-icon" />
@@ -110,4 +110,12 @@ function getArrowDownBtnTemplate(columnIndex) {
 			alt="arrow downward" />
 		${shortStatus[columnIndex]}
 	</button>`;
+}
+
+function getKanbanEmptyMessage(headerText) {
+	return /* HTML */ ` <div class="empty-msg">No tasks ${headerText}</div>`;
+}
+
+function getTaskPlaceholderTemplate() {
+	return /* HMTL */ `<div class="placeholder"></div>`;
 }
