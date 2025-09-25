@@ -54,10 +54,9 @@ function cardRender(
 }
 
 /**
- * Renders an HTML string for a priority icon based on the given priority level.
- *
- * @param {string} cleanPriority - The priority level (e.g., 'high', 'medium', 'low') used to select the corresponding icon.
- * @returns {string} An HTML string containing an <img> element for the specified priority icon.
+ * Returns the HTML for a priority icon based on the given priority name.
+ * @param {string} cleanPriority - Lowercase priority name ("low", "medium", or "urgent").
+ * @returns {string} HTML string for the corresponding priority icon.
  */
 function priorityRender(cleanPriority) {
 	return /* HTML */ `
@@ -82,10 +81,9 @@ function getSwitchDropdownTemplate(buttonsHTML) {
 }
 
 /**
- * Generates an HTML template string for a dropdown button with a upward arrow icon.
- *
- * @param {number} columnIndex - The index of the column for which the button is generated.
- * @returns {string} The HTML string for the arrow up button, including an image and the column's short status.
+ * Creates a button element to move a task **upward** in the board columns.
+ * @param {number} columnIndex - Index of the column to move to.
+ * @returns {string} HTML string of the upward switch button.
  */
 function getArrowUpBtnTemplate(columnIndex) {
 	return /* HTML */ `<button
@@ -97,10 +95,9 @@ function getArrowUpBtnTemplate(columnIndex) {
 }
 
 /**
- * Generates an HTML template string for a dropdown button with a downward arrow icon.
- *
- * @param {number} columnIndex - The index of the column for which the button is generated.
- * @returns {string} The HTML string for the arrow down button.
+ * Creates a button element to move a task **downward** in the board columns.
+ * @param {number} columnIndex - Index of the column to move to.
+ * @returns {string} HTML string of the downward switch button.
  */
 function getArrowDownBtnTemplate(columnIndex) {
 	return /* HTML */ `<button

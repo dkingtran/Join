@@ -29,24 +29,25 @@ body.no-scroll {
 
 .edit-task-content-style {
   display: flex;
-  width: 472px;
-  overflow-x: hidden;
-  max-height: calc(100vh - 16px);
-  padding: 15px 16px;
   flex-direction: column;
   align-items: flex-start;
+  width: 472px;
+  max-height: calc(100vh - 16px);
+  padding: 15px 16px;
+  margin: 0 10px;
   border-radius: 30px;
   background-color: white;
   box-shadow: 0px 0px 6.4px 0px rgba(0, 0, 0, 0.16);
   position: relative;
-  overflow: hidden;
-  margin: 0 10px;
+  overflow-y: auto;   
+  overflow-x: hidden; 
 }
 
 .form-scroll {
   flex: 1 1 auto;
   min-height: 0;
-  overflow: auto;
+  overflow-y: auto;   
+  overflow-x: hidden; 
   padding-bottom: 15px;
 }
 

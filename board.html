@@ -46,7 +46,7 @@
 
 <body onload="initBoardView()">
   <header>
-    <!--Header content-->
+  
     <div class="header-content">
       <div class="header-inner">
         <div class="logo-mobile d_none">
@@ -72,8 +72,7 @@
       </div>
     </div>
   </header>
-  <!--End of Header content-->
-  <!--Side-menu-->
+
   <aside class="side-menu background-side-menu">
     <div class="logo-section">
       <img src="./assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
@@ -114,7 +113,7 @@
       </a>
     </div>
   </aside>
-  <!--End of Side-menu-->
+
   <main class="main-content">
     <section>
       <div class="header-board">
@@ -174,13 +173,13 @@
           <div class="column-header">
             <span>Done</span>
           </div>
-          <!--rendered tasks -->
+       
           <div class="tasks-list" id="tasks-list-done"></div>
         </div>
       </div>
     </section>
     <section>
-      <!-- Modal für Add Task -->
+
       <div id="addTaskModal" class="add-task-modal">
         <div class="add-task-modal-content">
           <button class="add-task-modal-close padding-0" onclick="closeAddTaskModal()">
@@ -260,7 +259,7 @@
                           </button>
                         </div>
 
-                        <!-- Assigned -->
+                
                         <div class="assigned-to-container">
                           <label class="font-bundle">
                             <p class="assigned-to">Assigned to</p>
@@ -307,7 +306,6 @@
                         <div class="subtask-container">
                           <p class="font-bundle m-top">Subtasks</p>
 
-                          <!-- Zustand 1 -->
                           <div id="subtask-initial"
                             class="subtask-input-box input-bundle max-w-440 black-color flex align-center justify-between bg-white"
                             onclick="showSubtaskInput()">
@@ -318,7 +316,6 @@
                             </span>
                           </div>
 
-                          <!-- Zustand 2 -->
                           <div id="subtask-active" class="subtask-input-box input-bundle max-w-440 d-none">
                             <input class="input-second font-bundle" type="text" id="subtask-input-second"
                               placeholder="Add new subtask" />
@@ -365,7 +362,7 @@
                 </div>
               </div>
             </div>
-            <!-- End add Task section -->
+        
           </div>
         </div>
       </div>
