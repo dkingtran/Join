@@ -203,12 +203,9 @@ async function updateSubtasksFromOverlay(taskId) {
 /** Opens the edit overlay for a task, renders the form, loads contacts and subtasks, then pre-fills fields.  
  * @param {string} taskId - The Firebase ID of the task to edit. */
 async function openEditCardFor(taskId) {
-  let task = null;
-  if (Array.isArray(displayedTasks)) {
-    task = displayedTasks.find(t => t && t.id === taskId);
-  } else if (displayedTasks && displayedTasks[taskId]) {
-    task = displayedTasks[taskId];
-  }
+  const task = Array.isArray(displayedTasks)
+    ? displayedTasks.find(t => t?.id === taskId)
+    : displayedTasks?.[taskId];
   if (!task) return;
   openEditCard();
   showEditTaskBig();
@@ -307,7 +304,7 @@ function bindEditOverlayFormSubmit(taskId) {
     await Promise.all(f.map(n => putData(`/tasks/${taskId}/${n}`, data[n])));
     await putData(`/tasks/${taskId}/subtasks`, subs);
     updateTaskCache(taskId, { ...data, subtasks: subs });
-    renderAllTasks(); // Mini-Cards sofort aktualisieren
+    renderAllTasks(); 
     closeEditCard();
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x=>x?.id===taskId) : displayedTasks[taskId];
     renderBigCard(taskId, t || { id: taskId, ...data, subtasks: subs });
@@ -317,23 +314,15 @@ function bindEditOverlayFormSubmit(taskId) {
 /** Renders the task's existing subtasks into the edit overlay list.  
  * @param {Object} task - Task object containing a `subtasks` map. */
 function prefillSubtasksFromTaskOverlay(task) {
-  const overlay = document.getElementById('edit-task-content');
-  const subtaskOutput = overlay?.querySelector('#subtask-output');
-  if (!subtaskOutput) return;
-  subtaskOutput.innerHTML = '';
-  const subtasks = task?.subtasks || {};
-  const subtaskIds = Object.keys(subtasks);
-  for (let i = 0; i < subtaskIds.length; i++) {
-    const id = subtaskIds[i];
-    const data = subtasks[id] || {};
-    const text = data.subtask || '';
-    const done = !!data.done;
-    subtaskOutput.insertAdjacentHTML(
-      'beforeend',
-      getSubtaskTemplateOverlay(text, id, done) // <-- Template muss 3 Parameter verarbeiten
-    );
-  }
+  const out = document.querySelector('#edit-task-content #subtask-output');
+  if (!out) return;
+  out.innerHTML = '';
+
+  Object.entries(task?.subtasks || {}).forEach(([id, { subtask = '', done = false }]) => {
+    out.insertAdjacentHTML('beforeend', getSubtaskTemplateOverlay(subtask, id, done));
+  });
 }
+
 
 /** Shows the active subtask input inside the EDIT overlay */
 function showSubtaskInputOverlay() {
