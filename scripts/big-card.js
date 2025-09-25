@@ -28,7 +28,11 @@ function showBigCard(bigCardHTML) {
   if (!container) return;
   container.innerHTML = bigCardHTML;
   container.classList.remove("d-none");
-    document.body.style.overflow = "hidden"; 
+  const card = container.querySelector(".big-card-content");
+  requestAnimationFrame(() => {
+    card.classList.add("show");
+  });
+  document.body.style.overflow = "hidden";
 }
 
 /**
@@ -169,7 +173,6 @@ function openEditCard() {
 function closeEditCard() {
   document.getElementById("edit-task-overlay").classList.add("d-none");
 }
-
 
 function updateTaskCache(taskId, updated) {
   if (!updated || !Array.isArray(displayedTasks)) return;

@@ -89,7 +89,7 @@
         width: 430px;
         height: 120px;
         justify-content: center;
-        gap: 5px;
+        gap: 30px;
     }
 
     .task-subsection a{
@@ -134,19 +134,27 @@
 @media (max-width: 480px){
 
     .align-section {
-        width: 250px;
+        width: 300px;
     }
     
     .task-subsection{
-        width: 250px;
+        width: 300px;
     }
 
     .urgency-subsection {
-        width: 250px;
+        width: 300px;
+    }
+
+    .urgency-subsection span{
+        font-size: 14px;
+    }
+
+    .summary-section h1{
+        font-size: 47px;
     }
 
     .summary-section .todo-subsection {
-        width: 250px;
+        width: 300px;
     }
 
     .responsive-todo-icon{
@@ -168,7 +176,7 @@
     }
 
     .urgency-subsection{
-    gap: 30px;
+    gap: 10px;
     }
 
     .display-urgency{
@@ -183,11 +191,11 @@
         font-size: 16px;
     }
 
-    .todo-subsection h1{
-        font-size: 56px;
-    }
-
     .urgency-subsection h1{
         font-size: 47px;
     }
+
+    .task-subsection span{
+    font-size: 14px;
+}
 }

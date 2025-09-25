@@ -1,4 +1,6 @@
-
+/**
+ * array off css-classes for the avatar colors.
+ */
 let colors = [
   "bg-ff7a00",
   "bg-ff5eb3",
