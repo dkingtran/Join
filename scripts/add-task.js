@@ -30,6 +30,13 @@ function getTaskData() {
     };
 }
 
+/**
+ * Returns an object representing the status of each category, 
+ * where the specified status is set to true and all others are set to false.
+ *
+ * @param {string} status - The status to be set as true.
+ * @returns {Object} An object with category statuses as keys and boolean values.
+ */
 function getTaskStatus(status) {
     let newStatus = {};
     Object.values(categories).forEach((stat) => {
