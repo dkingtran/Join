@@ -23,6 +23,7 @@
 .board-add-task-template-wrapper .add-task-container {
   display: flex;
   flex-direction: row;
+  gap: 60px;
 }
 
 .add-task-modal {
