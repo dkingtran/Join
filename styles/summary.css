@@ -7,7 +7,7 @@
 }
 .main-container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -120,7 +120,7 @@
     background-color: #ffff;
     width: 246px;
     height: 168px;
-    gap: 18px;
+    gap: 10px;
 }
 
 .display-todo h1 {
@@ -210,22 +210,12 @@
     height: 168px;
 }
 
+
+
 .semi-bold {
     font-weight: 600;
     font-size: 64px;
 }
-
-/**.menu-section span{
-    font-size: 16px;
-    font-weight: 400;
-    color: #FFFFFF;
-}
-
-.menu-item span{
-    font-size: 16px;
-    font-weight: 400;
-    color: #A8A8A8;
-}**/
 
 .hover-img {
     display: none;
