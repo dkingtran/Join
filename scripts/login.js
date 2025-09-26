@@ -36,9 +36,9 @@ function displayLoginError() {
  * logs into Join as a guest.
  */
 function guestLogin() {
-  activateLogin("Guest");
-  window.location.href = "./summary.html";
-}
+    activateLogin("Guest");
+    window.location.href = "./summary.html";
+  }
 
 /**
  * Finds and returns a user object from the provided array that matches the email and password input values.

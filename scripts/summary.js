@@ -1,3 +1,5 @@
+let tasks = [];
+
 /**
  * Loads tasks from Firebase and returns them as an array.
  * @async
@@ -12,7 +14,6 @@ async function loadTasks() {
     }
     return Object.values(data);
 }
-
 
 /**
  * Determines the status of a single task based on its `status` field.
@@ -29,7 +30,6 @@ function getTaskStatus(task) {
         default: return "unknown";
     }
 }
-
 
 /**
  * Counts how many tasks have a specific status.
@@ -48,7 +48,6 @@ function countTasksByStatus(tasks, status) {
     return count;
 }
 
-
 /**
  * Counts how many tasks are marked as "urgent".
  * @param {Object[]} tasks - An array of task objects.
@@ -63,7 +62,6 @@ function countUrgentTasks(tasks) {
     }
     return count;
 }
-
 
 /**
  * Finds the earliest due date among tasks marked as "urgent".
@@ -84,18 +82,16 @@ function findEarliestUrgentDate(tasks) {
     return earliest["due-date"];
 }
 
-
 /**
  * Returns a greeting message based on the current time of day.
  * @returns {string} A greeting string like "Good morning,", "Good afternoon," or "Good evening,".
  */
 function getGreeting() {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning,";
-    if (hour < 18) return "Good afternoon,";
-    return "Good evening,";
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
 }
-
 
 /**
  * Replaces the text content of a DOM element by its ID.
@@ -109,14 +105,13 @@ function updateDOM(id, value) {
     }
 }
 
-
 /**
  * Loads task data and updates all related summary counters and elements in the DOM.
  * @async
  * @function
  */
-async function updateSummary() {
-    const tasks = await loadTasks();
+    function updateSummary() {
+    // const tasks = await loadTasks();
     updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
     updateDOM("done-counter", countTasksByStatus(tasks, "done"));
     updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
@@ -125,27 +120,86 @@ async function updateSummary() {
     updateDOM("inBord-counter", tasks.length);
     const deadline = findEarliestUrgentDate(tasks);
     updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
-    document.getElementById("greetUser").innerText = getGreeting();
+    //document.getElementById("greetUser").innerText = getGreeting();
+    document.querySelector(".summary-section").style.visibility = "visible";
+    document.querySelector(".title-section").style.visibility = "visible";
 }
-
-
-// Ensures the summary is updated when the page is loaded
-window.onload = updateSummary;
-
 
 /**
  * Updates the #userName DOM element with the currently logged-in user's name.
  * Reads the name from localStorage. If not found, logs an error.
  */
 function showUserName() {
-  const localStorageName = localStorage.getItem("name");
-  if (localStorageName) {
-    document.getElementById("userName").textContent = JSON.parse(localStorageName);
-  } else {
-    console.error("Kein gültiger Name im Login gefunden!");
-  }
+    const localStorageName = localStorage.getItem("name");
+    if (localStorageName) {
+        document.getElementById("userName").textContent = JSON.parse(localStorageName);
+    } else {
+        console.error("Kein gültiger Name im Login gefunden!");
+    }
 }
 
+// Run showUserName and updateSummary after the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", async () => {
+    tasks = await loadTasks();
 
-// Run showUserName after the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", showUserName);
+    const name = getUserNameFromStorage();
+    const isMobile = window.innerWidth <= 1000;
+
+    setUserName(name);
+    setGreeting(name);
+
+    if (isMobile) {
+        showGreetingMobile();
+    } else {
+        updateSummary();
+    }
+});
+
+function getUserNameFromStorage() {
+    return JSON.parse(localStorage.getItem("name")) || "";
+}
+
+function setUserName(name) {
+    const el = document.getElementById("userName");
+    if (el) el.textContent = name === "Guest" ? "" : name;
+}
+
+function setGreeting(name) {
+    const greeting = getGreeting();
+    const el = document.getElementById("greetUser");
+    const userContainer = document.querySelector(".user");
+    if (el){ el.textContent = name === "Guest" ? `${greeting}!` : `${greeting},`;
+    }
+    if (userContainer && window.innerWidth > 1000) {
+        userContainer.style.visibility = "visible";
+    }
+}
+
+function showGreetingMobile() {
+    const userContainer = document.querySelector(".user");
+    const summarySection = document.querySelector(".summary-section");
+    const titleSection = document.querySelector(".title-section");
+
+    if (userContainer) {
+        userContainer.classList.remove("hidden");
+        userContainer.style.display = "flex";
+        userContainer.style.visibility = "visible";
+    }
+    if (summarySection) summarySection.style.display = "none";
+    if (titleSection) titleSection.style.display = "none";
+
+    setTimeout(() => {
+        if (userContainer) {
+            userContainer.style.display = "none";
+        }
+        if (summarySection) {
+            summarySection.style.display = "block";
+            summarySection.style.visibility = "visible";
+        }
+        if (titleSection) {
+            titleSection.style.display = "block";
+            titleSection.style.visibility = "visible";
+        }
+        updateSummary();
+    }, 2000);
+}

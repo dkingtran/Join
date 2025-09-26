@@ -1,4 +1,3 @@
-
 .wrapper {
     display: flex;
     justify-content: center;
@@ -31,13 +30,6 @@
     font-size: 64px;
     color: #29ABE2;
 }
-
-/*.header-profile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}*/
 
 .profile-container{
     display: flex;
@@ -89,7 +81,6 @@
     font-size: 61px;
     color: #000000;
     font-weight: bold;
-    /*font-family: inter;*/
 }
 
 .summary-section{
@@ -210,8 +201,6 @@
     height: 168px;
 }
 
-
-
 .semi-bold {
     font-weight: 600;
     font-size: 64px;
@@ -229,7 +218,6 @@
     display: none;
 }
 
-
 .element-hover:hover .default-img{
     display: none;
 }
@@ -246,4 +234,12 @@
 a{
     text-decoration: none;
     color: #000000;
+}
+
+.summary-section, .user, .title-section {
+  visibility: hidden;
+}
+
+.invisible {
+  visibility: hidden;
 }
