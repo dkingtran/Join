@@ -111,17 +111,17 @@ function updateDOM(id, value) {
  * @function
  */
     function updateSummary() {
-    updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
-    updateDOM("done-counter", countTasksByStatus(tasks, "done"));
-    updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
-    updateDOM("awaitingFeedback-counter", countTasksByStatus(tasks, "feedback"));
-    updateDOM("urgency-counter", countUrgentTasks(tasks));
-    updateDOM("inBord-counter", tasks.length);
-    const deadline = findEarliestUrgentDate(tasks);
-    updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
-    document.querySelector(".summary-section").style.visibility = "visible";
-    document.querySelector(".title-section").style.visibility = "visible";
-}
+        updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
+        updateDOM("done-counter", countTasksByStatus(tasks, "done"));
+        updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
+        updateDOM("awaitingFeedback-counter", countTasksByStatus(tasks, "feedback"));
+        updateDOM("urgency-counter", countUrgentTasks(tasks));
+        updateDOM("inBord-counter", tasks.length);
+        const deadline = findEarliestUrgentDate(tasks);
+        updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
+        document.querySelector(".summary-section").style.visibility = "visible";
+        document.querySelector(".title-section").style.visibility = "visible";
+  }
 
 /**
  * Updates the #userName DOM element with the currently logged-in user's name.
