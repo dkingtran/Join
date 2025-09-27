@@ -1,6 +1,14 @@
 
 const BASE_URL = "https://join-f4dc9-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/**
+ * @function 
+ * executes the GET operation with the given path.
+ * 
+ * @param {string} path - string added to the BASE_URL to access correct directory.
+ * @param {object} data - the object that should be used with the method in this function.
+ * @returns response from the operation as a JSON data.
+ */
 async function loadData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json");
@@ -10,6 +18,14 @@ async function loadData(path = "") {
     }
 }
 
+/**
+ * @function 
+ * executes the POST operation with the given path.
+ * 
+ * @param {string} path - string added to the BASE_URL to access correct directory.
+ * @param {object} data - the object that should be used with the method in this function.
+ * @returns response from the operation as a JSON data.
+ */
 async function postData(path = "", data = {}) {
     try {
         let response = await fetch(BASE_URL + path + ".json", {
@@ -25,6 +41,13 @@ async function postData(path = "", data = {}) {
     }
 }
 
+/**
+ * @function 
+ * executes the DELETE operation with the given path.
+ * 
+ * @param {string} path - string added to the BASE_URL to access correct directory.
+ * @returns response from the operation as a JSON data.
+ */
 async function deleteData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json", {
@@ -36,6 +59,14 @@ async function deleteData(path = "") {
     }
 }
 
+/**
+ * @function 
+ * executes the PUT operation with the given path.
+ * 
+ * @param {string} path - string added to the BASE_URL to access correct directory.
+ * @param {object} data - the object that should be used with the method in this function.
+ * @returns response from the operation as a JSON data.
+ */
 async function putData(path = "", data = {}) {
     try {
         let response = await fetch(BASE_URL + path + ".json", {

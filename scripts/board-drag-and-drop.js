@@ -1,14 +1,11 @@
+let offsetX = 0, offsetY = 0;
+let startX = 0, startY = 0;
+const DRAG_THRESHOLD = 10;
 let draggedEl = null;
 let placeholder = null;
-let offsetX = 0, offsetY = 0;
 let dragged = false;
-let startX = 0, startY = 0;
-const DRAG_THRESHOLD = 10; // Minimum pixels to move before considering it a drag
-
-// Add global variables to track original position
 let originalTasksList = null;
 
-// === Board Rendering ===
 /**
  * Updates empty messages for task lists by checking if lists are empty and adding/removing messages accordingly.
  */
@@ -58,7 +55,6 @@ function checkColumnsAddEvents() {
     checkDragSwitchEvents();
 }
 
-// === Drag Setup ===
 /**
  * Adds mouse down event listeners to board cards for drag functionality, ensuring events are attached only once.
  */
@@ -102,7 +98,6 @@ function setupDragEvents() {
     document.addEventListener('mouseup', onMouseUp, { once: true });
 }
 
-// === Placeholder Management ===
 /**
  * Creates placeholder elements in the current and adjacent board columns for drop zones.
  */
@@ -147,7 +142,6 @@ function addPlaceholderToList(tasksList) {
     }
 }
 
-// === Drag Movement ===
 /**
  * Moves the dragged element to the specified page coordinates, accounting for offset.
  * @param {number} pageX - The x-coordinate on the page.
@@ -221,7 +215,6 @@ function highlightActiveDropZone(e) {
     }
 }
 
-// === Drag Lifecycle ===
 /**
  * Starts the drag operation by setting styles, creating placeholders, and moving the element.
  * @param {MouseEvent} e - The mouse event that triggered the drag start.
@@ -336,7 +329,6 @@ function isValidDropZone(dropZoneElement, fromColumn) {
     return Math.abs(sourceIndex - targetColumnId) === 1;
 }
 
-// === Task Management ===
 /**
  * Moves a task to a new category, updates local data, and syncs with Firebase.
  * @param {Object} taskData - The data of the task to move.
