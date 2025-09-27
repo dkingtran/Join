@@ -111,7 +111,7 @@ function updateDOM(id, value) {
  * @function
  */
     function updateSummary() {
-    // const tasks = await loadTasks();
+  
     updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
     updateDOM("done-counter", countTasksByStatus(tasks, "done"));
     updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
@@ -120,7 +120,6 @@ function updateDOM(id, value) {
     updateDOM("inBord-counter", tasks.length);
     const deadline = findEarliestUrgentDate(tasks);
     updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
-    //document.getElementById("greetUser").innerText = getGreeting();
     document.querySelector(".summary-section").style.visibility = "visible";
     document.querySelector(".title-section").style.visibility = "visible";
 }
