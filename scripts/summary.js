@@ -210,9 +210,18 @@ function showGreetingMobile() {
             summarySection.style.visibility = "visible";
         }
         if (titleSection) {
-            titleSection.style.display = "block";
+            titleSection.style.display = "flex";
             titleSection.style.visibility = "visible";
         }
         updateSummary();
     }, 2000);
 }
+
+window.addEventListener('resize', () => {
+    const userContainer = document.querySelector(".user");
+    if(window.innerWidth >= 1001) {
+        userContainer.style.display = "block";
+    } else {
+        userContainer.style.display = "none";
+    }
+})

@@ -20,11 +20,8 @@
 
     .summary-section {
         height: 500px;
-        margin-top: 40px;
         margin-top: 130px;
         margin-bottom: 20px;
-        margin-left: 380px;
-
     }
 
     .todo-subsection {
@@ -100,6 +97,15 @@
     .task-subsection a{
         height: 120px;
     }
+
+    .horizontal-pipe {
+        display: flex;
+        font-size: xx-large;
+        width: 90px;
+        color: #29ABE2;
+        position: relative;
+        bottom: 15px;
+    }
 }
 
 @media (max-width: 1000px){
@@ -118,14 +124,6 @@
         margin-right: auto;
     }
 
-    .horizontal-pipe {
-        display: flex;
-        font-size: xx-large;
-        width: 90px;
-        color: #29ABE2;
-        position: relative;
-        bottom: 15px;
-    }
 
     .summary-section{
         flex-direction: column;
@@ -174,10 +172,10 @@
         width: 230px;
         justify-content: flex-start;
         margin-left: 2%;
-    }
+    }  
 }
 
-@media (max-width: 480px){
+@media (max-width: 500px){
 
     .align-section {
         width: 255px;
@@ -249,5 +247,9 @@
     .user, .summary-section {
         transition: opacity 0.5s ease;
         opacity: 1;
+    }
+
+    .user span {
+        width: 300px;
     }
 }
