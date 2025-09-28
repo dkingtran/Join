@@ -5,7 +5,6 @@
  */
 let tasks = [];
 
-
 /**
  * Global array containing tasks currently displayed on the UI.
  * This can be filtered from `tasks`.
@@ -13,14 +12,12 @@ let tasks = [];
  */
 let displayedTasks = [];
 
-
 /**
  * Global array holding all contact objects retrieved from the backend.
  * Each contact should include fields like `name`, `color`, etc.
  * @type {Object[]}
  */
 let contacts = [];
-
 
 /**
  * Initializes the board data by loading tasks and contacts.
@@ -32,7 +29,6 @@ async function init() {
     await updateTasksArrays();
     await getContactsArray();
 }
-
 
 /**
  * Updates both the `tasks` and `displayedTasks` arrays with the latest data.
@@ -66,7 +62,6 @@ async function getTasksArray() {
     }
   }
 }
-
 
 /**
  * Loads all contacts from Firebase and stores them in the global `contacts` array.
