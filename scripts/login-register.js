@@ -1,11 +1,9 @@
 
-
 const passwordLockIcon = document.getElementById('lock-password');
 const passwordVisibilityOffIcon = document.getElementById('visibility-off-password');
 const passwordVisibilityOnIcon = document.getElementById('visibility-on-password');
 const passwordWrapperRef = document.getElementById('password-wrapper');
 const errorMessageRef = document.getElementById('error-msg');
-
 
 /**
  * Eventlistener on focus password-input.
@@ -17,7 +15,6 @@ passwordRef.addEventListener("focus", () => {
     passwordVisibilityOffIcon.classList.remove('d-none');
   }
 });
-
 
 /**
  * Click eventlistener on document.
@@ -32,7 +29,6 @@ document.addEventListener("click", event => {
   }
 });
 
-
 /**
  * Eventlistener click on visibility-off-icon.
  * Changes icon to visibility-on-icon.
@@ -44,7 +40,6 @@ passwordVisibilityOffIcon.addEventListener("click", () => {
   passwordVisibilityOnIcon.classList.remove('d-none');
 });
 
-
 /**
  * Eventlistener click on visibility-oon-icon.
  * Changes icon to visibility-off-icon.
@@ -55,7 +50,6 @@ passwordVisibilityOnIcon.addEventListener("click", () => {
   passwordVisibilityOnIcon.classList.add('d-none');
   passwordVisibilityOffIcon.classList.remove('d-none');
 });
-
 
 /**
  * Handles smooth intro animation on page load:

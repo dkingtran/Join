@@ -323,7 +323,6 @@ function prefillSubtasksFromTaskOverlay(task) {
   });
 }
 
-
 /** Shows the active subtask input inside the EDIT overlay */
 function showSubtaskInputOverlay() {
   const overlay = document.getElementById('edit-task-content'); if (!overlay) return;

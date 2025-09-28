@@ -1,6 +1,4 @@
-/* =========================
-   Kontakt-Details Template
-   ========================= */
+
 .contact-details {
     display: flex;
     flex-direction: column;
@@ -80,7 +78,6 @@
     filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
 }
 
-/* Ensure button images are always inline and sized */
 .delete-btn img {
     width: 24px;
     height: 24px;
@@ -128,7 +125,6 @@
     color: #333;
 }
 
-/* --- Media Queries für .contacts-section --- */
 
 @media (max-width: 1300px) {
     .contacts-section {

@@ -9,7 +9,6 @@ const statusToColumnId = {
     "done": "tasks-list-done"
 };
 
-
 /**
  * Determines the column ID for a task based on its status object.
  * @param {Object} statusObj - The task status object (e.g., { "in-progress": true }).
@@ -25,7 +24,6 @@ function getColumnIdByStatus(statusObj) {
     return null;
 }
 
-
 /**
  * Retrieves contact information (color and initials) for a given full name.
  * @param {string} fullName - The full name of the contact.
@@ -34,7 +32,6 @@ function getColumnIdByStatus(statusObj) {
 function getContactByName(fullName) {
     return contactsMap[fullName] || null;
 }
-
 
 /**
  * Renders avatars for assigned users (up to 3).
@@ -53,7 +50,6 @@ function renderAssignedAvatars(users = []) {
     return avatars.join("");
 }
 
-
 /**
  * Renders a single avatar with initials and background color.
  * @param {string} name - Full name of the user.
@@ -65,7 +61,6 @@ function renderSingleAvatar(name) {
     const color = contact?.color || "fallback-gray";
     return `<div class="avatar ${color}" title="${name}">${initials}</div>`;
 }
-
 
 /**
  * Renders an overflow avatar showing "+X" for hidden users.
@@ -82,7 +77,6 @@ function renderOverflowAvatar(users) {
         </div>
     `;
 }
-
 
 /**
  * Calculates progress for subtasks.
@@ -104,7 +98,6 @@ function getSubtaskProgress(subtasks = {}) {
     };
 }
 
-
 /**
  * Returns a CSS class based on the task category.
  * @param {string} category - The category name.
@@ -121,7 +114,6 @@ function getCategoryClass(category) {
     return "category-default";
 }
 
-
 /**
  * Returns the HTML icon for the given priority level.
  * @param {string} priority - Priority level ("low", "medium", "urgent").
@@ -134,7 +126,6 @@ function getPriorityIcon(priority) {
     if (!validPriorities.includes(cleanPriority)) return "";
     return priorityRender(cleanPriority);
 }
-
 
 /**
  * Clears all task columns before re-rendering cards.
@@ -152,7 +143,6 @@ function clearAllTaskLists() {
     });
 }
 
-
 /**
  * Renders all tasks to their appropriate columns.
  * @param {Object} tasksObject - Task ID mapped to task data.
@@ -169,7 +159,6 @@ function renderAllTasks() {
     checkColumnsAddEvents();
 }
 
-
 /**
  * Renders a single task card to its corresponding column.
  * @param {number} taskId - The index of the task in the main tasks array.
@@ -184,7 +173,6 @@ function renderTaskToColumn(taskId, displayedTasksId, task, columnId) {
     const progress = getSubtaskProgress(task.subtasks);
     container.innerHTML += cardRender(taskId, displayedTasksId, task, avatarsHTML, progress);
 }
-
 
 /**
  * Initializes the board view:

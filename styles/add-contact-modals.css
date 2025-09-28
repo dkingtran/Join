@@ -1,6 +1,4 @@
-/* =========================
-   Formular & Overlay
-   ========================= */
+
 .form-container {
     display: flex !important;
     position: fixed;
@@ -45,7 +43,6 @@
     margin-bottom: 15px;
 }
 
-/* Form Header (links im Overlay) */
 .form-header {
     display: flex;
     align-items: center;
@@ -60,7 +57,6 @@
     box-sizing: border-box;
 }
 
-/* Avatar im Overlay-Formular */
 .form-container .contact-avatar-clicked {
     min-width: 120px;
     min-height: 120px;
@@ -145,7 +141,6 @@ input:focus {
     border: 1px solid #29abe2;
 }
 
-/* Input Wrapper mit Icon rechts im Inputfeld */
 .input-wrapper {
     position: relative;
     display: flex;
@@ -200,7 +195,6 @@ input:focus {
     width: 10.5px;
     height: 10.5px;
     filter: brightness(0) saturate(100%) invert(13%) sepia(13%) saturate(1092%) hue-rotate(178deg) brightness(97%) contrast(92%);
-    /* entspricht #2A3647 */
     transition: filter 0.1s ease-in-out;
 }
 
@@ -217,7 +211,6 @@ input:focus {
 
 .cancel-btn:hover img {
     filter: brightness(0) saturate(100%) invert(54%) sepia(99%) saturate(749%) hue-rotate(167deg) brightness(97%) contrast(92%);
-    /* entspricht #29ABE2 */
 }
 
 .cancel-btn:active {
@@ -231,7 +224,6 @@ input:focus {
 
 .cancel-btn:active img {
     filter: brightness(0) saturate(100%) invert(7%) sepia(16%) saturate(1817%) hue-rotate(183deg) brightness(97%) contrast(92%);
-    /* entspricht #091931 */
 }
 
 .create-btn {
@@ -255,7 +247,6 @@ input:focus {
     background: #2a3647;
     color: white;
     white-space: nowrap;
-    /* Prevent line break */
 }
 
 .create-btn img {
@@ -275,7 +266,6 @@ input:focus {
     border: 1px solid #29abe2;
     background: #29abe2;
     white-space: nowrap;
-    /* Prevent line break on hover */
 }
 
 .create-btn:hover img {
@@ -290,16 +280,12 @@ input:focus {
     transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out,
         background 0.1s ease-in-out;
     white-space: nowrap;
-    /* Prevent line break on active */
 }
 
 .create-btn:active img {
     filter: brightness(0) invert(1);
 }
 
-/* =========================
-   Modals & Overlays
-   ========================= */
 .contact-created-modal {
     position: fixed;
     left: 743px;
