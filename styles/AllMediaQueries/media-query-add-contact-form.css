@@ -187,46 +187,6 @@
     }
 }
 
-/* @media (max-height: 760px) {
-    .form-container.show {
-        height: 90vh;
-    }
-
-    .form-container.show .contact-avatar-clicked {
-        position: absolute;
-        top: calc(50% - 72px);
-        left: calc(50% - 40px);
-        font-size: 28px;
-    }
-
-    .contact-avatar-clicked {
-        width: 80px;
-        min-width: 80px !important;
-        height: 80px;
-        min-height: 80px !important;
-    }
-
-    .form-header {
-        padding: 46px 36px;
-    }
-
-    .form-title h1 {
-        font-size: 47px;
-    }
-
-    .form-title p {
-        font-size: 20px;
-    }
-
-    .input-wrapper {
-        margin-bottom: 16px;
-    }
-
-    .button-group {
-        margin-top: 16px;
-    }
-} */
-
 @media (max-width: 490px) {
     .form-container {
         display: flex !important;
