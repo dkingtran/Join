@@ -66,7 +66,7 @@
     background: #F5F7F7;
     z-index: 100;
     margin-top: 60px;
-    padding: 16px 0px 16px 16px;
+    padding: 16px 0px 16px 0px;
   }
 }
 
@@ -79,6 +79,11 @@
     width: 100%;
     display: flex;
     align-items: center;
+  }
+
+  .btn-prio {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .btn-clear-task-container {
@@ -216,10 +221,6 @@
     width: 206px;
   }
 
-  .avatar {
-    margin-right: 0;
-  }
-
   .input-bundle {
     height: 48px;
   }
@@ -290,5 +291,12 @@
 
   .task-successful-info-text {
     font-size: 16px;
+  }
+}
+
+@media (max-height: 1168px) {
+  .btn-clear-task-container {
+    position: sticky !important;
+    top: 0;
   }
 }

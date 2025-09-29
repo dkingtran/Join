@@ -1,4 +1,3 @@
-
 .board-design {
 	background: #ff7a00;
 }
@@ -63,7 +62,7 @@
 	padding-left: 4px;
 	padding-top: 8px;
 	font-size: 18px;
-	color: red;
+	color: rgb(200, 0, 0);
 }
 
 .search-input-wrapper img {
