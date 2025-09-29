@@ -37,6 +37,7 @@
 
   .star-required {
     max-width: 480px;
+    position: unset;
   }
 
   #form-element {
