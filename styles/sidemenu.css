@@ -9,7 +9,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .header-inner {
@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    max-width: 1920px;
     padding-left: calc(232px + 116px);
     padding-right: 32px;
 }

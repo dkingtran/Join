@@ -1,11 +1,12 @@
-html, body {
+html,
+body {
   min-height: 100%;
   margin: 0;
   padding: 0;
 }
 
-.wrapper { 
-  height: auto; 
+.wrapper {
+  height: auto;
 }
 
 .main-container {
@@ -14,19 +15,20 @@ html, body {
   margin-top: 96px;
   padding: 16px;
 }
-.add-task-container { 
-  max-width: 1102px; 
-  gap: 60px; 
+
+.add-task-container {
+  max-width: 1102px;
+  gap: 60px;
 }
 
-.pipe { 
-  width: 2px; 
-  height: 424px; 
-  border: 1px solid #D1D1D1; 
+.pipe {
+  width: 2px;
+  height: 424px;
+  border: 1px solid #D1D1D1;
 }
 
-form { 
-  margin-left: 120px; 
+form {
+  margin-left: 120px;
 }
 
 .title-section {
@@ -36,17 +38,17 @@ form {
   margin-bottom: 30px;
 }
 
-.title-section h1 { 
-  font-size: 61px; 
+.title-section h1 {
+  font-size: 61px;
 }
 
-.title-task { 
-  margin-bottom: 10px; 
+.title-task {
+  margin-bottom: 10px;
 }
 
-.add-task-section { 
-  align-items: flex-start; 
-  height: auto; 
+.add-task-section {
+  align-items: flex-start;
+  height: auto;
 }
 
 .section-task-under {
@@ -56,9 +58,9 @@ form {
   top: 880px;
 }
 
-.input-title-task { 
-  height: 48px; 
-  padding-left: 21px; 
+.input-title-task {
+  height: 48px;
+  padding-left: 21px;
 }
 
 .textarea-task {
@@ -68,18 +70,18 @@ form {
   margin: 10px 0 25px 0;
 }
 
-#task-date:valid { 
-  color: #706b6b; 
+#task-date:valid {
+  color: #706b6b;
 }
 
-.date { 
-  min-width: 120px; 
-  margin-bottom: 10px; 
+.date {
+  min-width: 120px;
+  margin-bottom: 10px;
 }
 
-.btn-prio { 
-  gap: 15px; 
-  margin: 10px 0 25px 0; 
+.btn-prio {
+  gap: 15px;
+  margin: 10px 0 25px 0;
 }
 
 .btn-prio-bundle:hover:not(.active-green):not(.active-yellow):not(.active-red) {
@@ -98,34 +100,39 @@ form {
   cursor: pointer;
 }
 
-.active-green { 
-  background-color: #7AE229; 
-  color: white; 
-  box-shadow: none; 
+.active-green {
+  background-color: #7AE229;
+  color: white;
+  box-shadow: none;
 }
 
-.active-green img { 
-  filter: brightness(0) invert(1); 
+.active-green img {
+  filter: brightness(0) invert(1);
 }
 
-.active-yellow { 
-  background-color: #FFA800; 
-  color: white; 
-  box-shadow: none; 
+.active-yellow {
+  background-color: #FFA800;
+  color: white;
+  box-shadow: none;
 }
 
-.active-red { 
-  background-color: #FF3D00; 
-  color: white; 
-  box-shadow: none; 
+.active-yellow img {
+  filter: brightness(0) invert(1);
 }
 
-.active-red img { 
-  filter: brightness(0) invert(1); 
+.active-red {
+  background-color: #FF3D00;
+  color: white;
+  box-shadow: none;
 }
 
-.priority-btn { 
-  gap: 6px; font-size: 21px; 
+.active-red img {
+  filter: brightness(0) invert(1);
+}
+
+.priority-btn {
+  gap: 6px;
+  font-size: 21px;
 }
 
 .btn-clear-task-container {
@@ -135,7 +142,7 @@ form {
   justify-content: flex-end;
   align-items: center;
   width: 1000px;
-  top: 920px;
+  top: 1000px;
 }
 
 .btn-addtask-clear {
@@ -143,7 +150,8 @@ form {
   max-width: 110px;
   height: 56px;
   border: 1px solid #2A3647;
-  background-color:#F5F7F7;;
+  background-color: #F5F7F7;
+  ;
   color: #2A3647;
   transition: all 100ms ease-in-out;
   cursor: pointer;
@@ -180,24 +188,27 @@ form {
   transition: stroke 0.2s ease-in-out;
 }
 
-.btn-addtask-clear:hover .icon-close path { 
-  stroke: #29ABE2; 
+.btn-addtask-clear:hover .icon-close path {
+  stroke: #29ABE2;
 }
 
-.error-container { 
-  height: 25px; 
-  width: 150px; 
+.error-container {
+  height: 25px;
+  width: 150px;
 }
 
 .error-text {
   min-width: 250px;
   width: 100%;
-  color: red;
-  font-size: 12px;
+  color: rgb(200, 0, 0);
+  font-size: 14px;
   z-index: 3000;
 }
 
-.border-red { border-color: red; }
+.border-red {
+  border-color: rgb(200, 0, 0);
+}
+
 .message-box {
   margin-top: 10px;
   padding: 10px;
@@ -242,4 +253,12 @@ form {
   justify-content: center;
   flex-direction: row;
   align-items: center;
+}
+
+#selectedContacts .avatar {
+  position: relative;
+}
+
+#selectedContacts .avatar:not(:first-child) {
+  margin-left: -40px;
 }
