@@ -270,3 +270,32 @@
         margin-right: 8px;
     }
 }
+
+@media (max-width: 350px) {
+    .form-wrapper {
+        max-width: 280px;
+    }
+}
+
+@media (max-height: 810px) {
+    .form-header {
+        max-height: 320px;
+        min-height: 200px;
+    }
+
+    .contact-avatar-clicked {
+        top: calc(50% - 80px) !important;
+    }
+
+    .button-group {
+        margin-top: 0;
+        padding-bottom: 16px;
+    }
+}
+
+@media (max-height: 730px) {
+
+    .contact-avatar-clicked {
+        top: calc(48% - 88px) !important;
+    }
+}
