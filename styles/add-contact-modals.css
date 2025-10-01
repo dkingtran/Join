@@ -140,7 +140,6 @@ input {
 
 input:focus {
     outline: none;
-    /* border: 1px solid #29abe2; */
 }
 
 .input-container {
