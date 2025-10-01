@@ -116,7 +116,7 @@
     background-color: #2a3647;
     color: white;
     font-size: 20px;
-    position: absolute;
+    position: fixed;
     bottom: -100px; 
     opacity: 1;
     transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
