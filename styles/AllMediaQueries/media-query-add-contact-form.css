@@ -61,10 +61,6 @@
         min-width: 364px;
     }
 
-    .input-wrapper {
-        margin-bottom: 24px;
-    }
-
     .close-btn {
         position: absolute;
         top: 24px;
@@ -164,10 +160,6 @@
 
     .delete-btn {
         padding: 8px 8px;
-    }
-
-    .input-wrapper {
-        margin-bottom: 24px;
     }
 
     .contact-created-modal {

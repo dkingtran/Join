@@ -141,14 +141,14 @@ input:focus {
 }
 
 .input-container {
-    
+    margin-bottom: 16px;
 }
 
 .input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 4px;
 }
 
 .input-wrapper input {
@@ -159,6 +159,13 @@ input:focus {
 .contact-error-msg {
     visibility: hidden;
     user-select: none;
+    color: red !important;
+    font-size: 16px;
+    padding-left: 6px;
+}
+
+.contact-error-msg.show {
+    visibility: visible;
 }
 
 .icon {
