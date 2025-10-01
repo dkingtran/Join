@@ -142,16 +142,32 @@ input:focus {
     border: 1px solid #29abe2;
 }
 
+.input-container {
+    margin-bottom: 16px;
+}
+
 .input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 4px;
 }
 
 .input-wrapper input {
     width: 100%;
     margin-bottom: 0;
+}
+
+.contact-error-msg {
+    visibility: hidden;
+    user-select: none;
+    color: #E60026 !important;
+    font-size: 16px;
+    padding-left: 6px;
+}
+
+.contact-error-msg.show {
+    visibility: visible;
 }
 
 .icon {
