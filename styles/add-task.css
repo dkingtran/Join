@@ -200,13 +200,13 @@ form {
 .error-text {
   min-width: 250px;
   width: 100%;
-  color: rgb(200, 0, 0);
+  color: #E60026;
   font-size: 14px;
   z-index: 3000;
 }
 
 .border-red {
-  border-color: rgb(200, 0, 0);
+  border-color: #E60026;
 }
 
 .message-box {
