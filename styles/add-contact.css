@@ -52,6 +52,13 @@
 	box-sizing: border-box;
 }
 
+.contact-name {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .contact-email {
 	color: #007cee;
 	-webkit-line-clamp: 1;
