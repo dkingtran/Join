@@ -300,7 +300,7 @@ function showAddContactBtnMobile() {
  */
 function removeMobileEditDropdown() {
     const dropdown = document.getElementById('dropdown-mobile-edit');
-    dropdown.classList.remove('show');
+    if(dropdown) dropdown.classList.remove('show');
 }
 
 /**

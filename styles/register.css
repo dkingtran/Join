@@ -1,3 +1,11 @@
+.register-container {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
@@ -45,7 +53,7 @@
     width: 100%;
     max-width: 598px;
     height: 650px;
-    margin: 180px auto 0 auto;
+    margin-top: 180px;
     padding: 80px 40px;
     border-radius: 30px;
     text-align: center;
@@ -108,10 +116,8 @@
     background-color: #2a3647;
     color: white;
     font-size: 20px;
-    position: fixed;
+    position: absolute;
     bottom: -100px; 
-    left: 50%;
-    transform: translateX(-50%);
     opacity: 1;
     transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
     z-index: 1001;
@@ -123,8 +129,11 @@
 }
 
 .confirm-register-template.show {
-    bottom: 420px;
     opacity: 1;
+    left: 50%;
+    right: 50%;
+    bottom: unset;
+    transform: translate(-50%, -50%);
 }
 
 .register-succ-overlay {

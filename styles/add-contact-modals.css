@@ -140,6 +140,10 @@ input:focus {
     border: 1px solid #29abe2;
 }
 
+.input-container {
+    
+}
+
 .input-wrapper {
     position: relative;
     display: flex;
@@ -150,6 +154,11 @@ input:focus {
 .input-wrapper input {
     width: 100%;
     margin-bottom: 0;
+}
+
+.contact-error-msg {
+    visibility: hidden;
+    user-select: none;
 }
 
 .icon {
