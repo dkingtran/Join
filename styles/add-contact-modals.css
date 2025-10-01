@@ -129,17 +129,18 @@ label {
 
 input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: none;
     box-sizing: border-box;
     font-size: 16px;
     margin-bottom: 16px;
+    padding-right: 8px;
 }
+
+
 
 input:focus {
     outline: none;
-    border: 1px solid #29abe2;
+    /* border: 1px solid #29abe2; */
 }
 
 .input-container {
@@ -151,6 +152,13 @@ input:focus {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.input-wrapper:focus-within {
+    border: 1px solid #29abe2;
 }
 
 .input-wrapper input {
@@ -171,8 +179,6 @@ input:focus {
 }
 
 .icon {
-    position: absolute;
-    right: 16px;
     width: 20px;
     height: 20px;
     pointer-events: none;

@@ -331,15 +331,15 @@ function showInputError(inputRef, isValid) {
     if (!isValid) {
         switch (inputRef) {
             case "name":
-                nameRef.classList.add('error');
+                nameRef.closest('.input-wrapper').classList.add('error');
                 nameErrorMsg.classList.add('show');
                 break;
             case "email":
-                emailRef.classList.add('error');
+                emailRef.closest('.input-wrapper').classList.add('error');
                 emailErrorMsg.classList.add('show');
                 break;
             case "phone":
-                phoneRef.classList.add('error');
+                phoneRef.closest('.input-wrapper').classList.add('error');
                 phoneErrorMsg.classList.add('show');
                 break;
         }
@@ -351,17 +351,17 @@ function showInputError(inputRef, isValid) {
  * in the corresponding input field.
  */
 nameRef.addEventListener("input", () => {
-    nameRef.classList.remove('error');
+    nameRef.closest('.input-wrapper').classList.remove('error');
     nameErrorMsg.classList.remove('show');
 });
 
 emailRef.addEventListener("input", () => {
-    emailRef.classList.remove('error');
+    emailRef.closest('.input-wrapper').classList.remove('error');
     emailErrorMsg.classList.remove('show');
 });
 
 phoneRef.addEventListener("input", () => {
-    phoneRef.classList.remove('error');
+    phoneRef.closest('.input-wrapper').classList.remove('error');
     phoneErrorMsg.classList.remove('show');
 });
 
@@ -370,10 +370,10 @@ phoneRef.addEventListener("input", () => {
  * This function clears the 'error' class from the input elements and hides the associated error messages.
  */
 function removeErrors() {
-    nameRef.classList.remove('error');
+    nameRef.closest('.input-wrapper').classList.remove('error');
     nameErrorMsg.classList.remove('show');
-    emailRef.classList.remove('error');
+    emailRef.closest('.input-wrapper').classList.remove('error');
     emailErrorMsg.classList.remove('show');
-    phoneRef.classList.remove('error');
+    phoneRef.closest('.input-wrapper').classList.remove('error');
     phoneErrorMsg.classList.remove('show');
 }
