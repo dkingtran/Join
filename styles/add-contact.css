@@ -1,4 +1,3 @@
-
 .contact-sidebar {
 	position: fixed;
 	top: 96px;
@@ -53,8 +52,20 @@
 	box-sizing: border-box;
 }
 
+.contact-name {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .contact-email {
 	color: #007cee;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .contact-item:hover {

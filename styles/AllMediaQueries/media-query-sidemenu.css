@@ -88,7 +88,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -112,7 +112,7 @@
         padding: 0 16px;
         height: 76px;
         align-items: center;
-        font-size: 14px;
+        font-size: 16px;
         margin-top: 0;
     }
 
@@ -133,7 +133,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -170,7 +170,7 @@
         width: 40px;
         height: 40px;
         box-shadow: 0 0 0 2px #2A3647;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .profile-btn.single-initial {
@@ -208,7 +208,7 @@
         flex: 1;
         max-width: 80px;
         height: 100%;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -254,7 +254,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.2;
         white-space: nowrap;
         overflow: hidden;
@@ -289,7 +289,7 @@
         padding: 16px 4px;
         min-width: 40px;
         max-width: 70px;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.1;
     }
 }

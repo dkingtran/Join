@@ -21,6 +21,7 @@
     transform: translate(-50%, -50%);
     width: 80vw;
     height: 50vh;
+    max-height: 632px;
     max-width: 1300px;
     background: white;
     border-radius: 35px;
@@ -49,6 +50,7 @@
     background-color: #2a3647;
     color: white;
     height: 50vh;
+    max-height: 632px;
     width: 467px;
     padding: 66px 46px;
     border-top-left-radius: 30px;

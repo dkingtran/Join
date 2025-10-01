@@ -1,7 +1,3 @@
-// =====================
-// Task Data & Validation
-// =====================
-
 let selectedPriority = "";
 let subtasksById = {};
 let subtask = [];
@@ -180,15 +176,44 @@ function processCheckedContact(checkbox, selected, selectedContainer) {
 function updateAssignedList() {
     const checkboxes = document.querySelectorAll(".contact-checkbox");
     const selectedContainer = document.getElementById("selectedContacts");
+    const selected = getSelectedContacts(checkboxes);
+    assignedTo = selected.map(item => item.name);
+    renderSelectedAvatars(selected, selectedContainer);
+}
+
+/** Returns an array of selected contacts with name, initials, and color. */
+function getSelectedContacts(checkboxes) {
     const selected = [];
-    selectedContainer.innerHTML = "";
     for (let j = 0; j < checkboxes.length; j++) {
         const checkbox = checkboxes[j];
         if (checkbox.checked) {
-            processCheckedContact(checkbox, selected, selectedContainer);
+            const name = checkbox.dataset.name;
+            const initials = checkbox.dataset.initials;
+            const color = checkbox.closest(".contact-item")
+                .querySelector(".avatar").style.backgroundColor;
+            selected.push({ name, initials, color });
         }
     }
-    assignedTo = selected;
+    return selected;
+}
+
+/** Renders up to 5 avatars and a "+N" overflow avatar if needed. */
+function renderSelectedAvatars(selected, container) {
+    container.innerHTML = "";
+    const maxAvatars = 5;
+    for (let i = 0; i < Math.min(selected.length, maxAvatars); i++) {
+        const { initials, color } = selected[i];
+        const avatar = createAvatar(initials, color);
+        container.appendChild(avatar);
+    }
+    if (selected.length > maxAvatars) {
+        const overflowCount = selected.length - maxAvatars;
+        const overflowAvatar = document.createElement("span");
+        overflowAvatar.classList.add("avatar", "display-standard");
+        overflowAvatar.style.backgroundColor = "#2A3647";
+        overflowAvatar.textContent = `+${overflowCount}`;
+        container.appendChild(overflowAvatar);
+    }
 }
 
 /** Loads all contacts from Firebase and displays them in the dropdown menu. */
@@ -240,7 +265,16 @@ document.addEventListener("click", function (event) {
     }
 });
 
+/** Sets the default priority to "medium" and updates the UI accordingly. */
+function setDefaultPriority() {
+    selectedPriority = "medium";
+    document.querySelectorAll(".priority-btn").forEach(btn => btn.classList.remove("active-yellow"));
+    const mediumBtn = document.getElementById("medium");
+    if (mediumBtn) mediumBtn.classList.add("active-yellow");
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+    setDefaultPriority();
     setupCheckboxListener();
     loadContactsIntoDropdown();
     setupCategoryDropdown();
@@ -273,13 +307,9 @@ function showSuccessMessage() {
     }, 3000);
     setTimeout(() => {
         messageBox.classList.add('d-none');
-        window.location.href = "board.html"; // 🔁 Zielseite hier eintragen
+        window.location.href = "board.html";
     }, 1500);
 }
-
-// =====================
-// Utility
-// =====================
 
 function rotateCategoryArrow(rotate) {
     const arrow = document.getElementById("category-arrow");
@@ -288,9 +318,6 @@ function rotateCategoryArrow(rotate) {
     }
 }
 
-// =====================
-// Category Dropdown (Select)
-// =====================
 
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');

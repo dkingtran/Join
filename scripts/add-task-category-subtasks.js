@@ -1,7 +1,3 @@
-// =====================
-// Category Dropdown (Select)
-// =====================
-
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -93,24 +89,22 @@ function confirmSubtaskInput() {
 /**
  * Collects all current subtasks from the DOM.
  */
-
-/////// zu lang
 function collectSubtasksFromDOM() {
-  const container = document.getElementById('subtask-output');
-  if (!container) return {};
-  const nodes = container.querySelectorAll('.subtask-entry');
-  const collected = {};
-  let seq = 0;
-  const ts = Date.now();
-  for (let i = 0; i < nodes.length; i++) {
-    const el   = nodes[i];
-    const raw  = (el.value !== undefined ? el.value : el.textContent).trim();
-    if (!raw) continue;                         
-    const text = raw.replace(/^•\s*/, '');     
-    const id   = el.dataset.subtaskId || `subtask_${ts}_${seq++}`;
-    collected[id] = { subtask: text, done: false };
-  }
-  return collected;
+    const container = document.getElementById('subtask-output');
+    if (!container) return {};
+    const nodes = container.querySelectorAll('.subtask-entry');
+    const collected = {};
+    let seq = 0;
+    const ts = Date.now();
+    for (let i = 0; i < nodes.length; i++) {
+        const el = nodes[i];
+        const raw = (el.value !== undefined ? el.value : el.textContent).trim();
+        if (!raw) continue;
+        const text = raw.replace(/^•\s*/, '');
+        const id = el.dataset.subtaskId || `subtask_${ts}_${seq++}`;
+        collected[id] = { subtask: text, done: false };
+    }
+    return collected;
 }
 
 
@@ -137,7 +131,7 @@ function startEditSubtask(element) {
     const text = textElement.innerText;
     iconBox.querySelector(".edit-icon").classList.add("d-none");
     iconBox.querySelector(".confirm-icon").classList.remove("d-none");
-    iconBox.classList.add("editing"); 
+    iconBox.classList.add("editing");
     textElement.outerHTML = changeDivtoInputTemplate(text);
 }
 
