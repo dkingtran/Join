@@ -136,8 +136,6 @@ input {
     padding-right: 8px;
 }
 
-
-
 input:focus {
     outline: none;
 }
