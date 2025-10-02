@@ -70,6 +70,11 @@ body.no-scroll {
   border-radius: 10px;
 }
 
+.subtask-text-box{
+  flex-direction: column;
+  gap: 4px;
+}
+
 #edit-task-content .icon-edit-subtask-box {
   display: flex;
   gap: 8px;
@@ -136,11 +141,13 @@ body.no-scroll {
     max-height: calc(86vh - 16px);
     overflow:auto;
 }
+
 .textarea-task
  {
   height: 70px;
     margin: 10px 0 10px 0;
 }
+
 .error-container
  {
     height: 0px;
@@ -154,9 +161,11 @@ body.no-scroll {
 .output-subtask {
     max-height: 88px;
 }
+
 }
 
 @media(max-width:500px){
+
  .output-subtask {
   min-width: 350px;
 }
@@ -165,26 +174,30 @@ body.no-scroll {
   padding: 15px 12px;
   margin: 0 5px;
 }
+
 }
 
 @media(max-width:400px){
+
  .output-subtask {
   min-width: 200px;
 }
+
 }
 
 @media(max-width:368px){
+
   .btn-addtask-create-ok{
     justify-content: center;
   }
-   .textarea-task-edit {
-        height: 60px;
-    }
 
-    .btn-prio
- {
+  .textarea-task-edit {
+    height: 60px;
+  }
+
+    .btn-prio{
     margin: 10px  10px ;
-}
+  }
 }
 
 

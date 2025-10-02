@@ -3,7 +3,6 @@ let subtasksById = {};
 let subtask = [];
 let assignedTo = [];
 let taskToAddStatus = "to-do";
-
 const initialBox = document.getElementById("subtask-initial");
 const activeBox = document.getElementById("subtask-active");
 const inputField = document.getElementById("subtask-input-second");
@@ -86,7 +85,6 @@ function checkTitleDateInput() {
     return titleOk && dateOk && categoryOk;
 }
 
-
 /**
  * Toggles the visibility of the contact dropdown using inline style.
  * @param {Event} event - The click event triggering the dropdown toggle.
@@ -122,7 +120,7 @@ function checkClickOutside(clickedInsideInput, clickedContactItem) {
 function toggleCheckboxContact(containerOrCheckbox) {
     const isCheckbox = containerOrCheckbox.classList.contains("contact-checkbox");
     const container = isCheckbox
-        ? containerOrCheckbox.closest(".contact-item")// Ternary Operator
+        ? containerOrCheckbox.closest(".contact-item")
         : containerOrCheckbox;
     const checkbox = container.querySelector(".contact-checkbox");
     if (!isCheckbox) {
@@ -287,7 +285,6 @@ function resetFormState() {
     document.getElementById("subtask-output").innerHTML = "";
     document.getElementById("selectedContacts").innerHTML = "";
     subtask = [];
-
     document.querySelectorAll(".error-text").forEach(el => el.classList.add("d-none"));
     document.querySelectorAll(".border-red").forEach(el => el.classList.remove("border-red"));
     document.querySelectorAll(".contact-item.active").forEach(el => el.classList.remove("active"));
@@ -318,7 +315,6 @@ function rotateCategoryArrow(rotate) {
     }
 }
 
-
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -341,7 +337,6 @@ function toggleSelectDropdown() {
         openSelectDropdown(select, arrow);
     }
 }
-
 
 function openSelectDropdown(select, arrow) {
     select.focus();
