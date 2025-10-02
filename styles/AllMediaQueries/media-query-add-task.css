@@ -143,6 +143,22 @@
     width: 100%;
     justify-content: space-between;
   }
+
+  .output-subtask {
+    max-width: none;
+    width: 100%;
+    min-width: 260px;
+  }
+
+  .subtask-text-box {
+    max-width: none;
+    min-width: 260px;
+  }
+
+  .subtask-entry {
+    max-width: none;
+    min-width: 360px;
+  }
 }
 
 @media(max-width:510px) {
