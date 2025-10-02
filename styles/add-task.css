@@ -207,7 +207,7 @@ form {
 }
 
 .border-red {
-  border-color: rgb(200, 0, 0);
+  border-color: #E60026;
 }
 
 .subtask-input.border-red {
