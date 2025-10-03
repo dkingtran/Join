@@ -24,6 +24,9 @@ function getSubtaskTemplate(text) {
     </span>
     <img class="icon-task confirm-icon d-none" src="assets/img/icons/add_task/check_noir.svg" alt="Confirm Icon" onclick="finishEditSubtask(this)">
   </div>
+  <div class="subtask-error-msg error-text d-none" style="color: red; font-size: 0.85rem; margin-left: 8px;">
+    Please enter a subtask
+  </div>
 </div>
 `;
 }
@@ -59,7 +62,6 @@ function getReturnToDivTemplate(text) {
     </div>
   `;
 }
-
 
 /**
  * Returns the HTML template for rendering a contact item in the assign dropdown.

@@ -251,6 +251,7 @@
     min-width: 260px;
     max-height: 126px;
     overflow-y: auto;
+    height: 57px;
 }
 
 .subtask-text-box {
@@ -259,11 +260,13 @@
     min-width: 260px;
     padding-left: 20px;
     transition: background-color 0.1s;
-    height: 32px;
     margin-top: 10px;
     display: flex;
     align-items: center;
     position: relative;
+    flex-direction: column;
+    height: 32px;
+    gap: 5px;
 }
 
 .icon-edit-subtask-box {
@@ -271,11 +274,12 @@
     position: absolute;
     right: 8px;
     padding-right: 6px;
-    top: 50%;
+    top: 32%;
     transform: translateY(-50%);
     background: transparent;
     z-index: 2;
     align-items: center;
+    margin-top: 2px;
     gap: 8px;
 }
 
@@ -316,7 +320,7 @@
 .subtask-entry {
     border: none;
     height: 32px;
-    padding-left: 16px;
+    width: 100%;
     max-width: 440px;
     display: flex;
     align-items: center;
@@ -345,7 +349,6 @@ input.subtask-entry::before {
 
 .subtask-entry:hover {
     height: 32px;
-    min-width: 266px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -375,7 +378,7 @@ input.subtask-entry::before {
 }
 
 .input-second {
-    width: 250px;
+    width: 480px;
     border: none;
     outline: none;
     padding-left: 2px;

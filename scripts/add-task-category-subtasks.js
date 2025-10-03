@@ -35,17 +35,32 @@ function closeSelectDropdown(select, arrow) {
  * Displays the active subtask input field by hiding the initial field.
  */
 function showSubtaskInput() {
+    const initialBox = document.getElementById("subtask-initial");
+    const activeBox = document.getElementById("subtask-active");
+
+    if (!initialBox || !activeBox) return console.warn("Subtask boxes not found");
     initialBox.classList.add("d-none");
     activeBox.classList.remove("d-none");
+    const input = document.getElementById("subtask-input-second");
+    if (input) {
+        input.focus();
+    }
 }
 
 /**
  * Resets the subtask input to its initial state.
  */
 function cancelSubtaskInput() {
-    activeBox.classList.add("d-none");
-    initialBox.classList.remove("d-none");
-    inputField.value = "";
+    if (activeBox) activeBox.classList.add("d-none");
+    if (initialBox) initialBox.classList.remove("d-none");
+
+    if (inputField) {
+        inputField.value = "";
+        inputField.classList.remove("border-red");
+    }
+
+    const error = document.getElementById("subtask-error");
+    if (error) error.classList.add("d-none");
 }
 
 /**
@@ -68,9 +83,14 @@ function getTrimmedSubtaskInput() {
     const inputField = document.getElementById("subtask-input-second");
     const inputText = inputField.value.trim();
     if (inputText === "") {
-        alert("Please enter a subtask.");
+        inputField.classList.add("border-red");
+        const error = document.getElementById("subtask-error");
+        if (error) error.classList.remove("d-none");
         return null;
     }
+    inputField.classList.remove("border-red");
+    const error = document.getElementById("subtask-error");
+    if (error) error.classList.add("d-none");
     return inputText;
 }
 
@@ -107,7 +127,6 @@ function collectSubtasksFromDOM() {
     return collected;
 }
 
-
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
  */
@@ -142,6 +161,13 @@ function finishEditSubtask(iconElement) {
     const { box, iconBox } = getSubtaskParts(iconElement);
     const inputElement = box.querySelector("input.subtask-entry");
     const text = inputElement.value.trim();
+    const errorElement = box.querySelector(".subtask-error-msg");
+        if (text === "") {inputElement.classList.add("border-red");
+        if (errorElement) errorElement.classList.remove("d-none");
+        inputElement.focus();
+        return;}
+    inputElement.classList.remove("border-red");
+    if (errorElement) errorElement.classList.add("d-none");
     inputElement.outerHTML = getReturnToDivTemplate(text);
     iconBox.querySelector(".edit-icon")?.classList.remove("d-none");
     iconBox.querySelector(".confirm-icon")?.classList.add("d-none");
