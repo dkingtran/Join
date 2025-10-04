@@ -280,9 +280,9 @@
 }
 
 @media (max-width: 370px) {
-    .menu-section {
-        padding: 0 8px;
-        gap: 8px;
+       .menu-section {
+        padding: 0 4px;
+        gap: 4px;
     }
 
     .menu-item {
