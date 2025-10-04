@@ -138,15 +138,14 @@ function closeBigCardOverlay(e) {
 /**
  * Delete complete Task in Firebase
  */
-async function deleteTaskBigCard(taskId) {
-  if (!confirm("Delete this task?")) return;
+function deleteTaskBigCard(taskId) {
   try {
-    await deleteData(`/tasks/${taskId}`);
+    deleteData(`/tasks/${taskId}`);
     if (Array.isArray(displayedTasks))
       displayedTasks = displayedTasks.filter(t => t?.id !== taskId);
-    else if (displayedTasks && displayedTasks[taskId]) delete displayedTasks[taskId];
+      tasks = tasks.filter(t => t?.id !== taskId);
     closeBigCard();
-    renderAllTasks(); // Mini-Cards sofort neu
+    renderAllTasks();
   } catch (err) {
     console.error("Failed to delete task:", err);
   }
