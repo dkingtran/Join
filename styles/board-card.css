@@ -123,6 +123,7 @@
 .assigned-user {
 	display: flex;
 	margin-left: 0;
+	min-width: 168px;
 }
 
 .avatar {
