@@ -11,9 +11,15 @@ function editTasktemplateBig() {
         <div class="form-scroll">
             <div class="add-task-container edit-add-task-container w-full flex">
                 <div class="section-task-left w-full max-w-50">
-                    <!-- Title -->
                     <div class="title-task">
-                        <p class="title-task font-bundle">Title</p>
+
+                <div class="edit-title-btn">
+	<div class="btn-edit-close-cont">
+		<button class="close-edit-card-btn" onclick=""><img  src="../assets/img/icons/board/close.png" class="x-button-edit"></button>
+	</div>
+	<p class="title-task font-bundle">Title</p>
+
+</div>
                         <label for="title-task" class="sr-only"></label>
                         <input
                             class="input-title-task font-bundle max-w-440 border-radius-10px input-bundle black-color"
@@ -126,7 +132,7 @@ function editTasktemplateBig() {
 
 </div>
    `
-  }
+}
 
 /** Returns one subtask row HTML for the EDIT overlay (uses overlay handlers) */
 function getSubtaskTemplateOverlay(text, id, done) {

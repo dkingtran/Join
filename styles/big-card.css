@@ -77,7 +77,7 @@
 }
 
 .prio-big-card {
-    gap: 43px;
+    gap: 32px;
     height: 32px;
     margin-bottom: 10px;
 }
@@ -183,7 +183,7 @@
 
 @media(max-width:505px) {
     .big-card-content {
-        margin: 0 10px;
+   /*      margin: 10px 10px; */
         padding: 30px 40px;
         max-height: calc(85vh - 16px);
     }
@@ -194,7 +194,11 @@
 }
 
 @media(max-width:400px) {
-    .title-content {
-        font-size: 36px;
-    }
+  .title-content {
+    font-size: 36px;
+}
+
+ .big-card-content{
+    max-width: 309px;
+  }
 }
