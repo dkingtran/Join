@@ -86,6 +86,10 @@
 	.main-content {
 		margin-left: 0;
 	}
+
+	.add-task-modal-inner .wrapper {
+		padding-bottom: 0 !important;
+	}
 }
 
 @media (max-width: 800px) {
@@ -174,5 +178,12 @@
 
 	.search-input-wrapper {
 		min-width: 280px;
+	}
+}
+
+@media (max-height: 1048px) {
+	.btn-clear-task-container {
+		position: sticky !important;
+		top: 0;
 	}
 }
