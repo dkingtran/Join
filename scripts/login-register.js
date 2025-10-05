@@ -3,7 +3,6 @@ const passwordLockIcon = document.getElementById('lock-password');
 const passwordVisibilityOffIcon = document.getElementById('visibility-off-password');
 const passwordVisibilityOnIcon = document.getElementById('visibility-on-password');
 const passwordWrapperRef = document.getElementById('password-wrapper');
-const errorMessageRef = document.getElementById('error-msg');
 
 /**
  * Eventlistener on focus password-input.

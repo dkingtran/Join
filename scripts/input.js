@@ -4,8 +4,8 @@ let passwordRef;
 let passwordConRef;
 let phoneRef;
 
-const firstNameRegex = /^[a-z]+\s/i;
-const lastNameRegex = /\s[a-z]+$/i;
+const firstNameRegex = /^\S+\s/i;
+const lastNameRegex = /\s\S+$/i;
 const lettersRegex = /^[a-z]+$/i;
 const numbersRegex = /^[0-9]+$/i;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@\d]+$/i;
@@ -20,37 +20,42 @@ function removeSpaces(string) {
 }
 
 /**
- * Validates a given name string based on specific regex patterns.
- * Tests if name is empty, has first and last name and has no numbers.
- * @param {string} name - The name to validate.
- * @returns {boolean} Returns true if the name passes all validation checks, otherwise false.
+ * Checks if the given input string is not empty after removing spaces.
+ * @param {string} input - The input string to check.
+ * @returns {boolean} Returns true if the input is not empty after removing spaces, otherwise false.
  */
-function nameCheck(name) {
-    if (removeSpaces(name) == "") return false;
-    else if (!(firstNameRegex.test(name) && lastNameRegex.test(name))) return false;
-    else if (!(lettersRegex.test(removeSpaces(name)))) return false;
+function emptyCheck(input) {
+    if (removeSpaces(input) == "") return false;
     else return true;
 }
 
 /**
- * Checks if the provided email is valid.
- * Tests if email is empty and has a valid email-form.
+ * Checks if the provided name matches both the first name and last name regex patterns.
+ * @param {string} name - The name string to validate.
+ * @returns {boolean} Returns true if the name passes both first and last name regex tests, otherwise false.
+ */
+function firstLastNameCheck(name) {
+    if (!(firstNameRegex.test(name) && lastNameRegex.test(name))) return false;
+    else return true;
+}
+
+/**
+ * Checks if the given string contains only letters after removing spaces.
+ * @param {string} string - The input string to check.
+ * @returns {boolean} Returns true if the string contains only letters, false otherwise.
+ */
+function letterCheck(string) {
+    if (!(lettersRegex.test(removeSpaces(string)))) return false;
+    else return true;
+}
+
+/**
+ * Checks if the provided email is valid according to the emailRegex pattern.
  * @param {string} email - The email address to validate.
  * @returns {boolean} Returns true if the email is valid, otherwise false.
  */
-function emailCheck(email) {
-    if (removeSpaces(email) == "") return false;
-    else if (!(emailRegex.test(email))) return false;
-    else return true;
-}
-
-/**
- * Checks if the provided password is not an empty string after trimming whitespace.
- * @param {string} password - The password string to check.
- * @returns {boolean} Returns false if the trimmed password is an empty string, otherwise returns true.
- */
-function passwordCheck(password) {
-    if (removeSpaces(password) == "") return false;
+function validEmailCheck(email) {
+    if (!(emailRegex.test(email))) return false;
     else return true;
 }
 
@@ -82,13 +87,6 @@ function generateNameObject(name) {
 }
 
 /**
- * Checks if the provided date string is valid and represents a future date.
- *
- * @param {string} date - The date string to check.
- * @returns {boolean} Returns true if the date is not empty and is in the future, otherwise false.
- */
-
-/**
  * Checks if the provided date string represents a valid date that is today or in the future.
  *
  * @param {string} date - The date string to validate.
@@ -99,9 +97,9 @@ function dateCheck(date) {
     let dateInput = new Date(date);
     let dateNow = new Date();
     if (isNaN(dateInput.getTime())) return false;
-    dateInput.setHours(0,0,0,0);
-    dateNow.setHours(0,0,0,0);
-    return dateInput >= dateNow; 
+    dateInput.setHours(0, 0, 0, 0);
+    dateNow.setHours(0, 0, 0, 0);
+    return dateInput >= dateNow;
 }
 
 /**

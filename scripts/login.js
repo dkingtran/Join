@@ -1,7 +1,7 @@
 
-nameRef = document.getElementById('name');
 emailRef = document.getElementById('email');
 passwordRef = document.getElementById('password');
+const errorMessageRef = document.getElementById('error-msg');
 
 /**
  * Handles login submit.
