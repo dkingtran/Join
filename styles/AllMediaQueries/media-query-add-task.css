@@ -141,7 +141,9 @@
 
   .btn-prio {
     width: 100%;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-start;
+ 
   }
 
   .output-subtask {
