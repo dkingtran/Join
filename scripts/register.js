@@ -310,7 +310,7 @@ function showPasswordError(errorType = "") {
 /**
  * adds eventlistener to the password input to check it on blur
  */
-passwordRef.addEventListener("blur", passwordCheck());
+passwordRef.addEventListener("blur", passwordCheck);
 
 /**
  * Checks the validity of the confirm password input by performing the following checks:
@@ -348,4 +348,4 @@ function showConfirmPasswordError(errorType = "") {
 /**
  * adds eventlistener to the password confirmation input to check it on blur
  */
-passwordConRef.addEventListener("blur", confirmPasswordCheck());
+passwordConRef.addEventListener("blur", confirmPasswordCheck);
