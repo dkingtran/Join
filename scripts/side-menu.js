@@ -1,8 +1,15 @@
+/**
+ * Toggles the visibility of the profile dropdown menu.
+ */
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('dropdown-profile');
     dropdown.classList.toggle('show');
 }
 
+/**
+ * Updates the profile button with the user's initials.
+ * @param {string} userName - The full name of the user.
+ */
 function updateProfileInitials(userName) {
     const profileBtns = document.querySelectorAll('.profile-btn');
     const initials = getInitials(userName);
@@ -24,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('logout-btn').addEventListener('click', logout);
 });
 
+/**
+ * Handles document clicks to close the profile dropdown if clicked outside.
+ * @param {Event} event - The click event.
+ */
 function handleDocumentClick(event) {
     const profileContainer = document.getElementById('container-profile');
     const profileDropdown = document.getElementById('dropdown-profile');
@@ -34,6 +45,9 @@ function handleDocumentClick(event) {
 }
 document.onclick = handleDocumentClick;
 
+/**
+ * Initializes desktop hover effects for the side menu (currently empty).
+ */
 function initDesktopHover() {
     if (window.innerWidth >= 1000) {
     }
@@ -42,7 +56,7 @@ function initDesktopHover() {
 window.addEventListener('resize', initDesktopHover);
 
 /**
- * logs out user and redirects to login.
+ * Logs out the user and redirects to the login page.
  */
 function logout() {
     localStorage.setItem("loggedIn", false);

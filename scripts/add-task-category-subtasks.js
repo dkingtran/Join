@@ -1,3 +1,6 @@
+/**
+ * Sets up event listeners for the category dropdown.
+ */
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -11,6 +14,9 @@ function setupCategoryDropdown() {
     select.addEventListener('blur', () => arrow.classList.remove('rotate'));
 }
 
+/**
+ * Toggles the visibility of the category dropdown.
+ */
 function toggleSelectDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -21,11 +27,21 @@ function toggleSelectDropdown() {
     }
 }
 
+/**
+ * Opens the category dropdown by focusing the select element.
+ * @param {HTMLElement} select - The select element.
+ * @param {HTMLElement} arrow - The arrow element.
+ */
 function openSelectDropdown(select, arrow) {
     select.focus();
     select.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
 }
 
+/**
+ * Closes the category dropdown by blurring the select element.
+ * @param {HTMLElement} select - The select element.
+ * @param {HTMLElement} arrow - The arrow element.
+ */
 function closeSelectDropdown(select, arrow) {
     select.blur();
     arrow.classList.remove('rotate');
@@ -64,8 +80,8 @@ function cancelSubtaskInput() {
 }
 
 /**
- * Generates subtask HTML, displays it in the output box,
- * @param {string} text - The subtask text to add
+ * Generates subtask HTML, displays it in the output box, and stores the subtask.
+ * @param {string} text - The subtask text to add.
  */
 function renderAndStoreSubtask(text) {
     const outputBox = document.getElementById("subtask-output");
@@ -76,8 +92,8 @@ function renderAndStoreSubtask(text) {
 
 /**
  * Reads the current input value, trims whitespace, and returns it.
- * If the field is empty, shows an alert and returns null.
- * @returns {string|null}
+ * If the field is empty, shows an error and returns null.
+ * @returns {string|null} The trimmed input text or null if invalid.
  */
 function getTrimmedSubtaskInput() {
     const inputField = document.getElementById("subtask-input-second");
@@ -129,6 +145,7 @@ function collectSubtasksFromDOM() {
 
 /**
  * Deletes a specific subtask from the DOM and removes it from the subtask array.
+ * @param {HTMLElement} element - The element triggering the delete action.
  */
 function deleteSubtask(element) {
     const subtaskBox = element.closest(".subtask-text-box");
@@ -144,6 +161,7 @@ function deleteSubtask(element) {
 
 /**
  * Activates edit mode for the clicked subtask.
+ * @param {HTMLElement} element - The element triggering the edit action.
  */
 function startEditSubtask(element) {
     const { box, textElement, iconBox } = getSubtaskParts(element);
@@ -156,16 +174,19 @@ function startEditSubtask(element) {
 
 /**
  * Finishes the subtask editing.
+ * @param {HTMLElement} iconElement - The icon element triggering the finish action.
  */
 function finishEditSubtask(iconElement) {
     const { box, iconBox } = getSubtaskParts(iconElement);
     const inputElement = box.querySelector("input.subtask-entry");
     const text = inputElement.value.trim();
     const errorElement = box.querySelector(".subtask-error-msg");
-        if (text === "") {inputElement.classList.add("border-red");
+    if (text === "") {
+        inputElement.classList.add("border-red");
         if (errorElement) errorElement.classList.remove("d-none");
         inputElement.focus();
-        return;}
+        return;
+    }
     inputElement.classList.remove("border-red");
     if (errorElement) errorElement.classList.add("d-none");
     inputElement.outerHTML = getReturnToDivTemplate(text);
@@ -177,6 +198,8 @@ function finishEditSubtask(iconElement) {
 
 /**
  * Utility: Finds and returns relevant parts of a subtask block.
+ * @param {HTMLElement} element - The element within the subtask block.
+ * @returns {Object} An object containing box, iconBox, and textElement.
  */
 function getSubtaskParts(element) {
     const box = element.closest(".subtask-text-box");
