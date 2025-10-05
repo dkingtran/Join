@@ -4,11 +4,6 @@ const passwordConVisibilityOffIcon = document.getElementById('visibility-off-con
 const passwordConVisibilityOnIcon = document.getElementById('visibility-on-confirm-password');
 const passwordConWrapperRef = document.getElementById('password-confirmation-wrapper');
 
-let nameIsValid = false;
-let emailIsValid = false;
-let passwordIsValid = false;
-let passwordConIsValid = false;
-
 nameRef = document.getElementById('name');
 emailRef = document.getElementById('email');
 passwordRef = document.getElementById('password');
@@ -24,9 +19,7 @@ passwordConRef = document.getElementById('password-confirmation');
  */
 async function addUser() {
   if (!checkRegisterForm()) {
-    showErrorMessage();
-  } else if (await checkForUserDuplicate(emailRef.value)) {
-    showErrorMessage();
+    return;
   } else {
     let contactId = await postData("/contacts/", generateContact());
     await addIdToObject(contactId, "/contacts/");
@@ -83,98 +76,9 @@ async function checkForUserDuplicate(email) {
  *
  * @returns {boolean} Returns true if all form fields are valid, otherwise false.
  */
-function checkRegisterForm() {
-  nameIsValid = nameCheck(nameRef.value);
-  emailIsValid = emailCheck(emailRef.value);
-  passwordIsValid = passwordCheck(passwordRef.value);
-  passwordConIsValid = passwordConCheck(passwordRef.value, passwordConRef.value);
-  return emailIsValid && nameIsValid && passwordIsValid && passwordConIsValid;
+async function checkRegisterForm() {
+  return nameCheck() && await emailCheck() && passwordCheck() && confirmPasswordCheck();
 }
-
-/**
- * Adds an 'error' class to the parent element of the specified input reference if the input is invalid.
- *
- * @param {string} inputRef - The reference name of the input field ('name', 'email', 'password', or 'passwordCon').
- * @param {boolean} isValid - Indicates whether the input is valid.
- */
-function showInputError(inputRef, isValid) {
-  if (!isValid) {
-    switch (inputRef) {
-      case "name":
-        nameRef.parentElement.classList.add('error');
-        break;
-      case "email":
-        emailRef.parentElement.classList.add('error');
-        break;
-      case "password":
-        passwordRef.parentElement.classList.add('error');
-        break;
-      case "passwordCon":
-        passwordConRef.parentElement.classList.add('error');
-        break;
-    }
-  }
-}
-
-/**
- * Displays error messages for the registration form fields by validating each input
- * (name, email, password, and password confirmation) and showing corresponding error styles.
- * Also makes the general error message visible.
- * Assumes the existence of validation flags (nameIsValid, emailIsValid, passwordIsValid, passwordConIsValid)
- * and a reference to the error message element (errorMessageRef).
- */
-function showErrorMessage() {
-  showInputError("name", nameIsValid);
-  showInputError("email", emailIsValid);
-  showInputError("password", passwordIsValid);
-  showInputError("passwordCon", passwordConIsValid);
-  errorMessageRef.classList.add('show');
-}
-
-/**
- * lets error message disappear when all input fields have been corrected
- */
-document.getElementById('login-form').addEventListener("input", () => {
-  if (emailIsValid && nameIsValid && passwordIsValid && passwordConIsValid) {
-    errorMessageRef.classList.remove('show');
-  }
-});
-
-/**
- * eventlistener removes error class if name has been edited
- * nameIsVaild = true
- */
-nameRef.addEventListener("input", () => {
-  nameRef.parentElement.classList.remove('error');
-  nameIsValid = true;
-});
-
-/**
- * eventlistener removes error class if email has been edited
- * emailIsValid = true
- */
-emailRef.addEventListener("input", () => {
-  emailRef.parentElement.classList.remove('error');
-  emailIsValid = true;
-});
-
-/**
- * eventlistener removes error class if password has been edited
- * passwordIsValid = true
- */
-passwordRef.addEventListener("input", () => {
-  passwordRef.parentElement.classList.remove('error');
-  passwordIsValid = true;
-});
-
-/**
- * eventlistener removes error class if password confirmation has been edited
- * passwordConIsValid = true
- */
-passwordConRef.addEventListener("input", () => {
-  passwordConRef.parentElement.classList.remove('error');
-  passwordConIsValid = true;
-});
 
 /**
  * checks if privacy policy has been accepted
@@ -268,3 +172,180 @@ passwordConVisibilityOnIcon.addEventListener("click", () => {
   passwordConVisibilityOnIcon.classList.add('d-none');
   passwordConVisibilityOffIcon.classList.remove('d-none');
 });
+
+/**
+ * Validates the value of the name input field using multiple checks:
+ * - Checks if the name is not empty.
+ * - Checks if the name contains both a first and last name.
+ * - Checks if the name contains only valid letters.
+ * Displays appropriate error messages for each validation failure.
+ * @returns {boolean} Returns true if all checks pass, otherwise false.
+ */
+function nameCheck() {
+  if (!emptyCheck(nameRef.value)) {
+    showNameError("empty");
+    return false;
+  } else if (!firstLastNameCheck(nameRef.value)) {
+    showNameError("first-last");
+    return false;
+  } else if (!letterCheck(nameRef.value)) {
+    showNameError("letter");
+    return false;
+  } else {
+    showNameError();
+    return true;
+  }
+}
+
+/**
+ * Displays or hides the name error message based on the provided error type.
+ * @param {string} [errorType=""] - The type of error to display. Possible values:
+ *   - "empty": Name field is empty.
+ *   - "first-last": First and last name are required.
+ *   - "letter": Name can only contain letters.
+ *   - Any other value will hide the error message.
+ */
+function showNameError(errorType = "") {
+  let errorMsgRef = document.getElementById('name-error-msg');
+  errorMsgRef.classList.add('show');
+  nameRef.parentElement.classList.add('error');
+  if (errorType == "empty") errorMsgRef.innerText = "Name can't be empty!";
+  else if (errorType == "first-last") errorMsgRef.innerText = "First and last name required!";
+  else if (errorType == "letter") errorMsgRef.innerText = "name can only have letters!";
+  else {
+    errorMsgRef.classList.remove('show');
+    nameRef.parentElement.classList.remove('error');
+  }
+}
+
+/**
+ * adds eventlistener to the name input to check it on blur
+ */
+nameRef.addEventListener("blur", nameCheck);
+
+/**
+ * Checks the validity of the email input by performing the following checks:
+ * 1. Ensures the email field is not empty.
+ * 2. Validates the email format.
+ * 3. Checks for duplicate email addresses in the user database.
+ * Displays appropriate error messages for each failed check.
+ * @async
+ * @returns {Promise<boolean>} Returns true if the email passes all checks, otherwise false.
+ */
+async function emailCheck() {
+  if (!emptyCheck(emailRef.value)) {
+    showEmailError("empty");
+    return false;
+  } else if (!validEmailCheck(emailRef.value)) {
+    showEmailError("validity");
+    return false;
+  } else if (await checkForUserDuplicate(emailRef.value)) {
+    showEmailError("duplicate");
+    return false;
+  } else {
+    showEmailError();
+    return true;
+  }
+}
+
+/**
+ * Displays an email error message based on the specified error type.
+ * @param {string} [errorType=""] - The type of email error. Possible values:
+ *   - "empty": Email field is empty.
+ *   - "validity": Email format is invalid.
+ *   - "duplicate": Email is already in use.
+ *   - Any other value will hide the error message.
+ */
+function showEmailError(errorType = "") {
+  let errorMsgRef = document.getElementById('email-error-msg');
+  errorMsgRef.classList.add('show');
+  emailRef.parentElement.classList.add('error');
+  if (errorType == "empty") errorMsgRef.innerText = "E-mail can't be empty!";
+  else if (errorType == "validity") errorMsgRef.innerText = "Not a valid e-mail!";
+  else if (errorType == "duplicate") errorMsgRef.innerText = "E-mail already in use!";
+  else {
+    errorMsgRef.classList.remove('show');
+    emailRef.parentElement.classList.remove('error');
+  }
+}
+
+/**
+ * adds eventlistener to the e-mail input to check it on blur
+ */
+emailRef.addEventListener("blur", emailCheck);
+
+/**
+ * Validates the password input field.
+ * Checks if the password is not empty.
+ * Displays an error message if the password is empty.
+ * @returns {boolean} Returns `true` if the password is not empty, otherwise `false`.
+ */
+function passwordCheck() {
+  if (!emptyCheck(passwordRef.value)) {
+    showPasswordError("empty");
+    return false;
+  } else {
+    showPasswordError();
+    return true;
+  }
+}
+
+/**
+ * Displays an password error message based on the specified error type.
+ * @param {string} [errorType=""] - The type of password error. Possible values:
+ *   - "empty": Password field is empty.
+ *   - Any other value will hide the error message.
+ */
+function showPasswordError(errorType = "") {
+  let errorMsgRef = document.getElementById('password-error-msg');
+  errorMsgRef.classList.add('show');
+  passwordRef.parentElement.classList.add('error');
+  if (errorType == "empty") errorMsgRef.innerText = "Password can't be empty!";
+  else {
+    errorMsgRef.classList.remove('show');
+    passwordRef.parentElement.classList.remove('error');
+  }
+}
+
+/**
+ * adds eventlistener to the password input to check it on blur
+ */
+passwordRef.addEventListener("blur", passwordCheck);
+
+/**
+ * Checks the validity of the confirm password input by performing the following checks:
+ * 1. Ensures the password and confirm password are the same.
+ * Displays appropriate error messages for each failed check.
+ * @returns {Promise<boolean>} Returns true if the password confirmation passes all checks, otherwise false.
+ */
+function confirmPasswordCheck() {
+  if (!passwordConCheck(passwordRef.value, passwordConRef.value)) {
+    showConfirmPasswordError("not-conform");
+    return false;
+  } else {
+    showConfirmPasswordError();
+    return true;
+  }
+}
+
+/**
+ * Displays an password confirmation error message based on the specified error type.
+ * @param {string} [errorType=""] - The type of password error. Possible values:
+ *   - "not-conform": Password and password conformation arre not the same.
+ *   - Any other value will hide the error message.
+ */
+function showConfirmPasswordError(errorType = "") {
+  let errorMsgRef = document.getElementById('confirm-password-error-msg');
+  errorMsgRef.classList.add('show');
+  passwordConRef.parentElement.classList.add('error');
+  if (errorType == "not-conform") errorMsgRef.innerText = "Passwords don't match!";
+  else {
+    errorMsgRef.classList.remove('show');
+    passwordConRef.parentElement.classList.remove('error');
+  }
+}
+
+/**
+ * adds eventlistener to the password confirmation input to check it on blur
+ */
+passwordConRef.addEventListener("blur", confirmPasswordCheck);
