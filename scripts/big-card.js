@@ -87,7 +87,6 @@ async function toggleSubtaskDone(checkbox) {
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
     if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; 
     renderAllTasks();                
-    if (t) renderBigCard(taskId, t);  
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }
