@@ -81,7 +81,7 @@ function editTasktemplateBig() {
                                 <span class="arrow">&#9662;</span>
                             </div>
 
-                            <div class="dropdown-list w-full bg-white" id="contactList">
+                            <div class="dropdown-list  w-full  bg-white" id="contactList">
                                 <div class="contact-item flex align-center justify-between border-radius-10px"></div>
                             </div>
                         </div>
