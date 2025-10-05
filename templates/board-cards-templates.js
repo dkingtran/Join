@@ -10,47 +10,42 @@
  * @param {string} progressColor - CSS color for progress bar.
  * @returns {string} Card HTML.
  */
-function cardRender(
-	tasksId,
-	displayedTasksId,
-	task,
-	assignedAvatarsHTML,
-	progress
-) {
-	return /* HTML */ `
-		<div
-			class="board-card"
-			data-displayed-tasks-id="${displayedTasksId}"
-			data-tasks-id="${tasksId}">
-			<div onclick="openBigCard('${displayedTasksId}')">
-				<h3 class="task-category ${getCategoryClass(task.category)}">
-					${task.category ? task.category : "No category"}
-				</h3>
-				<h4 class="task-title">${task.title || "No titel"}</h4>
-				<p class="task-description">${task.description || ""}</p>
 
-				<div class="subtask-counter">
-					<div class="subtask-progress">
-						<div
-							class="progress-bar"
-							style="width:${progress.progressPercent}%"></div>
-					</div>
-					<span class="counter"
-						>${progress.total}/${progress.maxSubtasks} Subtasks</span
-					>
-				</div>
+function cardRender(tasksId, displayedTasksId, task, assignedAvatarsHTML, progress) {
+  return `
+    <div
+      class="board-card"
+      data-displayed-tasks-id="${displayedTasksId}"
+      data-tasks-id="${tasksId}">
+      <div onclick="openBigCard('${displayedTasksId}')">
+        <h3 class="task-category ${getCategoryClass(task.category)}">
+          ${task.category ? task.category : "No category"}
+        </h3>
+        <h4 class="task-title">${task.title || "No titel"}</h4>
+        <p class="task-description">${task.description || ""}</p>
 
-				<div class="board-card-footer">
-					<div class="assigned-user">${assignedAvatarsHTML}</div>
-					<div class="priority">${getPriorityIcon(task.priority)}</div>
-				</div>
-			</div>
-			<img
-				class="swap-icon"
-				src="./assets/img/icons/board/swap-status.svg"
-				alt="swap task icon" />
-		</div>
-	`;
+        <div class="subtask-counter">
+          ${
+            progress.maxSubtasks === 0
+              ? `<span class="no-subtask">No subtask</span>`
+              : `<div class="subtask-progress">
+                  <div class="progress-bar" style="width:${progress.progressPercent}%"></div>
+                </div>
+                <span class="counter">${progress.total}/${progress.maxSubtasks} Subtasks</span>`
+          }
+        </div>
+
+        <div class="board-card-footer">
+          <div class="assigned-user">${assignedAvatarsHTML}</div>
+          <div class="priority">${getPriorityIcon(task.priority)}</div>
+        </div>
+      </div>
+      <img
+        class="swap-icon"
+        src="./assets/img/icons/board/swap-status.svg"
+        alt="swap task icon" />
+    </div>
+  `;
 }
 
 /**
