@@ -38,6 +38,9 @@ body {
   gap: 35px;
   margin: 30px 20px 0 0;
 }
+.logo-animated.initial-hidden {
+  opacity: 0;
+}
 
 .logo-animated {
   position: absolute;
@@ -260,3 +263,4 @@ input:focus {
   font-weight: 600;
   transform: scale(1.03);
 }
+

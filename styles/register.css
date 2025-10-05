@@ -117,7 +117,7 @@
     color: white;
     font-size: 20px;
     position: fixed;
-    bottom: -100px; 
+    bottom: -100px;
     opacity: 1;
     transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
     z-index: 1001;
@@ -157,3 +157,9 @@
     pointer-events: none;
 }
 
+.logo-animated-register {
+    position: relative;
+    top: 45px;
+    right: 825px;
+    width: 100px;
+}

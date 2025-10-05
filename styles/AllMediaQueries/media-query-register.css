@@ -1,4 +1,43 @@
 /* Media Query */
+
+@media(max-width: 1800px) {
+   .logo-animated-register {
+    position: relative;
+    top: 45px;
+    right: 633px;
+    width: 100px;
+}
+}
+
+@media(max-width: 1350px) {
+   .logo-animated-register {
+    position: relative;
+    top: 45px;
+    right: 403px;
+    width: 100px;
+}
+}
+
+@media(max-width: 950px) {
+   .logo-animated-register {
+    position: relative;
+    top: 45px;
+    right: 203px;
+    width: 100px;
+}
+}
+
+@media(max-width: 530px) {
+   .logo-animated-register {
+    position: relative;
+    top: 20px;
+    right: 94px;
+    width: 46px;
+}
+}
+
+
+
 @media(max-width: 650px) {
     .login-box-register {
         max-width: 411px;

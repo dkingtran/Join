@@ -50,19 +50,14 @@ passwordVisibilityOnIcon.addEventListener("click", () => {
   passwordVisibilityOnIcon.classList.add('d-none');
   passwordVisibilityOffIcon.classList.remove('d-none');
 });
-
 /**
- * Handles smooth intro animation on page load:
- * - Shrinks the logo into the top corner
- * - Fades out the white overlay simultaneously
- * - Gradually reveals the main content
- * - Removes the intro element after the transition
+ * Plays the intro animation with logo shrink and overlay fade
+ * @param {HTMLElement} logo - The logo image element
+ * @param {HTMLElement} overlay - The white overlay element
+ * @param {HTMLElement} mainContent - The main content wrapper element
+ * @param {HTMLElement} intro - The intro container element
  */
-window.addEventListener('load', () => {
-  const logo = document.getElementById('logo');
-  const overlay = document.getElementById('whiteOverlay');
-  const mainContent = document.getElementById('mainContent');
-  const intro = document.getElementById('intro');
+function playIntroAnimation(logo, overlay, mainContent, intro) {
   mainContent.classList.remove('hidden');
   requestAnimationFrame(() => {
     logo.classList.add('shrink');
@@ -72,4 +67,28 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     intro.remove();
   }, 1600);
+}
+
+/**
+ * Shows content without animation (for pages without intro)
+ * @param {HTMLElement} mainContent - The main content wrapper element
+ */
+function showContentDirectly(mainContent) {
+  if (mainContent) {
+    mainContent.classList.remove('hidden');
+    mainContent.style.opacity = '1';
+  }
+}
+
+window.addEventListener('load', () => {
+  const logo = document.getElementById('logo');
+  const overlay = document.getElementById('whiteOverlay');
+  const mainContent = document.getElementById('mainContent');
+  const intro = document.getElementById('intro');
+  
+  if (intro && overlay) {
+    playIntroAnimation(logo, overlay, mainContent, intro);
+  } else {
+    showContentDirectly(mainContent);
+  }
 });
