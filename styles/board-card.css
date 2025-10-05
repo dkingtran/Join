@@ -169,3 +169,9 @@
 .overflow-avatar:hover .custom-tooltip {
 	display: block;
 }
+
+.no-subtask {
+	margin-bottom: 10px;
+	width: 100%;
+	font-size: 16px;
+}
