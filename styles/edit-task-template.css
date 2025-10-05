@@ -145,7 +145,7 @@ body.no-scroll {
 
 .output-subtask {
   margin-top: 10px;
-  min-width: 420px;
+  min-width: 440px;
   max-height: 125px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -161,6 +161,13 @@ body.no-scroll {
   align-items: center;
 }
 
+.custom-dropdown .dropdown-list {
+  min-width: 440px;
+}
+
+
+
+
 @media(max-width:1001px) {
   .edit-task-content-style {
     padding: 15px 8px;
@@ -168,6 +175,11 @@ body.no-scroll {
     max-height: calc(86vh - 16px);
     overflow: auto;
   }
+    .custom-dropdown .dropdown-list {
+    min-width: 230px;
+    width: 100%;
+  }
+
 
   .textarea-task {
     height: 70px;
