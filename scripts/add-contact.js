@@ -284,6 +284,43 @@ function checkContactForm() {
 }
 
 /**
+ * Validates the value of the name input field using multiple checks:
+ * - Checks if the name is not empty.
+ * - Checks if the name contains both a first and last name.
+ * - Checks if the name contains only valid letters.
+ * Displays appropriate error messages for each validation failure.
+ * @returns {boolean} Returns true if all checks pass, otherwise false.
+ */
+function nameCheck() {
+    if (!emptyCheck(nameRef.value)) {
+        return false;
+    } else if (!firstLastNameCheck(nameRef.value)) {
+        return false;
+    } else if (!letterCheck(nameRef.value)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * Checks the validity of the email input by performing the following checks:
+ * 1. Ensures the email field is not empty.
+ * 2. Validates the email format.
+ * Displays appropriate error messages for each failed check.
+ * @returns {Promise<boolean>} Returns true if the email passes all checks, otherwise false.
+ */
+function emailCheck() {
+    if (!emptyCheck(emailRef.value)) {
+        return false;
+    } else if (!validEmailCheck(emailRef.value)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
  * @function
  * Checks if a contact with the specified email already exists in the users data.
  * @param {string} email - The email address to check for duplication.
