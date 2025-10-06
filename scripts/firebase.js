@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://join-ad605-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-b7416-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * @function 
