@@ -14,12 +14,12 @@ function editTasktemplateBig() {
                     <div class="title-task">
 
                 <div class="edit-title-btn">
-	<div class="btn-edit-close-cont">
-		<button class="close-edit-card-btn" onclick=""><img  src="../assets/img/icons/board/close.png" class="x-button-edit"></button>
-	</div>
-	<p class="title-task font-bundle">Title</p>
+	                <div class="btn-edit-close-cont">
+		                  <button class="close-edit-card-btn" onclick=""><img  src="../assets/img/icons/board/close.png" class="x-button-edit"></button>
+                      	</div>
+	                         <p class="title-task font-bundle">Title</p>
 
-</div>
+                            </div>
                         <label for="title-task" class="sr-only"></label>
                         <input
                             class="input-title-task font-bundle max-w-440 border-radius-10px input-bundle black-color"
