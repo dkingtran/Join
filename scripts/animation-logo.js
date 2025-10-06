@@ -74,7 +74,6 @@ function skipAnimation() {
  */
 function handleFirstVisit() {
   const { logo, overlay, mainContent, intro } = getElements();
-  
   if (intro && overlay) {
     playAnimation(logo, overlay, mainContent);
     cleanupAnimation(intro, logo);
@@ -83,7 +82,6 @@ function handleFirstVisit() {
     sessionStorage.setItem('animationPlayed', 'true');
   }
 }
-
 if (!sessionStorage.getItem('animationPlayed')) {
   window.addEventListener('load', handleFirstVisit);
 } else {

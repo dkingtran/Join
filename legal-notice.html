@@ -1,214 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join - Legal Notice</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="../assets/img/logo/logo-dark.png"
-    />
-    <link rel="stylesheet" href="./styles/ln-pp.css" />
-    <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-ln-pp.css" />
-    <link rel="stylesheet" href="./styles/media.css" />
-    <link rel="stylesheet" href="./styles/standard.css" />
-    <script src="./scripts/login-status.js"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/side-menu.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="header-content">
-        <div class="header-inner">
-          <div class="logo-mobile d_none">
-            <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join - Legal Notice</title>
+  <link rel="icon" type="image/x-icon" href="../assets/img/logo/logo-dark.png" />
+  <link rel="stylesheet" href="./styles/ln-pp.css" />
+  <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-ln-pp.css" />
+  <link rel="stylesheet" href="./styles/media.css" />
+  <link rel="stylesheet" href="./styles/standard.css" />
+  <script src="./scripts/login-status.js"></script>
+  <script src="./script.js"></script>
+  <script src="./scripts/side-menu.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <div class="header-inner">
+        <div class="logo-mobile d_none">
+          <img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+        </div>
+        <h1 class="header-title">Kanban Project Management Tool</h1>
+        <div class="header-right">
+          <div class="help-container" id="container-help">
+            <a href="./help.html" class="help-icon">
+              <img src="./assets/img/icons/header-side-menu/help.png" alt="Help Icon" />
+            </a>
           </div>
-          <h1 class="header-title">Kanban Project Management Tool</h1>
-          <div class="header-right">
-            <div class="help-container" id="container-help">
-              <a href="./help.html" class="help-icon">
-                <img
-                  src="./assets/img/icons/header-side-menu/help.png"
-                  alt="Help Icon"
-                />
-              </a>
-            </div>
-            <div class="profile-container" id="container-profile">
-              <button
-                class="profile-btn"
-                onclick="toggleProfileDropdown()"
-                aria-label="Profile menu"
-              ></button>
-              <div id="dropdown-profile" class="profile-dropdown">
-                <a href="./help.html" class="dropdown-item mobile-only d_none"
-                  >Help</a
-                >
-                <a href="./legal-notice.html" class="dropdown-item"
-                  >Legal Notice</a
-                >
-                <a href="./privacy-policy.html" class="dropdown-item"
-                  >Privacy Policy</a
-                >
-                <a id="logout-btn" class="dropdown-item">Log out</a>
-              </div>
+          <div class="profile-container" id="container-profile">
+            <button class="profile-btn" onclick="toggleProfileDropdown()" aria-label="Profile menu"></button>
+            <div id="dropdown-profile" class="profile-dropdown">
+              <a href="./help.html" class="dropdown-item mobile-only d_none">Help</a>
+              <a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
+              <a href="./privacy-policy.html" class="dropdown-item">Privacy Policy</a>
+              <a id="logout-btn" class="dropdown-item">Log out</a>
             </div>
           </div>
         </div>
       </div>
-    </header>
-    <aside class="side-menu background-side-menu">
-      <div class="logo-section">
-        <img
-          src="../assets/img/logo/logo-light.png"
-          alt="Logo"
-          class="logo-side-menu-img"
-        />
-      </div>
+    </div>
+  </header>
+  <aside class="side-menu background-side-menu">
+    <div class="logo-section">
+      <img src="../assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
+    </div>
 
-      <div class="menu-section logged-in-only">
-        <a href="../summary.html" class="menu-item">
-          <span class="menu-icon">
-            <img
-              src="../assets/img/icons/header-side-menu/summary.svg"
-              alt=""
-            />
-          </span>
-          <span>Summary</span>
-        </a>
-        <a href="../add-task.html" class="menu-item">
-          <span class="menu-icon">
-            <img
-              src="../assets/img/icons/header-side-menu/add-task.svg"
-              alt=""
-            />
-          </span>
-          <span>Add Task</span>
-        </a>
-        <a href="../board.html" class="menu-item">
-          <span class="menu-icon">
-            <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
-          </span>
-          <span>Board</span>
-        </a>
-        <a href="../add-contact.html" class="menu-item">
-          <span class="menu-icon">
-            <img
-              src="../assets/img/icons/header-side-menu/contacts.svg"
-              alt=""
-            />
-          </span>
-          <span>Contacts</span>
-        </a>
-      </div>
+    <div class="menu-section logged-in-only">
+      <a href="../summary.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="../assets/img/icons/header-side-menu/summary.svg" alt="" />
+        </span>
+        <span>Summary</span>
+      </a>
+      <a href="../add-task.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="../assets/img/icons/header-side-menu/add-task.svg" alt="" />
+        </span>
+        <span>Add Task</span>
+      </a>
+      <a href="../board.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="../assets/img/icons/header-side-menu/board.svg" alt="" />
+        </span>
+        <span>Board</span>
+      </a>
+      <a href="../add-contact.html" class="menu-item">
+        <span class="menu-icon">
+          <img src="../assets/img/icons/header-side-menu/contacts.svg" alt="" />
+        </span>
+        <span>Contacts</span>
+      </a>
+    </div>
 
-      <div class="notice-side-menu logged-in-only">
-        <a href="./legal-notice.html" class="menu-item menu-bottom active">
-          <span>Legal notice</span>
-        </a>
-        <a href="./privacy-policy.html" class="menu-item menu-bottom">
-          <span>Privacy Policy</span>
-        </a>
-      </div>
-    </aside>
+    <div class="notice-side-menu logged-in-only">
+      <a href="./legal-notice.html" class="menu-item menu-bottom active">
+        <span>Legal notice</span>
+      </a>
+      <a href="./privacy-policy.html" class="menu-item menu-bottom">
+        <span>Privacy Policy</span>
+      </a>
+    </div>
+  </aside>
 
-    <main>
-      <div class="main-content">
-        <h1>Legal Notice</h1>
+  <main>
+    <div class="main-content">
+      <h1>Legal Notice</h1>
 
-        <h2>Imprint</h2>
+      <h2>Imprint</h2>
 
-        <li>Leo Michael Kohl</li>
-        <li>Andreas Kissner</li>
-        <li>Marius Kamto</li>
-        <li>Dennis King Tran</li>
-        <li>Offinger Str. 17a </li>
-        <li>86156 Augsburg</li>
+      <li>Leo Michael Kohl</li>
+      <li>Andreas Kissner</li>
+      <li>Marius Kamto</li>
+      <li>Dennis King Tran</li>
+      <li>Offinger Str. 17a </li>
+      <li>86156 Augsburg</li>
+      <br />
+      <h3>Exploring the Board</h3>
+      <p>Email: dennis_tran@icloud.com</p>
+      <br />
+      <br />
+      <h3>Acceptance of terms</h3>
+      <p>
+        By accessing and using
+        <span class="join-highlight">Join</span> (Product), you acknowledge
+        and agree to the following terms and conditions, and any policies,
+        guidelines, or amendments thereto that may be presented to you from
+        time to time. We, the listed students, may update or change the terms
+        and conditions from time to time without notice.
+      </p>
+      <br />
+      <h3>Scope and ownership of the product</h3>
+      <p>
+        <span class="join-highlight">Join</span> has been developed as part of
+        a student group project in a web development bootcamp at the
+        <span class="join-highlight">Developer Akademie GmbH</span>. It has an
+        educational purpose and is not intended for extensive personal &
+        business usage. As such, we cannot guarantee consistent availability,
+        reliability, accuracy, or any other aspect of quality regarding this
+        Product.
         <br />
-        <h3>Exploring the Board</h3>
-        <p>Email: dennis_tran@icloud.com</p>
-        <br />
-        <br />
-        <h3>Acceptance of terms</h3>
-        <p>
-          By accessing and using
-          <span class="join-highlight">Join</span> (Product), you acknowledge
-          and agree to the following terms and conditions, and any policies,
-          guidelines, or amendments thereto that may be presented to you from
-          time to time. We, the listed students, may update or change the terms
-          and conditions from time to time without notice.
-        </p>
-        <br />
-        <h3>Scope and ownership of the product</h3>
-        <p>
-          <span class="join-highlight">Join</span> has been developed as part of
-          a student group project in a web development bootcamp at the
-          <span class="join-highlight">Developer Akademie GmbH</span>. It has an
-          educational purpose and is not intended for extensive personal &
-          business usage. As such, we cannot guarantee consistent availability,
-          reliability, accuracy, or any other aspect of quality regarding this
-          Product.
-          <br />
-          The design of <span class="join-highlight">Join</span> is owned by the
-          <span class="join-highlight">Developer Akademie GmbH</span>.
-          Unauthorized use, reproduction, modification, distribution, or
-          replication of the design is strictly prohibited.
-        </p>
-        <br />
-        <h3>Proprietary rights</h3>
-        <p>
-          Aside from the design owned by
-          <span class="join-highlight">Developer Akademie GmbH</span>, we, the
-          listed students, retain all proprietary rights in
-          <span class="join-highlight">Join</span>, including any associated
-          copyrighted material, trademarks, and other proprietary information.
-        </p>
-        <br />
-        <h3>Use of the product</h3>
-        <p>
-          <span class="join-highlight">Join</span> is intended to be used for
-          lawful purposes only, in accordance with all applicable laws and
-          regulations. Any use of <span class="join-highlight">Join</span> for
-          illegal activities, or to harass, harm, threaten, or intimidate
-          another person, is strictly prohibited. You are solely responsible for
-          your interactions with other users of
-          <span class="join-highlight">Join</span>.
-        </p>
-        <br />
-        <h3>Disclaimer of warranties and limitation of liability</h3>
-        <p>
-          <span class="join-highlight">Join</span> is provided "as is" without
-          warranty of any kind, whether express or implied, including but not
-          limited to the implied warranties of merchantability, fitness for a
-          particular purpose, and non-infringement. In no event will we, the
-          listed students, or the
-          <span class="join-highlight">Developer Akademie GmbH</span>, be liable
-          for any direct, indirect, incidental, special, consequential or
-          exemplary damages, including but not limited to, damages for loss of
-          profits, goodwill, use, data, or other intangible losses, even if we
-          have been advised of the possibility of such damages, arising out of
-          or in connection with the use or performance of
-          <span class="join-highlight">Join</span>.
-        </p>
-        <br />
-        <h3>Indemnity</h3>
-        <p>
-          You agree to indemnify, defend and hold harmless us, the listed
-          students, the <span class="join-highlight">Developer Akademie</span>,
-          and our affiliates, partners, officers, directors, agents, and
-          employees, from and against any claim, demand, loss, damage, cost, or
-          liability (including reasonable legal fees) arising out of or relating
-          to your use of <span class="join-highlight">Join</span> and/or your
-          breach of this Legal Notice.
-        </p>
-        <p>
-          For any questions or notices, please contact us at dennis_tran@icloud.com.
-        </p>
-        <br />
-        <p>Date: July 26, 2023</p>
-        <br />
-        <br />
-      </div>
-    </main>
-  </body>
+        The design of <span class="join-highlight">Join</span> is owned by the
+        <span class="join-highlight">Developer Akademie GmbH</span>.
+        Unauthorized use, reproduction, modification, distribution, or
+        replication of the design is strictly prohibited.
+      </p>
+      <br />
+      <h3>Proprietary rights</h3>
+      <p>
+        Aside from the design owned by
+        <span class="join-highlight">Developer Akademie GmbH</span>, we, the
+        listed students, retain all proprietary rights in
+        <span class="join-highlight">Join</span>, including any associated
+        copyrighted material, trademarks, and other proprietary information.
+      </p>
+      <br />
+      <h3>Use of the product</h3>
+      <p>
+        <span class="join-highlight">Join</span> is intended to be used for
+        lawful purposes only, in accordance with all applicable laws and
+        regulations. Any use of <span class="join-highlight">Join</span> for
+        illegal activities, or to harass, harm, threaten, or intimidate
+        another person, is strictly prohibited. You are solely responsible for
+        your interactions with other users of
+        <span class="join-highlight">Join</span>.
+      </p>
+      <br />
+      <h3>Disclaimer of warranties and limitation of liability</h3>
+      <p>
+        <span class="join-highlight">Join</span> is provided "as is" without
+        warranty of any kind, whether express or implied, including but not
+        limited to the implied warranties of merchantability, fitness for a
+        particular purpose, and non-infringement. In no event will we, the
+        listed students, or the
+        <span class="join-highlight">Developer Akademie GmbH</span>, be liable
+        for any direct, indirect, incidental, special, consequential or
+        exemplary damages, including but not limited to, damages for loss of
+        profits, goodwill, use, data, or other intangible losses, even if we
+        have been advised of the possibility of such damages, arising out of
+        or in connection with the use or performance of
+        <span class="join-highlight">Join</span>.
+      </p>
+      <br />
+      <h3>Indemnity</h3>
+      <p>
+        You agree to indemnify, defend and hold harmless us, the listed
+        students, the <span class="join-highlight">Developer Akademie</span>,
+        and our affiliates, partners, officers, directors, agents, and
+        employees, from and against any claim, demand, loss, damage, cost, or
+        liability (including reasonable legal fees) arising out of or relating
+        to your use of <span class="join-highlight">Join</span> and/or your
+        breach of this Legal Notice.
+      </p>
+      <p>
+        For any questions or notices, please contact us at dennis_tran@icloud.com.
+      </p>
+      <br />
+      <p>Date: July 26, 2023</p>
+      <br />
+      <br />
+    </div>
+  </main>
+</body>
+
 </html>

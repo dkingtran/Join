@@ -229,7 +229,6 @@ async function loadContactsIntoDropdown() {
 }
 
 /** Prepares contact data with initials and color for rendering. */
-
 function prepareContactData(contact) {
     const name = contact.name;
     const initials = name["first-name"][0] + name["last-name"][0];
@@ -308,6 +307,10 @@ function showSuccessMessage() {
     }, 1500);
 }
 
+/**
+ * Rotates the category arrow visually by toggling the "rotate" CSS class.
+ * @param {boolean} rotate - If true, adds the "rotate" class (arrow rotates).
+ */
 function rotateCategoryArrow(rotate) {
     const arrow = document.getElementById("category-arrow");
     if (arrow) {
@@ -315,6 +318,11 @@ function rotateCategoryArrow(rotate) {
     }
 }
 
+/**
+ * Initializes the category dropdown behavior by linking the select element .
+ * @function
+ * @returns {void}
+ */
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -328,6 +336,11 @@ function setupCategoryDropdown() {
     select.addEventListener('blur', () => arrow.classList.remove('rotate'));
 }
 
+/**
+ * Toggles the category dropdown state between open and closed.  
+ * @function
+ * @returns {void}
+ */
 function toggleSelectDropdown() {
     const select = document.getElementById('task-category');
     const arrow = document.getElementById('category-arrow');
@@ -338,11 +351,23 @@ function toggleSelectDropdown() {
     }
 }
 
+/**
+ * Opens the category dropdown programmatically by focusing the select element 
+ * @param {HTMLSelectElement} select - The select element representing the dropdown menu.
+ * @param {HTMLElement} arrow - The arrow element that visually indicates dropdown state.
+ * @returns {void}
+ */
 function openSelectDropdown(select, arrow) {
     select.focus();
     select.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
 }
 
+/**
+ * Closes the category dropdown by removing focus from the select element .
+ * @param {HTMLSelectElement} select - The select element representing the dropdown menu.
+ * @param {HTMLElement} arrow - The arrow element that visually indicates dropdown state.
+ * @returns {void}
+ */
 function closeSelectDropdown(select, arrow) {
     select.blur();
     arrow.classList.remove('rotate');

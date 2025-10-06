@@ -79,6 +79,15 @@ function showContentDirectly(mainContent) {
   }
 }
 
+
+/**
+ * Handles the page load event by initializing the intro animation sequence.  
+ * If the intro elements are available, it plays the animation;  
+ * otherwise, it displays the main content immediately.
+ *
+ * @event window#load
+ * @returns {void}
+ */
 window.addEventListener('load', () => {
   const logo = document.getElementById('logo');
   const overlay = document.getElementById('whiteOverlay');

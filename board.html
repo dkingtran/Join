@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="./styles/big-card.css" />
   <link rel="stylesheet" href="./styles/board-card.css" />
   <link rel="stylesheet" href="./styles/board-drag-and-drop.css" />
-    <link rel="stylesheet" href="./styles/sidemenu.css" />
-    <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-sidemenu.css" />
+  <link rel="stylesheet" href="./styles/sidemenu.css" />
+  <link rel="stylesheet" href="./styles/AllMediaQueries/media-query-sidemenu.css" />
   <link rel="stylesheet" href="./styles/add-task.css" />
   <link rel="stylesheet" href="./styles/add-task-assigned-subtasks.css" />
   <link rel="stylesheet" href="./styles/edit-task-template.css" />
@@ -47,7 +47,7 @@
 
 <body onload="initBoardView()">
   <header>
-  
+
     <div class="header-content">
       <div class="header-inner">
         <div class="logo-mobile d_none">
@@ -121,20 +121,20 @@
         <div class="header-title-container">
           <h1>Board</h1>
         </div>
-          <div class="search-add-container">
-            <div class="search-input-wrapper">
-              <input type="text" id="searchInput" placeholder="Find Task" />
-              <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
-              <button type="button" class="search-icon-btn" onclick="onSearchClick()">
-                <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
-              </button>
-              <span class="search-empty-message d-none" id="search-empty-message">No tasks found!</span>
-            </div>
-            <button class="add-task-button" id="addTaskButton" onclick="addTaskBoard('to-do')">
-              Add Task
-              <img src="./assets/img/icons/board/add-task.svg" alt="" />
+        <div class="search-add-container">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="Find Task" />
+            <img class="search-divider" src="./assets/img/icons/board/search-line.svg" alt="|" />
+            <button type="button" class="search-icon-btn" onclick="onSearchClick()">
+              <img class="search-icon" src="./assets/img/icons/board/search.svg" alt="Search" />
             </button>
+            <span class="search-empty-message d-none" id="search-empty-message">No tasks found!</span>
           </div>
+          <button class="add-task-button" id="addTaskButton" onclick="addTaskBoard('to-do')">
+            Add Task
+            <img src="./assets/img/icons/board/add-task.svg" alt="" />
+          </button>
+        </div>
         <button class="plus-add-task-button" id="plusAddTaskButton" onclick="addTaskBoard('to-do')"
           style="display: none" aria-label="Add Task">
           <img src="./assets/img/icons/board/plus-add-task-mobile.svg" alt="Add Task" />
@@ -174,7 +174,7 @@
           <div class="column-header">
             <span>Done</span>
           </div>
-       
+
           <div class="tasks-list" id="tasks-list-done"></div>
         </div>
       </div>
@@ -230,7 +230,7 @@
                             name="dueDate" type="date" />
                           <div class="error-container" id="date-error-border">
                             <div id="error-info" class="error-text d-none">
-                             This fields is required or the date in the past
+                              This fields is required or the date in the past
                             </div>
                           </div>
                         </div>
@@ -362,7 +362,7 @@
                 </div>
               </div>
             </div>
-        
+
           </div>
         </div>
       </div>
