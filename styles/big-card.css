@@ -142,6 +142,11 @@
 .avatar-name {
     font-size: 14px;
     color: #333;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .delete-edit-big-card-content {

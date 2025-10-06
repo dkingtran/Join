@@ -23,6 +23,7 @@
 	margin-top: 96px;
 	padding: 64px;
 	box-sizing: border-box;
+	max-width: 1920px;
 }
 
 .header-board {
