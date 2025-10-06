@@ -18,7 +18,7 @@ passwordConRef = document.getElementById('password-confirmation');
  * if false shows error message
  */
 async function addUser() {
-  if (!checkRegisterForm()) {
+  if (!await checkRegisterForm()) {
     return;
   } else {
     let contactId = await postData("/contacts/", generateContact());
