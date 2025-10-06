@@ -48,7 +48,6 @@ async function updateTasksArrays() {
  * @async
  * @function
  */
-
 async function getTasksArray() {
   tasks = [];
   const taskObjects = await loadData("/tasks/");

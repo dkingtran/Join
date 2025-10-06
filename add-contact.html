@@ -1,257 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Join - Contacts</title>
-		<link rel="icon" href="./assets/img/logo/logo-dark.png" />
-		<link rel="stylesheet" href="./styles/add-contact.css" />
-		<link rel="stylesheet" href="./styles/add-contact-details-template.css" />
-		<link rel="stylesheet" href="./styles/add-contact-modals.css" />
-		<link rel="stylesheet" href="./styles/global.css" />
-		<link rel="stylesheet" href="./styles/standard.css" />
-		<link rel="stylesheet" href="./styles/sidemenu.css" />
-		<link
-			rel="stylesheet"
-			href="./styles/AllMediaQueries/media-query-sidemenu.css" />
-		<link rel="stylesheet" href="./styles/colors.css" />
-		<link
-			rel="stylesheet"
-			href="./styles/AllMediaQueries/media-query-add-contact.css" />
-		<link
-			rel="stylesheet"
-			href="./styles/AllMediaQueries/media-query-add-contact-form.css" />
-		<script src="./scripts/login-status.js"></script>
-		<script src="./script.js"></script>
-		<script src="./scripts/input.js"></script>
-		<script src="./scripts/db.js"></script>
-		<script src="./scripts/firebase.js"></script>
-		<script src="./scripts/side-menu.js"></script>
-		<script src="./templates/contacts-template.js"></script>
-		<script src="./scripts/add-contact.js" defer></script>
-		<script src="./scripts/render-contacts.js"></script>
-	</head>
-	<body onload="init()">
-		<header>
-			<div class="header-content">
-				<div class="header-inner">
-					<div class="logo-mobile d_none">
-						<img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Join - Contacts</title>
+	<link rel="icon" href="./assets/img/logo/logo-dark.png" />
+	<link rel="stylesheet" href="./styles/add-contact.css" />
+	<link rel="stylesheet" href="./styles/add-contact-details-template.css" />
+	<link rel="stylesheet" href="./styles/add-contact-modals.css" />
+	<link rel="stylesheet" href="./styles/global.css" />
+	<link rel="stylesheet" href="./styles/standard.css" />
+	<link rel="stylesheet" href="./styles/sidemenu.css" />
+	<link rel="stylesheet" href="./styles/AllMediaQueries/media-query-sidemenu.css" />
+	<link rel="stylesheet" href="./styles/colors.css" />
+	<link rel="stylesheet" href="./styles/AllMediaQueries/media-query-add-contact.css" />
+	<link rel="stylesheet" href="./styles/AllMediaQueries/media-query-add-contact-form.css" />
+	<script src="./scripts/login-status.js"></script>
+	<script src="./script.js"></script>
+	<script src="./scripts/input.js"></script>
+	<script src="./scripts/db.js"></script>
+	<script src="./scripts/firebase.js"></script>
+	<script src="./scripts/side-menu.js"></script>
+	<script src="./templates/contacts-template.js"></script>
+	<script src="./scripts/add-contact.js" defer></script>
+	<script src="./scripts/render-contacts.js"></script>
+</head>
+
+<body onload="init()">
+	<header>
+		<div class="header-content">
+			<div class="header-inner">
+				<div class="logo-mobile d_none">
+					<img src="./assets/img/logo/logo-dark.png" alt="Logo" />
+				</div>
+				<h1 class="header-title">Kanban Project Management Tool</h1>
+				<div class="header-right">
+					<div class="help-container" id="container-help">
+						<a href="./help.html" class="help-icon">
+							<img src="./assets/img/icons/header-side-menu/help.png" alt="Help Icon" />
+						</a>
 					</div>
-					<h1 class="header-title">Kanban Project Management Tool</h1>
-					<div class="header-right">
-						<div class="help-container" id="container-help">
-							<a href="./help.html" class="help-icon">
-								<img
-									src="./assets/img/icons/header-side-menu/help.png"
-									alt="Help Icon" />
-							</a>
-						</div>
-						<div class="profile-container" id="container-profile">
-							<button
-								class="profile-btn"
-								onclick="toggleProfileDropdown()"
-								aria-label="Profile menu"></button>
-							<div id="dropdown-profile" class="profile-dropdown">
-								<a href="./help.html" class="dropdown-item mobile-only d_none"
-									>Help</a
-								>
-								<a href="./legal-notice.html" class="dropdown-item"
-									>Legal Notice</a
-								>
-								<a href="./privacy-policy.html" class="dropdown-item"
-									>Privacy Policy</a
-								>
-								<a id="logout-btn" class="dropdown-item">Log out</a>
-							</div>
+					<div class="profile-container" id="container-profile">
+						<button class="profile-btn" onclick="toggleProfileDropdown()"
+							aria-label="Profile menu"></button>
+						<div id="dropdown-profile" class="profile-dropdown">
+							<a href="./help.html" class="dropdown-item mobile-only d_none">Help</a>
+							<a href="./legal-notice.html" class="dropdown-item">Legal Notice</a>
+							<a href="./privacy-policy.html" class="dropdown-item">Privacy Policy</a>
+							<a id="logout-btn" class="dropdown-item">Log out</a>
 						</div>
 					</div>
 				</div>
 			</div>
-		</header>
-		<aside class="side-menu background-side-menu">
-			<div class="logo-section">
-				<img
-					src="./assets/img/logo/logo-light.png"
-					alt="Logo"
-					class="logo-side-menu-img" />
-			</div>
-
-			<div class="menu-section">
-				<a href="../summary.html" class="menu-item">
-					<span class="menu-icon">
-						<img src="./assets/img/icons/header-side-menu/summary.svg" alt="" />
-					</span>
-					<span>Summary</span>
-				</a>
-				<a href="./add-task.html" class="menu-item">
-					<span class="menu-icon">
-						<img
-							src="./assets/img/icons/header-side-menu/add-task.svg"
-							alt="" />
-					</span>
-					<span>Add Task</span>
-				</a>
-				<a href="./board.html" class="menu-item">
-					<span class="menu-icon">
-						<img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
-					</span>
-					<span>Board</span>
-				</a>
-				<a href="../add-contact.html" class="menu-item active">
-					<span class="menu-icon">
-						<img
-							src="./assets/img/icons/header-side-menu/contacts.svg"
-							alt="" />
-					</span>
-					<span>Contacts</span>
-				</a>
-			</div>
-
-			<div class="notice-side-menu">
-				<a href="./legal-notice.html" class="menu-item menu-bottom">
-					<span>Legal notice</span>
-				</a>
-				<a href="./privacy-policy.html" class="menu-item menu-bottom">
-					<span>Privacy Policy</span>
-				</a>
-			</div>
-		</aside>
-
-		<div class="contact-sidebar">
-			<div class="contact-sidebar-inner">
-				<button
-					class="add-contact-btn display-standard"
-					onclick="openContactForm()">
-					<span>Add new contact</span>
-					<img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-				</button>
-				<button class="add-contact-btn-mobile" onclick="openContactForm()">
-					<img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
-				</button>
-				<div class="contact-list" id="list-contact"></div>
-			</div>
+		</div>
+	</header>
+	<aside class="side-menu background-side-menu">
+		<div class="logo-section">
+			<img src="./assets/img/logo/logo-light.png" alt="Logo" class="logo-side-menu-img" />
 		</div>
 
-		<div class="contacts-section">
-			<div class="contacts-header">
-				<h1>Contacts</h1>
-				<hr class="logo-divider" />
-				<h2>Better with a team</h2>
-			</div>
-			<div class="contact-list-clicked" id="clicked-list-contact"></div>
-			<button
-				class="mobile-back-btn display-standard"
-				id="mobile-back-button"
-				onclick="hideMobileContactDetails()"
-				style="display: none">
-				<img src="./assets/img/icons/content/help/back.png" alt="Back" />
+		<div class="menu-section">
+			<a href="../summary.html" class="menu-item">
+				<span class="menu-icon">
+					<img src="./assets/img/icons/header-side-menu/summary.svg" alt="" />
+				</span>
+				<span>Summary</span>
+			</a>
+			<a href="./add-task.html" class="menu-item">
+				<span class="menu-icon">
+					<img src="./assets/img/icons/header-side-menu/add-task.svg" alt="" />
+				</span>
+				<span>Add Task</span>
+			</a>
+			<a href="./board.html" class="menu-item">
+				<span class="menu-icon">
+					<img src="./assets/img/icons/header-side-menu/board.svg" alt="" />
+				</span>
+				<span>Board</span>
+			</a>
+			<a href="../add-contact.html" class="menu-item active">
+				<span class="menu-icon">
+					<img src="./assets/img/icons/header-side-menu/contacts.svg" alt="" />
+				</span>
+				<span>Contacts</span>
+			</a>
+		</div>
+
+		<div class="notice-side-menu">
+			<a href="./legal-notice.html" class="menu-item menu-bottom">
+				<span>Legal notice</span>
+			</a>
+			<a href="./privacy-policy.html" class="menu-item menu-bottom">
+				<span>Privacy Policy</span>
+			</a>
+		</div>
+	</aside>
+
+	<div class="contact-sidebar">
+		<div class="contact-sidebar-inner">
+			<button class="add-contact-btn display-standard" onclick="openContactForm()">
+				<span>Add new contact</span>
+				<img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
 			</button>
-		</div>
-
-		<div class="modal-overlay" id="overlay-modal"></div>
-		<div class="form-container" id="container-form">
-			<button class="close-btn" onclick="hideForm()">
-				<img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+			<button class="add-contact-btn-mobile" onclick="openContactForm()">
+				<img src="./assets/img/icons/add-contact/person_add.svg" alt="Add" />
 			</button>
-			<div class="form-header">
-				<div class="form-title">
-					<img src="./assets/img/logo/logo-light.png" alt="form logo" />
-					<h1 id="contact-form-title">Add contact</h1>
-					<p id="contact-form-subtitle">Tasks are better with a team!</p>
-					<hr class="form-divider" />
-				</div>
-			</div>
-			<div class="contact-avatar-clicked display-standard" id="form-avatar">
-				<img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
-			</div>
-			<div class="form-content">
-				<form
-					class="form-wrapper"
-					onsubmit="submitContactsForm(event); return false;">
-					<div class="input-container">
-						<div class="input-wrapper">
-							<input
-								type="text"
-								placeholder="Name"
-								id="name"
-								oninput="updateFormAvatar()" />
-							<img
-								class="icon"
-								src="./assets/img/icons/add-contact/person.svg"
-								alt="Name Icon" />
-						</div>
-						<p id="name-error-msg" class="contact-error-msg">
-							Letters only! Requires first and last name!
-						</p>
-					</div>
-					<div class="input-container">
-						<div class="input-wrapper">
-							<input type="text" placeholder="Email" id="email" />
-							<img
-								class="icon"
-								src="./assets/img/icons/add-contact/mail.svg"
-								alt="Mail Icon" />
-						</div>
-						<p id="email-error-msg" class="contact-error-msg">
-							Not a valid e-mail!
-						</p>
-					</div>
-					<div class="input-container">
-						<div class="input-wrapper">
-							<input type="text" placeholder="Phone" id="phone" />
-							<img
-								class="icon"
-								src="./assets/img/icons/add-contact/call.svg"
-								alt="Phone Icon" />
-						</div>
-						<p id="phone-error-msg" class="contact-error-msg">
-							Not a valid phone number!
-						</p>
-					</div>
-					<div class="button-group" id="add-form-buttons">
-						<button type="button" class="cancel-btn" onclick="hideForm()">
-							Cancel
-							<img src="./assets/img/icons/add-contact/close.svg" alt="" />
-						</button>
-						<button id="create-contact-btn" type="submit" class="create-btn">
-							Create Contact
-							<img src="./assets/img/icons/add-contact/check.svg" alt="" />
-						</button>
-					</div>
-					<div class="button-group d-none" id="edit-form-buttons">
-						<button
-							id="delete-contact-form-btn"
-							type="submit"
-							class="cancel-btn form-delete-btn btn-width-114">
-							Delete
-						</button>
-						<button
-							id="edit-contact-btn"
-							type="submit"
-							class="create-btn btn-width-114">
-							Save
-							<img src="./assets/img/icons/add-contact/check.svg" alt="" />
-						</button>
-					</div>
-				</form>
-			</div>
+			<div class="contact-list" id="list-contact"></div>
 		</div>
+	</div>
 
-		<div id="modal-contact-created" class="contact-created-modal">
-			Contact successfully created
+	<div class="contacts-section">
+		<div class="contacts-header">
+			<h1>Contacts</h1>
+			<hr class="logo-divider" />
+			<h2>Better with a team</h2>
 		</div>
-
-		<button
-			id="mobile-edit-button"
-			class="mobile-edit-btn display-standard"
-			style="display: none"
-			onclick="event.stopPropagation(); toggleMobileEditDropdown()">
-			<img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit" />
+		<div class="contact-list-clicked" id="clicked-list-contact"></div>
+		<button class="mobile-back-btn display-standard" id="mobile-back-button" onclick="hideMobileContactDetails()"
+			style="display: none">
+			<img src="./assets/img/icons/content/help/back.png" alt="Back" />
 		</button>
-		<div
-			id="dropdown-mobile-edit"
-			class="mobile-edit-dropdown"
-			style="display: flex"></div>
-	</body>
+	</div>
+
+	<div class="modal-overlay" id="overlay-modal"></div>
+	<div class="form-container" id="container-form">
+		<button class="close-btn" onclick="hideForm()">
+			<img src="./assets/img/icons/add-contact/close.svg" alt="Close" />
+		</button>
+		<div class="form-header">
+			<div class="form-title">
+				<img src="./assets/img/logo/logo-light.png" alt="form logo" />
+				<h1 id="contact-form-title">Add contact</h1>
+				<p id="contact-form-subtitle">Tasks are better with a team!</p>
+				<hr class="form-divider" />
+			</div>
+		</div>
+		<div class="contact-avatar-clicked display-standard" id="form-avatar">
+			<img src="./assets/img/icons/add-contact/person-avatar.svg" alt="" />
+		</div>
+		<div class="form-content">
+			<form class="form-wrapper" onsubmit="submitContactsForm(event); return false;">
+				<div class="input-container">
+					<div class="input-wrapper">
+						<input type="text" placeholder="Name" id="name" oninput="updateFormAvatar()" />
+						<img class="icon" src="./assets/img/icons/add-contact/person.svg" alt="Name Icon" />
+					</div>
+					<p id="name-error-msg" class="contact-error-msg">
+						Letters only! Requires first and last name!
+					</p>
+				</div>
+				<div class="input-container">
+					<div class="input-wrapper">
+						<input type="text" placeholder="Email" id="email" />
+						<img class="icon" src="./assets/img/icons/add-contact/mail.svg" alt="Mail Icon" />
+					</div>
+					<p id="email-error-msg" class="contact-error-msg">
+						Not a valid e-mail!
+					</p>
+				</div>
+				<div class="input-container">
+					<div class="input-wrapper">
+						<input type="text" placeholder="Phone" id="phone" />
+						<img class="icon" src="./assets/img/icons/add-contact/call.svg" alt="Phone Icon" />
+					</div>
+					<p id="phone-error-msg" class="contact-error-msg">
+						Not a valid phone number!
+					</p>
+				</div>
+				<div class="button-group" id="add-form-buttons">
+					<button type="button" class="cancel-btn" onclick="hideForm()">
+						Cancel
+						<img src="./assets/img/icons/add-contact/close.svg" alt="" />
+					</button>
+					<button id="create-contact-btn" type="submit" class="create-btn">
+						Create Contact
+						<img src="./assets/img/icons/add-contact/check.svg" alt="" />
+					</button>
+				</div>
+				<div class="button-group d-none" id="edit-form-buttons">
+					<button id="delete-contact-form-btn" type="submit" class="cancel-btn form-delete-btn btn-width-114">
+						Delete
+					</button>
+					<button id="edit-contact-btn" type="submit" class="create-btn btn-width-114">
+						Save
+						<img src="./assets/img/icons/add-contact/check.svg" alt="" />
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="modal-contact-created" class="contact-created-modal">
+		Contact successfully created
+	</div>
+
+	<button id="mobile-edit-button" class="mobile-edit-btn display-standard" style="display: none"
+		onclick="event.stopPropagation(); toggleMobileEditDropdown()">
+		<img src="./assets/img/icons/add-contact/edit-button.svg" alt="Edit" />
+	</button>
+	<div id="dropdown-mobile-edit" class="mobile-edit-dropdown" style="display: flex"></div>
+</body>
+
 </html>
