@@ -22,8 +22,16 @@ async function addUser() {
     return;
   } else {
     let contactId = await postData("/contacts/", generateContact());
+    if (!contactId) {
+      console.error("Failed to create contact - check Firebase rules");
+      return;
+    }
     await addIdToObject(contactId, "/contacts/");
     let userId = await postData("/users/", generateUser());
+    if (!userId) {
+      console.error("Failed to create user - check Firebase rules");
+      return;
+    }
     await addIdToObject(userId, "/users/");
     showSuccess();
   }

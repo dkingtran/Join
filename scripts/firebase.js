@@ -35,9 +35,14 @@ async function postData(path = "", data = {}) {
             },
             body: JSON.stringify(data)
         });
+        if (!response.ok) {
+            console.error("Post error: Server responded with status", response.status);
+            return null;
+        }
         return responseToJson = await response.json();
     } catch (error) {
         console.error("Post error:", error);
+        return null;
     }
 }
 
@@ -93,8 +98,8 @@ async function putData(path = "", data = {}) {
  * @returns {Promise<void>} Resolves when the object has been updated in Firebase.
  */
 async function addIdToObject(idObject, path) {
-  let objectPath = path + idObject.name + "/";
-  let firebaseObject = await loadData(objectPath);
-  firebaseObject["id"] = idObject.name;
-  await putData(objectPath, firebaseObject);
+    let objectPath = path + idObject.name + "/";
+    let firebaseObject = await loadData(objectPath);
+    firebaseObject["id"] = idObject.name;
+    await putData(objectPath, firebaseObject);
 }
