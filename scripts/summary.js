@@ -23,6 +23,7 @@ async function loadTasks() {
 function getTaskStatus(task) {
     if (!task || !task.status) return "unknown";
     switch (true) {
+        case task.status["triage"]: return "triage";
         case task.status["to-do"]: return "todo";
         case task.status["in-progress"]: return "in-progress";
         case task.status["feedback"]: return "feedback";
@@ -110,18 +111,19 @@ function updateDOM(id, value) {
  * @async
  * @function
  */
-    function updateSummary() {
-        updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
-        updateDOM("done-counter", countTasksByStatus(tasks, "done"));
-        updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
-        updateDOM("awaitingFeedback-counter", countTasksByStatus(tasks, "feedback"));
-        updateDOM("urgency-counter", countUrgentTasks(tasks));
-        updateDOM("inBord-counter", tasks.length);
-        const deadline = findEarliestUrgentDate(tasks);
-        updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
-        document.querySelector(".summary-section").style.visibility = "visible";
-        document.querySelector(".title-section").style.visibility = "visible";
-  }
+function updateSummary() {
+    updateDOM("board-counter", countTasksByStatus(tasks, "todo"));
+    updateDOM("done-counter", countTasksByStatus(tasks, "done"));
+    updateDOM("inProgress-counter", countTasksByStatus(tasks, "in-progress"));
+    updateDOM("awaitingFeedback-counter", countTasksByStatus(tasks, "feedback"));
+    updateDOM("triage-counter", countTasksByStatus(tasks, "triage"));
+    updateDOM("urgency-counter", countUrgentTasks(tasks));
+    updateDOM("inBord-counter", tasks.length);
+    const deadline = findEarliestUrgentDate(tasks);
+    updateDOM("deadline", deadline ? new Date(deadline).toLocaleDateString("de-DE") : "No");
+    document.querySelector(".summary-section").style.visibility = "visible";
+    document.querySelector(".title-section").style.visibility = "visible";
+}
 
 /**
  * Updates the #userName DOM element with the currently logged-in user's name.
@@ -178,7 +180,8 @@ function setGreeting(name) {
     const greeting = getGreeting();
     const el = document.getElementById("greetUser");
     const userContainer = document.querySelector(".user");
-    if (el){ el.textContent = name === "Guest" ? `${greeting}!` : `${greeting},`;
+    if (el) {
+        el.textContent = name === "Guest" ? `${greeting}!` : `${greeting},`;
     }
     if (userContainer && window.innerWidth > 1000) {
         userContainer.style.visibility = "visible";
@@ -219,7 +222,7 @@ function showGreetingMobile() {
 
 window.addEventListener('resize', () => {
     const userContainer = document.querySelector(".user");
-    if(window.innerWidth >= 1001) {
+    if (window.innerWidth >= 1001) {
         userContainer.style.display = "block";
     } else {
         userContainer.style.display = "none";

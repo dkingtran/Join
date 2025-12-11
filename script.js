@@ -1,5 +1,5 @@
 
-const categories = { 0: "to-do", 1: "in-progress", 2: "feedback", 3: "done" };
+const categories = { 0: "triage", 1: "to-do", 2: "in-progress", 3: "feedback", 4: "done" };
 
 /**
  * @param {String} takes String. 

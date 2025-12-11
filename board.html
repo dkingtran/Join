@@ -143,7 +143,13 @@
     </section>
     <section>
       <div class="drag-board">
-        <div class="board-column" id="open" data-column-index="0">
+        <div class="board-column" id="triage" data-column-index="0">
+          <div class="column-header">
+            <span>Triage</span>
+          </div>
+          <div class="tasks-list" id="tasks-list-triage"></div>
+        </div>
+        <div class="board-column" id="open" data-column-index="1">
           <div class="column-header">
             <span>To do</span>
             <button class="add-board-btn" onclick="addTaskBoard('to-do')">
@@ -152,7 +158,7 @@
           </div>
           <div class="tasks-list" id="tasks-list-open"></div>
         </div>
-        <div class="board-column" id="inprogress" data-column-index="1">
+        <div class="board-column" id="inprogress" data-column-index="2">
           <div class="column-header">
             <span>In progress</span>
             <button class="add-board-btn" onclick="addTaskBoard('in-progress')">
@@ -161,7 +167,7 @@
           </div>
           <div class="tasks-list" id="tasks-list-inprogress"></div>
         </div>
-        <div class="board-column" id="awaitfeedback" data-column-index="2">
+        <div class="board-column" id="awaitfeedback" data-column-index="3">
           <div class="column-header">
             <span>Await feedback</span>
             <button class="add-board-btn" onclick="addTaskBoard('feedback')">
@@ -170,7 +176,7 @@
           </div>
           <div class="tasks-list" id="tasks-list-awaitfeedback"></div>
         </div>
-        <div class="board-column" id="done" data-column-index="3">
+        <div class="board-column" id="done" data-column-index="4">
           <div class="column-header">
             <span>Done</span>
           </div>

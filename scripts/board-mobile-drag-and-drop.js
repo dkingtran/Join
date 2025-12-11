@@ -1,4 +1,4 @@
-let shortStatus = { "0": "To-do", "1": "Work", "2": "Review", "3": "Done" };
+let shortStatus = { "0": "Triage", "1": "To-do", "2": "Work", "3": "Review", "4": "Done" };
 
 /**
  * Adds click event listeners to all elements with the 'swap-icon' class,

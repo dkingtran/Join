@@ -1,7 +1,7 @@
 @media (max-width: 1440px) {
-  .user {
-    margin-left: 66px;
-    width: 150px;
+    .user {
+        margin-left: 66px;
+        width: 150px;
     }
 
     .user span {
@@ -35,10 +35,11 @@
 
 @media (max-width: 1180px) {
 
-    .user{
+    .user {
         margin-left: 25px;
     }
-    .summary-section{
+
+    .summary-section {
         margin-left: 380px;
         margin-top: 100px;
     }
@@ -61,7 +62,7 @@
         font-size: 20px;
     }
 
-    .summary-section{
+    .summary-section {
         margin-top: 30px;
     }
 
@@ -69,13 +70,13 @@
         display: none;
     }
 
-    .summary-section .todo-subsection{
+    .summary-section .todo-subsection {
         width: 430px;
         justify-content: center;
         gap: 30px;
     }
 
-    .todo-responsive{
+    .todo-responsive {
         height: 120px;
         width: 200px;
         justify-content: center;
@@ -94,7 +95,7 @@
         gap: 30px;
     }
 
-    .task-subsection a{
+    .task-subsection a {
         height: 120px;
     }
 
@@ -108,13 +109,13 @@
     }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
 
     .main-container {
         justify-content: center;
-    }   
+    }
 
-    .hidden{
+    .hidden {
         display: none !important;
     }
 
@@ -125,7 +126,7 @@
     }
 
 
-    .summary-section{
+    .summary-section {
         flex-direction: column;
         display: flex;
         justify-content: center;
@@ -154,8 +155,8 @@
         width: 500px;
     }
 
-    .user h1{
-        font-size: 47px; 
+    .user h1 {
+        font-size: 47px;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -166,22 +167,22 @@
         margin-bottom: 82px;
         margin-left: 0;
     }
-    
+
     .title-section {
         margin-bottom: 55px;
         width: 230px;
         justify-content: flex-start;
         margin-left: 2%;
-    }  
+    }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
 
     .align-section {
         width: 255px;
     }
-    
-    .task-subsection{
+
+    .task-subsection {
         width: 255px;
         gap: 10px;
     }
@@ -190,11 +191,11 @@
         width: 255px;
     }
 
-    .urgency-subsection span{
+    .urgency-subsection span {
         font-size: 14px;
     }
 
-    .summary-section h1{
+    .summary-section h1 {
         font-size: 47px;
     }
 
@@ -202,29 +203,29 @@
         width: 255px;
     }
 
-    .responsive-todo-icon{
+    .responsive-todo-icon {
         width: 40px;
         height: 40px;
     }
 
-    .reponsive-urgency-icon{
+    .reponsive-urgency-icon {
         width: 40px;
         height: 40px;
     }
 
-    .display-deadline h1{
+    .display-deadline h1 {
         font-size: 24px;
     }
 
-    .display-deadline span{
+    .display-deadline span {
         font-size: 16px;
     }
 
-    .urgency-subsection{
-    gap: 10px;
+    .urgency-subsection {
+        gap: 10px;
     }
 
-    .display-urgency{
+    .display-urgency {
         gap: 5px;
     }
 
@@ -232,24 +233,93 @@
         font-size: xxx-large;
     }
 
-    .in-progress span{
+    .in-progress span {
         font-size: 16px;
     }
 
-    .urgency-subsection h1{
+    .urgency-subsection h1 {
         font-size: 47px;
     }
 
-    .task-subsection span{
+    .task-subsection span {
         font-size: 14px;
     }
 
-    .user, .summary-section {
+    .user,
+    .summary-section {
         transition: opacity 0.5s ease;
         opacity: 1;
     }
 
     .user span {
         width: 300px;
+    }
+}
+
+/* New Triage Layout Media Queries */
+@media (max-width: 1180px) {
+    .middle-subsection {
+        width: 430px;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .urgency-subsection {
+        width: 280px;
+        height: 120px;
+        gap: 10px;
+    }
+
+    .summary-card {
+        width: 130px;
+        height: 120px;
+    }
+
+    .summary-card h1 {
+        font-size: 36px;
+    }
+
+    .summary-card img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .middle-subsection {
+        width: 255px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .urgency-subsection {
+        width: 255px;
+    }
+
+    .summary-card {
+        width: 255px;
+        height: 80px;
+        border-radius: 15px;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .display-triage-inner {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .summary-card h1 {
+        font-size: 24px;
+    }
+
+    .summary-card span {
+        font-size: 14px;
+    }
+
+    .summary-card img {
+        width: 30px;
+        height: 30px;
     }
 }

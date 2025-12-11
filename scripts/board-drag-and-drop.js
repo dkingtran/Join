@@ -183,7 +183,7 @@ function shouldStartDrag(e) {
  * @param {MouseEvent} e - The mouse move event.
  */
 function handleDragMovement(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     moveAt(e.clientX, e.clientY);
     resetDropZones();
     highlightActiveDropZone(e);
@@ -256,8 +256,9 @@ function onMouseUp(e) {
     if (dragged) {
         enableTextSelection();
         updateTaskData(e);
+        cleanupPlaceholders(); // Ensure placeholders are removed
         resetDrag();
-    } 
+    }
 }
 
 function resetDrag() {

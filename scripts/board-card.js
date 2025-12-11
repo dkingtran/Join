@@ -3,6 +3,7 @@
  * @type {Object.<string, string>}
  */
 const statusToColumnId = {
+    "triage": "tasks-list-triage",
     "to-do": "tasks-list-open",
     "in-progress": "tasks-list-inprogress",
     "feedback": "tasks-list-awaitfeedback",
@@ -132,6 +133,7 @@ function getPriorityIcon(priority) {
  */
 function clearAllTaskLists() {
     const columns = [
+        "tasks-list-triage",
         "tasks-list-open",
         "tasks-list-inprogress",
         "tasks-list-awaitfeedback",

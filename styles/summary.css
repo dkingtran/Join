@@ -2,22 +2,23 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-  
+
 }
-.main-container{
+
+.main-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.user{
+.user {
     margin-left: 168px;
     margin-top: 50px;
     width: 385px;
     height: 136px;
 }
 
-.greet-user{
+.greet-user {
     display: flex;
     font-weight: 500;
     font-size: 47px;
@@ -25,13 +26,13 @@
     color: #2A3647;
 }
 
-.user-name{
+.user-name {
     font-weight: bold;
     font-size: 64px;
     color: #29ABE2;
 }
 
-.profile-container{
+.profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,7 +72,7 @@
     display: none;
 }
 
-.title-section span{
+.title-section span {
     font-size: 27px;
     font-weight: 400;
     color: #2A3647;
@@ -83,7 +84,7 @@
     font-weight: bold;
 }
 
-.summary-section{
+.summary-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -143,15 +144,15 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 560px;
+    width: 370px;
     height: 168px;
     border-radius: 30px;
     background-color: #ffff;
-    margin-top: 30px;
-    gap: 50px;
+    margin-top: 0;
+    gap: 20px;
 }
 
-.display-urgency{
+.display-urgency {
     width: 130px;
     height: 96px;
     display: flex;
@@ -165,13 +166,13 @@
     font-size: 64px;
 }
 
-.urgency-pipe{
+.urgency-pipe {
     width: 2px;
     height: 102px;
     background-color: #D1D1D1;
 }
 
-.display-deadline{
+.display-deadline {
     text-align: center;
 }
 
@@ -190,7 +191,9 @@
     margin-bottom: 30px;
 }
 
-.awaiting-feedback, .in-progress, .in-board {
+.awaiting-feedback,
+.in-progress,
+.in-board {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -214,15 +217,15 @@
     cursor: pointer;
 }
 
-.element-hover .hover-img{
+.element-hover .hover-img {
     display: none;
 }
 
-.element-hover:hover .default-img{
+.element-hover:hover .default-img {
     display: none;
 }
 
-.element-hover:hover .hover-img{
+.element-hover:hover .hover-img {
     display: block;
 }
 
@@ -231,15 +234,118 @@
     color: #FFFFFF !important;
 }
 
-a{
+a {
     text-decoration: none;
     color: #000000;
 }
 
-.summary-section, .user, .title-section {
-  visibility: hidden;
+.summary-section,
+.user,
+.title-section {
+    visibility: hidden;
 }
 
 .invisible {
-  visibility: hidden;
+    visibility: hidden;
+}
+
+/* New Triage Layout */
+.middle-subsection {
+    display: flex;
+    justify-content: space-between;
+    width: 560px;
+    margin-top: 30px;
+}
+
+.summary-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 168px;
+    border-radius: 30px;
+    background-color: #ffff;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    transition: transform 0.1s ease-in-out;
+}
+
+.summary-card:hover {
+    transform: scale(1.05);
+}
+
+.display-urgency-inner,
+.display-triage-inner,
+.display-deadline-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.display-deadline-inner h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2A3647;
+}
+
+.display-deadline-inner span {
+    font-size: 16px;
+    color: #2A3647;
+}
+
+.summary-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.summary-card h1 {
+    font-size: 48px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.summary-card span {
+    font-size: 16px;
+    color: #2A3647;
+}
+
+
+/* 
+   CUSTOM TRIAGE CARD STYLES
+   You can customize the Triage card here without using :nth-child.
+   The class .triage-card is unique to this element.
+*/
+
+.triage-card {
+    /* Add custom base styles here if needed */
+}
+
+.triage-card:hover {
+    /* Override the default dark hover effect here */
+    /* Example: background-color: #ff5555 !important; */
+    /* Example: transform: scale(1.1); */
+}
+
+.triage-card h1 {
+    background: linear-gradient(180deg, #8933FC 0%, #29ABE2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Ensure text turns white on hover */
+.triage-card:hover h1 {
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+}
+
+/* Target text inside the triage card on hover */
+.triage-card:hover span {
+    color: white !important;
 }
