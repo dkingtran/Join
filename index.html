@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="styles/login.css" />
 	<link rel="stylesheet" href="styles/global.css">
 	<link rel="stylesheet" href="styles/standard.css" />
+	<link rel="stylesheet" href="styles/n8n-modals.css">
 	<link rel="stylesheet" href="styles/AllMediaQueries/media-query-login.css">
 
 	<script src="./scripts/firebase.js"></script>
@@ -17,22 +18,108 @@
 
 <body>
 
+	<!-- Modal 1: Role Selection -->
+	<div id="role-selection-modal" class="modal-overlay d-none">
+		<div class="modal-content">
+			<h2>Welcome</h2>
+			<p>Pick the option that suits your role: create a request as a stakeholder or log in if you’re part of the team.</p>
+			<div class="button-group-login">
+				<div class="button-group-login-item">
+					<div class="login-option-header">
+						<img src="./assets/img/icons/login/work.png" alt=""><p>Are you a stakeholder?</p>
+					</div>
+					<button class="btn-stakeholder" onclick="openStakeholderFlow()">Create Request</button>
+				</div>
+				<div class="button-group-login-item">
+					<div class="login-option-header">
+						<img src="./assets/img/icons/login/group.png" alt=""><p>Are you a team member?</p>
+					</div>
+					<button class="btn-member" onclick="closeModalAndLogin()">Member Log in</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	<div class="wrapper" id="mainContent">
+	<!-- Modal 2: Stakeholder Request (Full Page) -->
+	<div id="stakeholder-modal" class="full-page-modal d-none">
+		<div class="stakeholder-wrapper">
+			<img src="./assets/img/logo/logo-dark.png" alt="Logo" class="stakeholder-logo">
+			
+			<div class="stakeholder-header">
+				<button class="back-btn" onclick="location.reload()">
+					<img src="./assets/img/icons/login/arrow-left-line.png" alt="Back">
+				</button>
+				<div class="request-counter">
+					<span id="request-count">0</span> of 10 requests used today
+				</div>
+				<!-- Debug Button: Remove in production -->
+				<button onclick="toggleLimitView()" style="position: absolute; top: 10px; right: 10px; opacity: 0.5;">Toggle Limit View</button>
+			</div>
+
+			<div class="stakeholder-content">
+				<h1>Welcome</h1>
+				
+				<div id="limit-ok-container" class="stakeholder-flex-container">
+					<div class="stakeholder-text-column">
+						<h2 class="limit-ok-heading">Easily create a ticket by sending an email — no extra steps needed.</h2>
+						<div class="stakeholder-image-mobile">
+							<img src="assets/img/icons/login/stakeholder-img.png" alt="Stakeholder Illustration">
+						</div>
+						<p>
+							On this platform, you can submit your feature requests via email. Our AI system will automatically generate a ticket with a deadline and priority level.
+							<br><br>
+							A total of 10 requests can be created per day. After this limit, emails can still be sent, but they will be manually reviewed by our team instead of generating AI tickets.
+						</p>
+						<button class="create-request-btn" onclick="sendN8nRequest()">
+							Create Email Request <img src="./assets/img/icons/login/check.png" alt="Mail Icon">
+						</button>
+					</div>
+					<div class="stakeholder-image-column">
+						<img src="assets/img/icons/login/stakeholder-img.png" alt="Stakeholder Illustration">
+					</div>
+				</div>
+				
+				<div id="limit-reached-container" class="stakeholder-flex-container d-none">
+					<div class="stakeholder-text-column">
+						<h2>The daily 10-request limit has been reached! </h2>
+						<div class="stakeholder-image-mobile">
+							<img src="assets/img/icons/login/stakeholder-img-limit.png" alt="Limit Reached Illustration">
+						</div>
+						<p>
+							Need more? No worries — you can still send emails, but our team will review them manually instead of using AI to create tickets.
+						</p>
+						<a href="mailto:support@join-kanban.com?subject=Manual Stakeholder Request" class="create-request-btn">
+							Create request
+						</a>
+					</div>
+					<div class="stakeholder-image-column">
+						<img src="assets/img/icons/login/stakeholder-img-limit.png" alt="Limit Reached Illustration">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer display-standard">
+			<a href="./pp-login.html">Privacy Policy</a>
+			<a href="./ln-login.html">Legal notice</a>
+		</footer>
+	</div>
+
+	<main class="wrapper" id="mainContent">
 		<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated initial-hidden" id="logo" />
 
 		<div class="intro" id="intro">
 			<div class="white-overlay" id="whiteOverlay"></div>
 		</div>
 
-		<div class="top-row">
+		<header class="top-row">
 			<div class="top-right">
 				<span class="not-a-user">Not a Join user?</span>
 				<a class="signup-btn" href="register.html">Sign up</a>
 			</div>
-		</div>
+		</header>
 
-		<div class="container display-standard">
+		<section class="container display-standard">
 			<div class="login-box display-standard">
 				<h2>Log in</h2>
 				<div class="underline">
@@ -82,14 +169,17 @@
 			<span class="not-a-user">Not a Join user?</span>
 			<a href="register.html" class="signup-btn">Sign up</a>
 		</div>
-		<div class="footer display-standard">
+		</section>
+		<footer class="footer display-standard">
 			<a id="privacy-policy" href="./pp-login.html">Privacy Policy</a>
 			<a id="legal-notice" href="./ln-login.html">Legal notice</a>
-		</div>
-	</div>
+		</footer>
+	</main>
 	<script src="./scripts/animation-logo.js"></script>
 	<script src="./scripts/login.js"></script>
 	<script src="./scripts/login-register.js"></script>
+	<script src="./scripts/n8n-client.js"></script>
+	<script src="./scripts/debug-helper.js"></script>
 </body>
 
 </html>
