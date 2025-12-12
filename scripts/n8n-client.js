@@ -24,21 +24,37 @@ function getTodayDateString() {
  * @async
  * @returns {Promise<void>}
  */
-async function openStakeholderFlow() {
+async function openStakeholderFlow(checkLimit = false) {
     const roleModal = document.getElementById('role-selection-modal');
     const stakeholderModal = document.getElementById('stakeholder-modal');
+    const staticLogo = document.querySelector('.logo-static');
 
     if (roleModal) roleModal.classList.add('d-none');
     if (stakeholderModal) stakeholderModal.classList.remove('d-none');
+    if (staticLogo) staticLogo.classList.add('d-none'); // Hide static logo
+
+    if (!checkLimit) return; // Skip Firebase check if not requested
 
     const today = getTodayDateString();
     const path = `/api_usage/${today}/count`;
 
     try {
         // Uses the existing loadData function from firebase.js
-        let count = await loadData(path);
+        let countData = await loadData(path);
 
-        if (!count) count = 0;
+        // Handle case where countData is an object (e.g. { "-N...": 5 } or { count: 5 })
+        let count = 0;
+        if (typeof countData === 'number') {
+            count = countData;
+        } else if (typeof countData === 'string') {
+            count = parseInt(countData, 10) || 0;
+        } else if (typeof countData === 'object' && countData !== null) {
+            // Try to find the first numeric value
+            const values = Object.values(countData);
+            if (values.length > 0 && typeof values[0] === 'number') {
+                count = values[0];
+            }
+        }
 
         const limitOkContainer = document.getElementById('limit-ok-container');
         const limitReachedContainer = document.getElementById('limit-reached-container');
@@ -69,8 +85,11 @@ async function openStakeholderFlow() {
 function closeModalAndLogin() {
     const roleModal = document.getElementById('role-selection-modal');
     const logo = document.getElementById('logo');
+    const staticLogo = document.querySelector('.logo-static');
+
     if (roleModal) roleModal.classList.add('d-none');
     if (logo) logo.classList.remove('d-none');
+    if (staticLogo) staticLogo.classList.remove('d-none'); // Show static logo
     // The login form is already visible on the main page underneath
 }
 
@@ -87,10 +106,20 @@ async function sendN8nRequest() {
     const path = `/api_usage/${today}/count`;
 
     // Double check limit
-    let currentCount = await loadData(path) || 0;
+    let currentCountData = await loadData(path);
+    let currentCount = 0;
+    if (typeof currentCountData === 'number') {
+        currentCount = currentCountData;
+    } else if (typeof currentCountData === 'object' && currentCountData !== null) {
+        const values = Object.values(currentCountData);
+        if (values.length > 0 && typeof values[0] === 'number') {
+            currentCount = values[0];
+        }
+    }
+
     if (currentCount >= 10) {
         alert("Daily limit just reached! Please use the manual email option.");
-        openStakeholderFlow(); // Refresh UI
+        openStakeholderFlow(true); // Refresh UI and force check
         return;
     }
 
@@ -111,12 +140,11 @@ async function sendN8nRequest() {
 
         if (response.ok) {
             // Increment counter in Firebase
-            // Note: In a production env, it's safer if n8n does this to prevent client-side manipulation,
-            // but for this demo, client-side is acceptable.
+            // Ensure we save a simple number
             await putData(path, currentCount + 1);
 
             alert("Request sent successfully!");
-            openStakeholderFlow(); // Refresh UI
+            openStakeholderFlow(true); // Refresh UI and force check
         } else {
             alert("Error connecting to the automation service.");
         }

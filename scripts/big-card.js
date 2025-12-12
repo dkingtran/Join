@@ -14,7 +14,7 @@ function openBigCard(taskId) {
   const bigCardHTML = bigCardTemplate(
     task.id, task.category || "", task.title || "", task.description || "",
     task["due-date"] || task.due || task.date || "", task.priority || "",
-    avatarsHTML, subtasksHTML
+    avatarsHTML, subtasksHTML, task.isAiGenerated
   );
   showBigCard(bigCardHTML);
 }
@@ -85,8 +85,8 @@ async function toggleSubtaskDone(checkbox) {
   try {
     await putData(`/tasks/${taskId}/subtasks/${subId}/done`, isDone);
     const t = Array.isArray(displayedTasks) ? displayedTasks.find(x => x?.id === taskId) : displayedTasks[taskId];
-    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone; 
-    renderAllTasks();                
+    if (t?.subtasks?.[subId]) t.subtasks[subId].done = isDone;
+    renderAllTasks();
   } catch (err) {
     console.error("Failed to save subtask:", err);
   }
@@ -112,13 +112,13 @@ function buildSubtasksHTML(taskId, subtasks) {
 /**
  * Close big Card
  */
-  function closeBigCard() {
+function closeBigCard() {
   const container = document.getElementById("big-card-container")
   if (container) {
     container.innerHTML = "";
     container.classList.add("d-none");
   }
-  document.body.style.overflow = ""; 
+  document.body.style.overflow = "";
 }
 
 /**
@@ -142,7 +142,7 @@ function deleteTaskBigCard(taskId) {
     deleteData(`/tasks/${taskId}`);
     if (Array.isArray(displayedTasks))
       displayedTasks = displayedTasks.filter(t => t?.id !== taskId);
-      tasks = tasks.filter(t => t?.id !== taskId);
+    tasks = tasks.filter(t => t?.id !== taskId);
     closeBigCard();
     renderAllTasks();
   } catch (err) {

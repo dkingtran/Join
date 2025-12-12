@@ -8,15 +8,19 @@
  * @param {string} prio - Priority level.
  * @param {string} avatarsHTML - Pre-rendered HTML for assigned avatars.
  * @param {string} subtasksHTML - Pre-rendered HTML for subtasks list.
+ * @param {boolean} isAiGenerated - Whether the task is AI generated.
  * @returns {string} Full HTML for the big card.
  */
-function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML) {
+function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML, isAiGenerated) {
   return `
 <div class="big-card-content w-full" id="big-card-${id}">
     <div class="category-x flex align-center justify-between w-full">
-        <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}"
-            id="category-big-card-${id}">
-            ${category || ""}
+        <div class="flex align-center gap-10">
+            <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}"
+                id="category-big-card-${id}">
+                ${category || ""}
+            </div>
+            ${isAiGenerated ? `<div class="ai-label-big"><img src="./assets/img/icons/board/wand_stars.png" class="ai-icon"> AI-generated ticket</div>` : ""}
         </div>
 
         <div class="x-closing-icon flex" onclick="closeBigCard()">

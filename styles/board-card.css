@@ -175,3 +175,43 @@
 	width: 100%;
 	font-size: 16px;
 }
+
+/* AI Label Styles */
+.card-header-flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.ai-label,
+.ai-label-big {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 12px;
+	font-weight: 600;
+	background: linear-gradient(90deg, #FF00D6, #FF7A00);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
+
+.ai-icon {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	/* If you want the icon to be colored too, it's tricky with img. 
+       Assuming the icon is the check.png which is likely green or black. 
+       If you want it to match the gradient, you might need an SVG mask or filter.
+       For now, I'll leave it as is. */
+}
+
+.ai-label-big {
+	font-size: 16px;
+}
+
+.gap-10 {
+	gap: 10px;
+}

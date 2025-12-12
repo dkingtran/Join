@@ -54,6 +54,7 @@
     font-size: 23px;
     max-width: 208px;
     height: 36px;
+    padding: 8px;
     background-color: #1FD7C1;
     border-radius: 8px;
 }
@@ -188,7 +189,7 @@
 
 @media(max-width:505px) {
     .big-card-content {
-   /*      margin: 10px 10px; */
+        /*      margin: 10px 10px; */
         padding: 30px 40px;
         max-height: calc(85vh - 16px);
     }
@@ -199,11 +200,11 @@
 }
 
 @media(max-width:400px) {
-  .title-content {
-    font-size: 36px;
-}
+    .title-content {
+        font-size: 36px;
+    }
 
- .big-card-content{
-    max-width: 309px;
-  }
+    .big-card-content {
+        max-width: 309px;
+    }
 }

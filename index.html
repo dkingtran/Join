@@ -19,7 +19,7 @@
 <body>
 
 	<!-- Modal 1: Role Selection -->
-	<div id="role-selection-modal" class="modal-overlay d-none">
+	<div id="role-selection-modal" class="modal-overlay">
 		<div class="modal-content">
 			<h2>Welcome</h2>
 			<p>Pick the option that suits your role: create a request as a stakeholder or log in if you’re part of the team.</p>
@@ -105,14 +105,15 @@
 		</footer>
 	</div>
 
+	<!-- Intro Animation Elements -->
+	<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated" id="logo" />
+	<div class="intro" id="intro">
+		<div class="white-overlay" id="whiteOverlay"></div>
+	</div>
+
 	<main class="wrapper" id="mainContent">
-		<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated initial-hidden" id="logo" />
-
-		<div class="intro" id="intro">
-			<div class="white-overlay" id="whiteOverlay"></div>
-		</div>
-
 		<header class="top-row">
+			<img src="./assets/img/logo/logo-dark.png" alt="Logo" class="logo-static d-none" />
 			<div class="top-right">
 				<span class="not-a-user">Not a Join user?</span>
 				<a class="signup-btn" href="register.html">Sign up</a>

@@ -25,14 +25,13 @@ function cardRender(tasksId, displayedTasksId, task, assignedAvatarsHTML, progre
         <p class="task-description">${task.description || ""}</p>
 
         <div class="subtask-counter">
-          ${
-            progress.maxSubtasks === 0
-              ? `<span class="no-subtask">No subtask</span>`
-              : `<div class="subtask-progress">
+          ${progress.maxSubtasks === 0
+      ? `<span class="no-subtask">No subtask</span>`
+      : `<div class="subtask-progress">
                   <div class="progress-bar" style="width:${progress.progressPercent}%"></div>
                 </div>
                 <span class="counter">${progress.total}/${progress.maxSubtasks} Subtasks</span>`
-          }
+    }
         </div>
 
         <div class="board-card-footer">
@@ -54,7 +53,7 @@ function cardRender(tasksId, displayedTasksId, task, assignedAvatarsHTML, progre
  * @returns {string} HTML string for the corresponding priority icon.
  */
 function priorityRender(cleanPriority) {
-	return /* HTML */ `
+  return /* HTML */ `
         <img src="./assets/img/icons/priority-icons/${cleanPriority}.png" 
                 alt="${cleanPriority} priority" 
                 class="priority-icon" />
@@ -69,7 +68,7 @@ function priorityRender(cleanPriority) {
  * @returns {string} The complete HTML string for the switch dropdown menu.
  */
 function getSwitchDropdownTemplate(buttonsHTML) {
-	return /* HTML */ ` <div class="switch-dropdown">
+  return /* HTML */ ` <div class="switch-dropdown">
 		<p>Move To</p>
 		${buttonsHTML}
 	</div>`;
@@ -81,7 +80,7 @@ function getSwitchDropdownTemplate(buttonsHTML) {
  * @returns {string} HTML string of the upward switch button.
  */
 function getArrowUpBtnTemplate(columnIndex) {
-	return /* HTML */ `<button
+  return /* HTML */ `<button
 		class="switch-dropdown-btn"
 		onclick="switchColumn(event, ${columnIndex})">
 		<img src="./assets/img/icons/board/arrow-upward.svg" alt="arrow upward" />
@@ -95,7 +94,7 @@ function getArrowUpBtnTemplate(columnIndex) {
  * @returns {string} HTML string of the downward switch button.
  */
 function getArrowDownBtnTemplate(columnIndex) {
-	return /* HTML */ `<button
+  return /* HTML */ `<button
 		class="switch-dropdown-btn"
 		onclick="switchColumn(event, ${columnIndex})">
 		<img
@@ -112,7 +111,7 @@ function getArrowDownBtnTemplate(columnIndex) {
  * @returns {string} The HTML string for the empty message.
  */
 function getKanbanEmptyMessage(headerText) {
-	return /* HTML */ ` <div class="empty-msg">No tasks ${headerText}</div>`;
+  return /* HTML */ ` <div class="empty-msg">No tasks ${headerText}</div>`;
 }
 
 /**
@@ -121,5 +120,5 @@ function getKanbanEmptyMessage(headerText) {
  * @returns {string} The HTML string representing a placeholder div.
  */
 function getTaskPlaceholderTemplate() {
-	return /* HMTL */ `<div class="placeholder"></div>`;
+  return /* HMTL */ `<div class="placeholder"></div>`;
 }

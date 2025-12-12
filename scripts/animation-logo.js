@@ -39,12 +39,15 @@ function showContent(mainContent, logo) {
 function playAnimation(logo, overlay, mainContent) {
   mainContent.classList.remove('hidden');
   logo.classList.remove('initial-hidden');
-  
-  requestAnimationFrame(() => {
+
+  // Ensure overlay is visible initially
+  overlay.style.opacity = '1';
+
+  setTimeout(() => {
     logo.classList.add('shrink');
     overlay.style.opacity = '0';
     mainContent.style.opacity = '1';
-  });
+  }, 1000);
 }
 
 /**
@@ -56,8 +59,8 @@ function cleanupAnimation(intro, logo) {
   setTimeout(() => {
     intro.remove();
     logo.style.transition = 'none';
-    sessionStorage.setItem('animationPlayed', 'true');
-  }, 1600);
+    // sessionStorage.setItem('animationPlayed', 'true');
+  }, 2600);
 }
 
 /**
@@ -79,11 +82,11 @@ function handleFirstVisit() {
     cleanupAnimation(intro, logo);
   } else {
     showContent(mainContent, logo);
-    sessionStorage.setItem('animationPlayed', 'true');
+    // sessionStorage.setItem('animationPlayed', 'true');
   }
 }
-if (!sessionStorage.getItem('animationPlayed')) {
-  window.addEventListener('load', handleFirstVisit);
-} else {
-  window.addEventListener('load', skipAnimation);
-}
+// if (!sessionStorage.getItem('animationPlayed')) {
+window.addEventListener('load', handleFirstVisit);
+// } else {
+//   window.addEventListener('load', skipAnimation);
+// }
