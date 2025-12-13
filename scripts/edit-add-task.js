@@ -300,6 +300,11 @@ async function openEditCardFor(taskId) {
     ? displayedTasks.find(t => t?.id === taskId)
     : displayedTasks?.[taskId];
   if (!task) return;
+
+  if (typeof closeBigCard === "function") {
+    closeBigCard();
+  }
+
   openEditCard();
   showEditTaskBig();
   prefillEditForm(task);

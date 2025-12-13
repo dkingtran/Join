@@ -13,6 +13,7 @@ const inputField = document.getElementById("subtask-input-second");
  */
 function getTaskData() {
     const $ = id => document.getElementById(id).value.trim();
+    const creatorName = JSON.parse(localStorage.getItem("name")) || "Unknown";
     return {
         title: $('title-task'),
         description: $('task-description'),
@@ -21,7 +22,9 @@ function getTaskData() {
         "assigned-to": assignedTo,
         category: $('task-category'),
         subtasks: collectSubtasksFromDOM(),
-        status: getTaskStatus(taskToAddStatus)
+        status: getTaskStatus(taskToAddStatus),
+        creator: creatorName,
+        creatorType: "member"
     };
 }
 

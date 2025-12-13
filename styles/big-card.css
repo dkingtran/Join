@@ -13,7 +13,7 @@
     max-height: calc(100vh - 16px);
     overflow-x: hidden;
     padding: 48px 40px;
-    max-width: 472px;
+    max-width: 600px;
     gap: 15px;
     z-index: 2001;
     position: fixed;
@@ -63,7 +63,7 @@
     line-height: 120%;
     min-height: 40px;
     margin-bottom: 20px;
-    max-height: 80px;
+    max-height: 360px;
     overflow: auto;
 }
 

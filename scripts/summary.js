@@ -9,10 +9,25 @@ let tasks = [];
 async function loadTasks() {
     const data = await loadData("tasks");
     if (!data) return [];
+    let tasksArray = [];
     if (Array.isArray(data)) {
-        return data.filter(task => task !== null && typeof task === "object");
+        tasksArray = data.filter(task => task !== null && typeof task === "object");
+    } else {
+        tasksArray = Object.values(data);
     }
-    return Object.values(data);
+    tasksArray.forEach(task => {
+        if (typeof task.status === "string") {
+            // AI generated tasks come as string. Force them to 'triage' by default.
+            task.status = {
+                "triage": true,
+                "to-do": false,
+                "in-progress": false,
+                "feedback": false,
+                "done": false
+            };
+        }
+    });
+    return tasksArray;
 }
 
 /**

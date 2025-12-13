@@ -26,8 +26,8 @@ let contacts = [];
  * @function
  */
 async function init() {
-    await updateTasksArrays();
-    await getContactsArray();
+  await updateTasksArrays();
+  await getContactsArray();
 }
 
 /**
@@ -37,8 +37,8 @@ async function init() {
  * @function
  */
 async function updateTasksArrays() {
-    await getTasksArray();
-    displayedTasks = tasks;
+  await getTasksArray();
+  displayedTasks = tasks;
 }
 
 /**
@@ -57,7 +57,18 @@ async function getTasksArray() {
   }
   for (const taskId in taskObjects) {
     if (taskObjects.hasOwnProperty(taskId)) {
-      tasks.push({ id: taskId, ...taskObjects[taskId] });
+      let task = { id: taskId, ...taskObjects[taskId] };
+      if (typeof task.status === "string") {
+        // AI generated tasks come as string. Force them to 'triage' by default.
+        task.status = {
+          "triage": true,
+          "to-do": false,
+          "in-progress": false,
+          "feedback": false,
+          "done": false
+        };
+      }
+      tasks.push(task);
     }
   }
 }
@@ -69,14 +80,14 @@ async function getTasksArray() {
  * @function
  */
 async function getContactsArray() {
-    contacts = [];
-    let contactObjects = await loadData("/contacts/");
-    if (!contactObjects) {
-        console.warn("no contacts available.");
-        return;
-    }
-    Object.keys(contactObjects).forEach(key => {
-        contacts.push(contactObjects[key]);
-    });
+  contacts = [];
+  let contactObjects = await loadData("/contacts/");
+  if (!contactObjects) {
+    console.warn("no contacts available.");
+    return;
+  }
+  Object.keys(contactObjects).forEach(key => {
+    contacts.push(contactObjects[key]);
+  });
 }
 

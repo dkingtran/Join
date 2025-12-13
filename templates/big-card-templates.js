@@ -9,14 +9,15 @@
  * @param {string} avatarsHTML - Pre-rendered HTML for assigned avatars.
  * @param {string} subtasksHTML - Pre-rendered HTML for subtasks list.
  * @param {boolean} isAiGenerated - Whether the task is AI generated.
+ * @param {string} creatorHTML - HTML for the creator line.
  * @returns {string} Full HTML for the big card.
  */
-function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML, isAiGenerated) {
+function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subtasksHTML, isAiGenerated, creatorHTML) {
   return `
 <div class="big-card-content w-full" id="big-card-${id}">
     <div class="category-x flex align-center justify-between w-full">
-        <div class="flex align-center gap-10">
-            <div class="category-chois white-color display-standard w-full ${getCategoryClass(category)}"
+        <div class="creator-line flex align-center gap-10">
+            <div class="category-chois white-color display-standard ${getCategoryClass(category)}"
                 id="category-big-card-${id}">
                 ${category || ""}
             </div>
@@ -38,6 +39,8 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
     <div class="description-big-card max-w-445 w-full font-size-20 font-weight 400" id="description-big-card-${id}">
         ${desc || ""}
     </div>
+
+    ${creatorHTML || ""}
 
     <div class="date-big-card w-full max-w-445 flex align-center font-size-20">
         <p class="date-big-card-text font-weight-400">Due date:</p>

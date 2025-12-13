@@ -85,7 +85,7 @@ function renderOverflowAvatar(users) {
  * @returns {{progressPercent: number, total: number, maxSubtasks: number}} Progress data.
  */
 function getSubtaskProgress(subtasks = {}) {
-    if (typeof subtasks !== "object" || Array.isArray(subtasks)) {
+    if (!subtasks || typeof subtasks !== "object" || Array.isArray(subtasks)) {
         return { progressPercent: 0, total: 0, maxSubtasks: 0 };
     }
     const keys = Object.keys(subtasks);

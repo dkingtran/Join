@@ -191,7 +191,7 @@
 	gap: 5px;
 	font-size: 12px;
 	font-weight: 600;
-	background: linear-gradient(90deg, #FF00D6, #FF7A00);
+	background: linear-gradient(90deg, #9327FF 0%, #2EA1DC 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -214,4 +214,30 @@
 
 .gap-10 {
 	gap: 10px;
+}
+
+.creator-icon {
+	object-fit: contain;
+}
+
+.creator-name {
+	font-size: 19px;
+	color: #2A3647;
+}
+
+.creator-text {
+	margin-right: 16px;
+	color: #2A3647;
+}
+
+.creator-details {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.creator-spacer {
+	flex-grow: 1;
+	min-width: 20px;
 }

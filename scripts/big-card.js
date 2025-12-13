@@ -11,12 +11,46 @@ function openBigCard(taskId) {
   const avatarsHTML = buildAvatarsHTML(task);
   const subtasks = normalizeSubtasks(task);
   const subtasksHTML = buildSubtasksHTML(task.id, subtasks);
+  const creatorHTML = buildCreatorHTML(task);
   const bigCardHTML = bigCardTemplate(
     task.id, task.category || "", task.title || "", task.description || "",
     task["due-date"] || task.due || task.date || "", task.priority || "",
-    avatarsHTML, subtasksHTML, task.isAiGenerated
+    avatarsHTML, subtasksHTML, task.isAiGenerated, creatorHTML
   );
   showBigCard(bigCardHTML);
+}
+
+/**
+ * Builds the HTML for the creator line in the big card.
+ * @param {Object} task - The task object.
+ * @returns {string} HTML string for the creator section.
+ */
+function buildCreatorHTML(task) {
+  let leftIcon, creatorName, rightIconHTML;
+
+  if (task.isAiGenerated) {
+    leftIcon = "./assets/img/icons/board/extern.png";
+    creatorName = task.creator || "Email Request";
+    rightIconHTML = `<img src="./assets/img/icons/board/send-email.png" alt="Email" class="creator-icon">`;
+  } else {
+    leftIcon = "./assets/img/icons/board/member.png";
+    creatorName = task.creator || "Unknown Member";
+    rightIconHTML = `<img src="./assets/img/icons/board/see-profile.png" alt="Email" class="creator-icon">`;
+  }
+
+  return `
+    <div class="creator-big-card w-full flex align-center font-size-20">
+        <p class="creator-text font-weight-400">Creator:</p>
+        <div class="creator-details">
+            <div class="flex align-center gap-10">
+                <img src="${leftIcon}" alt="Type" class="creator-icon">
+                <span style="color: black; white-space: nowrap;">${creatorName}</span>
+            </div>
+            <div class="creator-spacer"></div>
+            ${rightIconHTML}
+        </div>
+    </div>
+  `;
 }
 
 /**
@@ -193,6 +227,7 @@ function renderBigCard(taskId, taskObj) {
   if (!taskObj) return;
   const avatarsHTML = buildAvatarsHTML(taskObj);
   const subs = taskObj.subtasks ? normalizeSubtasks(taskObj) : [];
+  const creatorHTML = buildCreatorHTML(taskObj);
   const bigCardHTML = bigCardTemplate(
     taskId,
     taskObj.category || "",
@@ -201,7 +236,9 @@ function renderBigCard(taskId, taskObj) {
     taskObj["due-date"] || taskObj.due || taskObj.date || "",
     taskObj.priority || "",
     avatarsHTML,
-    buildSubtasksHTML(taskId, subs)
+    buildSubtasksHTML(taskId, subs),
+    taskObj.isAiGenerated,
+    creatorHTML
   );
   showBigCard(bigCardHTML);
 }
