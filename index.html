@@ -28,7 +28,7 @@
 					<div class="login-option-header">
 						<img src="./assets/img/icons/login/work.png" alt=""><p>Are you a stakeholder?</p>
 					</div>
-					<button class="btn-stakeholder" onclick="openStakeholderFlow()">Create Request</button>
+					<button class="btn-stakeholder" onclick="openStakeholderFlow(true)">Create Request</button>
 				</div>
 				<div class="button-group-login-item">
 					<div class="login-option-header">
@@ -70,9 +70,9 @@
 							<br><br>
 							A total of 10 requests can be created per day. After this limit, emails can still be sent, but they will be manually reviewed by our team instead of generating AI tickets.
 						</p>
-						<button class="create-request-btn" onclick="sendN8nRequest()">
+						<a href="mailto:dennisking.tran@gmail.com?subject=New Stakeholder Request" class="create-request-btn" onclick="handleEmailClick()">
 							Create Email Request <img src="./assets/img/icons/login/check.png" alt="Mail Icon">
-						</button>
+						</a>
 					</div>
 					<div class="stakeholder-image-column">
 						<img src="assets/img/icons/login/stakeholder-img.png" alt="Stakeholder Illustration">

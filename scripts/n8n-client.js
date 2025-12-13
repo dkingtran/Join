@@ -94,67 +94,15 @@ function closeModalAndLogin() {
 }
 
 /**
- * Sends a request to the n8n webhook.
- * First re-checks the limit to prevent race conditions.
- * If successful, increments the counter in Firebase.
- * 
- * @async
- * @returns {Promise<void>}
+ * Handles the click on the mailto link.
+ * Instead of counting locally, we let n8n do the counting when the email is actually received.
+ * This function simply redirects the user back to the login screen after a short delay.
  */
-async function sendN8nRequest() {
-    const today = getTodayDateString();
-    const path = `/api_usage/${today}/count`;
-
-    // Double check limit
-    let currentCountData = await loadData(path);
-    let currentCount = 0;
-    if (typeof currentCountData === 'number') {
-        currentCount = currentCountData;
-    } else if (typeof currentCountData === 'object' && currentCountData !== null) {
-        const values = Object.values(currentCountData);
-        if (values.length > 0 && typeof values[0] === 'number') {
-            currentCount = values[0];
-        }
-    }
-
-    if (currentCount >= 10) {
-        alert("Daily limit just reached! Please use the manual email option.");
-        openStakeholderFlow(true); // Refresh UI and force check
-        return;
-    }
-
-    // UI Feedback (could be improved with a spinner)
-    const btn = document.querySelector('#limit-ok-container button');
-    if (btn) btn.disabled = true;
-    if (btn) btn.innerText = "Sending...";
-
-    try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                message: "New Stakeholder Request",
-                timestamp: new Date().toISOString()
-            })
-        });
-
-        if (response.ok) {
-            // Increment counter in Firebase
-            // Ensure we save a simple number
-            await putData(path, currentCount + 1);
-
-            alert("Request sent successfully!");
-            openStakeholderFlow(true); // Refresh UI and force check
-        } else {
-            alert("Error connecting to the automation service.");
-        }
-    } catch (error) {
-        console.error("n8n connection error:", error);
-        alert("Could not connect to the automation service. Is n8n running?");
-    } finally {
-        if (btn) btn.disabled = false;
-        if (btn) btn.innerText = "Create Email Request";
-    }
+function handleEmailClick() {
+    // Wait 2 seconds (while mail client opens), then go back to login
+    setTimeout(() => {
+        location.reload(); // Reloads page to reset state
+    }, 2000);
 }
 
 /**
