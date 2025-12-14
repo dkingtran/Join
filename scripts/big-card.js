@@ -41,14 +41,10 @@ function buildCreatorHTML(task) {
   return `
     <div class="creator-big-card w-full flex align-center font-size-20">
         <p class="creator-text font-weight-400">Creator:</p>
-        <div class="creator-details">
-            <div class="flex align-center gap-10">
-                <img src="${leftIcon}" alt="Type" class="creator-icon">
-                <span style="color: black; white-space: nowrap;">${creatorName}</span>
-            </div>
-            <div class="creator-spacer"></div>
-            ${rightIconHTML}
-        </div>
+        <img src="${leftIcon}" alt="Type" class="creator-icon left-icon">
+        <span class="creator-name" style="color: black; white-space: nowrap;">${creatorName}</span>
+        <div class="creator-spacer"></div>
+        ${rightIconHTML}
     </div>
   `;
 }

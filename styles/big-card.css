@@ -13,6 +13,7 @@
     max-height: calc(100vh - 16px);
     overflow-x: hidden;
     padding: 48px 40px;
+    width: 90%;
     max-width: 600px;
     gap: 15px;
     z-index: 2001;
@@ -86,7 +87,7 @@
 .assigned-big-card {
     height: 175px;
     overflow: auto;
-    margin: 15px 15px;
+    margin: 15px 15px 15px 0;
 }
 
 .contacts-big-card {
@@ -95,12 +96,29 @@
     gap: 40px;
 }
 
+.creator-big-card {
+    gap: 10px;
+}
+
+.creator-spacer {
+    flex-grow: 1;
+}
+
 .subtasks-big-card {
-    min-width: 400px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     height: auto;
+}
+
+.subtasks-list-container {
+    width: 100%;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+    margin: 15px 15px 15px 0;
+    /* Platz für Scrollbar */
 }
 
 .input-subtask-checkbox-big-card {
@@ -141,7 +159,7 @@
 }
 
 .avatar-name {
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -184,6 +202,55 @@
 
     .title-content {
         font-size: 60px;
+    }
+}
+
+@media (max-width: 560px) {
+    .category-x {
+        height: auto;
+        align-items: flex-start;
+    }
+
+    .creator-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .creator-big-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "icon icon icon"
+            "label name right";
+        gap: 5px;
+        align-items: center;
+    }
+
+    .creator-big-card>img.left-icon {
+        grid-area: icon;
+        justify-self: start;
+        margin-bottom: 5px;
+        margin-left: 0 !important;
+    }
+
+    .creator-text {
+        grid-area: label;
+        margin-right: 10px;
+    }
+
+    .creator-name {
+        grid-area: name;
+        margin-left: 0 !important;
+    }
+
+    .creator-big-card>img:not(.left-icon) {
+        grid-area: right;
+        justify-self: end;
+    }
+
+    .creator-spacer {
+        display: none;
     }
 }
 

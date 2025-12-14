@@ -35,6 +35,15 @@
 
 @media (max-width: 1180px) {
 
+    .display-todo,
+    .display-done,
+    .urgency-subsection,
+    .in-board,
+    .in-progress,
+    .awaiting-feedback {
+        border-radius: 30px;
+    }
+
     .user {
         margin-left: 25px;
     }
@@ -265,7 +274,7 @@
     }
 
     .urgency-subsection {
-        width: 280px;
+        width: 400px;
         height: 120px;
         gap: 10px;
     }
@@ -300,9 +309,18 @@
     .summary-card {
         width: 255px;
         height: 80px;
-        border-radius: 15px;
+        border-radius: 30px;
         flex-direction: row;
         gap: 20px;
+    }
+
+    .display-todo,
+    .display-done,
+    .urgency-subsection,
+    .in-board,
+    .in-progress,
+    .awaiting-feedback {
+        border-radius: 30px;
     }
 
     .display-triage-inner {

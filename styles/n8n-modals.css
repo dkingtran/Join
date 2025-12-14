@@ -27,7 +27,9 @@
 
 /* Typography */
 .modal-content h2 {
-    font-size: 32px;
+    font-size: 40px;
+    line-height: 120%;
+    font-weight: 700;
     margin-bottom: 24px;
     color: #2A3647;
 }
@@ -89,12 +91,71 @@
 
 .button-group-login-item p {
     font-size: 23px;
+    text-align: start;
     margin: 0;
 }
 
 .button-group-login-item button {
     margin: 0;
     font-size: 23px;
+}
+
+/* Mobile Modal Elements (Hidden by default) */
+.modal-logo-mobile {
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    width: 64px;
+    /* Adjust size as needed */
+    height: auto;
+}
+
+.modal-signup-mobile {
+    position: absolute;
+    top: 100px;
+    /* Adjust based on layout */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.not-a-user-white {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.signup-btn-blue {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.3s;
+}
+
+.signup-btn-blue:hover {
+    background-color: #29ABE2;
+}
+
+.modal-footer-mobile {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.modal-footer-mobile a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.modal-footer-mobile a:hover {
+    opacity: 1;
 }
 
 /* Specific Button Styles */
@@ -263,177 +324,4 @@
     max-height: 300px;
     object-fit: contain;
     border-radius: 20px;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 900px) {
-    .stakeholder-flex-container {
-        flex-direction: column;
-        /* Stack normally */
-        text-align: center;
-    }
-
-    .stakeholder-image-column {
-        display: none;
-        /* Hide the side image on mobile */
-    }
-
-    .stakeholder-image-mobile {
-        display: block;
-        /* Show the mobile image between h2 and p */
-    }
-
-    .stakeholder-text-column {
-        max-width: 100%;
-    }
-
-    .stakeholder-content h2,
-    .stakeholder-content p {
-        text-align: center;
-    }
-
-    .create-request-btn {
-        float: none;
-        margin: 0 auto;
-        /* Center button */
-    }
-
-    .stakeholder-text-column .limit-ok-heading {
-        text-align: start;
-    }
-}
-
-@media (max-width: 550px) {
-    .stakeholder-header {
-        flex-direction: row-reverse;
-        /* Back button to right */
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-top: 20px;
-        padding: 20px;
-    }
-
-    .stakeholder-content {
-        margin-top: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .stakeholder-content h1 {
-        order: -2;
-        /* Move to top */
-        text-align: left;
-        font-size: 40px;
-        margin-bottom: 10px;
-        margin-top: 0;
-        position: absolute;
-        top: 120px;
-        /* Moved further down */
-        left: 20px;
-    }
-
-    .request-counter {
-        order: -1;
-        text-align: left;
-        margin-top: 132px;
-        /* Adjusted for new h1 position */
-        margin-bottom: 20px;
-        width: 100%;
-    }
-
-    .back-btn {
-        position: absolute;
-        top: 120px;
-        right: 20px;
-    }
-
-    .stakeholder-logo {
-        top: 20px;
-        left: 20px;
-        width: 40px;
-        height: auto;
-    }
-}
-
-.stakeholder-content h1 {
-    font-size: 61px;
-    font-weight: 700;
-    color: #2A3647;
-    margin-bottom: 60px;
-    text-align: center;
-}
-
-.stakeholder-content h2 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #2A3647;
-    margin-bottom: 24px;
-    white-space: nowrap;
-}
-
-.stakeholder-content p {
-    font-size: 20px;
-    color: #2A3647;
-    text-align: left;
-    line-height: 1.5;
-    margin-bottom: 40px;
-}
-
-.create-request-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #29ABE2;
-    color: white;
-    border: none;
-    padding: 16px 24px;
-    font-size: 21px;
-    font-weight: 700;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    float: left;
-    /* Align left */
-}
-
-.create-request-btn:hover {
-    background-color: #29ABE2;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.create-request-btn img {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
-    /* Make icon white */
-}
-
-/* Utility */
-.d-none {
-    display: none !important;
-}
-
-@media (max-width: 550px) {
-
-    .stakeholder-content h2 {
-        font-size: 16px;
-        font-weight: 500;
-        color: #2A3647;
-        margin-bottom: 24px;
-        text-align: center;
-        white-space: normal;
-    }
-
-    .stakeholder-content h1 {
-        font-size: 40px;
-        line-height: 120%;
-        font-weight: 700;
-        text-align: start;
-    }
-
-    .request-counter {
-        font-size: 16px;
-    }
 }

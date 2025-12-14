@@ -62,7 +62,9 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
 
     <div class="subtasks-big-card flex max-w-445">
         <p class="subtask-text-big-card font-size-20" font-weight-400>Subtasks</p>
-        ${subtasksHTML}
+        <div class="subtasks-list-container">
+            ${subtasksHTML}
+        </div>
     </div>
 
     <div class="delete-edit-big-card-content flex -w-full bg-white">

@@ -320,15 +320,9 @@ a {
    The class .triage-card is unique to this element.
 */
 
-.triage-card {
-    /* Add custom base styles here if needed */
-}
+.triage-card {}
 
-.triage-card:hover {
-    /* Override the default dark hover effect here */
-    /* Example: background-color: #ff5555 !important; */
-    /* Example: transform: scale(1.1); */
-}
+.triage-card:hover {}
 
 .triage-card h1 {
     background: linear-gradient(180deg, #8933FC 0%, #29ABE2 100%);
