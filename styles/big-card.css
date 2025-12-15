@@ -297,8 +297,7 @@
 
 @media(max-width:505px) {
     .big-card-content {
-        /*      margin: 10px 10px; */
-        padding: 30px 40px;
+        padding: 32px 16px;
         max-height: calc(85vh - 16px);
     }
 
@@ -307,12 +306,41 @@
     }
 }
 
+@media (max-width:430px) {
+    .creator-big-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "icon right"
+            "label name";
+        gap: 5px;
+        align-items: center;
+    }
+
+    .creator-big-card>img.left-icon {
+        grid-area: icon;
+        justify-self: start;
+        margin-bottom: 0;
+    }
+
+    .creator-big-card>img:not(.left-icon) {
+        grid-area: right;
+        justify-self: start;
+    }
+
+    .creator-text {
+        grid-area: label;
+        margin-right: 10px;
+    }
+
+    .creator-name {
+        grid-area: name;
+        margin-left: 0;
+    }
+}
+
 @media(max-width:400px) {
     .title-content {
         font-size: 36px;
-    }
-
-    .big-card-content {
-        max-width: 309px;
     }
 }

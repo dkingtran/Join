@@ -31,11 +31,11 @@ function buildCreatorHTML(task) {
   if (task.isAiGenerated) {
     leftIcon = "./assets/img/icons/board/extern.png";
     creatorName = task.creator || "Email Request";
-    rightIconHTML = `<img src="./assets/img/icons/board/send-email.png" alt="Email" class="creator-icon">`;
+    rightIconHTML = `<img src="./assets/img/icons/board/send-email.png" alt="Email" class="creator-icon right-icon">`;
   } else {
     leftIcon = "./assets/img/icons/board/member.png";
     creatorName = task.creator || "Unknown Member";
-    rightIconHTML = `<img src="./assets/img/icons/board/see-profile.png" alt="Email" class="creator-icon">`;
+    rightIconHTML = `<img src="./assets/img/icons/board/see-profile.png" alt="Email" class="creator-icon right-icon">`;
   }
 
   return `
