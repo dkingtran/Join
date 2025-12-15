@@ -36,31 +36,31 @@ function bigCardTemplate(id, category, title, desc, due, prio, avatarsHTML, subt
 
     <div class="title-content w-full" id="title-big-card-${id}">${title || ""}</div>
 
-    <div class="description-big-card max-w-445 w-full font-size-20 font-weight 400" id="description-big-card-${id}">
+    <div class="description-big-card w-full font-size-20 font-weight 400" id="description-big-card-${id}">
         ${desc || ""}
     </div>
 
     ${creatorHTML || ""}
 
-    <div class="date-big-card w-full max-w-445 flex align-center font-size-20">
+    <div class="date-big-card w-full flex align-center font-size-20">
         <p class="date-big-card-text font-weight-400">Due date:</p>
         <span class="date-info-big-card font-size-20" id="date-big-card-${id}">${due || ""}</span>
     </div>
 
-    <div class="prio-big-card flex align-center font-size-20 w-full font-weight-400 max-w-445">
+    <div class="prio-big-card flex align-center font-size-20 w-full font-weight-400">
         <p class="subtitles-prio-big-card font-size-20 font-weight-400">Priority:</p>
         <span id="prio-big-card-${id}">${prio ? prio.charAt(0).toUpperCase() + prio.slice(1) : ""}</span>
         ${typeof getPriorityIcon === "function" ? getPriorityIcon(prio) : ""}
     </div>
 
     <p class="subtitles-assigned-big-card font-size-20">Assigned to:</p>
-    <div class="assigned-big-card font-size-20 w-full font-weight-400 max-w-445">
+    <div class="assigned-big-card font-size-20 w-full font-weight-400">
         <div class="contacts-big-card">
             ${avatarsHTML}
         </div>
     </div>
 
-    <div class="subtasks-big-card flex max-w-445">
+    <div class="subtasks-big-card flex">
         <p class="subtask-text-big-card font-size-20" font-weight-400>Subtasks</p>
         <div class="subtasks-list-container">
             ${subtasksHTML}
