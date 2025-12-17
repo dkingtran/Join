@@ -79,24 +79,13 @@ function renderOverflowAvatar(users) {
     `;
 }
 
-/**
- * Calculates progress for subtasks.
- * @param {Object} [subtasks={}] - Subtask objects keyed by name or ID.
- * @returns {{progressPercent: number, total: number, maxSubtasks: number}} Progress data.
- */
 function getSubtaskProgress(subtasks = {}) {
-    if (!subtasks || typeof subtasks !== "object" || Array.isArray(subtasks)) {
-        return { progressPercent: 0, total: 0, maxSubtasks: 0 };
-    }
-    const keys = Object.keys(subtasks);
-    const totalSubtasks = keys.length;
-    const doneCount = keys.filter(key => subtasks[key].done === true).length;
-    const progressPercent = totalSubtasks > 0 ? (doneCount / totalSubtasks) * 100 : 0;
-    return {
-        progressPercent,
-        total: doneCount,
-        maxSubtasks: totalSubtasks
-    };
+    if (!subtasks) return { progressPercent: 0, total: 0, maxSubtasks: 0 };
+    const isArray = Array.isArray(subtasks);
+    const totalSubtasks = isArray ? subtasks.length : Object.keys(subtasks).length;
+    const doneCount = isArray ? subtasks.filter(sub => sub?.done).length : Object.keys(subtasks).filter(key => subtasks[key]?.done).length;
+    const progressPercent = totalSubtasks ? (doneCount / totalSubtasks) * 100 : 0;
+    return { progressPercent, total: doneCount, maxSubtasks: totalSubtasks };
 }
 
 /**

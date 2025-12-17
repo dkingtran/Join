@@ -17,66 +17,56 @@ function getTodayDateString() {
 }
 
 /**
- * Opens the Stakeholder flow.
- * Checks the daily usage limit in Firebase before deciding which view to show.
- * If the limit (10) is reached, shows the fallback view.
- * 
- * @async
- * @returns {Promise<void>}
+ * Handles modal visibility for stakeholder flow.
  */
-async function openStakeholderFlow(checkLimit = false) {
+function handleModals() {
     const roleModal = document.getElementById('role-selection-modal');
     const stakeholderModal = document.getElementById('stakeholder-modal');
     const staticLogo = document.querySelector('.logo-static');
-
     if (roleModal) roleModal.classList.add('d-none');
     if (stakeholderModal) stakeholderModal.classList.remove('d-none');
-    if (staticLogo) staticLogo.classList.add('d-none'); // Hide static logo
+    if (staticLogo) staticLogo.classList.add('d-none');
+}
 
-    if (!checkLimit) return; // Skip Firebase check if not requested
-
+/**
+ * Checks daily usage limit and updates UI accordingly.
+ * @async
+ */
+async function checkUsageLimit() {
     const today = getTodayDateString();
     const path = `/api_usage/${today}/count`;
-
     try {
-        // Uses the existing loadData function from firebase.js
         let countData = await loadData(path);
-
-        // Handle case where countData is an object (e.g. { "-N...": 5 } or { count: 5 })
         let count = 0;
-        if (typeof countData === 'number') {
-            count = countData;
-        } else if (typeof countData === 'string') {
-            count = parseInt(countData, 10) || 0;
-        } else if (typeof countData === 'object' && countData !== null) {
-            // Try to find the first numeric value
+        if (typeof countData === 'number') count = countData;
+        else if (typeof countData === 'string') count = parseInt(countData, 10) || 0;
+        else if (typeof countData === 'object' && countData !== null) {
             const values = Object.values(countData);
-            if (values.length > 0 && typeof values[0] === 'number') {
-                count = values[0];
-            }
+            if (values.length > 0 && typeof values[0] === 'number') count = values[0];
         }
-
-        const limitOkContainer = document.getElementById('limit-ok-container');
-        const limitReachedContainer = document.getElementById('limit-reached-container');
-
+        const limitOk = document.getElementById('limit-ok-container');
+        const limitReached = document.getElementById('limit-reached-container');
         if (count >= 10) {
-            // Limit reached
-            if (limitOkContainer) limitOkContainer.classList.add('d-none');
-            if (limitReachedContainer) limitReachedContainer.classList.remove('d-none');
+            if (limitOk) limitOk.classList.add('d-none');
+            if (limitReached) limitReached.classList.remove('d-none');
         } else {
-            // Limit OK
-            if (limitOkContainer) limitOkContainer.classList.remove('d-none');
-            if (limitReachedContainer) limitReachedContainer.classList.add('d-none');
+            if (limitOk) limitOk.classList.remove('d-none');
+            if (limitReached) limitReached.classList.add('d-none');
         }
-
-        // Update counter display
-        const counterElement = document.getElementById('request-count');
-        if (counterElement) counterElement.innerText = count;
-
+        const counter = document.getElementById('request-count');
+        if (counter) counter.innerText = count;
     } catch (error) {
         console.error("Error checking API usage:", error);
-        // Fallback to safe state (maybe show manual email if check fails)
     }
+}
+
+/**
+ * Opens the Stakeholder flow.
+ * @async
+ */
+async function openStakeholderFlow(checkLimit = false) {
+    handleModals();
+    if (checkLimit) await checkUsageLimit();
 }
 
 /**
