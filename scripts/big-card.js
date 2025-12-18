@@ -26,8 +26,18 @@ function openBigCard(taskId) {
  * @returns {string} HTML string for the creator section.
  */
 function buildCreatorHTML(task) {
-  let leftIcon, creatorName, rightIconHTML;
+  const { leftIcon, creatorName, rightIconHTML } = getCreatorDetails(task);
+  const adjustedName = adjustCreatorName(creatorName);
+  return buildCreatorHTMLString(leftIcon, adjustedName, rightIconHTML);
+}
 
+/**
+ * Gets creator details based on task type.
+ * @param {Object} task - The task object.
+ * @returns {Object} Object with leftIcon, creatorName, rightIconHTML.
+ */
+function getCreatorDetails(task) {
+  let leftIcon, creatorName, rightIconHTML;
   if (task.isAiGenerated) {
     leftIcon = "./assets/img/icons/board/extern.png";
     creatorName = task.creator || "Email Request";
@@ -37,7 +47,30 @@ function buildCreatorHTML(task) {
     creatorName = task.creator || "Unknown Member";
     rightIconHTML = `<img src="./assets/img/icons/board/see-profile.png" alt="Email" class="creator-icon right-icon">`;
   }
+  return { leftIcon, creatorName, rightIconHTML };
+}
 
+/**
+ * Adjusts the creator name if it matches the current user.
+ * @param {string} creatorName - The original creator name.
+ * @returns {string} Adjusted creator name.
+ */
+function adjustCreatorName(creatorName) {
+  const currentUser = JSON.parse(localStorage.getItem('name'));
+  if (creatorName === currentUser) {
+    return `${creatorName} (You)`;
+  }
+  return creatorName;
+}
+
+/**
+ * Builds the HTML string for the creator section.
+ * @param {string} leftIcon - Path to the left icon.
+ * @param {string} creatorName - The creator name.
+ * @param {string} rightIconHTML - HTML for the right icon.
+ * @returns {string} HTML string.
+ */
+function buildCreatorHTMLString(leftIcon, creatorName, rightIconHTML) {
   return `
     <div class="creator-big-card w-full flex align-center font-size-20">
         <p class="creator-text font-weight-400">Creator:</p>

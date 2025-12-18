@@ -85,14 +85,44 @@ function closeModalAndLogin() {
 
 /**
  * Handles the click on the mailto link.
- * Instead of counting locally, we let n8n do the counting when the email is actually received.
- * This function simply redirects the user back to the login screen after a short delay.
+ * Increases the request counter locally and updates Firebase immediately, then lets n8n handle further logic.
+ * Shows a confirmation message instead of reloading.
  */
-function handleEmailClick() {
-    // Wait 2 seconds (while mail client opens), then go back to login
-    setTimeout(() => {
-        location.reload(); // Reloads page to reset state
-    }, 2000);
+async function handleEmailClick() {
+    try {
+        // Get current count from Firebase
+        const today = getTodayDateString();
+        const path = `api_usage/${today}`;
+        const currentData = await loadData(path);
+        let currentCount = 0;
+        if (typeof currentData === 'object' && currentData !== null && typeof currentData.count === 'number') {
+            currentCount = currentData.count;
+        } else if (typeof currentData === 'number') {
+            currentCount = currentData;
+        }
+
+        // Increase count
+        const newCount = currentCount + 1;
+
+        // Update Firebase
+        await putData(path, { count: newCount });
+
+        // Update display immediately
+        const counter = document.getElementById('request-count');
+        if (counter) counter.innerText = newCount;
+
+        // Check if limit reached
+        if (newCount >= 10) {
+            const limitOk = document.getElementById('limit-ok-container');
+            const limitReached = document.getElementById('limit-reached-container');
+            if (limitOk) limitOk.classList.add('d-none');
+            if (limitReached) limitReached.classList.remove('d-none');
+        }
+
+        // maybe show confirmation message
+    } catch (error) {
+        console.error("Error updating request count:", error);
+    }
 }
 
 /**
