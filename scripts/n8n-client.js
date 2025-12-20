@@ -6,6 +6,8 @@
 
 const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/create-request"; // Replace with production URL later
 
+let hasInteracted = false; // Flag to prevent modal from reopening after user interaction
+
 /**
  * Gets the current date as a string in YYYY-MM-DD format.
  * Used for generating the daily key for Firebase usage tracking.
@@ -65,6 +67,7 @@ async function checkUsageLimit() {
  * @async
  */
 async function openStakeholderFlow(checkLimit = false) {
+    hasInteracted = true; // Prevent modal from reopening
     handleModals();
     if (checkLimit) await checkUsageLimit();
 }
@@ -73,6 +76,7 @@ async function openStakeholderFlow(checkLimit = false) {
  * Closes the modal and proceeds to the normal login screen.
  */
 function closeModalAndLogin() {
+    hasInteracted = true; // Prevent modal from reopening
     const roleModal = document.getElementById('role-selection-modal');
     const logo = document.getElementById('logo');
     const staticLogo = document.querySelector('.logo-static');
@@ -132,10 +136,12 @@ async function handleEmailClick() {
 function initLandingPage() {
     // Wait for logo animation (approx 1-2 seconds based on CSS)
     setTimeout(() => {
-        const roleModal = document.getElementById('role-selection-modal');
-        const logo = document.getElementById('logo');
-        if (roleModal) roleModal.classList.remove('d-none');
-        if (logo) logo.classList.add('d-none');
+        if (!hasInteracted) { // Only show modal if user hasn't interacted yet
+            const roleModal = document.getElementById('role-selection-modal');
+            const logo = document.getElementById('logo');
+            if (roleModal) roleModal.classList.remove('d-none');
+            if (logo) logo.classList.add('d-none');
+        }
     }, 2500); // Adjust timing to match your animation-logo.js
 }
 

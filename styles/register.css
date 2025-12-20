@@ -54,6 +54,8 @@
     max-width: 598px;
     height: 650px;
     margin-top: 180px;
+    margin-left: 16px;
+    margin-right: 16px;
     padding: 20px;
     border-radius: 30px;
     text-align: center;

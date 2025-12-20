@@ -43,6 +43,14 @@ body {
 	opacity: 0;
 }
 
+.white-overlay.initial-hidden {
+	opacity: 0;
+}
+
+#intro.initial-hidden {
+	opacity: 0;
+}
+
 .logo-animated {
 	position: absolute;
 	top: 50%;

@@ -66,7 +66,7 @@
 					<span id="request-count">0</span> of 10 requests used today
 				</div>
 				<!-- Debug Button: Remove in production -->
-				<button onclick="toggleLimitView()" style="position: absolute; top: 10px; right: 10px; opacity: 0.5;">Toggle Limit View</button>
+				<!-- <button onclick="toggleLimitView()" style="position: absolute; top: 10px; right: 10px; opacity: 0.5;">Toggle Limit View</button> -->
 			</div>
 
 			<div class="stakeholder-content">
@@ -101,7 +101,7 @@
 						<p>
 							Need more? No worries — you can still send emails, but our team will review them manually instead of using AI to create tickets.
 						</p>
-						<a href="mailto:dennis.tran@hotmail.de?subject=Manual Stakeholder Request" class="create-request-btn">
+						<a href="mailto:dennis.tran@hotmail.de?subject=Manual Stakeholder Request" class="create-request-btn" onclick="handleEmailClick()">
 							Create request
 						</a>
 					</div>
@@ -119,9 +119,9 @@
 	</div>
 
 	<!-- Intro Animation Elements -->
-	<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated" id="logo" />
-	<div class="intro" id="intro">
-		<div class="white-overlay" id="whiteOverlay"></div>
+	<img src="assets/img/logo/logo-dark.png" alt="Logo" class="logo-animated" id="logo" style="display: none;" />
+	<div class="intro" id="intro" style="display: none;">
+		<div class="white-overlay" id="whiteOverlay" style="display: none;"></div>
 	</div>
 
 	<main class="wrapper" id="mainContent">

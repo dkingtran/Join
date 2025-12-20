@@ -47,19 +47,21 @@ function playAnimation(logo, overlay, mainContent) {
     logo.classList.add('shrink');
     overlay.style.opacity = '0';
     mainContent.style.opacity = '1';
-  }, 1000);
+  }, 1000); // Increased to 3 seconds for better visibility
 }
 
 /**
  * Removes intro elements and marks animation as complete
  * @param {HTMLElement} intro - The intro container element
  * @param {HTMLElement} logo - The logo image element
+ * @param {HTMLElement} overlay - The white overlay element
  */
-function cleanupAnimation(intro, logo) {
+function cleanupAnimation(intro, logo, overlay) {
   setTimeout(() => {
-    intro.remove();
-    logo.style.transition = 'none';
-    // sessionStorage.setItem('animationPlayed', 'true');
+    logo.style.display = 'none';
+    overlay.style.display = 'none';
+    intro.style.display = 'none';
+    localStorage.setItem('animationPlayed', 'true');
   }, 2600);
 }
 
@@ -78,15 +80,19 @@ function skipAnimation() {
 function handleFirstVisit() {
   const { logo, overlay, mainContent, intro } = getElements();
   if (intro && overlay) {
+    // Make elements visible for animation
+    logo.style.display = 'block';
+    overlay.style.display = 'block';
+    intro.style.display = 'block';
     playAnimation(logo, overlay, mainContent);
-    cleanupAnimation(intro, logo);
+    cleanupAnimation(intro, logo, overlay);
   } else {
     showContent(mainContent, logo);
-    // sessionStorage.setItem('animationPlayed', 'true');
+    localStorage.setItem('animationPlayed', 'true');
   }
 }
-// if (!sessionStorage.getItem('animationPlayed')) {
-window.addEventListener('load', handleFirstVisit);
-// } else {
-//   window.addEventListener('load', skipAnimation);
-// }
+if (!localStorage.getItem('animationPlayed')) {
+  window.addEventListener('load', handleFirstVisit);
+} else {
+  window.addEventListener('load', skipAnimation);
+}

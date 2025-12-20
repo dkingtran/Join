@@ -1,60 +1,51 @@
 /* Media Query */
 
 @media(max-width: 1800px) {
-   .logo-animated-register {
-    position: relative;
-    top: 45px;
-    right: 633px;
-    width: 100px;
-}
+    .logo-animated-register {
+        position: relative;
+        top: 45px;
+        right: 633px;
+        width: 100px;
+    }
 }
 
 @media(max-width: 1350px) {
-   .logo-animated-register {
-    position: relative;
-    top: 45px;
-    right: 403px;
-    width: 100px;
-}
+    .logo-animated-register {
+        position: relative;
+        top: 45px;
+        right: 403px;
+        width: 100px;
+    }
 }
 
 @media(max-width: 950px) {
-   .logo-animated-register {
-    position: relative;
-    top: 45px;
-    right: 203px;
-    width: 100px;
-}
+    .logo-animated-register {
+        position: relative;
+        top: 45px;
+        right: 203px;
+        width: 100px;
+    }
 }
 
 @media(max-width: 530px) {
-   .logo-animated-register {
-    position: relative;
-    top: 20px;
-    right: 94px;
-    width: 46px;
-}
+    .logo-animated-register {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 46px;
+    }
 }
 
 
 
 @media(max-width: 650px) {
     .login-box-register {
-        max-width: 411px;
         height: 650px;
-    }
-}
-
-@media(max-width: 600px) {
-    .login-box-register {
-        max-width: 445px;
-        height: 600px;
     }
 }
 
 @media(max-width: 470px) {
     .login-box-register {
-        max-width: 310px;
         height: 620px;
         padding: 80px 10px;
     }
