@@ -40,3 +40,5 @@ firebase-debug.log
 .n8n/
 n8n-encryption-key
 credentials.json
+n8n/Join-workflow.json
+n8n/Join-workflow-public.json
