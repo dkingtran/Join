@@ -1,0 +1,307 @@
+{
+    "name": "Join workflow",
+    "nodes": [
+        {
+            "parameters": {
+                "options": {}
+            },
+            "type": "n8n-nodes-base.emailReadImap",
+            "typeVersion": 2.1,
+            "position": [
+                -112,
+                -32
+            ],
+            "id": "node-1",
+            "name": "Email Trigger (IMAP)"
+        },
+        {
+            "parameters": {
+                "promptType": "define",
+                "text": "=You are an AI assistant for a Kanban project management tool.\nYour task is to analyze an incoming email to determine if it is a valid task request, and if so, extract task details as a JSON object.\n\nIncoming Email:\nSubject: {{ $json.subject }}\nBody: {{ $json.textPlain }}\n\nSTEP 1: RELEVANCE CHECK\nAnalyze the content. Is this a request for a task, project, bug fix, or feature?\n- Private emails (e.g., \"Hello, how are you?\", \"Lunch?\", personal chat, newsletters) are IRRELEVANT.\n- Business requests, bug reports, or task assignments are RELEVANT.\n\nSTEP 2: EXTRACTION (Only if RELEVANT)\nIf relevant, extract:\n1. title: A concise summary of the request (max 50 chars).\n2. description: The full details of the request.\n3. priority: Infer from the tone. One of: \"urgent\", \"medium\", \"low\". Default to \"medium\".\n4. category: \n   - If the email mentions bugs, fixes, errors, technical issues, code, database, server, API, or words like \"bug\", \"fix\", \"error\", \"technisch\", \"code\", \"database\", \"server\", \"crash\", \"debug\" → \"Technical Task\".\n   - If it's a feature request, user interface, new functionality, or words like \"feature\", \"request\", \"user\", \"interface\", \"add\", \"implement\" → \"User Story\".\n   - Default to \"User Story\".\n5. dueDate: If mentioned, format as \"YYYY-MM-DD\". If not, set to 7 days from today ({{ $now.format('yyyy-MM-dd') }}).\n6. isAiGenerated: Set this strictly to true.\n7. assigned: Versuche, vollständige Namen (z.B. \"Anna Müller\", \"Max Schneider\") im Text zu erkennen. Suche nach Namen, die auf eigenen Zeilen stehen, vor Bullet-Points oder in Sätzen, die Verantwortlichkeit oder Aufgaben anzeigen (z.B. \"Name übernimmt\", \"Name schaut sich\", \"Name ist zuständig für\", \"Name bitte\", \"Name soll\"). Füge alle gefundenen Namen als Array von Strings hinzu. Wenn keine Namen gefunden werden, verwende [].\n8. subtasks: Analysiere den Text nach spezifischen Aufgabenschritten. Wenn die E-Mail Aufgaben unter Namen auflistet (z.B. Bullet-Points wie \"-\" oder \"•\"), erstelle für jeden Punkt einen prägnanten Subtask-String. Sammle sie als Array von Strings. Wenn keine klaren Schritte gefunden werden, verwende [].\n\nSTEP 3: OUTPUT\nRespond ONLY with a valid JSON object. Do not add Markdown formatting.\n\nIf IRRELEVANT, output:\n{\n  \"is_relevant\": false,\n  \"reason\": \"Private conversation or spam\"\n}\n\nIf RELEVANT, output:\n{\n  \"is_relevant\": true,\n  \"title\": \"...\",\n  \"description\": \"...\",\n  \"category\": \"...\",\n  \"priority\": \"...\",\n  \"dueDate\": \"...\",\n  \"isAiGenerated\": true,\n  \"status\": \"to-do\",\n  \"subtasks\": [\"Subtask 1\", \"Subtask 2\"],\n  \"assigned\": [\"Name 1\", \"Name 2\"]\n}\n",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.agent",
+            "typeVersion": 3,
+            "position": [
+                304,
+                -32
+            ],
+            "id": "node-2",
+            "name": "AI Agent"
+        },
+        {
+            "parameters": {
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+            "typeVersion": 1,
+            "position": [
+                224,
+                160
+            ],
+            "id": "node-3",
+            "name": "Google Gemini Chat Model"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://join-b7416-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ $json }}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                1136,
+                -112
+            ],
+            "id": "node-4",
+            "name": "HTTP Request"
+        },
+        {
+            "parameters": {
+                "url": "=https://join-b7416-default-rtdb.europe-west1.firebasedatabase.app/api_usage/{{ $now.format('yyyy-MM-dd') }}/count.json",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                1328,
+                -112
+            ],
+            "id": "node-5",
+            "name": "HTTP Request1"
+        },
+        {
+            "parameters": {
+                "method": "PUT",
+                "url": "=https://join-b7416-default-rtdb.europe-west1.firebasedatabase.app/api_usage/{{ $now.format('yyyy-MM-dd') }}/count.json",
+                "sendBody": true,
+                "bodyParameters": {
+                    "parameters": [
+                        {
+                            "name": "JSON",
+                            "value": "={{ $json.newCount }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                1712,
+                -112
+            ],
+            "id": "node-6",
+            "name": "HTTP Request2"
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict",
+                        "version": 3
+                    },
+                    "conditions": [
+                        {
+                            "id": "7e415cde-6da9-4c19-8320-3728121ae6bc",
+                            "leftValue": "={{ $json.is_relevant }}",
+                            "rightValue": "true",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.3,
+            "position": [
+                768,
+                -32
+            ],
+            "id": "node-7",
+            "name": "If"
+        },
+        {
+            "parameters": {
+                "jsCode": "const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD\nconst url = `https://join-b7416-default-rtdb.europe-west1.firebasedatabase.app/api_usage/${today}/count.json`;\n\ntry {\n  const response = await fetch(url);\n  const data = await response.json();\n  const count = (typeof data === 'number') ? data : 0;\n  \n  return $input.all().map(item => ({\n    json: { ...item.json, count }\n  }));\n} catch (error) {\n  console.error('Error fetching count:', error);\n  return $input.all().map(item => ({\n    json: { ...item.json, count: 0 }\n  }));\n}"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                96,
+                -32
+            ],
+            "id": "node-8",
+            "name": "Retrieve Firebase API Usage Count"
+        },
+        {
+            "parameters": {
+                "jsCode": "/**\n * Safely parses a string to JSON, returns the input if not string, null on error.\n * @param {*} s - The value to parse.\n * @returns {*} Parsed object or null.\n */\nfunction safeParse(s) {\n  try { return typeof s === 'string' ? JSON.parse(s) : s; } catch(e) { return null; }\n}\n\n/**\n * Parses and merges output into data.\n * @param {Object} data - The data object.\n */\nfunction parseAndMergeOutput(data) {\n  let parsed = null;\n  if (data.output) {\n    parsed = safeParse(data.output) || (typeof data.output === 'object' ? data.output : null);\n    if (parsed) {\n      for (const k in parsed) {\n        if (Object.prototype.hasOwnProperty.call(parsed, k)) data[k] = parsed[k];\n      }\n    } else if (typeof data.output === 'string') {\n      data._rawOutput = data.output;\n    }\n    delete data.output;\n  }\n}\n\n/**\n * Handles assigned field conversion to assigned-to.\n * @param {Object} data - The data object.\n */\nfunction handleAssigned(data) {\n  if (Array.isArray(data.assigned)) {\n    data['assigned-to'] = data.assigned.slice();\n  } else if (typeof data.assigned === 'string' && data.assigned.trim() !== '') {\n    data['assigned-to'] = [data.assigned.trim()];\n  } else if (!Array.isArray(data['assigned-to'])) {\n    data['assigned-to'] = [];\n  }\n  delete data.assigned;\n}\n\n/**\n * Extracts assigned names from textPlain if assigned-to is empty.\n * @param {Object} data - The data object.\n */\nfunction extractAssignedFromText(data) {\n  if (Array.isArray(data['assigned-to']) && data['assigned-to'].length === 0 && data.textPlain) {\n    const body = String(data.textPlain);\n    const names = [];\n    const rx = /Zuständig:?\\s*([^\\r\\n]+)/gi;\n    let m;\n    while ((m = rx.exec(body)) !== null) names.push(m[1].trim());\n    extractNamesFromPatterns(body, names);\n    data['assigned-to'] = [...new Set(names)];\n  }\n}\n\n/**\n * Extracts names using predefined patterns.\n * @param {string} body - The text body.\n * @param {Array} names - Array to push names into.\n */\nfunction extractNamesFromPatterns(body, names) {\n  const patterns = [\n    /([A-Z][a-z]+)\\s+übernimmt/gi,\n    /([A-Z][a-z]+)\\s+schaut/gi,\n    /([A-Z][a-z]+)\\s+bereitet/gi,\n    /([A-Z][a-z]+)\\s+ergänzt/gi,\n    /([A-Z][a-z]+)\\s+soll/gi,\n  ];\n  for (const rx of patterns) {\n    let m;\n    while ((m = rx.exec(body)) !== null) {\n      names.push(m[1].trim());\n    }\n  }\n}\n\n/**\n * Normalizes subtasks from array.\n * @param {Array} subtasks - The subtasks array.\n * @returns {Object} Normalized subtasks object.\n */\nfunction normalizeSubtasksFromArray(subtasks) {\n  const normalized = {};\n  for (let i = 0; i < subtasks.length; i++) {\n    const el = subtasks[i];\n    const id = `s${i}`;\n    if (typeof el === 'string') {\n      normalized[id] = { subtask: el, done: false };\n    } else if (el && typeof el === 'object') {\n      const text = el.subtask || el.text || el.title || '';\n      const done = !!el.done;\n      normalized[id] = { subtask: text, done };\n    } else {\n      normalized[id] = { subtask: String(el || ''), done: false };\n    }\n  }\n  return normalized;\n}\n\n/**\n * Normalizes subtasks from object.\n * @param {Object} subtasks - The subtasks object.\n * @returns {Object} Normalized subtasks object.\n */\nfunction normalizeSubtasksFromObject(subtasks) {\n  const normalized = {};\n  const keys = Object.keys(subtasks);\n  const allNumeric = keys.length > 0 && keys.every(k => /^\\d+$/.test(k));\n  if (allNumeric) {\n    keys.sort((a,b) => Number(a) - Number(b));\n    for (let i = 0; i < keys.length; i++) {\n      const k = keys[i];\n      const el = subtasks[k];\n      const id = `s${i}`;\n      if (typeof el === 'string') normalized[id] = { subtask: el, done: false };\n      else normalized[id] = { subtask: el.subtask || el.text || el.title || '', done: !!el.done };\n    }\n  } else {\n    let idx = 0;\n    for (const k of keys) {\n      if (!Object.prototype.hasOwnProperty.call(subtasks, k)) continue;\n      const e = subtasks[k];\n      const text = (e && (e.subtask || e.text || e.title)) || '';\n      const done = !!(e && e.done);\n      const id = k || `s${idx++}`;\n      normalized[id] = { subtask: text, done };\n    }\n  }\n  return normalized;\n}\n\n/**\n * Normalizes subtasks.\n * @param {Object} data - The data object.\n */\nfunction normalizeSubtasks(data) {\n  const normalizedSubtasks = {};\n  if (Array.isArray(data.subtasks)) {\n    Object.assign(normalizedSubtasks, normalizeSubtasksFromArray(data.subtasks));\n  } else if (data.subtasks && typeof data.subtasks === 'object') {\n    Object.assign(normalizedSubtasks, normalizeSubtasksFromObject(data.subtasks));\n  }\n  data.subtasks = normalizedSubtasks;\n}\n\n/**\n * Sets default values for dueDate, category, priority.\n * @param {Object} data - The data object.\n */\nfunction setDefaults(data) {\n  if (!data.dueDate && data['due-date']) data.dueDate = data['due-date'];\n  if (!data.dueDate) {\n    const d = new Date();\n    d.setDate(d.getDate() + 7);\n    data.dueDate = d.toISOString().split('T')[0];\n  }\n  data['due-date'] = data.dueDate;\n  if (!data.category) data.category = 'User Story';\n  if (!data.priority) data.priority = 'medium';\n}\n\n/**\n * Cleans error and stack fields.\n * @param {Object} data - The data object.\n */\nfunction cleanData(data) {\n  delete data.error;\n  delete data.stack;\n}\n\n/**\n * Processes a single item.\n * @param {Object} orig - The original item json.\n * @returns {Object} Processed data.\n */\nfunction processItem(orig) {\n  let data = Object.assign({}, orig);\n  parseAndMergeOutput(data);\n  handleAssigned(data);\n  extractAssignedFromText(data);\n  normalizeSubtasks(data);\n  setDefaults(data);\n  cleanData(data);\n  return data;\n}\n\nreturn $input.all().map(item => {\n  const orig = item.json || {};\n  return { json: processItem(orig) };\n});"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                608,
+                -32
+            ],
+            "id": "node-9",
+            "name": "Format AI Task Data"
+        },
+        {
+            "parameters": {
+                "jsCode": "/**\n * Parses the output field and merges into data.\n * @param {Object} data - The data object.\n * @returns {Object|null} Parsed data or null on error.\n */\nfunction parseOutput(data) {\n  if (data.output) {\n    if (typeof data.output === 'string') {\n      try {\n        let cleanJson = data.output.replace(/```json/g, '').replace(/```/g, '').trim();\n        data = JSON.parse(cleanJson);\n      } catch (e) {\n        return { error: \"JSON Parse Error\", raw: data.output };\n      }\n    } else if (typeof data.output === 'object') {\n      data = data.output;\n    }\n  }\n  return data;\n}\n\n/**\n * Converts subtasks object to array if needed and normalizes.\n * @param {Object} data - The data object.\n */\nfunction normalizeSubtasks(data) {\n  if (data.subtasks && typeof data.subtasks === 'object' && !Array.isArray(data.subtasks)) {\n    data.subtasks = Object.values(data.subtasks);\n  } else if (!Array.isArray(data.subtasks)) {\n    data.subtasks = [];\n  }\n  if (Array.isArray(data.subtasks)) {\n    data.subtasks = data.subtasks.map(item => {\n      if (typeof item === 'string') {\n        return { subtask: item, done: false };\n      } else if (item && typeof item === 'object') {\n        return {\n          subtask: item.subtask || item.text || item.title || '',\n          done: !!item.done\n        };\n      } else {\n        return { subtask: String(item || ''), done: false };\n      }\n    });\n  } else {\n    data.subtasks = [];\n  }\n}\n\n/**\n * Handles assigned field conversion to assigned-to.\n * @param {Object} data - The data object.\n */\nfunction handleAssigned(data) {\n  if (data.assigned && Array.isArray(data.assigned)) {\n    data['assigned-to'] = data.assigned;\n    delete data.assigned;\n  }\n}\n\n/**\n * Sets default dueDate if not present.\n * @param {Object} data - The data object.\n */\nfunction setDueDate(data) {\n  if (!data.dueDate) {\n    const today = new Date();\n    today.setDate(today.getDate() + 7);\n    data.dueDate = today.toISOString().split('T')[0];\n  }\n  data['due-date'] = data.dueDate;\n}\n\n/**\n * Processes a single item.\n * @param {Object} item - The input item.\n * @returns {Object} Processed item.\n */\nfunction processItem(item) {\n  let data = item.json;\n  const parsed = parseOutput(data);\n  if (parsed && parsed.error) return parsed;\n  data = parsed;\n  normalizeSubtasks(data);\n  handleAssigned(data);\n  setDueDate(data);\n  return { json: data };\n}\n\nreturn $input.all().map(processItem);"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                976,
+                -112
+            ],
+            "id": "node-10",
+            "name": "Format Parsed AI Data"
+        },
+        {
+            "parameters": {
+                "jsCode": "const val = $input.first().json;\nconst count = (typeof val === 'number') ? val : 0;\nreturn { newCount: count + 1 };"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1520,
+                -112
+            ],
+            "id": "node-11",
+            "name": "Increment API Usage Count"
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Email Trigger (IMAP)": {
+            "main": [
+                [
+                    {
+                        "node": "Retrieve Firebase API Usage Count",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Gemini Chat Model": {
+            "ai_languageModel": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_languageModel",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "AI Agent": {
+            "main": [
+                [
+                    {
+                        "node": "Format AI Task Data",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request1": {
+            "main": [
+                [
+                    {
+                        "node": "Increment API Usage Count",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "If": {
+            "main": [
+                [
+                    {
+                        "node": "Format Parsed AI Data",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Retrieve Firebase API Usage Count": {
+            "main": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Format AI Task Data": {
+            "main": [
+                [
+                    {
+                        "node": "If",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Format Parsed AI Data": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Increment API Usage Count": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": true,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "id": "workflow-public-anon",
+    "tags": []
+}
