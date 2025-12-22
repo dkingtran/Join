@@ -185,7 +185,7 @@ function confirmSubtaskInputOverlay() {
   overlay.querySelector('#subtask-initial')?.classList.remove('d-none');
 }
 
-window.startEditSubtaskOverlay = startEditSubtaskOverlay;
-window.deleteSubtaskOverlay = deleteSubtaskOverlay;
-window.finishEditSubtaskOverlay = finishEditSubtaskOverlay;
+if (typeof startEditSubtaskOverlay === 'function') window.startEditSubtaskOverlay = startEditSubtaskOverlay;
+if (typeof deleteSubtaskOverlay === 'function') window.deleteSubtaskOverlay = deleteSubtaskOverlay;
+if (typeof finishEditSubtaskOverlay === 'function') window.finishEditSubtaskOverlay = finishEditSubtaskOverlay;
 window.openEditCardFor = openEditCardFor;

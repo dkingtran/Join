@@ -14,30 +14,29 @@ body.no-scroll {
   height: calc(100vh - 16px);
 }
 
-.close-edit-card-btn{
- border: none;
- background-color: white;
+.close-edit-card-btn {
+  border: none;
+  background-color: white;
 }
 
 .close-edit-card-btn {
-   position: absolute;
-  top:0px;    
+  position: absolute;
+  top: 0px;
   right: 5px;
   border: none;
   background-color: white;
   padding: 6px;
-  border-radius: 30px; /* optional: abgerundete Ecken */
+  border-radius: 30px;
+  /* optional: abgerundete Ecken */
   cursor: pointer;
 
 }
 
 .close-edit-card-btn:hover {
-  background-color: #c9c6c6; /* hellgrauer Hintergrund */
+  background-color: #c9c6c6;
+  /* hellgrauer Hintergrund */
 
 }
-
-
-
 
 .overlay-edit-task {
   position: fixed;
@@ -165,9 +164,6 @@ body.no-scroll {
   min-width: 440px;
 }
 
-
-
-
 @media(max-width:1001px) {
   .edit-task-content-style {
     padding: 15px 8px;
@@ -175,7 +171,8 @@ body.no-scroll {
     max-height: calc(86vh - 16px);
     overflow: auto;
   }
-    .custom-dropdown .dropdown-list {
+
+  .custom-dropdown .dropdown-list {
     min-width: 230px;
     width: 100%;
   }
@@ -234,7 +231,5 @@ body.no-scroll {
   .btn-prio {
     margin: 10px 10px;
   }
- 
+
 }
-
-
