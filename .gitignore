@@ -42,3 +42,8 @@ n8n-encryption-key
 credentials.json
 n8n/Join-workflow.json
 n8n/Join-workflow-public.json
+# Deploy artifacts (not for git)
+deploy/.env
+deploy/.env.*
+deploy/*.zip
+Join_done-deploy.zip
