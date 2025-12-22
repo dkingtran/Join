@@ -47,3 +47,8 @@ deploy/.env
 deploy/.env.*
 deploy/*.zip
 Join_done-deploy.zip
+# Certificates and private keys in deploy
+deploy/*.pem
+deploy/*.key
+deploy/*.crt
+deploy/*.pfx
